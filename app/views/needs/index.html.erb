@@ -1,29 +1,17 @@
-<h1>Listing needs</h1>
+<div class="page-header">
+  <h1>All Needs</h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @needs.each do |need| %>
-      <tr>
-        <td><%= need.title %></td>
-        <td><%= need.description %></td>
-        <td><%= link_to 'Show', need %></td>
-        <td><%= link_to 'Edit', edit_need_path(need) %></td>
-        <td><%= link_to 'Destroy', need, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Need', new_need_path %>
+<% @needs.each do |need| %>
+  <div class="need">
+    <strong><%= need.title %></strong>
+    <p><%= need.description %></p>
+    <div class="meta">
+      <%= link_to time_ago_in_words(need.created_at) + " ago", need %>
+      <span class="admin">
+        | <%= link_to "Edit", edit_need_path(need) %>
+        | <%= link_to "Delete", need, method: :delete, data: { confirm: "Are you sure you want to delete this need?"} %>
+      </span>
+    </div>
+  </div>
+<% end %>

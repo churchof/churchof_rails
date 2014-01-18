@@ -1,3 +1,12 @@
 // Place all the styles related to the needs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.need {
+	border-bottom: solid 1px #CCC;
+	padding: 30px 0;
+}
+
+.need p {
+	margin: 4px 0;
+}
