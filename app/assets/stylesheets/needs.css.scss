@@ -4,9 +4,21 @@
 
 .need {
 	border-bottom: solid 1px #CCC;
-	padding: 30px 0;
+	padding: 14px 0;
 }
 
 .need p {
 	margin: 4px 0;
+}
+
+.need.hover {
+	background: #FAFAFA
+}
+
+.need .admin {
+	display: none;
+}
+
+.need.hover .admin {
+	display: inline;
 }
