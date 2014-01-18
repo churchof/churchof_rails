@@ -3,15 +3,14 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <!-- TODO The first and last name fields arent populating when editing. Is this becasue they were never saved in the first place? Or because they just arent auto populating like the email is told to from somewhere? -->
   <div><%= f.label :first_name %><br />
-  <%= f.text_field :first_name %></div>
+  <%= f.text_field :first_name, :autofocus => true %></div>
 
   <div><%= f.label :last_name %><br />
   <%= f.text_field :last_name %></div>
 
   <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <%= f.email_field :email %></div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
