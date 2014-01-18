@@ -6,7 +6,8 @@
 
 <% @needs.each do |need| %>
   <div class="need">
-    <strong><%= need.title %></strong>
+    <p><strong><%= need.user.full_name %></strong></p>
+    <p><strong><%= need.title %></strong></p>
     <p><%= need.description %></p>
     <div class="meta">
       <%= link_to time_ago_in_words(need.created_at) + " ago", need %>
