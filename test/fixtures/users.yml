@@ -1,0 +1,6 @@
+zach:
+	first_name: "Zach"
+	last_name: "Whelchel"
+	email: "zach.whelchel@gmail.com"
+	password: "password"
+	password_confirmation: "password"
