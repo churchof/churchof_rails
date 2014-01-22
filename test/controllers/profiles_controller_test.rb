@@ -18,4 +18,11 @@ class ProfilesControllerTest < ActionController::TestCase
     assert assigns(:needs)
   end
 
+  test "only shows the correct user's needs" do
+    get :show, id: users(:zach).id
+    assigns(:needs).each do |need|
+    	assert_equal users(:zach), need.user
+    end
+  end
+
 end

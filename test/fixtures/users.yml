@@ -2,3 +2,10 @@ zach:
   first_name: "Zach"
   last_name: "Whelchel"
   email: "zach.whelchel@gmail.com"
+  id: 1
+
+sam:
+  first_name: "Sam"
+  last_name: "Withey"
+  email: "sam.withey@gmail.com"
+  id: 2
