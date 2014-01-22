@@ -11,7 +11,9 @@
 		<a class="navbar-brand" href="#">Church of Lexington</a>
 		<ul class="nav navbar-nav">
      		<li><%= link_to "All Needs", needs_path %></li>
-     		<li><%= link_to "Post a Need", new_need_path %></li>
+     		<% if can? :create, Need %>
+     			<li><%= link_to "Post a Need", new_need_path %></li>
+			<% end %>
      	</ul>
      	<ul class="nav navbar-nav pull-right">
      		<% if user_signed_in? %>
