@@ -16,6 +16,8 @@ class Ability
       can :manage, :all
     elsif user.has_role? :need_poster
       can :manage, :all
+    elsif user.has_role? :member
+      can :manage, :all
     else
       can :read, :all
     end

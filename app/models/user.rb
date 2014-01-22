@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   # declare the valid roles -- do not change the order if you add more
   # roles later, always append them at the end!
-  roles :super_admin, :church_admin, :need_poster
+  roles :member, :need_poster, :church_admin, :super_admin
 
   def full_name
   	first_name + " " + last_name
