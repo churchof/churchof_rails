@@ -1,6 +1,6 @@
 class NeedsController < ApplicationController
   before_action :set_need, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!, only: [:new]
   # GET /needs
   # GET /needs.json
   def index
