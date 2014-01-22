@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'devise'
 gem 'simple_form'
+gem 'cancan'
 
 group :development, :test do
 	gem 'sqlite3'
