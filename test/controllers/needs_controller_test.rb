@@ -34,8 +34,16 @@ class NeedsControllerTest < ActionController::TestCase
     assert_difference('Need.count') do
       post :create, need: { description: @need.description, title: @need.title }
     end
-
     assert_redirected_to need_path(assigns(:need))
+  end
+
+  test "should create need for the current user when logged in" do
+    sign_in users(:zach)
+    assert_difference('Need.count') do
+      post :create, need: { description: @need.description, title: @need.title, user_id: users(:sam).id }
+    end
+    assert_redirected_to need_path(assigns(:need))
+    assert_equal assigns(:need).user_id, users(:zach).id
   end
 
   test "should show need" do

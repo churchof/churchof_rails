@@ -2,6 +2,12 @@ class NeedsController < ApplicationController
   load_and_authorize_resource
   before_action :set_need, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
+
+  # Part of a workaround for cancan described here: https://github.com/ryanb/cancan/issues/835
+  def needs_params
+    params.require(:needs).permit(:what, :ever)
+  end
+
   # GET /needs
   # GET /needs.json
   def index
@@ -25,7 +31,7 @@ class NeedsController < ApplicationController
   # POST /needs
   # POST /needs.json
   def create
-    @need = Need.new(need_params)
+    @need = current_user.needs.new(need_params)
 
     respond_to do |format|
       if @need.save
