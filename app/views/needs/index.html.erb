@@ -9,10 +9,10 @@
     <div class="need">
       <div class="row">
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-          <%= image_tag need.user.gravatar_url %>
+          <%= image_tag need.user_posted_by.gravatar_url %>
         </div>
         <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-          <p><strong><%= need.user.full_name %></strong></p>
+          <p><strong><%= need.user_posted_by.full_name %></strong></p>
           <p><strong><%= need.title %></strong></p>
           <p><%= need.description %></p>
           <div class="meta">

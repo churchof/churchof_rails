@@ -31,7 +31,7 @@ class NeedsController < ApplicationController
   # POST /needs
   # POST /needs.json
   def create
-    @need = current_user.needs.new(need_params)
+    @need = current_user.needs_posted_by.new(need_params)
 
     respond_to do |format|
       if @need.save
@@ -76,6 +76,6 @@ class NeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def need_params
-      params.require(:need).permit(:title, :description, :user_id)
+      params.require(:need).permit(:title, :description, :user_id_posted_by, :user_id_church_admin)
     end
 end
