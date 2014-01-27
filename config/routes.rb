@@ -1,4 +1,6 @@
 Churchof::Application.routes.draw do
+  get "users/index"
+  get "users_controller/index"
   get "profiles/show"
   devise_for :users
 
