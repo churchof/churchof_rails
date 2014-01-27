@@ -1,5 +1,22 @@
 <% @users.each do |user| %>
 	<p>
-		<%= user.full_name %>
+		<%= user.full_name %> | 
+		<% if user.has_role? :poster %>
+			<%= "Poster = Y" %>
+		<% else %>
+			<%= "Poster = N" %>
+		<% end %>
+		| 
+		<% if user.has_role? :church_admin %>
+			<%= "Church Admin = Y" %>
+		<% else %>
+			<%= "Church Admin = N" %>
+		<% end %>
+		| 
+		<% if user.has_role? :super_admin %>
+			<%= "Super Admin = Y" %>
+		<% else %>
+			<%= "Super Admin = N" %>
+		<% end %>
 	</p>
 <% end %>
