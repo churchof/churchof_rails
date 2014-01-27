@@ -10,21 +10,25 @@
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<a class="navbar-brand" href="#">Church of Lexington</a>
 		<ul class="nav navbar-nav">
-     		<li><%= link_to "All Needs", needs_path %></li>
-     		<li><%= link_to "All Users", users_index_path %></li>
-     		<% if can? :create, Need %>
-     			<li><%= link_to "Post a Need", new_need_path %></li>
-			<% end %>
-     	</ul>
-     	<ul class="nav navbar-nav pull-right">
-     		<% if user_signed_in? %>
-	     		<li><%= link_to current_user.full_name, edit_user_registration_path %></li>
-	     		<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-	     	<% else %>
-	     		<li><%= link_to "Register", register_path %></li>
-	     		<li><%= link_to "Log in", login_path %></li>
-     		<% end %>
-     	</ul>
+   		<li><%= link_to "All Needs", needs_path %></li>
+      <% if user_signed_in? %>
+        <% if current_user.has_role? :super_admin %>
+          <li><%= link_to "All Users", users_index_path %></li>
+        <% end %>
+        <% if current_user.has_role? :poster %>
+     	    <li><%= link_to "Post a Need", new_need_path %></li>
+        <% end %>
+      <% end %>
+   	</ul>
+   	<ul class="nav navbar-nav pull-right">
+   		<% if user_signed_in? %>
+     		<li><%= link_to current_user.full_name, edit_user_registration_path %></li>
+     		<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+     	<% else %>
+     		<li><%= link_to "Register", register_path %></li>
+     		<li><%= link_to "Log in", login_path %></li>
+   		<% end %>
+   	</ul>
 	</nav>
 
 	<div class="container">
