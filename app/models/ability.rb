@@ -10,17 +10,17 @@ class Ability
     #   can :read, Need
     # end
 
-    if user.has_role? :super_admin
+    # if user.has_role? :super_admin
+    #   can :manage, :all
+    # elsif user.has_role? :church_admin
+    #   can :manage, :all
+    # elsif user.has_role? :need_poster
+    #   can :manage, :all
+    # elsif user.has_role? :member
+    #   can :manage, :all
+    # else
       can :manage, :all
-    elsif user.has_role? :church_admin
-      can :manage, :all
-    elsif user.has_role? :need_poster
-      can :manage, :all
-    elsif user.has_role? :member
-      can :manage, :all
-    else
-      can :read, :all
-    end
+    # end
 
     # def initialize(user)
     #     # Define abilities for the passed in user here.

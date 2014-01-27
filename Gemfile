@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'simple_form'
 gem 'cancan'
-gem 'role_model'
+# gem 'role_model'
 
 group :development, :test do
 	gem 'sqlite3'
