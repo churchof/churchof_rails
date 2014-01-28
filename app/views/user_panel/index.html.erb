@@ -6,4 +6,12 @@
   <li class="active"><a href="#">Awaiting Approval</a></li>
   <li><a href="#">In Progress</a></li>
   <li><a href="#">Completed</a></li>
+
+  <% if user_signed_in? %>
+    <% if current_user.has_role? :church_admin %>
+  		<li><a href="#">Incoming Needs</a></li>
+  		<li><a href="#">In Progress Needs</a></li>
+  		<li><a href="#">Completed Needs</a></li>
+    <% end %>
+  <% end %>
 </ul>
