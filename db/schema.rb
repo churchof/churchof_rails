@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127212238) do
+ActiveRecord::Schema.define(version: 20140128220217) do
 
   create_table "needs", force: true do |t|
     t.string   "title"
@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 20140127212238) do
     t.datetime "updated_at"
     t.integer  "user_id_posted_by"
     t.integer  "user_id_church_admin"
+    t.integer  "need_stage"
   end
 
+  add_index "needs", ["need_stage"], name: "index_needs_on_need_stage"
   add_index "needs", ["user_id_church_admin"], name: "index_needs_on_user_id_church_admin"
   add_index "needs", ["user_id_posted_by"], name: "index_needs_on_user_id_posted_by"
 

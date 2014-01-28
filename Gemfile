@@ -5,6 +5,7 @@ gem 'simple_form'
 gem 'cancan'
 # gem 'role_model'
 gem "rolify", "~> 3.2.0" # this is the old version, needs updated once current gem is stable again.
+gem 'enumerize'
 
 group :development, :test do
 	gem 'sqlite3'
