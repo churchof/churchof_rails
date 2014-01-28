@@ -1,7 +1,11 @@
+<div class="page-header">
+  <h1>Church Admin Panel</h1>
+</div>
+
 <% @users.each do |user| %>
 	<p>
 		<%= user.full_name %> | 
-		<% if user.has_role? :poster %>
+		<% if user.has_role? :need_poster %>
 			<%= "Poster = Y" %>
 		<% else %>
 			<%= "Poster = N" %>

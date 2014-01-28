@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  rolify # :poster, :church_admin, :super_admin
+  rolify # :need_poster, :church_admin, :super_admin
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

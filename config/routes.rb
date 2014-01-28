@@ -1,4 +1,6 @@
 Churchof::Application.routes.draw do
+  get "church_admin_panel/index"
+  get "need_poster_panel/index"
   get "user_panel/index"
   get "user_panel/new"
   get "user_panel/create"

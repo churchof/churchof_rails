@@ -4,15 +4,15 @@ class UsersController < ApplicationController
   end
 
   # Maybe this is the right way? It seems I need to do an actual POST to a url with params to do this the right way.
-  def assign_poster_role
+  def assign_need_poster_role
 	@user = User.find(params[:id])
-	@user.add_role :poster
+	@user.add_role :need_poster
 	redirect_to @user
   end
 
-  def remove_poster_role
+  def remove_need_poster_role
   	@user = User.find(params[:id])
-  	@user.remove_role :poster
+  	@user.remove_role :need_poster
   	redirect_to @user
   end
 end
