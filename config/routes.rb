@@ -1,4 +1,7 @@
 Churchof::Application.routes.draw do
+  get "user_panel/index"
+  get "user_panel/new"
+  get "user_panel/create"
   get "users/index"
   get "users_controller/index"
   get "profiles/show"
@@ -13,7 +16,7 @@ Churchof::Application.routes.draw do
 
   get 'feed', to: 'needs#index', as: :feed
 
-  root :to => 'needs#index'
+  root :to => 'user_panel#index'
 
   get '/:id', to: 'profiles#show'
 
