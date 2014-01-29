@@ -14,6 +14,7 @@ Churchof::Application.routes.draw do
     get 'login', to: 'devise/sessions#new', as: :login
   end
 
+  resources :users # Not sure if this is ok to do with Devise also.
   resources :needs
 
   get 'feed', to: 'needs#index', as: :feed

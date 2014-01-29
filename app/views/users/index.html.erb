@@ -10,6 +10,15 @@
 		<% else %>
 			<%= "Poster = N" %>
 		<% end %>
+
+		<%= simple_form_for user, method: :put do |f| %>
+			<%= f.input :first_name %>
+			<%= f.input :roles, :as => :hidden, :input_html => { :value => :need_poster } %>
+			<div class="form form-actions">
+				<%= submit_tag "Add As Poster", class: 'btn btn-primary' %>
+			</div>
+		<% end %>
+
 		| 
 		<% if user.has_role? :church_admin %>
 			<%= "Church Admin = Y" %>

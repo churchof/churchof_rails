@@ -15,4 +15,11 @@ class UsersController < ApplicationController
   	@user.remove_role :need_poster
   	redirect_to @user
   end
+
+  # Added... but I don't want to do the template also to make this work... and is this even
+  # ok with Devise? http://stackoverflow.com/questions/5212350/making-changes-to-the-devise-user-controller-in-rails
+  def update
+   #edit here
+  end
+
 end
