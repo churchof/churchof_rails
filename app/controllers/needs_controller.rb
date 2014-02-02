@@ -12,6 +12,17 @@ class NeedsController < ApplicationController
   # GET /needs.json
   def index
     @needs = Need.all
+    @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
+      marker.lat 38.033461
+      marker.lng -84.472019
+      marker.infowindow need.title
+      # marker.picture({
+      #   :url    => "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+      #   :width  => "32",
+      #   :height => "32"
+      # })
+      marker.json({ title: need.title })
+    end
   end
 
   # GET /needs/1
