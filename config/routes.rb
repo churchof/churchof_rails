@@ -19,7 +19,7 @@ Churchof::Application.routes.draw do
 
   get 'feed', to: 'needs#index', as: :feed
 
-  root :to => 'user_panel#index'
+  root :to => 'needs#index'
 
   get '/:id', to: 'profiles#show'
 
