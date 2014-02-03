@@ -12,6 +12,15 @@
   <% end %>
   <%= f.input :title %>
   <%= f.input :description %>
+  <%= f.input :title_public %>
+  <%= f.input :description_public %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :social_security_number %>
+  <%= f.input :street_address %>
+  <%= f.input :drivers_license %>
+  <%= f.input :age %>
+  <%= f.input :gender %>
   <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
   <div class="form-actions">
     <%= f.button :submit %>

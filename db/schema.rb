@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128220217) do
+ActiveRecord::Schema.define(version: 20140203210054) do
 
   create_table "needs", force: true do |t|
     t.string   "title"
@@ -21,9 +21,27 @@ ActiveRecord::Schema.define(version: 20140128220217) do
     t.integer  "user_id_posted_by"
     t.integer  "user_id_church_admin"
     t.integer  "need_stage"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "social_security_number"
+    t.string   "street_address"
+    t.string   "drivers_license"
+    t.integer  "age"
+    t.integer  "gender"
+    t.string   "title_public"
+    t.text     "description_public"
   end
 
+  add_index "needs", ["age"], name: "index_needs_on_age"
+  add_index "needs", ["description_public"], name: "index_needs_on_description_public"
+  add_index "needs", ["drivers_license"], name: "index_needs_on_drivers_license"
+  add_index "needs", ["first_name"], name: "index_needs_on_first_name"
+  add_index "needs", ["gender"], name: "index_needs_on_gender"
+  add_index "needs", ["last_name"], name: "index_needs_on_last_name"
   add_index "needs", ["need_stage"], name: "index_needs_on_need_stage"
+  add_index "needs", ["social_security_number"], name: "index_needs_on_social_security_number"
+  add_index "needs", ["street_address"], name: "index_needs_on_street_address"
+  add_index "needs", ["title_public"], name: "index_needs_on_title_public"
   add_index "needs", ["user_id_church_admin"], name: "index_needs_on_user_id_church_admin"
   add_index "needs", ["user_id_posted_by"], name: "index_needs_on_user_id_posted_by"
 
