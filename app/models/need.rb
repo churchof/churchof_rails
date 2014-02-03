@@ -1,6 +1,6 @@
 class Need < ActiveRecord::Base
-	resourcify
 	extend Enumerize
+	resourcify
 
 	enumerize :need_stage, in: {:admin_incoming => 1, :admin_in_progress => 2, :admin_completed => 3}, default: :admin_incoming
 

@@ -6,6 +6,7 @@ gem 'cancan'
 # gem 'role_model'
 gem 'rolify'
 gem 'gmaps4rails'
+gem 'enumerize'
 
 group :development, :test do
 	gem 'sqlite3'
