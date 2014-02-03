@@ -5,9 +5,15 @@ class Ability
     
     user ||= User.new # guest user (not logged in)
     if user.has_role? :need_poster
-      can :manage, :all
+        can :manage, :all
+        #can :create, Need
+        #can :update, Need, :need_stage => :admin_incoming
+        #can :read, Need
     elsif user.has_role? :church_admin
       can :manage, :all
+
+        # can :update, Need, :need_stage => :admin_incoming
+
     elsif user.has_role? :super_admin
       can :manage, :all
     else
