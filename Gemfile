@@ -4,8 +4,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'cancan'
 # gem 'role_model'
-gem "rolify", "~> 3.2.0" # This is the old version, needs updated once current gem is stable again.
-gem 'enumerize'
+gem 'rolify'
 gem 'gmaps4rails'
 
 group :development, :test do
