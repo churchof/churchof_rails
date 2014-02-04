@@ -5,21 +5,26 @@ class Ability
     
     user ||= User.new # guest user (not logged in)
     if user.has_role? :need_poster
-        can :manage, :all
-        #can :create, Need
-        #can :update, Need, :need_stage => :admin_incoming
-        #can :read, Need
-    elsif user.has_role? :church_admin
-      can :manage, :all
-
-        # can :update, Need, :need_stage => :admin_incoming
-
-    elsif user.has_role? :super_admin
-      can :manage, :all
-    else
-      can :manage, :all
+        can :create, Need
+        can :update, Need, :need_stage => :admin_incoming, :user_id_posted_by => user.id, :message => "Unable to read this article."
+        can :read, Need, :user_id_posted_by => user.id
     end
+    if user.has_role? :church_admin
+        can :update, Need, :user_id_church_admin => user.id # I only want them to be able to update it in certain views though.
+        can :read, Need, :user_id_church_admin => user.id
+    end
+    if user.has_role? :super_admin
+        can :update, User
+    end
+    # Everyone can do the following, these will overide the specific roles:
+    can :read, Need, :is_public => true
+    can :create, User
+    can :update, User, :id => user.id
+    can :read, User, :id => user.id
 
+
+
+    
     # def initialize(user)
     #     # Define abilities for the passed in user here.
     #     user ||= User.new # guest user (not logged in)

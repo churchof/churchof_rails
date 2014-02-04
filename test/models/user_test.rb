@@ -12,4 +12,10 @@ class UserTest < ActiveSupport::TestCase
 		assert !user.save
 		assert !user.errors[:last_name].empty?
 	end
+
+	# test "a new user should have no roles" do
+	# 	user = User.new
+	# 	assert !user.save
+	# 	assert !user.has_role? :admin
+	# end
 end
