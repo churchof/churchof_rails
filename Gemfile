@@ -3,10 +3,10 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'simple_form'
 gem 'cancan'
-# gem 'role_model'
 gem 'rolify'
 gem 'gmaps4rails'
 gem 'enumerize'
+gem 'paperclip'
 
 group :development, :test do
 	gem 'sqlite3'

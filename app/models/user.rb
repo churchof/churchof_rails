@@ -12,11 +12,22 @@ class User < ActiveRecord::Base
   has_many :needs_posted_by, :foreign_key => 'user_id_posted_by', :class_name => "Need"
   has_many :needs_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "Need"
 
+  has_attached_file :avatar, {
+    :styles => {
+      :thumb => ["50x50#", :png],
+      :medium => ["100x100#", :png],
+      :large => ["300x300>", :png]
+    },
+    :convert_options => {
+      :thumb => "-gravity Center -crop 50x50+0+0",
+      :thumb => "-gravity Center -crop 100x100+0+0",
+    }
+  }
+
+  validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/jpg', 'image/png']
+
   def full_name
   	first_name + " " + last_name
   end
 
-  def gravatar_url
-    "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(email.strip.downcase)}"
-  end
 end
