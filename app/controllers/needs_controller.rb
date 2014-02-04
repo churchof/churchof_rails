@@ -11,7 +11,7 @@ class NeedsController < ApplicationController
   # GET /needs
   # GET /needs.json
   def index
-    @needs = Need.all
+    @needs = Need.where(is_public: true)
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       marker.lat 38.033461
       marker.lng -84.472019

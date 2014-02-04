@@ -3,9 +3,24 @@
 </div>
 
 <ul class="nav nav-pills">
-	<li class="active"><a href="#IncomingNeeds" data-toggle="tab">Incoming Needs</a></li>
-	<li><a href="#InProgressNeeds" data-toggle="tab">In Progress Needs</a></li>
-	<li><a href="#CompletedNeeds" data-toggle="tab">Completed Needs</a></li>
+	<li class="active"><a href="#IncomingNeeds" data-toggle="tab">
+		<% if @needs_admin_incoming.count > 0 %>
+			<span class="badge pull-right"><%= @needs_admin_incoming.count %></span>
+		<% end %>
+		Incoming Needs</a>
+	</li>
+	<li><a href="#InProgressNeeds" data-toggle="tab">
+		<% if @needs_admin_in_progress.count > 0 %>
+			<span class="badge pull-right"><%= @needs_admin_in_progress.count %></span>
+		<% end %>
+		In Progress Needs</a>
+	</li>
+	<li><a href="#CompletedNeeds" data-toggle="tab">
+		<% if @needs_admin_completed.count > 0 %>
+			<span class="badge pull-right"><%= @needs_admin_completed.count %></span>
+		<% end %>
+		Completed Needs</a>
+	</li>
 </ul>
 
 <div id='content' class="tab-content">

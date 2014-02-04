@@ -17,7 +17,7 @@ class Ability
     elsif user.has_role? :super_admin
       can :manage, :all
     else
-      can :read, :all
+      can :manage, :all
     end
 
     # def initialize(user)

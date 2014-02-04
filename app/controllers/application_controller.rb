@@ -6,8 +6,9 @@ class ApplicationController < ActionController::Base
   # Added to make Devise work with Rails 4.
   before_filter :configure_devise_params, if: :devise_controller?
 
-  # Added for cancan.
-  check_authorization
+  # Added for cancan. Currently causing too many side errors.
+  # check_authorization :unless => :devise_controller?
+
   private
 
   def configure_devise_params
