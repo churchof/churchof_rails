@@ -7,6 +7,7 @@ gem 'rolify'
 gem 'gmaps4rails'
 gem 'enumerize'
 gem 'paperclip'
+gem 'stripe'
 
 group :development, :test do
 	gem 'sqlite3'

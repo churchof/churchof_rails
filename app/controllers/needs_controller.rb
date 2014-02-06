@@ -3,6 +3,29 @@ class NeedsController < ApplicationController
   before_action :set_need, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
 
+  
+  def create_charge
+    # Amount in cents
+    @amount = 500
+
+    customer = Stripe::Customer.create(
+      :email => current_user.email,
+      :card  => params[:stripeToken]
+    )
+
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount,
+      :description => 'Rails Stripe customer',
+      :currency    => 'usd'
+    )
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to root_path
+  end
+
+
   # Part of a workaround for cancan described here: https://github.com/ryanb/cancan/issues/835
   def needs_params
     params.require(:needs).permit(:what, :ever)

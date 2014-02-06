@@ -7,6 +7,7 @@ Churchof::Application.routes.draw do
   get "users/index"
   get "users_controller/index"
   get "profiles/show"
+  post 'needs/create_charge'
   devise_for :users
 
   devise_scope :user do
@@ -22,6 +23,9 @@ Churchof::Application.routes.draw do
   root :to => 'needs#index'
 
   get '/:id', to: 'profiles#show'
+
+  # Added for create_charge method.
+  # resources :needs, :member => {:create_charge => :post}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

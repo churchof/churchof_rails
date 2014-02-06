@@ -21,7 +21,7 @@ class Ability
     can :create, User
     can :update, User, :id => user.id
     can :read, User, :id => user.id
-
+    can :create_charge, Need
 
 
     
