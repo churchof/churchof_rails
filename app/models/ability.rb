@@ -6,7 +6,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :need_poster
         can :create, Need
-        can :update, Need, :need_stage => :admin_incoming, :user_id_posted_by => user.id, :message => "Unable to read this article."
+        can :update, Need, :need_stage => :admin_incoming, :user_id_posted_by => user.id
         can :read, Need, :user_id_posted_by => user.id
     end
     if user.has_role? :church_admin

@@ -7,7 +7,6 @@ Churchof::Application.routes.draw do
   get "users/index"
   get "users_controller/index"
   get "profiles/show"
-  post 'needs/create_charge'
   devise_for :users
 
   devise_scope :user do
@@ -16,7 +15,10 @@ Churchof::Application.routes.draw do
   end
 
   resources :users # Not sure if this is ok to do with Devise also.
-  resources :needs
+  resources :needs do
+    post :create_charge
+  end
+
 
   get 'feed', to: 'needs#index', as: :feed
 

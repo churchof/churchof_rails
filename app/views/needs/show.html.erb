@@ -73,10 +73,12 @@
 <%= link_to 'Edit', edit_need_path(@need) %> |
 <%= link_to 'Back', needs_path %>
 
+<!-- 
+<%#= form_tag needs_create_charge_path do %>
 
-<%= form_tag needs_create_charge_path do %>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="<%= @need.title %>"
           data-amount="500"></script>
-<% end %>
+<%# end %>
+ -->
