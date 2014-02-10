@@ -10,11 +10,13 @@
       <div class="user-role-block" id="user_<%= user.id %>">
         <div class="inner-content">
           <p><%= user.full_name %></p>
-          <%= simple_form_for user do |f| %>
+        </div>
+        <%= simple_form_for user do |f| %>
+          <div class="inner-content">
             <div class="form form-actions">
               <%= f.association :roles, as: :check_boxes %>
             </div>
-        </div>
+          </div>
           <%= submit_tag "Save Roles", class: 'action-btn' %>
         <% end %>
       </div>
