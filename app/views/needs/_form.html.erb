@@ -1,28 +1,51 @@
-<%= simple_form_for(@need, html: {class: "form-horizontal"}) do |f| %>
-  <% if @need.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@need.errors.count, "error") %> prohibited this need from being saved:</h2>
-
-      <ul>
-      <% @need.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for(@need, html: {class: "form-horizontal need-form"}) do |f| %>
+  <div class="inner-content">
+    <p class="form-instructions">Please title and describe the need:</p>
+    <% if @need.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@need.errors.count, "error") %> prohibited this need from being saved:</h2>
+        <ul>
+          <% @need.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="private-fields">
+      <%= f.input :title %>
+      <%= f.input :description %>
     </div>
-  <% end %>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.input :title_public %>
-  <%= f.input :description_public %>
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-  <%= f.input :social_security_number %>
-  <%= f.input :street_address %>
-  <%= f.input :drivers_license %>
-  <%= f.input :age %>
-  <%= f.input :gender %>
-  <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
-  <div class="form-actions">
-    <%= f.button :submit %>
+    <div class="public-fields">
+      <%= f.input :title_public %>
+      <%= f.input :description_public %>
+    </div>
+    <div class="all-private-fields">
+      <p class="form-instructions ">The following fields will remain private, and viewed only by church admins:</p>
+      <div class="field-pair">
+        <%= f.input :first_name%>
+      </div>
+      <div class="field-pair">
+        <%= f.input :last_name %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :social_security_number %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :street_address %>
+      </div>
+      <div class="field-group-3">
+        <%= f.input :drivers_license %>
+      </div>
+      <div class="field-group-3">
+        <%= f.input :age %>
+      </div>
+      <div class="field-group-3">
+        <%= f.input :gender %>
+      </div>
+      <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
+    </div>
+  </div>
+  <div class="form-actions submit-new-need">
+    <%= f.button :submit, "Submit" %>
   </div>
 <% end %>

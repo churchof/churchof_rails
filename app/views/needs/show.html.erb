@@ -1,82 +1,99 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header-block">
+</div>
 
-<p>
-  <strong>Posted By:</strong>
-  <%= @need.user_posted_by.full_name %>
-</p>
+<div class="main-content show-need">
+  <div class="inner-content">
+    <div class="page-title">
+      <h2>
+        <% if @need.is_public %>
+          <%= @need.title %></h2>
+        <% else %>
+          <%= @need.title_public %></h2>
+        <% end %>
+      <p>
+        <strong>Posted By:</strong>
+        <%= @need.user_posted_by.full_name %>
+         &nbsp;|&nbsp;
+        <strong>Church Admin:</strong>
+        <%= @need.user_church_admin.full_name %>
+          &nbsp;|&nbsp;
+              <strong>Current Status:</strong>
+      <%= @need.need_stage %>
+      </p>
+    </div>
 
-<p>
-  <strong>Church Admin:</strong>
-  <%= @need.user_church_admin.full_name %>
-</p>
+    <div class="about-need">
+      <% if @need.is_public %>
+        <p class="need-description"><%= @need.description %></p>
+      <% else %>
+        <p class="need-description"><%= @need.description_public %></p>
+      <% end %>
+    </div>
 
-<p>
-  <strong>Current Status:</strong>
-  <%= @need.need_stage %>
-</p>
+    <% if current_user == @need.user_church_admin || current_user == @need.user_posted_by %>
+      <% if @need.first_name? %>
+        <p>
+          <strong>First Name: </strong>
+          <%= @need.first_name %>
+        </p>
+      <% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @need.title %>
-</p>
+     <% if @need.last_name? %>
+        <p>
+          <strong>Last Name: </strong>
+          <%= @need.last_name %>
+        </p>
+      <% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @need.description %>
-</p>
-
-<p>
-  <strong>Title (Public):</strong>
-  <%= @need.title_public %>
-</p>
-
-<p>
-  <strong>Description (Public):</strong>
-  <%= @need.description_public %>
-</p>
-
-<p>
-  <strong>First Name</strong>
-  <%= @need.first_name %>
-</p>
-
-<p>
-  <strong>Last Name</strong>
-  <%= @need.last_name %>
-</p>
-
-<p>
-  <strong>Social Security Number</strong>
-  <%= @need.social_security_number %>
-</p>
-
-<p>
-  <strong>Street Address</strong>
-  <%= @need.street_address %>
-</p>
-
-<p>
-  <strong>Driver's License</strong>
-  <%= @need.drivers_license %>
-</p>
-
-<p>
-  <strong>Age</strong>
-  <%= @need.age %>
-</p>
-
-<p>
-  <strong>Gender</strong>
-  <%= @need.gender %>
-</p>
-
-<%= link_to 'Edit', edit_need_path(@need) %> |
-<%= link_to 'Back', needs_path %>
+      <% if @need.social_security_number? %>
+        <p>
+          <strong>Social Security Number: </strong>
+          <%= @need.social_security_number %>
+        </p>
+      <% end %>
 
 
+      <% if @need.street_address? %>
+        <p>
+          <strong>Street Address: </strong>
+          <%= @need.street_address %>
+        </p>
+      <% end %>
+
+      <% if @need.drivers_license? %>
+        <p>
+          <strong>Driver's License: </strong>
+          <%= @need.drivers_license %>
+        </p>
+      <% end %>
+
+      <% if @need.age? %>
+        <p>
+          <strong>Age: </strong>
+          <%= @need.age %>
+        </p>
+      <% end %>
+
+     <% if @need.gender %>
+      <p>
+        <strong>Gender: </strong>
+        <%= @need.gender %>
+      </p>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
 <%= form_tag needs_create_charge_path do %>
+  <%= hidden_field_tag(:user_id, current_user.id) %>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="<%= @need.title %>"
           data-amount="500"></script>
 <% end %>
+
+
+<%= link_to 'Edit', edit_need_path(@need) %> |
+<%= link_to 'Back', needs_path %>
+
+

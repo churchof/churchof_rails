@@ -1,139 +1,143 @@
-<div class="page-header">
-  <h1>Church Admin Panel</h1>
+<div class="page-header-block">
+  <div class="page-title">
+    <h2>Church Admin Panel</h2>
+  </div>
+
+  <ul class="nav nav-pills page-options">
+    <li class="active">
+      <a href="#IncomingNeeds" data-toggle="tab">
+        <% if @needs_admin_incoming.count > 0 %>
+          <span class="count-number pull-left"><%= @needs_admin_incoming.count %></span>
+        <% end %>
+        Incoming Needs
+      </a>
+    </li>
+    <li>
+      <a href="#InProgressNeeds" data-toggle="tab">
+        <% if @needs_admin_in_progress.count > 0 %>
+          <span class="count-number pull-left"><%= @needs_admin_in_progress.count %></span>
+        <% end %>
+        In Progress Needs
+      </a>
+    </li>
+    <li>
+      <a href="#CompletedNeeds" data-toggle="tab">
+        <% if @needs_admin_completed.count > 0 %>
+          <span class="count-number pull-left"><%= @needs_admin_completed.count %></span>
+        <% end %>
+        Completed Needs
+      </a>
+    </li>
+    <li class="pull-right post-new-need">
+      <%= link_to "Post a Need", new_need_path, :class => 'important-btn' %>
+    </li>
+  </ul>
 </div>
 
-<ul class="nav nav-pills">
-	<li class="active"><a href="#IncomingNeeds" data-toggle="tab">
-		<% if @needs_admin_incoming.count > 0 %>
-			<span class="badge pull-right"><%= @needs_admin_incoming.count %></span>
-		<% end %>
-		Incoming Needs</a>
-	</li>
-	<li><a href="#InProgressNeeds" data-toggle="tab">
-		<% if @needs_admin_in_progress.count > 0 %>
-			<span class="badge pull-right"><%= @needs_admin_in_progress.count %></span>
-		<% end %>
-		In Progress Needs</a>
-	</li>
-	<li><a href="#CompletedNeeds" data-toggle="tab">
-		<% if @needs_admin_completed.count > 0 %>
-			<span class="badge pull-right"><%= @needs_admin_completed.count %></span>
-		<% end %>
-		Completed Needs</a>
-	</li>
-</ul>
+<div id='content' class="tab-content main-content">
+  <div class="tab-pane active" id="IncomingNeeds">
+    <% @needs_admin_incoming.each do |need| %>
+      <div class="need-container">
+        <div class="inner-content">
+          <h3><%= need.title %></h3>
+          <p>Posted By: <strong><%= need.user_posted_by.full_name %></strong></p>
+          <div class="need-details">
+            <p><%= need.description %></p>
+            <%= simple_form_for(need, html: {class: "form-horizontal action-btn"}) do |f| %>
+              <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_in_progress } %>
+              <div class="form-actions">
+                <%= f.submit "Move To In Progress" %>
+              </div>
+            <% end %>
+          </div>
+          <div class="meta">
+            <%= link_to time_ago_in_words(need.created_at) + " ago", need %>
+            <span class="admin">
+                | <%= link_to "Edit", edit_need_path(need) %>
+                | <%= link_to "Delete", need, method: :delete, data: { confirm: "Are you sure you want to delete this need?"} %>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<div id='content' class="tab-content">
-	<div class="tab-pane active" id="IncomingNeeds">
-		<% @needs_admin_incoming.each do |need| %>
-			  <div class="container">
-			    <div class="need">
-			      	<div class="row">
-			        	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			          	<%= image_tag need.user_posted_by.avatar.url(:medium) %>
-			        	</div>
-			        	<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-			          		<p><strong><%= need.user_posted_by.full_name %></strong></p>
-			          		<p><strong><%= need.title %></strong></p>
-			          		<p><%= need.description %></p>
-			          			<div class="meta">
-			            		<%= link_to time_ago_in_words(need.created_at) + " ago", need %>
-			            			<span class="admin">
-			              				| <%= link_to "Edit", edit_need_path(need) %>
-			              				| <%= link_to "Delete", need, method: :delete, data: { confirm: "Are you sure you want to delete this need?"} %>
-			           				</span>
-			          			</div>
-			        		</div>
-			      		</div>
-						<%= simple_form_for(need, html: {class: "form-horizontal"}) do |f| %>
-						  <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_in_progress } %>
-						  <div class="form-actions">
-						    <%= f.submit "Move To In Progress" %>
-						  </div>
-						<% end %>
-			    	</div>
-			  	</div>
-		<% end %>
-	</div>
-	<div class="tab-pane" id="InProgressNeeds">
-		<% @needs_admin_in_progress.each do |need| %>
-			<% if need.need_stage_value == 2 %>
-			  <div class="container">
-			    <div class="need">
-			      	<div class="row">
-			        	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			          	<%= image_tag need.user_posted_by.avatar.url(:medium) %>
-			        	</div>
-			        	<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-			          		<p><strong><%= need.user_posted_by.full_name %></strong></p>
-			          		<p><strong><%= need.title %></strong></p>
-			          		<p><%= need.description %></p>
-			          			<div class="meta">
-			            		<%= link_to time_ago_in_words(need.created_at) + " ago", need %>
-			            			<span class="admin">
-			              				| <%= link_to "Edit", edit_need_path(need) %>
-			              				| <%= link_to "Delete", need, method: :delete, data: { confirm: "Are you sure you want to delete this need?"} %>
-			           				</span>
-			          			</div>
-			        		</div>
-			      		</div>
-						<% if need.is_public %>
-							<%= simple_form_for(need, html: {class: "form-horizontal"}) do |f| %>
-							  <%= f.input :is_public, :as => :hidden, :input_html => { :value => false } %>
-							  <div class="form-actions">
-							    <%= f.submit "Set as NOT Public" %>
-							  </div>
-							<% end %>
-						<% else %>
-							<%= simple_form_for(need, html: {class: "form-horizontal"}) do |f| %>
-							  <%= f.input :is_public, :as => :hidden, :input_html => { :value => true } %>
-							  <div class="form-actions">
-							    <%= f.submit "Set as Public" %>
-							  </div>
-							<% end %>
-						<% end %>
-			      		<%= simple_form_for(need, html: {class: "form-horizontal"}) do |f| %>
-						  <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_incoming } %>
-						  <div class="form-actions">
-						    <%= f.submit "Mark as Incoming" %>
-						  </div>
-						<% end %>
-						<%= simple_form_for(need, html: {class: "form-horizontal"}) do |f| %>
-						  <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_completed } %>
-						  <div class="form-actions">
-						    <%= f.submit "Move To Completed" %>
-						  </div>
-						<% end %>
-			    	</div>
-			  	</div>
-		  	<% end %>
-		<% end %>
-	</div>
-	<div class="tab-pane" id="CompletedNeeds">
-		<% @needs_admin_completed.each do |need| %>
-			<% if need.need_stage_value == 3 %>
-			  <div class="container">
-			    <div class="need">
-			      	<div class="row">
-			        	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			          	<%= image_tag need.user_posted_by.avatar.url(:medium) %>
-			        	</div>
-			        	<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-			          		<p><strong><%= need.user_posted_by.full_name %></strong></p>
-			          		<p><strong><%= need.title %></strong></p>
-			          		<p><%= need.description %></p>
-			          			<div class="meta">
-			            		<%= link_to time_ago_in_words(need.created_at) + " ago", need %>
-			            			<span class="admin">
-			              				| <%= link_to "Edit", edit_need_path(need) %>
-			              				| <%= link_to "Delete", need, method: :delete, data: { confirm: "Are you sure you want to delete this need?"} %>
-			           				</span>
-			          			</div>
-			        		</div>
-			      		</div>
-			    	</div>
-			  	</div>
-		  	<% end %>
-		<% end %>
-	</div>
+  <div class="tab-pane" id="InProgressNeeds">
+    <% @needs_admin_in_progress.each do |need| %>
+      <% if need.need_stage_value == 2 %>
+        <div class="need-container">
+          <div class="inner-content">
+            <h3><%= need.title %></h3>
+            <p>Posted By: <strong><%= need.user_posted_by.full_name %></strong></p>
+
+            <div class="need-details">
+              <p><%= need.description %></p>
+              <% if need.is_public %>
+                <%= simple_form_for(need, html: {class: "form-horizontal action-btn"}) do |f| %>
+                  <%= f.input :is_public, :as => :hidden, :input_html => { :value => false } %>
+                  <div class="form-actions">
+                    <%= f.submit "Set as PRIVATE" %>
+                  </div>
+                <% end %>
+              <% else %>
+                <%= simple_form_for(need, html: {class: "form-horizontal action-btn"}) do |f| %>
+                  <%= f.input :is_public, :as => :hidden, :input_html => { :value => true } %>
+                  <div class="form-actions">
+                    <%= f.submit "Set as Public" %>
+                  </div>
+                <% end %>
+              <% end %>
+
+              <%= simple_form_for(need, html: {class: "form-horizontal action-btn"}) do |f| %>
+                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_incoming } %>
+                <div class="form-actions">
+                  <%= f.submit "Mark as Incoming" %>
+                </div>
+              <% end %>
+
+              <%= simple_form_for(need, html: {class: "form-horizontal action-btn"}) do |f| %>
+                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_completed } %>
+                <div class="form-actions">
+                  <%= f.submit "Move To Completed" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="meta">
+              <%= link_to time_ago_in_words(need.created_at) + " ago", need %>
+              <span class="admin">
+                | <%= link_to "Edit", edit_need_path(need) %>
+                | <%= link_to "Delete", need, method: :delete, data: { confirm: "Are you sure you want to delete this need?"} %>
+              </span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="tab-pane" id="CompletedNeeds">
+    <% if @needs_admin_completed.length < 1 %>
+      <p>None of the needs you are responsible for have been completed at this time.</p>
+    <% end %>
+    <% @needs_admin_completed.each do |need| %>
+      <% if need.need_stage_value == 3 %>
+        <div class="need-container">
+          <div class="inner-content">
+            <h3><%= need.title %></h3>
+            <p>Posted By: <strong><%= need.user_posted_by.full_name %></strong></p>
+            <div class="need-details">
+              <p><%= need.description %></p>
+              <div class="meta">
+                <%= link_to time_ago_in_words(need.created_at) + " ago", need %>
+                <span class="admin">
+                    | <%= link_to "Edit", edit_need_path(need) %>
+                    | <%= link_to "Delete", need, method: :delete, data: { confirm: "Are you sure you want to delete this need?"} %>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

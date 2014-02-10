@@ -3,44 +3,62 @@
 <head>
   <title>Churchof</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Muli:400,400italic' %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,700'%>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= javascript_include_tag "https://js.stripe.com/v1/" %>
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <%= link_to "Church of Lexington", needs_path, :class => 'navbar-brand' %>
-   	<ul class="nav navbar-nav pull-right">
-   		<% if user_signed_in? %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user.full_name %> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <% if current_user.has_role? :need_poster %>
-              <li><%= link_to "Poster Panel", need_poster_panel_index_path %></li>
-            <% end %>
-            <% if current_user.has_role? :church_admin %>
-              <li><%= link_to "Church Admin Panel", church_admin_panel_index_path %></li>
-            <% end %>
-            <% if current_user.has_role? :super_admin %>
-              <li><%= link_to "Super Admin Panel", users_index_path %></li>
-            <% end %>
-            <li class="divider"></li>
-            <li><%= link_to "Edit Account", edit_user_registration_path %></li>
-            <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
-          </ul>
-        </li>
-      <% else %>
-     		<li><%= link_to "Register", register_path %></li>
-     		<li><%= link_to "Log In", login_path %></li>
-   		<% end %>
-   	</ul>
-	</nav>
-	<div class="container">
-		<% flash.each do |type, message| %>
-      		<div class="alert <%= flash_class type %>">
-				<%= message %>
-      		</div>
-      	<% end %>
-		<%= yield %>
-	</div>
+  <nav class="navbar navbar-fixed-top" role="navigation">
+    <div class="container">
+      <%= link_to "Church of Lexington", needs_path, :class => 'navbar-brand' %>
+      <ul class="menu-links">
+        <% if user_signed_in? %>
+          <li class="menu-link">
+            <a href="#" class="dropdown-toggle highlighted" data-toggle="dropdown">
+              <span class="hide-on-xs"><%= current_user.full_name %></span>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <div class="dropdown-wrapper">
+                <% if current_user.has_role? :need_poster %>
+                  <li><%= link_to "Poster Panel", need_poster_panel_index_path %></li>
+                <% end %>
+                <% if current_user.has_role? :church_admin %>
+                  <li><%= link_to "Church Admin Panel", church_admin_panel_index_path %></li>
+                <% end %>
+                <% if current_user.has_role? :super_admin %>
+                  <li><%= link_to "Super Admin Panel", users_index_path %></li>
+                <% end %>
+                <li class="divider"></li>
+                <li><%= link_to "Edit Account", edit_user_registration_path %></li>
+                <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+              </div>
+            </ul>
+          </li>
+        <% else %>
+          <li class="menu-link highlighted login-btn"><%= link_to "Log In", login_path %></li>
+          <li class="menu-link hide-on-xs"><%= link_to "Register", register_path %></li>
+        <% end %>
+      </ul>
+     </div>
+  </nav>
+
+  <% if controller.controller_name == 'needs' %>
+    <% if controller.action_name == 'index' %>
+      <%= render :partial => '/layouts/map' %>
+    <% end %>
+  <% end %>
+
+  <div class="container" id="main-content-container">
+    <% flash.each do |type, message| %>
+          <div class="alert <%= flash_class type %>">
+        <%= message %>
+          </div>
+        <% end %>
+    <%= yield %>
+  </div>
+
 </body>
 </html>
