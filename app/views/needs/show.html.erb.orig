@@ -1,3 +1,83 @@
+<<<<<<< HEAD
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Posted By:</strong>
+  <%= @need.user_posted_by.full_name %>
+</p>
+
+<p>
+  <strong>Church Admin:</strong>
+  <%= @need.user_church_admin.full_name %>
+</p>
+
+<p>
+  <strong>Current Status:</strong>
+  <%= @need.need_stage %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @need.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @need.description %>
+</p>
+
+<p>
+  <strong>Title (Public):</strong>
+  <%= @need.title_public %>
+</p>
+
+<p>
+  <strong>Description (Public):</strong>
+  <%= @need.description_public %>
+</p>
+
+<p>
+  <strong>First Name</strong>
+  <%= @need.first_name %>
+</p>
+
+<p>
+  <strong>Last Name</strong>
+  <%= @need.last_name %>
+</p>
+
+<p>
+  <strong>Social Security Number</strong>
+  <%= @need.social_security_number %>
+</p>
+
+<p>
+  <strong>Street Address</strong>
+  <%= @need.street_address %>
+</p>
+
+<p>
+  <strong>Driver's License</strong>
+  <%= @need.drivers_license %>
+</p>
+
+<p>
+  <strong>Age</strong>
+  <%= @need.age %>
+</p>
+
+<p>
+  <strong>Gender</strong>
+  <%= @need.gender %>
+</p>
+
+<%= link_to 'Edit', edit_need_path(@need) %> |
+<%= link_to 'Back', needs_path %>
+
+<!-- 
+<%#= form_tag needs_create_charge_path do %>
+
+=======
 <div class="page-header-block">
 </div>
 
@@ -86,12 +166,20 @@
 </div>
 <%= form_tag needs_create_charge_path do %>
   <%= hidden_field_tag(:user_id, current_user.id) %>
+>>>>>>> ebc977febba301e66f78d07424104b3fe8c397f8
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="<%= @need.title %>"
           data-amount="500"></script>
+<<<<<<< HEAD
+<%# end %>
+ -->
+=======
 <% end %>
 
 
 <%= link_to 'Edit', edit_need_path(@need) %> |
 <%= link_to 'Back', needs_path %>
+
+
+>>>>>>> ebc977febba301e66f78d07424104b3fe8c397f8

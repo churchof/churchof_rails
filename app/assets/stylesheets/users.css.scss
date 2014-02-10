@@ -1,3 +1,164 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$primary-blue: #58A1EB;
+$dark-blue: #4281C8;
+$dark-grey: #989898;
+$content-width: 960px;
+$main-font: "Muli", sans-serif;
+$body-font: "Open Sans", sans-serif;
+
+.user-role-block{
+  width: 23.2%;
+  display: inline-block;
+  vertical-align: top;
+  background: #FFF;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.user-role-block .inner-content{
+  max-width: 90%;
+  margin: 10px auto;
+}
+
+.user-role-block .action-btn{
+  margin-top: 10px;
+  -webkit-appearance: none;
+  height: 35px;
+  border-radius: 5px;
+  background: $primary-blue;
+  color: #FFF;
+  border: none;
+  width: 100%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.user-role-block .action-btn:hover{
+  background: $dark-blue;
+}
+
+/*Sign Up*/
+.devise-form-wrapper{
+  max-width: 650px;
+  margin: 0px auto;
+}
+
+.form-horizontal label,
+label{
+  color: $dark-grey;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  display: block;
+}
+
+.devise input{
+  width: 100%;
+  height: 45px;
+  vertical-align: top;
+  border: solid 1px #CCC;
+  padding: 5px;
+}
+
+.devise abbr{
+  border-bottom: none;
+  margin-right: 0px;
+}
+
+.devise .action-btn{
+  margin-top: 15px;
+  background: $primary-blue;
+  color: #FFF;
+  font-size: 1.25em;
+}
+
+.devise .action-btn:hover{
+  background: $dark-blue;
+}
+
+.devise h2{
+  text-align: center;
+}
+
+.signup-form{
+  background-color: #FFF;
+}
+
+.devise.well{
+  background: #FFF;
+}
+
+.sign-in-link{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.devise input#user_remember_me{
+  width: auto;
+  height: auto;
+}
+
+.devise label[user_remember_me]{
+  width: auto;
+}
+
+#error_explanation h2{
+  display: none;
+}
+
+#error_explanation ul{
+  padding: 0px;
+  text-align: center;
+}
+
+#error_explanation ul li{
+  color: red;
+  list-style: none;
+  padding: 0px;
+}
+
+.devise-shared-links{
+  text-align: left;
+  width: 100%;
+  display: inline-block;
+  margin: 0px auto;
+  text-align: right;
+}
+
+.devise-shared-links br{
+  display: none;
+}
+
+.devise-shared-links a:first-of-type:after{
+  content: " | ";
+  color: #CCC;
+}
+
+.devise-shared-links a{
+  width: auto;
+  display: inline-block;
+}
+
+.devise input.cancel-btn{
+  color: #FFF;
+}
+
+.devise input.cancel-btn:hover{
+  background: $dark-grey;
+}
+
+@media(max-width: 767px){
+  .user-role-block{
+    width: 48%;
+  }
+}
+
+@media(max-width: 640px){
+  .user-role-block{
+    width: 100%;
+  }
+}

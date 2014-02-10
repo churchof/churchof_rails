@@ -2,23 +2,220 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.need {
-	border-bottom: solid 1px #CCC;
-	padding: 14px 0;
+$primary-blue: #58A1EB;
+$dark-blue: #4281C8;
+$dark-grey: #989898;
+$content-width: 960px;
+$main-font: "Muli", sans-serif;
+$body-font: "Open Sans", sans-serif;
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
 }
 
-.need p {
-	margin: 4px 0;
+.need-container {
+  border-bottom: solid 1px #CCC;
+  padding-bottom: 20px;
+  padding-top: 10px;
 }
 
-.need.hover {
-	background: #FAFAFA
+.need-details{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.need .admin {
-	display: none;
+.need-container h1,
+.need-container h2,
+.need-container h3,
+.need-container h4{
+  color: $primary-blue;
+  font-weight: 400;
 }
 
-.need.hover .admin {
-	display: inline;
+
+.need-form{
+  padding-top: 10px;
+}
+
+input:focus, textarea:focus, select:focus{
+  outline:none;
+}
+
+.need-form.form-horizontal label{
+  color: #353535;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.need-form abbr{
+  border-bottom: none;
+  margin-right: 0px;
+}
+
+p.form-instructions{
+  margin-top: 15px;
+  color: #353535;
+  font-size: 1.25em;
+  font-weight: 200;
+  font-family: $body-font;
+}
+
+.need-form .private-fields,
+.need-form .public-fields{
+  width: 48.7%;
+  margin-right: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.need-form .private-fields input,
+.need-form .public-fields input{
+  width: 100%;
+  height: 45px;
+  vertical-align: top;
+}
+
+.need-form .private-fields textarea,
+.need-form .public-fields textarea{
+  width: 100%;
+  height: 60px;
+}
+
+.need-form .all-private-fields{
+  margin-top: 25px;
+}
+
+.need-form .all-private-fields input,
+.need-form .all-private-fields select{
+  width: 100%;
+  height: 45px;
+}
+
+.need-form .all-private-fields select{
+  height: 45px;
+  background: #FFF;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  background: #FFF;
+  border: solid 1px #CCC;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.need-form .all-private-fields textarea{
+  width: 100%;
+  height: 60px;
+}
+
+.need-form .field-pair{
+width: 48.7%;
+margin-right: 1%;
+display: inline-block;
+  vertical-align: top;
+}
+
+.need-form .field-group-3{
+  width: 32%;
+  margin-right: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.need-form .submit-new-need input{
+  margin-top: 30px;
+  height: 55px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  width: 100%;
+  background: $primary-blue;
+  color: #FFF;
+}
+
+.need-form .submit-new-need input:hover{
+  background: $dark-blue;
+}
+
+.need-form input,
+.need-form textarea{
+  border: solid 1px #CCC;
+  padding-left: 5px;
+}
+
+/*SHOW*/
+.show-need{
+  padding-top: 15px;
+  font-family: $body-font;
+  padding-bottom: 15px;
+  margin-bottom: 0px;
+}
+
+.show-need strong{
+  font-weight: 600;
+}
+
+.show-need .need-description{
+  font-size: 1.25em;
+  line-height: 1.25em;
+  margin-bottom: 15px;
+}
+
+.show-need .about-need{
+  border-bottom: solid 1px #CCC;
+  margin-bottom: 10px;
+}
+
+.show-need h1,
+.show-need h2,
+.show-need h3,
+.show-need h4{
+  color: $primary-blue;
+}
+
+.stripe-button-el{
+  width: 100%;
+  background-image: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none;
+  height: 45px;
+  background: #70c769 !important;
+  text-shadow: none !important;
+  margin-bottom: 10px;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+.stripe-button-el:hover{
+  background: #6EC25D !important;
+}
+
+.stripe-button-el span{
+  background: none !important;
+  background-image: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none;
+  text-shadow: none !important;
+}
+
+@media(max-width: 767px){
+  .need-form .private-fields,
+  .need-form .public-fields,
+  .need-form .field-pair,
+  .need-form .field-group-3{
+    width: 100%;
+    margin-right: 0%;
+    display: block;
+    vertical-align: top;
+  }
+
+  .need-form .private-fields textarea,
+  .need-form .public-fields textarea{
+    height: 100px;
+  }
 }
