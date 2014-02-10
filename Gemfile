@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'devise'
 gem 'simple_form'
-gem 'cancan'
+gem "cancan"#, :git => "git://github.com/ryanb/cancan.git", :branch => "2.0"
 gem 'rolify'
 gem 'gmaps4rails'
 gem 'enumerize'

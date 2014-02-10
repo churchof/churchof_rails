@@ -10,11 +10,14 @@ class Ability
         can :read, Need, :user_id_posted_by => user.id
     end
     if user.has_role? :church_admin
-        can :update, Need, :user_id_church_admin => user.id # I only want them to be able to update it in certain views though.
         can :read, Need, :user_id_church_admin => user.id
+        can :update, Need, :user_id_church_admin => user.id
+        # can :update, Need, :is_public, [:user_id_church_admin => user.id, :need_stage => :admin_in_progress]
+
     end
     if user.has_role? :super_admin
         can :update, User
+
     end
     # Everyone can do the following, these will overide the specific roles:
     can :read, Need, :is_public => true
