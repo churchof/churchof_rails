@@ -1,15 +1,23 @@
-<div class="page-header">
-  <h1>Super Admin Panel</h1>
+<div class="page-header-block">
+  <div class="page-title">
+    <h2>Super Admin Panel</h2>
+  </div>
 </div>
 
-<% @users.each do |user| %>
-	<div class="user" id="user_<%= user.id %>">
-		<p><%= user.full_name %></p>
-		<%= simple_form_for user do |f| %>
-			<div class="form form-actions">
-				<%= f.association :roles, as: :check_boxes %>
-				<%= submit_tag "Save Roles", class: 'btn btn-primary' %>
-			</div>
-		<% end %>
-	</div>
-<% end %>
+<div class="user-roles-admin-block container">
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class="user-role-block" id="user_<%= user.id %>">
+        <div class="inner-content">
+          <p><%= user.full_name %></p>
+          <%= simple_form_for user do |f| %>
+            <div class="form form-actions">
+              <%= f.association :roles, as: :check_boxes %>
+            </div>
+        </div>
+          <%= submit_tag "Save Roles", class: 'action-btn' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
