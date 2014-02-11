@@ -3,11 +3,10 @@ class NeedsController < ApplicationController
   before_action :set_need, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
 
-
   def set_is_public
-    @need = params[:need]
-    logger.debug "This is from debug"
-    @need.update_attributes(params[:need])
+    @need = Need.find(params["need"]["id"])
+    @need.is_public = params["need"]["is_public"]
+    @need.save
     redirect_to root_path
   end
 
@@ -116,6 +115,6 @@ class NeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def need_params
-      params.require(:need).permit(:is_public, :first_name, :last_name, :social_security_number, :street_address, :drivers_license, :age, :gender, :title_public, :description_public, :need_stage, :title, :description, :user_id_posted_by, :user_id_church_admin)
+      params.require(:need).permit(:id, :is_public, :first_name, :last_name, :social_security_number, :street_address, :drivers_license, :age, :gender, :title_public, :description_public, :need_stage, :title, :description, :user_id_posted_by, :user_id_church_admin)
     end
 end

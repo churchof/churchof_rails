@@ -73,10 +73,11 @@
             <div class="need-details">
               <p><%= need.description %></p>
               <% if need.is_public %>
-                <%= simple_form_for(need, html: {class: "form-horizontal action-btn"}) do |f| %>
+                <%= simple_form_for(need, :url => needs_set_is_public_path, :method => :post, html: {class: "form-horizontal action-btn"}) do |f| %>
+                  <%= f.input :id, :as => :hidden, :input_html => { :value => need.id } %>
                   <%= f.input :is_public, :as => :hidden, :input_html => { :value => false } %>
                   <div class="form-actions">
-                    <%= f.submit "Set as PRIVATE" %>
+                    <%= f.submit "Set as Private" %>
                   </div>
                 <% end %>
               <% else %>

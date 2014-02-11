@@ -14,4 +14,15 @@ class Need < ActiveRecord::Base
 	validates :description_public, presence: true, length: { minimum: 2 }
 	validates :user_id_posted_by, presence: true
 	validates :user_id_church_admin, presence: true
+
+	before_save :validate_is_public
+	
+    def validate_is_public
+      	if self.need_stage.admin_incoming?
+			self.is_public = false
+     	elsif self.need_stage.admin_completed?
+			self.is_public = false
+     	end
+     	true
+    end
 end

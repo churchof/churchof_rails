@@ -6,27 +6,27 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :need_poster
         can :create, Need
-        can :update, Need, :need_stage => :admin_incoming, :user_id_posted_by => user.id
+        can :update, Need, :need_stage => 1, :user_id_posted_by => user.id
         can :read, Need, :user_id_posted_by => user.id
+        can :read, Need, :is_public => true
     end
     if user.has_role? :church_admin
         can :read, Need, :user_id_church_admin => user.id
+        can :read, Need, :is_public => true
         can :update, Need, :user_id_church_admin => user.id
+        can :set_is_public, Need, :user_id_church_admin => user.id
         # can :update, Need, :is_public, [:user_id_church_admin => user.id, :need_stage => :admin_in_progress]
-
     end
     if user.has_role? :super_admin
         can :update, User
-
     end
-    # Everyone can do the following, these will overide the specific roles:
     can :read, Need, :is_public => true
     can :create, User
     can :update, User, :id => user.id
-    can :read, User, :id => user.id
+    can :read, User
     can :create_charge, Need
 
-    can :manage, :all
+    # can :manage, :all
     
     # def initialize(user)
     #     # Define abilities for the passed in user here.
