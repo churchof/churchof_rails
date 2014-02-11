@@ -6,7 +6,9 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :need_poster
         can :create, Need
-        can :update, Need, :need_stage => 1, :user_id_posted_by => user.id
+        can :update, Need, Need.all do |need|
+            need.need_stage.admin_incoming? && need.user_id_posted_by == user.id
+        end
         can :read, Need, :user_id_posted_by => user.id
         can :read, Need, :is_public => true
     end
@@ -15,7 +17,6 @@ class Ability
         can :read, Need, :is_public => true
         can :update, Need, :user_id_church_admin => user.id
         can :set_is_public, Need, :user_id_church_admin => user.id
-        # can :update, Need, :is_public, [:user_id_church_admin => user.id, :need_stage => :admin_in_progress]
     end
     if user.has_role? :super_admin
         can :update, User
