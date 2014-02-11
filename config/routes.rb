@@ -8,6 +8,7 @@ Churchof::Application.routes.draw do
   get "users_controller/index"
   get "profiles/show"
   post "needs/create_charge"
+  post "needs/set_is_public"
   devise_for :users
 
   devise_scope :user do

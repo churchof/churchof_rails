@@ -3,6 +3,14 @@ class NeedsController < ApplicationController
   before_action :set_need, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
 
+
+  def set_is_public
+    @need = params[:need]
+    logger.debug "This is from debug"
+    @need.update_attributes(params[:need])
+    redirect_to root_path
+  end
+
   def create_charge
     # Amount in cents
     @amount = 500

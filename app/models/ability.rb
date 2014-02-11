@@ -26,7 +26,7 @@ class Ability
     can :read, User, :id => user.id
     can :create_charge, Need
 
-
+    can :manage, :all
     
     # def initialize(user)
     #     # Define abilities for the passed in user here.

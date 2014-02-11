@@ -80,7 +80,8 @@
                   </div>
                 <% end %>
               <% else %>
-                <%= simple_form_for(need, html: {class: "form-horizontal action-btn"}) do |f| %>
+                <%= simple_form_for(need, :url => needs_set_is_public_path, :method => :post, html: {class: "form-horizontal action-btn"}) do |f| %>
+                  <%= f.input :id, :as => :hidden, :input_html => { :value => need.id } %>
                   <%= f.input :is_public, :as => :hidden, :input_html => { :value => true } %>
                   <div class="form-actions">
                     <%= f.submit "Set as Public" %>
