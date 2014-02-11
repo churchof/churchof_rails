@@ -1,4 +1,15 @@
 class UsersController < ApplicationController
+
+  before_filter :is_allowed_to_view_page?
+
+  def is_allowed_to_view_page?
+    if current_user.has_role? :super_admin
+      true
+    else
+      redirect_to root_path, :flash => { :alert => "You don't have permission to view that page." }
+    end
+  end
+
   def index
   	@users = User.all
   end
