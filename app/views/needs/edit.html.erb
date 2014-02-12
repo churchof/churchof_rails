@@ -1,12 +1,12 @@
 <div class="page-header-block">
   <div class="page-title">
-    <h2><%= @need.title %> (Edit)</h2>
-    <%= link_to 'Show', @need %> |
-    <%= link_to 'Back', need_poster_panel_index_path %>
   </div>
 </div>
 
 <div class="main-content">
-  <%= render 'form' %>
+  <div class="need-container edit">
+    <h2 class="need-title"><%= @need.title %> (Edit)</h2>
+    <%= render 'form' %>
+  </div>
 </div>
 

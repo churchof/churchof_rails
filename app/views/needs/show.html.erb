@@ -1,97 +1,171 @@
 <div class="page-header-block">
 </div>
 
-<div class="main-content show-need">
-  <div class="inner-content">
-    <div class="page-title">
-      <h2>
-        <% if @need.is_public %>
-          <%= @need.title %></h2>
+<div class="needs main-content">
+  <div class="need-container">
+    <div class="inner-content">
+
+      <h2 class="need-title">
+        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+          <%= @need.title %>
         <% else %>
-          <%= @need.title_public %></h2>
+          <%= @need.title_public %>
         <% end %>
-      <p>
-        <strong>Posted By:</strong>
-        <%= @need.user_posted_by.full_name %>
-         &nbsp;|&nbsp;
-        <strong>Church Admin:</strong>
-        <%= @need.user_church_admin.full_name %>
-          &nbsp;|&nbsp;
-              <strong>Current Status:</strong>
-      <%= @need.need_stage %>
-      </p>
+      </h2>
+
+      <div class="need-description">
+        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+          <p><%= @need.description %></p>
+        <% else %>
+          <p><%= @need.description_public %></p>
+        <% end %>
+      </div>
+      <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+        <div class="private-information">
+          <% if @need.first_name? %>
+            <p class="first-name">
+              <strong>First Name: </strong>
+              <%= @need.first_name %>
+            </p>
+          <% end %>
+
+          <% if @need.last_name? %>
+            <p class="last-name">
+              <strong>Last Name: </strong>
+              <%= @need.last_name %>
+            </p>
+          <% end %>
+
+          <% if @need.social_security_number? %>
+            <p class="social-security-number">
+              <strong>Social Security Number: </strong>
+              <%= @need.social_security_number %>
+            </p>
+          <% end %>
+
+          <% if @need.street_address? %>
+            <p class="street-address">
+              <strong>Street Address: </strong>
+              <%= @need.street_address %>
+            </p>
+          <% end %>
+
+          <% if @need.drivers_license? %>
+            <p class="drivers-license">
+              <strong>Driver's License: </strong>
+              <%= @need.drivers_license %>
+            </p>
+          <% end %>
+
+          <% if @need.age? %>
+            <p class="age">
+              <strong>Age: </strong>
+              <%= @need.age %>
+            </p>
+          <% end %>
+
+          <% if @need.gender %>
+            <p class="gender">
+              <strong>Gender: </strong>
+              <%= @need.gender %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if current_user == @need.user_church_admin %>
+        <div class="private-records-block">
+          <div class="previous-records-bar">
+            <span class="record-count">
+              0 Previous Records for
+              <%= @need.first_name %>
+              <%=  @need.last_name %>
+            </span>
+            <span class="details">Show Results</span>
+          </div>
+          <div class="potential-benefits-bar">
+            <span class="record-count">
+              0 Potential Benefits Available
+            </span>
+            <span class="details">Show Results</span>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row need-details">
+        <div class="expenses col-xs-12 col-sm-6">
+          <h3>Expenses</h3>
+          <div class="expenses-bar">
+            <span class="progress-bar"></span>
+            <span class="amount-raised">$385.00 / $900.00</span>
+            <span class="expense-details">Details</span>
+          </div>
+        </div>
+        <div class="skills col-xs-12 col-sm-6">
+          <h3>Skills needed</h3>
+          <div class="skills-bar">
+            <span class="progress-bar"></span>
+            <span class="skills-count">3 Skills</span>
+            <span class="skill-details">Details</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-location">
+        <%= image_tag("placeholder-map.png", alt: "Map Placeholder") %>
+      </div>
+
+      <div class="row responsibility-bar">
+        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+          <div class="responsible-user col-xs-4">
+            <div class="user-title">
+              <h3>Posted By</h3>
+            </div>
+            <div class="user-image">
+              <%= image_tag(@need.user_posted_by.avatar, class: "img-circle") %>
+            </div>
+            <div class="user-details">
+              <%= @need.user_posted_by.full_name %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="responsible-user col-xs-4">
+          <div class="user-title">
+            <h3>Admin</h3>
+          </div>
+          <div class="user-image">
+            <%= image_tag(@need.user_church_admin.avatar, class: "img-circle") %>
+          </div>
+          <div class="user-details">
+            <%= @need.user_posted_by.full_name %>
+          </div>
+        </div>
+
+        <div class="responsible-user col-xs-4">
+          <div class="user-title">
+            <h3>Leader</h3>
+          </div>
+          <div class="user-image">
+            <div class="placeholder-leader-image"></div>
+            <div class="user-details">
+              <p class="unsupported-feature">This feature is not yet supported yet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="about-need">
-      <% if @need.is_public %>
-        <p class="need-description"><%= @need.description %></p>
-      <% else %>
-        <p class="need-description"><%= @need.description_public %></p>
+    <% if can? :update, @need %>
+      <%= link_to 'Edit Need', edit_need_path(@need), :class => "full-width-btn" %>
+    <% else %>
+      <%= form_tag needs_create_charge_path do %>
+        <%= hidden_field_tag(:user_id, current_user.id) %>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                data-description="<%= @need.title %>"
+                data-amount="500"></script>
       <% end %>
-    </div>
-
-    <% if current_user == @need.user_church_admin || current_user == @need.user_posted_by %>
-      <% if @need.first_name? %>
-        <p>
-          <strong>First Name: </strong>
-          <%= @need.first_name %>
-        </p>
-      <% end %>
-
-     <% if @need.last_name? %>
-        <p>
-          <strong>Last Name: </strong>
-          <%= @need.last_name %>
-        </p>
-      <% end %>
-
-      <% if @need.social_security_number? %>
-        <p>
-          <strong>Social Security Number: </strong>
-          <%= @need.social_security_number %>
-        </p>
-      <% end %>
-
-
-      <% if @need.street_address? %>
-        <p>
-          <strong>Street Address: </strong>
-          <%= @need.street_address %>
-        </p>
-      <% end %>
-
-      <% if @need.drivers_license? %>
-        <p>
-          <strong>Driver's License: </strong>
-          <%= @need.drivers_license %>
-        </p>
-      <% end %>
-
-      <% if @need.age? %>
-        <p>
-          <strong>Age: </strong>
-          <%= @need.age %>
-        </p>
-      <% end %>
-
-     <% if @need.gender %>
-      <p>
-        <strong>Gender: </strong>
-        <%= @need.gender %>
-      </p>
-      <% end %>
-
     <% end %>
   </div>
 </div>
-<%= form_tag needs_create_charge_path do %>
-  <%= hidden_field_tag(:user_id, current_user.id) %>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="<%= @need.title %>"
-          data-amount="500"></script>
-<% end %>
-
-
-<%= link_to 'Edit', edit_need_path(@need) %> |
-<%= link_to 'Back', needs_path %>

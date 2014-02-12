@@ -1,13 +1,7 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-$primary-blue: #58A1EB;
-$dark-blue: #4281C8;
-$dark-grey: #989898;
-$content-width: 960px;
-$main-font: 'Avenir LT W01 55 Roman';
-$body-font: 'Avenir LT W01 35 Light';
+@import "variables.css.scss";
 
 .user-role-block{
   width: 23.2%;

@@ -2,29 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$primary-blue: #58A1EB;
-$dark-blue: #4281C8;
-$dark-grey: #989898;
-$content-width: 960px;
-$main-font: 'Avenir LT W01 55 Roman';
-$body-font: 'Avenir LT W01 35 Light', sans-serif;
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-       -o-border-radius: $radius;
-          border-radius: $radius;
-}
+@import "variables.css.scss";
 
 .need-container {
   border-bottom: solid 1px #CCC;
-  padding-bottom: 20px;
   padding-top: 10px;
+  margin: 25px auto;
+  background: #FFF;
+  position: relative;
 }
 
-.need-details{
-  margin-top: 10px;
-  margin-bottom: 10px;
+.row.no-margin{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.need-container .inner-content{
+  padding-bottom: 25px;
 }
 
 .need-container h1,
@@ -35,7 +29,274 @@ $body-font: 'Avenir LT W01 35 Light', sans-serif;
   font-weight: 400;
 }
 
+.private-information{
+ margin:30px auto;
+}
 
+.need-description p,
+.private-information p{
+  font-size: 18px;
+  color: $text-grey;
+}
+
+.need-container.edit .need-title{
+  max-width: 95%;
+  margin: 20px auto;
+}
+
+.need-title{
+  color: $primary-blue;
+  margin: 20px auto 25px;
+}
+
+.edit .inner-content{
+  margin-top: 25px;
+}
+
+  .need-description{
+    font-size: 18px;
+    color: $medium-grey;
+  }
+
+  .need-details{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .need-details h3{
+    color: $text-grey;
+  }
+
+.expenses-bar,
+.skills-bar{
+  @include content-bar($light-grey)
+}
+  .expenses-bar .progress-bar{
+    height: 100%;
+    @include border-radius(2px);
+    position: absolute;
+    width: 35%;
+    background: $green;
+  }
+
+  .amount-raised,
+  .skills-count{
+    font-size: 22px;
+    color: #FFF;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-weight: 200;
+  }
+
+  .expense-details,
+  .skill-details{
+    font-size: 16px;
+    color: #FFF;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: 200;
+  }
+
+.responsibility-bar{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+  .user-title h3{
+    color: $text-grey;
+    margin-bottom: 15px;
+  }
+
+  .responsible-user{
+    vertical-align: top;
+  }
+
+  .user-details p.role{
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  .user-image .img-circle{
+    max-width: 125px;
+    float: left;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+
+  .placeholder-leader-image{
+    float: left;
+    margin-right: 10px;
+    display: block;
+    max-width: 125px;
+    width: 125px;
+    height: 125px;
+    background: $medium-grey;
+    @include border-radius(50%);
+  }
+
+p.unsupported-feature{
+  font-size: 15px;
+  font-style: italic;
+}
+
+.previous-records-bar{
+  @include content-bar($green);
+  margin: 10px auto;
+}
+
+.potential-benefits-bar{
+  @include content-bar($primary-blue);
+  margin: 10px auto;
+}
+
+.private-records-block{
+  margin: 20px auto;
+}
+
+  .record-count{
+    font-size: 16px;
+    color: #FFF;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: 200;
+  }
+
+  .details{
+    font-size: 16px;
+    color: #FFF;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: 200;
+  }
+
+.full-width-btn{
+  display: block;
+   width: 100%;
+   background: $primary-blue;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
+
+.full-width-btn:hover{
+  background: $dark-blue;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.half-width-btn{
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+}
+
+.blue-btn{
+  background: $primary-blue;
+}
+
+.blue-btn:hover{
+  background: $dark-blue;
+}
+
+.change-status input{
+  border: none;
+  padding: 0px;
+}
+
+.map-location img{
+  width: 100%;
+  @include border-radius(2px);
+  margin: 10px auto 0px;
+}
+
+.toggle-container{
+  text-transform: uppercase;
+  color: #FFF;
+  width: 100px;
+  @include border-radius(20px);
+  text-align: center;
+  position: relative;
+  border: solid 1px $light-grey;
+  height: 25px;
+  font-size: .9em;
+  float: right;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.toggle-btn.green{
+  color: #FFF;
+  background: $green;
+  position:absolute;
+  width: 50%;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-top: 5px;
+    font-size: 10px;
+}
+.toggle-btn.red{
+  padding-top: 5px;
+  font-size: 10px;
+  color: #FFF;
+  background: #E46868;
+  position:absolute;
+  width: 50%;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+input.toggle-btn.left{
+  text-transform: uppercase;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background: #FFF;
+  color: #CCC;
+  position:absolute;
+  width: 50%;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+    font-size: 10px;
+}
+
+input.toggle-btn.left:hover{
+  background: $green;
+  color: #FFF;
+}
+
+input.toggle-btn.right:hover{
+  background: #E46868;
+  color: #FFF;
+}
+
+input.toggle-btn.right{
+  text-transform: uppercase;
+  font-size: 10px;
+  background: #FFF;
+  color: #CCC;
+  position:absolute;
+  width: 50%;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+    border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/*Forms*/
 .need-form{
   padding-top: 10px;
 }
@@ -161,9 +422,6 @@ display: inline-block;
 }
 
 .show-need .need-description{
-  font-size: 1.25em;
-  line-height: 1.25em;
-  margin-bottom: 15px;
 }
 
 .show-need .about-need{
@@ -172,9 +430,7 @@ display: inline-block;
 }
 
 .show-need h1,
-.show-need h2,
-.show-need h3,
-.show-need h4{
+.show-need h2{
   color: $primary-blue;
 }
 
@@ -217,5 +473,17 @@ display: inline-block;
   .need-form .private-fields textarea,
   .need-form .public-fields textarea{
     height: 100px;
+  }
+
+  .responsible-user{
+    text-align: center;
+  }
+
+  .user-image .img-circle,
+  .user-image .placeholder-leader-image{
+    float: none;
+    max-width: 80px;
+    height: 80px;
+    margin: 0px auto 10px;
   }
 }

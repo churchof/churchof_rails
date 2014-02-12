@@ -1,39 +1,10 @@
-$screen-xs-max: 767px;
-$screen-sm-min: 768px;
-$screen-md-min: 992px;
-$screen-lg-min: 1200px;
-
-
-
-$primary-blue: #58A1EB;
-$dark-blue: #4281C8;
-$dark-grey: #989898;
-$content-width: 960px;
-$main-font: 'Avenir LT W01 55 Roman';
-$body-font: 'Avenir LT W01 35 Light';
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-       -o-border-radius: $radius;
-          border-radius: $radius;
-}
-
-@mixin font-pack($font-family, $weight) {
-  font-family: $font-family;
-  font-weight: $weight;
-  letter-spacing: .05em;
-}
+@import "variables.css.scss";
 
 body{
   background: #EEEFF1;
   font-family: $main-font;
   font-weight: 400;
   padding-bottom: 100px;
-}
-
-#main-content-container{
-  margin-top: 30px;
 }
 
 /**** Typography *****/
@@ -59,6 +30,10 @@ a:hover, a:focus{
 .navbar a{
   color: #FFF;
   @include font-pack($main-font, 400);
+}
+
+.navbar a.navbar-brand{
+  font-size: 18px;
 }
 
 ul.menu-links{
@@ -125,7 +100,7 @@ ul.menu-links{
 }
 
 .dropdown-wrapper li a:hover{
-  background: $dark-grey;
+  background: $medium-grey;
   color: #FFF;
 }
 
@@ -135,7 +110,7 @@ ul.menu-links{
   margin-bottom: 30px;
 }
 
-.main-content{
+.main-bg{
   background: #FFF;
 }
 
@@ -144,21 +119,26 @@ ul.menu-links{
   margin: 0px auto;
 }
 
+.page-options{
+  margin: 20px auto 50px;
+}
+
 .page-options li{
   margin-right: 10px;
 }
 
 .page-options li a{
-  padding: 8px 10px 8px;
+  padding: 8px 12px 8px;
+  font-size: 18px;
   background: none;
-  color: $dark-grey;
+  color: $medium-grey;
   @include border-radius(20px);
 }
 
 .page-options li.active a,
 .page-options li.active a:hover,
 .page-options li a:hover{
-  background: $dark-grey;
+  background: $medium-grey;
   color: #FFF;
 }
 
@@ -173,10 +153,9 @@ ul.menu-links{
 }
 
 .count-number{
-  margin-right: 8px;
+  margin-right: 5px;
   font-weight: 700;
-  font-size: 1.2em;
-  line-height: 1.2em;
+  font-size: 18px;
 }
 
 .meta a, .meta{
