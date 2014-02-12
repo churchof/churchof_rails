@@ -16,8 +16,8 @@
   	}, 
   	function(){
       markers = handler.addMarkers(<%=raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
+      //handler.bounds.extendWith(markers);
+      //handler.fitMapToBounds();
     });
   </script>
 </div>
