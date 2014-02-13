@@ -6,11 +6,34 @@
   <% @needs.each do |need| %>
     <div class="need-container">
       <div class="inner-content">
+
+
+
+
+
+
+
         <h2 class="need-title">
-          <%= link_to need.title, need %>
+          <% if user_signed_in? %>
+            <% if current_user == need.user_posted_by || current_user == need.user_church_admin %>
+              <%= link_to need.title, need %>
+            <% else %>
+              <%= link_to need.title_public, need %>
+            <% end %>
+          <% else %>
+              <%= link_to need.title_public, need %>
+          <% end %>
         </h2>
         <div class="need-description">
-          <p><%= need.description %></p>
+          <% if user_signed_in? %>
+            <% if current_user == need.user_posted_by || current_user == need.user_church_admin %>
+              <p><%= need.description %></p>
+            <% else %>
+              <p><%= need.description_public %></p>
+            <% end %>
+          <% else %>
+            <p><%= need.description_public %></p>
+          <% end %>
           <div class="row need-details">
             <div class="expenses col-xs-12 col-sm-6">
               <h3>Expenses</h3>
