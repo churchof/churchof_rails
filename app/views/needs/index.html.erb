@@ -6,13 +6,6 @@
   <% @needs.each do |need| %>
     <div class="need-container">
       <div class="inner-content">
-
-
-
-
-
-
-
         <h2 class="need-title">
           <% if user_signed_in? %>
             <% if current_user == need.user_posted_by || current_user == need.user_church_admin %>
