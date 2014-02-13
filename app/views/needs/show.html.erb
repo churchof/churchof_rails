@@ -202,7 +202,6 @@
       <%= link_to 'Edit Need', edit_need_path(@need), :class => "full-width-btn" %>
     <% else %>
       <%= form_tag needs_create_charge_path do %>
-        <%= text_field_tag :amount %>
         <%= hidden_field_tag(:user_id, current_user.id) %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
@@ -212,7 +211,7 @@
     <% end %>
   </div>
 
-  <form action="" method="POST" id="payment-form">
+<!--   <form url= <%needs_create_charge_path%> method="POST" id="payment-form">
   <span class="payment-errors"></span>
 
   <div class="form-row">
@@ -240,7 +239,8 @@
 
   <button type="submit">Submit Payment</button>
 </form>
-
+ -->
+ 
 </div>
 
 

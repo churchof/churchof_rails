@@ -24,7 +24,6 @@ Churchof::Application.routes.draw do
   #   post :create_charge
   # end
 
-
   get 'feed', to: 'needs#index', as: :feed
 
   root :to => 'needs#index'
