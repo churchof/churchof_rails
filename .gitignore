@@ -18,3 +18,5 @@
 public/system/users/avatars/
 
 .DS_Store
+/.env
+/vendor/cookbooks

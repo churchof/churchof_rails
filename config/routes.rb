@@ -17,7 +17,10 @@ Churchof::Application.routes.draw do
   end
 
   resources :users # Not sure if this is ok to do with Devise also.
-  resources :needs
+
+  resources :needs do
+    resources :contributions
+  end
 
   # The following was proposed by Todd Willey and adds it as a subroute.
   # resources :needs do
