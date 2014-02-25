@@ -13,7 +13,7 @@ class ContributorController < ApplicationController
   private
 
   def contributor_params
-    params.require(:contributor).permit(:email)
+    params.require(:contributor).permit(:email, :user_id)
   end
 
 end

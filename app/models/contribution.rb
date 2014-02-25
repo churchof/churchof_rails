@@ -3,7 +3,6 @@ class Contribution < ActiveRecord::Base
   belongs_to :user
   belongs_to :contributor
 
-  attr_writer :email
   attr_writer :stripe_token
   attr_writer :stripe_currency
 
@@ -27,13 +26,13 @@ class Contribution < ActiveRecord::Base
     # find the appropriate contributor to associate this with
     # if no contributor exists with this email then make one.
     # set this contribution's contributor to the appropriate contributor.
-
     self.contributor = Contributor.where(:email => self.email).first_or_create do |contributor|
       contributor.email = self.email
       # associate that contributor with the user if one exists.
+      contributor.user = User.where(:email => self.email).first
     end
-
-
+    # if the contributor has an account but isnt logged in currently
+    self.user = User.where(:email => self.email).first
     true
   end
 

@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :needs_posted_by, :foreign_key => 'user_id_posted_by', :class_name => "Need"
   has_many :needs_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "Need"
 
+  has_many :contributions
+  has_one :contributor
+
   has_attached_file :avatar, {
     :styles => {
       :thumb => ["50x50#", :png],
@@ -33,5 +36,18 @@ class User < ActiveRecord::Base
   # after create
   # check if there is are any contributions with this email address if so associate them
   # check if there are any contributors with this email address if so associate them
+  before_create :assign_past_contributor_record_and_past_contributions_to_user
+  
+  def assign_past_contributor_record_and_past_contributions_to_user
+    Contributor.where(:email => self.email).first do |contributor|
+      # associate that contributor with the user if one exists.
+      contributor.user = self
+    end
+    Contribution.where(:email => self.email).first do |contribution|
+      # associate that contribution with the user if one exists.
+      contribution.user = self
+    end
+    true
+  end
 
 end
