@@ -3,6 +3,7 @@ class Contribution < ActiveRecord::Base
   belongs_to :user
   belongs_to :contributor
 
+  attr_writer :email
   attr_writer :stripe_token
   attr_writer :stripe_currency
 
@@ -11,7 +12,6 @@ class Contribution < ActiveRecord::Base
   #validates :contributor, presence: true
 
   def process_payment
-    Stripe.api_key = "sk_test_cZ9kzgqpCdO3FYJofQwtwrdk"
     charge = Stripe::Charge.create(amount: cents,
                                    currency: @stripe_currency,
                                    card: @stripe_token,
@@ -20,4 +20,21 @@ class Contribution < ActiveRecord::Base
   rescue Stripe::CardError
     false
   end
+
+  before_create :assign_to_contributor_and_user
+  
+  def assign_to_contributor_and_user
+    # find the appropriate contributor to associate this with
+    # if no contributor exists with this email then make one.
+    # set this contribution's contributor to the appropriate contributor.
+
+    self.contributor = Contributor.where(:email => self.email).first_or_create do |contributor|
+      contributor.email = self.email
+      # associate that contributor with the user if one exists.
+    end
+
+
+    true
+  end
+
 end

@@ -14,11 +14,15 @@ class ContributionsController < ApplicationController
 
   def create
     @need = Need.find(params[:need_id])
-    @contribution = @need.contributions.build(contribution_params)
+
+
+    @contribution = @need.contributions.build(contribution_params.merge(user: current_user))
+
+    logger.info '---------------------'
+    logger.info @contribution
+    logger.info '---------------------'
+
     if @contribution.process_payment
-      if current_user
-        @contribution.user = current_user
-      end
       @contribution.save
       redirect_to root_path, :flash => { :notice => "Payment accepted" }
     else
@@ -30,6 +34,6 @@ class ContributionsController < ApplicationController
 
   def contribution_params
     params.require(:contribution).permit(:cents, :stripe_token,
-                                         :stripe_currency, :need_id, :user_id)
+                                         :stripe_currency, :email)
   end
 end

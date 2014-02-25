@@ -1,5 +1,5 @@
 class Contributor < ActiveRecord::Base
-  validates :email, uniquness: true
+  validates :email, uniqueness: true
 
   has_many :contributions
 end

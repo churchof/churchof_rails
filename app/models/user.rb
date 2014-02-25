@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
   	first_name + " " + last_name
   end
 
+  # after create
+  # check if there is are any contributions with this email address if so associate them
+  # check if there are any contributors with this email address if so associate them
+
 end

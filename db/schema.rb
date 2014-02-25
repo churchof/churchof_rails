@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140224144352) do
+ActiveRecord::Schema.define(version: 20140225030519) do
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140224144352) do
     t.string   "stripe_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
   create_table "contributors", force: true do |t|
