@@ -36,16 +36,24 @@ class User < ActiveRecord::Base
   # after create
   # check if there is are any contributions with this email address if so associate them
   # check if there are any contributors with this email address if so associate them
-  before_create :assign_past_contributor_record_and_past_contributions_to_user
+  after_create :assign_past_contributor_record_and_past_contributions_to_user
   
   def assign_past_contributor_record_and_past_contributions_to_user
+
+    logger.debug "This is from debug"
+    logger.debug self.email
+
     Contributor.where(:email => self.email).first do |contributor|
       # associate that contributor with the user if one exists.
-      contributor.user = self
+          logger.debug "This is from debug 2"
+
+      contributor.update_attributes(:user => self)
     end
     Contribution.where(:email => self.email).first do |contribution|
+          logger.debug "This is from debug 3"
+
       # associate that contribution with the user if one exists.
-      contribution.user = self
+      contributor.update_attributes(:user => self)
     end
     true
   end

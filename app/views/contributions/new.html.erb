@@ -62,12 +62,16 @@
     </label>
   </div>
 
-  <div class="form-row">
-    <label>
-      <span>Email this should only show if the user is not logged in </span>
-      <%= f.text_field :email %>
-    </label>
-  </div>
+  <% if !user_signed_in? %>
+    <div class="form-row">
+      <label>
+        <span>Email this should only show if the user is not logged in </span>
+        <%= f.text_field :email %>
+      </label>
+    </div>
+  <% else %>
+      <%= f.text_field :email, :type => "hidden" %>
+  <% end %>
 
   <button type="submit">Submit Payment</button>
 <% end %>
