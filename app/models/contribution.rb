@@ -11,6 +11,7 @@ class Contribution < ActiveRecord::Base
   #validates :contributor, presence: true
 
   def process_payment
+    Stripe.api_key = "sk_test_cZ9kzgqpCdO3FYJofQwtwrdk"
     charge = Stripe::Charge.create(amount: cents,
                                    currency: @stripe_currency,
                                    card: @stripe_token,
