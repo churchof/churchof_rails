@@ -2,11 +2,12 @@ class ContributionsController < ApplicationController
   # Show the stripe form.
   def new
     @need = Need.find(params[:need_id])
-    @contribution = @need.contributions.build(cents: 2500)
+    @contribution = @need.contributions.build(cents: 1000)
   end
 
   def create
     @need = Need.find(params[:need_id])
+    # if a current user is signed in it will set them as the user for this contribution.
     @contribution = @need.contributions.build(contribution_params.merge(user: current_user))
     if @contribution.process_payment
       @contribution.save

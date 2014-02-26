@@ -28,7 +28,6 @@
   });
 </script>
 
-
 <%= form_for [@need, @contribution] do |f| %>
   <span class="payment-errors"></span>
 
@@ -69,8 +68,6 @@
         <%= f.text_field :email %>
       </label>
     </div>
-  <% else %>
-      <%= f.text_field :email, :type => "hidden" %>
   <% end %>
 
   <button type="submit">Submit Payment</button>

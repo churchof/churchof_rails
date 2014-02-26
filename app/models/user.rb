@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   has_many :needs_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "Need"
 
   has_many :contributions
-  has_one :contributor
 
   has_attached_file :avatar, {
     :styles => {
@@ -33,27 +32,15 @@ class User < ActiveRecord::Base
   	first_name + " " + last_name
   end
 
-  # after create
-  # check if there is are any contributions with this email address if so associate them
-  # check if there are any contributors with this email address if so associate them
-  after_create :assign_past_contributor_record_and_past_contributions_to_user
+  # after the initial creation this will take the contributions from the appropriate contributor.
+  # in the event that the email has been changed to another contributor account it will pick up those records as well.
+  after_save :assign_past_contributor_contributions_to_user
   
-  def assign_past_contributor_record_and_past_contributions_to_user
-
-    logger.debug "This is from debug"
-    logger.debug self.email
-
-    Contributor.where(:email => self.email).first do |contributor|
-      # associate that contributor with the user if one exists.
-          logger.debug "This is from debug 2"
-
-      contributor.update_attributes(:user => self)
-    end
-    Contribution.where(:email => self.email).first do |contribution|
-          logger.debug "This is from debug 3"
-
-      # associate that contribution with the user if one exists.
-      contributor.update_attributes(:user => self)
+  def assign_past_contributor_contributions_to_user
+    contributor = Contributor.find_by_email(email)
+    if contributor
+      contributor.contributions.update_all(:user_id => id, :contributor_id => nil)
+      contributor.destroy
     end
     true
   end
