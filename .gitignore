@@ -18,4 +18,9 @@
 public/system/users/avatars/
 
 .DS_Store
+<<<<<<< HEAD
 .env
+=======
+/.env
+/vendor/cookbooks
+>>>>>>> develop

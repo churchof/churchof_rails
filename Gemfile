@@ -11,6 +11,7 @@ gem 'stripe'
 
 group :development, :test do
 	gem 'sqlite3'
+	gem 'dotenv'
 end
 
 group :production do

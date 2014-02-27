@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140227200325) do
+=======
+ActiveRecord::Schema.define(version: 20140226190132) do
+>>>>>>> develop
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -29,6 +33,7 @@ ActiveRecord::Schema.define(version: 20140227200325) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+<<<<<<< HEAD
 
   create_table "expenses", force: true do |t|
     t.string   "title"
@@ -41,6 +46,8 @@ ActiveRecord::Schema.define(version: 20140227200325) do
   end
 
   add_index "expenses", ["need_id"], name: "index_expenses_on_need_id"
+=======
+>>>>>>> develop
 
   create_table "needs", force: true do |t|
     t.string   "title"
