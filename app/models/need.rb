@@ -17,6 +17,8 @@ class Need < ActiveRecord::Base
 
 	before_save :validate_is_public
 	
+	has_many :expenses
+
     def validate_is_public
       	if self.need_stage.admin_incoming?
 			self.is_public = false
