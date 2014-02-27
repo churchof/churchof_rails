@@ -11,6 +11,7 @@ class ExpensesController < ApplicationController
   # GET /expenses/1
   # GET /expenses/1.json
   def show
+  	@need = Need.find(params[:need_id])
   end
 
   # GET /expenses/new
@@ -30,7 +31,7 @@ class ExpensesController < ApplicationController
     @expense = @need.expenses.new(expense_params)
     respond_to do |format|
       if @expense.save
-        format.html { redirect_to @expense, notice: 'Expense was successfully created.' }
+        format.html { redirect_to [@need, @expense], notice: 'Expense was successfully created.' }
         format.json { render action: 'show', status: :created, location: @expense }
       else
         format.html { render action: 'new' }
@@ -42,9 +43,10 @@ class ExpensesController < ApplicationController
   # PATCH/PUT /expenses/1
   # PATCH/PUT /expenses/1.json
   def update
+  	@need = Need.find(params[:need_id])
     respond_to do |format|
       if @expense.update(expense_params)
-        format.html { redirect_to @expense, notice: 'Expense was successfully updated.' }
+        format.html { redirect_to [@need, @expense], notice: 'Expense was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
