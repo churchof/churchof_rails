@@ -141,9 +141,11 @@
         <div class="expenses col-xs-12 col-sm-6">
           <h3>Expenses</h3>
           <div class="expenses-bar">
-            <span class="progress-bar"></span>
-            <span class="amount-raised">$385.00 / $900.00</span>
-            <span class="expense-details">Details</span>
+            <span class="progress-bar width:65%"></span>
+            <span class="amount-raised">$<%= @need.total_contributed %> / $<%= @need.total_expenses %></span>
+            <span class="expense-details" data-toggle="modal" data-target="#expensesModal">
+              Details
+            </span>
           </div>
         </div>
         <div class="skills col-xs-12 col-sm-6">
@@ -244,6 +246,27 @@
 </form>
  -->
  
+</div>
+
+<!-- expensesModal -->
+<div class="modal fade" id="expensesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Expenses</h4>
+      </div>
+      <div class="modal-body">
+        <% @need.expenses.each do |expense| %>
+          <%= expense.title %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= link_to "Add an expense", new_need_expense_path(@need), :class => 'important-btn' %>
+      </div>
+    </div>
+  </div>
 </div>
 
 
