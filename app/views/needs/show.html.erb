@@ -18,8 +18,10 @@
       } else {
         // token contains id, last4, and card type
         var token = response.id;
+        var currency = response.currency;
         // Insert the token into the form so it gets submitted to the server
         $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        $form.append($('<input type="hidden" name="stripeCurrency" />').val(currency));
         // and re-submit
         $form.get(0).submit();
       }
@@ -201,8 +203,9 @@
     <% if can? :update, @need %>
       <%= link_to 'Edit Need', edit_need_path(@need), :class => "full-width-btn" %>
     <% else %>
+      <%= link_to 'Contribute!', new_need_contribution_path(@need) %>
       <%= form_tag needs_create_charge_path do %>
-        <%= hidden_field_tag(:user_id, current_user.id) %>
+        <%= hidden_field_tag(:user_id, (current_user || @need.user_church_admin).id) %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                 data-description="<%= @need.title %>"
