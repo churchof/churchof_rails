@@ -32,7 +32,7 @@ class Need < ActiveRecord::Base
     def total_contributed
     	i = 0
       	self.contributions.each do |contribution|
-			i = i + contribution.cents
+			    i = i + contribution.cents
       	end
       	i
     end
@@ -40,7 +40,7 @@ class Need < ActiveRecord::Base
     def total_expenses
     	i = 0
       	self.expenses.each do |expense|
-			i = i + expense.amount
+			    i = i + expense.amount
       	end
       	i
     end
