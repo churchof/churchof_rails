@@ -27,4 +27,21 @@ class Need < ActiveRecord::Base
      	end
      	true
     end
+
+    def total_contributed
+    	integer i = 0
+      	self.con do |expense|
+			i = i + expense.amount
+      	end
+      	i
+    end
+
+    def total_expenses
+    	integer i = 0
+      	self.expenses do |expense|
+			i = i + expense.amount
+      	end
+      	i
+    end
+
 end
