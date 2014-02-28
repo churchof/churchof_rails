@@ -11,12 +11,14 @@ class Ability
         end
         can :read, Need, :user_id_posted_by => user.id
         can :read, Need, :is_public => true
+        can :manage, Expense, :need => { :user_id_posted_by => user.id }
     end
     if user.has_role? :church_admin
         can :read, Need, :user_id_church_admin => user.id
         can :read, Need, :is_public => true
         can :update, Need, :user_id_church_admin => user.id
         can :set_is_public, Need, :user_id_church_admin => user.id
+        can :manage, Expense, :need => { :user_id_church_admin => user.id }
     end
     if user.has_role? :super_admin
         can :update, User

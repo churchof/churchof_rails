@@ -1,6 +1,9 @@
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
 
+  load_and_authorize_resource :need
+  load_and_authorize_resource :expense, :through => :need
+
   # GET /expenses
   # GET /expenses.json
   def index
@@ -22,6 +25,7 @@ class ExpensesController < ApplicationController
 
   # GET /expenses/1/edit
   def edit
+    @need = Need.find(params[:need_id])
   end
 
   # POST /expenses
@@ -60,7 +64,7 @@ class ExpensesController < ApplicationController
   def destroy
     @expense.destroy
     respond_to do |format|
-      format.html { redirect_to expenses_url }
+      format.html { redirect_to root_path, :flash => { :notice => "Expense deleted." } }
       format.json { head :no_content }
     end
   end
@@ -73,6 +77,6 @@ class ExpensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_params
-      params[:expense]
+      params.require(:expense).permit(:amount_cents, :title, :description, :documentation)
     end
 end

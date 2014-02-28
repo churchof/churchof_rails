@@ -2,7 +2,7 @@ class ContributionsController < ApplicationController
   # Show the stripe form.
   def new
     @need = Need.find(params[:need_id])
-    @contribution = @need.contributions.build(cents: 1000)
+    @contribution = @need.contributions.build(amount_cents: 1000)
   end
 
   def create
@@ -20,6 +20,6 @@ class ContributionsController < ApplicationController
   private
 
   def contribution_params
-    params.require(:contribution).permit(:cents, :stripe_token, :stripe_currency, :email)
+    params.require(:contribution).permit(:amount_cents, :stripe_token, :stripe_currency, :email)
   end
 end
