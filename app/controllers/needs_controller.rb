@@ -45,7 +45,7 @@ class NeedsController < ApplicationController
       marker.lng -84.472019
       marker.infowindow need.title
       # marker.picture({
-      #   :url    => "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+      #   :url    => "http://www.clker.com/cliparts/3/v/I/F/6/V/light-blue-circle-md.png",
       #   :width  => "32",
       #   :height => "32"
       # })
