@@ -16,6 +16,9 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
 
 
 @buildMap = (markers)->
+
+  logger.debug "This is from debug"
+  
 	handler = Gmaps.build 'Google', { builders: { Marker: RichMarkerBuilder} } #dependency injection
 
 	#then standard use
