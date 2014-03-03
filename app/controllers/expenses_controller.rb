@@ -4,11 +4,11 @@ class ExpensesController < ApplicationController
   load_and_authorize_resource :need
   load_and_authorize_resource :expense, :through => :need
 
-  # GET /expenses
-  # GET /expenses.json
+  # GET /need/:need_id/expenses
+  # GET /need/:need_id/expenses.json
   def index
   	@need = Need.find(params[:need_id])
-    @expenses = Expense.all
+    @expenses = @need.expenses.all
   end
 
   # GET /expenses/1

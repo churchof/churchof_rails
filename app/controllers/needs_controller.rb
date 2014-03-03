@@ -56,6 +56,7 @@ class NeedsController < ApplicationController
   # GET /needs/1
   # GET /needs/1.json
   def show
+    @expense = Expense.new
   end
 
   # GET /needs/new
