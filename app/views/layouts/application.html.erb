@@ -48,11 +48,7 @@
      </div>
   </nav>
 
-  <% if controller.controller_name == 'needs' %>
-    <% if controller.action_name == 'index' %>
-      <%= render :partial => '/layouts/map' %>
-    <% end %>
-  <% end %>
+  <%= content_for :map %>
 
   <div class="container" id="main-content-container">
     <% flash.each do |type, message| %>
