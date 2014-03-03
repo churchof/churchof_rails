@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  after_save :assign_past_contributor_contributions_to_user
+
   has_many :needs_posted_by, :foreign_key => 'user_id_posted_by', :class_name => "Need"
   has_many :needs_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "Need"
 
@@ -34,8 +36,6 @@ class User < ActiveRecord::Base
 
   # after the initial creation this will take the contributions from the appropriate contributor.
   # in the event that the email has been changed to another contributor account it will pick up those records as well.
-  after_save :assign_past_contributor_contributions_to_user
-  
   def assign_past_contributor_contributions_to_user
     contributor = Contributor.find_by_email(email)
     if contributor
