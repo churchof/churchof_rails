@@ -1,3 +1,10 @@
+<% content_for :map do %>
+  <script>
+    var map_hash = <%= raw @hash.to_json %>;
+  </script>
+  <%= render 'layouts/map' %>
+<% end %>
+
 <div class="page-header-block">
   <h1>All Needs</h1>
 </div>
