@@ -41,14 +41,19 @@ class NeedsController < ApplicationController
   def index
     @needs = Need.where(is_public: true)
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
-      marker.lat 38.033461
-      marker.lng -84.472019
+      marker.lat 38.033461 + (need.id / 10000.0)
+      marker.lng -84.472019 + (need.id / 10000.0)
       marker.infowindow need.title
       # marker.picture({
       #   :url    => "http://www.clker.com/cliparts/3/v/I/F/6/V/light-blue-circle-md.png",
       #   :width  => "32",
       #   :height => "32"
       # })
+      marker.shadow({
+      anchor: [2,22],
+      url: '',
+      width: 29,
+      height: 22 })
       marker.json({ title: need.title })
     end
   end
