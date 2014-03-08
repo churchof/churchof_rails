@@ -1,32 +1,6 @@
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript">
-  Stripe.setPublishableKey('pk_test_EvYspVJmIJvMohKKhAykkgwA');
-
-  var stripeResponseHandler = function(status, response) {
-    var $form = $('#new_contribution');
-    if (response.error) {
-      $form.find('.payment-errors').text(response.error.message);
-      $form.find('button').prop('disabled', false);
-    } else {
-      var token = response.id;
-      var currency = response.currency || 'USD';
-      $form.append($('<input type="hidden" name="contribution[stripe_token]" />').val(token));
-      $form.append($('<input type="hidden" name="contribution[stripe_currency]" />').val(currency));
-      // and re-submit
-      $form.get(0).submit();
-    }
-  };
-
-  jQuery(function($) {
-    $('#new_contribution').submit(function(e) {
-      var $form = $(this);
-      $form.find('button').prop('disabled', true);
-      Stripe.createToken($form, stripeResponseHandler);
-      return false;
-    });
-  });
-</script>
+<%= javascript_include_tag "contribution", "data-turbolinks-track" => false %>
 
 <%= form_for [@need, @contribution] do |f| %>
   <span class="payment-errors"></span>
