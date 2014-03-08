@@ -7,7 +7,9 @@ class Need < ActiveRecord::Base
 
   	belongs_to :user_posted_by, :foreign_key => 'user_id_posted_by', :class_name => "User"
   	belongs_to :user_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "User"
-  has_many :contributions
+  	
+  	has_many :contributions
+  	has_many :skills
 
 	validates :title, presence: true
 	validates :title_public, presence: true

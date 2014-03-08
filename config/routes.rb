@@ -20,6 +20,7 @@ Churchof::Application.routes.draw do
 
   resources :needs do
     resources :contributions
+    resources :skills
   end
 
   # The following was proposed by Todd Willey and adds it as a subroute.

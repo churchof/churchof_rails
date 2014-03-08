@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226190132) do
+ActiveRecord::Schema.define(version: 20140308022249) do
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
     t.integer  "user_id"
     t.integer  "need_id"
-    t.integer  "cents"
     t.string   "stripe_token"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
+    t.integer  "amount_cents"
   end
 
   create_table "contributors", force: true do |t|
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20140226190132) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "expenses", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "documentation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "need_id"
+    t.integer  "amount_cents"
+  end
+
+  add_index "expenses", ["need_id"], name: "index_expenses_on_need_id"
 
   create_table "needs", force: true do |t|
     t.string   "title"
@@ -74,6 +86,14 @@ ActiveRecord::Schema.define(version: 20140226190132) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "skills", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "icon_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name"
