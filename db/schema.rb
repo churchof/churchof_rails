@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140228011745) do
+=======
+ActiveRecord::Schema.define(version: 20140308022249) do
+>>>>>>> skills
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -86,6 +90,14 @@ ActiveRecord::Schema.define(version: 20140228011745) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "skills", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "icon_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name"
