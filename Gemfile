@@ -8,6 +8,7 @@ gem 'gmaps4rails'
 gem 'enumerize'
 gem 'paperclip'
 gem 'stripe'
+gem 'aws-sdk'
 
 group :development, :test do
 	gem 'sqlite3'
