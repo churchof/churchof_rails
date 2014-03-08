@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<%= @expense.title %>
+<%= @expense.description %>
+<%= @expense.documentation %>
+<%= @expense.amount_cents %>
+
+<%= link_to 'Edit', edit_need_expense_path(@need, @expense) %>

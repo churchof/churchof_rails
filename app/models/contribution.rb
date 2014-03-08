@@ -13,7 +13,7 @@ class Contribution < ActiveRecord::Base
   #validates :contributor, presence: true
 
   def process_payment
-    charge = Stripe::Charge.create(amount: cents,
+    charge = Stripe::Charge.create(amount: amount_cents,
                                    currency: @stripe_currency,
                                    card: @stripe_token,
                                    description: "Support of #{need.title}")
