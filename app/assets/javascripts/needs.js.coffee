@@ -5,7 +5,13 @@
 class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from builtin builder
   #override create_marker method
   create_marker: ->
-    options = _.extend @marker_options(), @rich_marker_options()
+    options = _.extend @marker_options(), @rich_marker_options(), 
+    scrollwheel: false,
+    navigationControl: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    draggable: false
+
     @serviceObject = new RichMarker options #assign marker to @serviceObject
 
   rich_marker_options: ->
