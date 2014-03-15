@@ -19,6 +19,13 @@
       <%= f.input :title_public %>
       <%= f.input :description_public %>
     </div>
+    <div class="field-group-3">
+      <%= f.input :recipient_size %>
+    </div>
+    <div class="field-group-3">
+      <%= f.input :frequency_type %>
+    </div>
+
     <div class="all-private-fields">
       <p class="form-instructions ">The following fields will remain private, and viewed only by church admins:</p>
       <div class="field-pair">
@@ -42,7 +49,23 @@
       <div class="field-group-3">
         <%= f.input :gender %>
       </div>
+      <div class="field-group-3">
+        <%= f.input :recipient_contribution %>
+      </div>
+      <div class="field-group-3">
+        <%= f.input :date_of_birth %>
+      </div>
+      <div class="field-group-3">
+        <%= f.input :lat %>
+      </div>
+      <div class="field-group-3">
+        <%= f.input :lng %>
+      </div>
       <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
+      <div class="field-group-3">
+        <%= f.input :leader %>
+      </div>
+
     </div>
   </div>
   <div class="form-actions submit-new-need">

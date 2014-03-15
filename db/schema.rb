@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308022249) do
+ActiveRecord::Schema.define(version: 20140315032721) do
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -60,16 +60,25 @@ ActiveRecord::Schema.define(version: 20140308022249) do
     t.string   "title_public"
     t.text     "description_public"
     t.boolean  "is_public"
+    t.integer  "recipient_size"
+    t.integer  "frequency_type"
+    t.text     "recipient_contribution"
+    t.string   "date_of_birth"
+    t.decimal  "lat",                    precision: 10, scale: 6
+    t.decimal  "lng",                    precision: 10, scale: 6
+    t.string   "leader"
   end
 
   add_index "needs", ["age"], name: "index_needs_on_age"
   add_index "needs", ["description_public"], name: "index_needs_on_description_public"
   add_index "needs", ["drivers_license"], name: "index_needs_on_drivers_license"
   add_index "needs", ["first_name"], name: "index_needs_on_first_name"
+  add_index "needs", ["frequency_type"], name: "index_needs_on_frequency_type"
   add_index "needs", ["gender"], name: "index_needs_on_gender"
   add_index "needs", ["is_public"], name: "index_needs_on_is_public"
   add_index "needs", ["last_name"], name: "index_needs_on_last_name"
   add_index "needs", ["need_stage"], name: "index_needs_on_need_stage"
+  add_index "needs", ["recipient_size"], name: "index_needs_on_recipient_size"
   add_index "needs", ["social_security_number"], name: "index_needs_on_social_security_number"
   add_index "needs", ["street_address"], name: "index_needs_on_street_address"
   add_index "needs", ["title_public"], name: "index_needs_on_title_public"

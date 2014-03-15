@@ -4,6 +4,8 @@ class Need < ActiveRecord::Base
 
 	enumerize :need_stage, in: {:admin_incoming => 1, :admin_in_progress => 2, :admin_completed => 3}, default: :admin_incoming
 	enumerize :gender, in: {:unknown => 1, :male => 2, :female => 3}
+  enumerize :recipient_size, in: {:unknown => 1, :individual => 2, :group => 3}
+  enumerize :frequency_type, in: {:unknown => 1, :one_time => 2, :ongoing => 3}
 
   belongs_to :user_posted_by, :foreign_key => 'user_id_posted_by', :class_name => "User"
   belongs_to :user_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "User"
@@ -18,6 +20,10 @@ class Need < ActiveRecord::Base
 	validates :description_public, presence: true, length: { minimum: 2 }
 	validates :user_id_posted_by, presence: true
 	validates :user_id_church_admin, presence: true
+  validates :recipient_size, presence: true
+  validates :frequency_type, presence: true
+  validates :lat, presence: true
+  validates :lng, presence: true
 
 	before_save :validate_is_public
 	
