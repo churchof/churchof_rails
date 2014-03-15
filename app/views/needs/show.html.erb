@@ -152,8 +152,10 @@
           <h3>Skills needed</h3>
           <div class="skills-bar">
             <span class="progress-bar"></span>
-            <span class="skills-count">3 Skills</span>
-            <span class="skill-details">Details</span>
+            <span class="skills-count"><%= @need.total_contributed %> Skills</span>
+            <span class="expense-details" data-toggle="modal" data-target="#skillsModal">
+              Details
+            </span>
           </div>
         </div>
       </div>
@@ -292,6 +294,24 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <%= link_to "Add an expense", new_need_expense_path(@need), :class => 'important-btn' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- skillsModal -->
+<div class="modal fade" id="skillsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Skills</h4>
+      </div>
+      <div class="modal-body">
+        All Skills Listed Here.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

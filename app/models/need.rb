@@ -30,6 +30,10 @@ class Need < ActiveRecord::Base
    	true
   end
 
+  def skills_count
+    self.skills.count
+  end
+
   def total_contributed
   	i = 0
     	self.contributions.each do |contribution|
