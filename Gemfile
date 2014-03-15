@@ -9,6 +9,8 @@ gem 'enumerize'
 gem 'paperclip'
 gem 'stripe'
 gem 'aws-sdk'
+gem 'money'
+gem 'money-rails'
 
 group :development, :test do
 	gem 'sqlite3'
