@@ -10,7 +10,7 @@ class Need < ActiveRecord::Base
   	
   has_many :contributions
   has_many :expenses
-  has_many :skills
+  has_and_belongs_to_many :skills
 
 	validates :title, presence: true
 	validates :title_public, presence: true
