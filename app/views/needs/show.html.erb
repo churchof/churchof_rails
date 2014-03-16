@@ -81,10 +81,10 @@
             </p>
           <% end %>
 
-          <% if @need.social_security_number? %>
+          <% if @need.last_four_ssn? %>
             <p class="social-security-number">
-              <strong>Social Security Number: </strong>
-              <%= @need.social_security_number %>
+              <strong>Last 4 SSN: </strong>
+              <%= @need.last_four_ssn %>
             </p>
           <% end %>
 
