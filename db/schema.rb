@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140315032721) do
+ActiveRecord::Schema.define(version: 20140316012344) do
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -64,9 +64,10 @@ ActiveRecord::Schema.define(version: 20140315032721) do
     t.integer  "frequency_type"
     t.text     "recipient_contribution"
     t.string   "date_of_birth"
-    t.decimal  "lat",                    precision: 10, scale: 6
-    t.decimal  "lng",                    precision: 10, scale: 6
     t.string   "leader"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "full_street_address"
   end
 
   add_index "needs", ["age"], name: "index_needs_on_age"

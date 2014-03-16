@@ -22,11 +22,13 @@ class Need < ActiveRecord::Base
 	validates :user_id_church_admin, presence: true
   validates :recipient_size, presence: true
   validates :frequency_type, presence: true
-  validates :lat, presence: true
-  validates :lng, presence: true
+  validates :full_street_address, presence: true
 
 	before_save :validate_is_public
 	
+  geocoded_by :full_street_address   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
+
   def validate_is_public
     	if self.need_stage.admin_incoming?
 		self.is_public = false

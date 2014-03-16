@@ -9,6 +9,7 @@ gem 'enumerize'
 gem 'paperclip'
 gem 'stripe'
 gem 'aws-sdk'
+gem 'geocoder'
 
 group :development, :test do
 	gem 'sqlite3'

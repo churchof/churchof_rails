@@ -56,10 +56,7 @@
         <%= f.input :date_of_birth %>
       </div>
       <div class="field-group-3">
-        <%= f.input :lat %>
-      </div>
-      <div class="field-group-3">
-        <%= f.input :lng %>
+        <%= f.input :full_street_address %>
       </div>
       <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
       <div class="field-group-3">
