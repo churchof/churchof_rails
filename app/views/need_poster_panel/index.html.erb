@@ -3,7 +3,6 @@
     <div class="page-title">
       <h2>Poster Panel</h2>
     </div>
-
     <ul class="nav nav-pills page-options">
       <li class="active">
         <a href="#IncomingNeeds" data-toggle="tab">
@@ -62,16 +61,18 @@
                 <div class="expenses col-xs-12 col-sm-6">
                   <h3>Expenses</h3>
                   <div class="expenses-bar">
-                    <span class="progress-bar"></span>
-                    <span class="amount-raised">$385.00 / $900.00</span>
-                    <span class="expense-details">Details</span>
+                    <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                    <span class="amount-raised">$<%= need.total_contributed %> / $<%= need.total_expenses %></span>
+                    <span class="expense-details" data-toggle="modal" data-target="#expensesModal">
+                      Details
+                    </span>
                   </div>
                 </div>
                 <div class="skills col-xs-12 col-sm-6">
                   <h3>Skills needed</h3>
                   <div class="skills-bar">
                     <span class="progress-bar"></span>
-                    <span class="skills-count">3 Skills</span>
+                    <span class="skills-count">1 Skill</span>
                     <span class="skill-details">Details</span>
                   </div>
                 </div>
@@ -132,22 +133,23 @@
               <div class="need-description">
                 <p><%= need.description %></p>
 
-                <div class="row need-details">
-                  <div class="expenses col-xs-12 col-sm-6">
-                    <h3>Expenses</h3>
-                    <div class="expenses-bar">
-                      <span class="progress-bar"></span>
-                      <span class="amount-raised">$385.00 / $900.00</span>
-                      <span class="expense-details">Details</span>
-                    </div>
+              <div class="row need-details">
+                <div class="expenses col-xs-12 col-sm-6">
+                  <h3>Expenses</h3>
+                  <div class="expenses-bar">
+                    <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                    <span class="amount-raised">$<%= need.total_contributed %> / $<%= need.total_expenses %></span>
+                    <span class="expense-details" data-toggle="modal" data-target="#expensesModal">
+                      Details
+                    </span>
                   </div>
-                  <div class="skills col-xs-12 col-sm-6">
-                    <h3>Skills needed</h3>
-                    <div class="skills-bar">
-                      <span class="progress-bar"></span>
-                      <span class="skills-count">3 Skills</span>
-                      <span class="skill-details">Details</span>
-                    </div>
+                </div>
+                <div class="skills col-xs-12 col-sm-6">
+                  <h3>Skills needed</h3>
+                  <div class="skills-bar">
+                    <span class="progress-bar"></span>
+                    <span class="skills-count">1 Skill</span>
+                    <span class="skill-details">Details</span>
                   </div>
                 </div>
 

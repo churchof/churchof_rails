@@ -81,10 +81,10 @@
             </p>
           <% end %>
 
-          <% if @need.social_security_number? %>
+          <% if @need.last_four_ssn? %>
             <p class="social-security-number">
-              <strong>Social Security Number: </strong>
-              <%= @need.social_security_number %>
+              <strong>Last 4 SSN: </strong>
+              <%= @need.last_four_ssn %>
             </p>
           <% end %>
 
@@ -152,7 +152,7 @@
           <h3>Skills needed</h3>
           <div class="skills-bar">
             <span class="progress-bar"></span>
-            <span class="skills-count">3 Skills</span>
+            <span class="skills-count">1 Skill</span>
             <span class="skill-details">Details</span>
           </div>
         </div>
