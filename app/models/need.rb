@@ -12,7 +12,7 @@ class Need < ActiveRecord::Base
   	
   has_many :contributions
   has_many :expenses
-  has_many :skills
+  has_and_belongs_to_many :skills
 
 	validates :title, presence: true
 	validates :title_public, presence: true
@@ -38,20 +38,24 @@ class Need < ActiveRecord::Base
    	true
   end
 
+  def skills_count
+    self.skills.count
+  end
+
   def total_contributed
-  	i = 0
+    money = Money.new(0, "USD")
     	self.contributions.each do |contribution|
-		    i = i + contribution.amount_cents
+		    money = money + contribution.amount
     	end
-    	i
+    	money
   end
 
   def total_expenses
-  	i = 0
+    money = Money.new(0, "USD")
     	self.expenses.each do |expense|
-		    i = i + expense.amount_cents
+		    money = money + expense.amount
     	end
-    	i
+    	money
   end
 
   def percent_raised

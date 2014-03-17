@@ -2,7 +2,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <%= javascript_include_tag "contribution", "data-turbolinks-track" => false %>
 
-<%= form_for [@need, @contribution] do |f| %>
+<%= simple_form_for [@need, @contribution] do |f| %>
   <span class="payment-errors"></span>
 
   <div class="form-row">
@@ -31,7 +31,7 @@
   <div class="form-row">
     <label>
       <span>Amount (in cents)</span>
-      <%= f.text_field :amount_cents %>
+      <%= f.input :amount_cents %>
     </label>
   </div>
 

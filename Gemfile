@@ -10,6 +10,8 @@ gem 'paperclip'
 gem 'stripe'
 gem 'aws-sdk'
 gem 'geocoder'
+gem 'money'
+gem 'money-rails'
 
 group :development, :test do
 	gem 'sqlite3'
