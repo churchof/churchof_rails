@@ -5,6 +5,7 @@ class NeedsController < ApplicationController
 
   def set_is_public
     @need = Need.find(params["need"]["id"])
+    authorize! :set_is_public, @need
     @need.is_public = params["need"]["is_public"]
     @need.save
     redirect_to root_path
