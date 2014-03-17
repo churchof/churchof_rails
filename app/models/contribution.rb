@@ -3,6 +3,8 @@ class Contribution < ActiveRecord::Base
   belongs_to :user
   belongs_to :contributor
 
+  monetize :amount_cents
+
   attr_writer :stripe_token
   attr_writer :stripe_currency
 
