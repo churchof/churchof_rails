@@ -5,6 +5,8 @@ class ChurchAdminPanelController < ApplicationController
 	def is_allowed_to_view_page?
 	    if current_user.has_role? :church_admin
 	      	true
+	    elsif current_user.has_role? :pending_church_admin
+	      	true
 	    else
 	      	redirect_to root_path, :flash => { :alert => "You don't have permission to view that page." }
 	    end

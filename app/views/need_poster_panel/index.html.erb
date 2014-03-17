@@ -1,128 +1,55 @@
-<div class="page-header-block">
-  <div class="page-title">
-    <h2>Poster Panel</h2>
+<% if current_user.has_role? :need_poster %>
+  <div class="page-header-block">
+    <div class="page-title">
+      <h2>Poster Panel</h2>
+    </div>
+
+    <ul class="nav nav-pills page-options">
+      <li class="active">
+        <a href="#IncomingNeeds" data-toggle="tab">
+          <% if @needs_admin_incoming.count > 0 %>
+            <span class="count-number pull-left"><%= @needs_admin_incoming.count %></span>
+          <% end %>
+          <% if @needs_admin_incoming.count == 1 %>
+            Incoming Need
+          <% else %>
+            Incoming Needs
+          <% end %>
+        </a>
+      </li>
+      <li>
+        <a href="#InProgressNeeds" data-toggle="tab">
+          <% if @needs_admin_in_progress.count > 0 %>
+            <span class="count-number pull-left"><%= @needs_admin_in_progress.count %></span>
+          <% end %>
+          <% if @needs_admin_in_progress.count == 1 %>
+            In Progress Need
+          <% else %>
+            In Progress Needs
+          <% end %>
+        </a>
+      </li>
+      <li>
+        <a href="#CompletedNeeds" data-toggle="tab">
+          <% if @needs_admin_completed.count > 0 %>
+            <span class="count-number pull-left"><%= @needs_admin_completed.count %></span>
+          <% end %>
+          <% if @needs_admin_completed.count == 1 %>
+            Completed Need
+          <% else %>
+            Completed Needs
+          <% end %>
+        </a>
+      </li>
+      <li class="pull-right post-new-need">
+        <%= link_to "Post a Need", new_need_path, :class => 'important-btn' %>
+      </li>
+    </ul>
   </div>
 
-  <ul class="nav nav-pills page-options">
-    <li class="active">
-      <a href="#IncomingNeeds" data-toggle="tab">
-        <% if @needs_admin_incoming.count > 0 %>
-          <span class="count-number pull-left"><%= @needs_admin_incoming.count %></span>
-        <% end %>
-        <% if @needs_admin_incoming.count == 1 %>
-          Incoming Need
-        <% else %>
-          Incoming Needs
-        <% end %>
-      </a>
-    </li>
-    <li>
-      <a href="#InProgressNeeds" data-toggle="tab">
-        <% if @needs_admin_in_progress.count > 0 %>
-          <span class="count-number pull-left"><%= @needs_admin_in_progress.count %></span>
-        <% end %>
-        <% if @needs_admin_in_progress.count == 1 %>
-          In Progress Need
-        <% else %>
-          In Progress Needs
-        <% end %>
-      </a>
-    </li>
-    <li>
-      <a href="#CompletedNeeds" data-toggle="tab">
-        <% if @needs_admin_completed.count > 0 %>
-          <span class="count-number pull-left"><%= @needs_admin_completed.count %></span>
-        <% end %>
-        <% if @needs_admin_completed.count == 1 %>
-          Completed Need
-        <% else %>
-          Completed Needs
-        <% end %>
-      </a>
-    </li>
-    <li class="pull-right post-new-need">
-      <%= link_to "Post a Need", new_need_path, :class => 'important-btn' %>
-    </li>
-  </ul>
-</div>
-
-<div id='content' class="tab-content main-content">
-  <div class="tab-pane active" id="IncomingNeeds">
-    <% @needs_admin_incoming.each do |need| %>
-      <div class="need-container">
-        <div class="inner-content">
-          <h2 class="need-title">
-            <%= link_to need.title, need %>
-          </h2>
-          <div class="need-description">
-            <p><%= need.description %></p>
-
-            <div class="row need-details">
-              <div class="expenses col-xs-12 col-sm-6">
-                <h3>Expenses</h3>
-                <div class="expenses-bar">
-                  <span class="progress-bar"></span>
-                  <span class="amount-raised">$385.00 / $900.00</span>
-                  <span class="expense-details">Details</span>
-                </div>
-              </div>
-              <div class="skills col-xs-12 col-sm-6">
-                <h3>Skills needed</h3>
-                <div class="skills-bar">
-                  <span class="progress-bar"></span>
-                  <span class="skills-count">3 Skills</span>
-                  <span class="skill-details">Details</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="row responsibility-bar">
-              <div class="responsible-user col-xs-4">
-                <div class="user-title">
-                  <h3>Posted By</h3>
-                </div>
-                <div class="user-image">
-                  <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
-                </div>
-                <div class="user-details">
-                  <%= need.user_posted_by.full_name %>
-                  <p class="role">Member- Church of Lexington</p>
-                </div>
-              </div>
-              <div class="responsible-user col-xs-4">
-                <div class="user-title">
-                  <h3>Admin</h3>
-                </div>
-                <div class="user-image">
-                  <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
-                </div>
-                <div class="user-details">
-                  <%= need.user_church_admin.full_name %>
-                  <p class="role">Admin- Church of Lexington</p>
-                </div>
-              </div>
-              <div class="responsible-user col-xs-4">
-                <div class="user-title">
-                  <h3>Leader</h3>
-                </div>
-                <div class="user-image">
-                  <div class="placeholder-leader-image"></div>
-                  <div class="user-details">
-                    <p class="unsupported-feature">This feature is not yet supported yet.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="tab-pane" id="InProgressNeeds">
-    <% @needs_admin_in_progress.each do |need| %>
-      <% if need.need_stage_value == 2 %>
+  <div id='content' class="tab-content main-content">
+    <div class="tab-pane active" id="IncomingNeeds">
+      <% @needs_admin_incoming.each do |need| %>
         <div class="need-container">
           <div class="inner-content">
             <h2 class="need-title">
@@ -192,79 +119,167 @@
           </div>
         </div>
       <% end %>
-    <% end %>
-  </div>
+    </div>
 
-  <div class="tab-pane" id="CompletedNeeds">
-    <% @needs_admin_completed.each do |need| %>
-      <% if need.need_stage_value == 3 %>
-        <div class="need-container">
-          <div class="inner-content">
-            <h2 class="need-title">
-              <%= link_to need.title, need %>
-            </h2>
-            <div class="need-description">
-              <p><%= need.description %></p>
+    <div class="tab-pane" id="InProgressNeeds">
+      <% @needs_admin_in_progress.each do |need| %>
+        <% if need.need_stage_value == 2 %>
+          <div class="need-container">
+            <div class="inner-content">
+              <h2 class="need-title">
+                <%= link_to need.title, need %>
+              </h2>
+              <div class="need-description">
+                <p><%= need.description %></p>
 
-              <div class="row need-details">
-                <div class="expenses col-xs-12 col-sm-6">
-                  <h3>Expenses</h3>
-                  <div class="expenses-bar">
-                    <span class="progress-bar"></span>
-                    <span class="amount-raised">$385.00 / $900.00</span>
-                    <span class="expense-details">Details</span>
+                <div class="row need-details">
+                  <div class="expenses col-xs-12 col-sm-6">
+                    <h3>Expenses</h3>
+                    <div class="expenses-bar">
+                      <span class="progress-bar"></span>
+                      <span class="amount-raised">$385.00 / $900.00</span>
+                      <span class="expense-details">Details</span>
+                    </div>
                   </div>
-                </div>
-                <div class="skills col-xs-12 col-sm-6">
-                  <h3>Skills needed</h3>
-                  <div class="skills-bar">
-                    <span class="progress-bar"></span>
-                    <span class="skills-count">3 Skills</span>
-                    <span class="skill-details">Details</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row responsibility-bar">
-                <div class="responsible-user col-xs-4">
-                  <div class="user-title">
-                    <h3>Posted By</h3>
-                  </div>
-                  <div class="user-image">
-                    <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
-                  </div>
-                  <div class="user-details">
-                    <%= need.user_posted_by.full_name %>
-                  </div>
-                </div>
-                <div class="responsible-user col-xs-4">
-                  <div class="user-title">
-                    <h3>Admin</h3>
-                  </div>
-                  <div class="user-image">
-                    <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
-                  </div>
-                  <div class="user-details">
-                    <%= need.user_church_admin.full_name %>
-                  </div>
-                </div>
-                <div class="responsible-user col-xs-4">
-                  <div class="user-title">
-                    <h3>Leader</h3>
-                  </div>
-                  <div class="user-image">
-                    <div class="placeholder-leader-image"></div>
-                    <div class="user-details">
-                      <p class="unsupported-feature">This feature is not yet supported yet.</p>
+                  <div class="skills col-xs-12 col-sm-6">
+                    <h3>Skills needed</h3>
+                    <div class="skills-bar">
+                      <span class="progress-bar"></span>
+                      <span class="skills-count">3 Skills</span>
+                      <span class="skill-details">Details</span>
                     </div>
                   </div>
                 </div>
-              </div>
 
+                <div class="row responsibility-bar">
+                  <div class="responsible-user col-xs-4">
+                    <div class="user-title">
+                      <h3>Posted By</h3>
+                    </div>
+                    <div class="user-image">
+                      <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
+                    </div>
+                    <div class="user-details">
+                      <%= need.user_posted_by.full_name %>
+                      <p class="role">Member- Church of Lexington</p>
+                    </div>
+                  </div>
+                  <div class="responsible-user col-xs-4">
+                    <div class="user-title">
+                      <h3>Admin</h3>
+                    </div>
+                    <div class="user-image">
+                      <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
+                    </div>
+                    <div class="user-details">
+                      <%= need.user_church_admin.full_name %>
+                      <p class="role">Admin- Church of Lexington</p>
+                    </div>
+                  </div>
+                  <div class="responsible-user col-xs-4">
+                    <div class="user-title">
+                      <h3>Leader</h3>
+                    </div>
+                    <div class="user-image">
+                      <div class="placeholder-leader-image"></div>
+                      <div class="user-details">
+                        <p class="unsupported-feature">This feature is not yet supported yet.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
+    </div>
+
+    <div class="tab-pane" id="CompletedNeeds">
+      <% @needs_admin_completed.each do |need| %>
+        <% if need.need_stage_value == 3 %>
+          <div class="need-container">
+            <div class="inner-content">
+              <h2 class="need-title">
+                <%= link_to need.title, need %>
+              </h2>
+              <div class="need-description">
+                <p><%= need.description %></p>
+
+                <div class="row need-details">
+                  <div class="expenses col-xs-12 col-sm-6">
+                    <h3>Expenses</h3>
+                    <div class="expenses-bar">
+                      <span class="progress-bar"></span>
+                      <span class="amount-raised">$385.00 / $900.00</span>
+                      <span class="expense-details">Details</span>
+                    </div>
+                  </div>
+                  <div class="skills col-xs-12 col-sm-6">
+                    <h3>Skills needed</h3>
+                    <div class="skills-bar">
+                      <span class="progress-bar"></span>
+                      <span class="skills-count">3 Skills</span>
+                      <span class="skill-details">Details</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row responsibility-bar">
+                  <div class="responsible-user col-xs-4">
+                    <div class="user-title">
+                      <h3>Posted By</h3>
+                    </div>
+                    <div class="user-image">
+                      <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
+                    </div>
+                    <div class="user-details">
+                      <%= need.user_posted_by.full_name %>
+                    </div>
+                  </div>
+                  <div class="responsible-user col-xs-4">
+                    <div class="user-title">
+                      <h3>Admin</h3>
+                    </div>
+                    <div class="user-image">
+                      <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
+                    </div>
+                    <div class="user-details">
+                      <%= need.user_church_admin.full_name %>
+                    </div>
+                  </div>
+                  <div class="responsible-user col-xs-4">
+                    <div class="user-title">
+                      <h3>Leader</h3>
+                    </div>
+                    <div class="user-image">
+                      <div class="placeholder-leader-image"></div>
+                      <div class="user-details">
+                        <p class="unsupported-feature">This feature is not yet supported yet.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% elsif current_user.has_role? :pending_need_poster %>
+  <div class="page-header-block">
+    <div class="page-title">
+      <h2>Poster Agreement</h2>
+    </div>
+    <p>
+      In order to be a poster you'll need to agree to the following. It's a lot of legaleez so we'll try and point out the highlights. Basically confidentiality, etc.
+    </p>
+    <%= simple_form_for(current_user, :url => users_agree_to_need_poster_agreement_path, :method => :post, html: {class: "change-status"}) do |f| %>
+      <%= f.submit "I Agree to the Above" %>
     <% end %>
   </div>
-</div>
+<% end %>
+

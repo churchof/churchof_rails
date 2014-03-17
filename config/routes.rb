@@ -9,6 +9,8 @@ Churchof::Application.routes.draw do
   get "profiles/show"
   post "needs/create_charge"
   post "needs/set_is_public"
+  post "users/agree_to_need_poster_agreement"
+  post "users/agree_to_church_admin_agreement"
   devise_for :users
 
   devise_scope :user do

@@ -1,6 +1,20 @@
 class UsersController < ApplicationController
 
-  before_filter :is_allowed_to_view_page?
+  before_filter :is_allowed_to_view_page?, only: [:new, :create, :edit, :update, :index]
+
+  def agree_to_need_poster_agreement
+    current_user.remove_role "pending_need_poster"
+    current_user.add_role "need_poster"
+    current_user.save
+    redirect_to root_path
+  end
+
+  def agree_to_church_admin_agreement
+    current_user.remove_role "pending_church_admin"
+    current_user.add_role "church_admin"
+    current_user.save
+    redirect_to root_path
+  end
 
   def is_allowed_to_view_page?
     if current_user.has_role? :super_admin

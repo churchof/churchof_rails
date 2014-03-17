@@ -25,10 +25,14 @@
             </a>
             <ul class="dropdown-menu">
               <div class="dropdown-wrapper">
-                <% if current_user.has_role? :need_poster %>
+                <% if current_user.has_role? :pending_need_poster %>
+                  <li><%= link_to "Poster Agreement", need_poster_panel_index_path %></li>
+                <% elsif current_user.has_role? :need_poster %>
                   <li><%= link_to "Poster Panel", need_poster_panel_index_path %></li>
                 <% end %>
-                <% if current_user.has_role? :church_admin %>
+                <% if current_user.has_role? :pending_church_admin %>
+                  <li><%= link_to "Church Admin Agreement", church_admin_panel_index_path %></li>
+                <% elsif current_user.has_role? :church_admin %>
                   <li><%= link_to "Church Admin Panel", church_admin_panel_index_path %></li>
                 <% end %>
                 <% if current_user.has_role? :super_admin %>
