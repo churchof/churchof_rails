@@ -322,6 +322,10 @@
           <%= f.text_field :skill_tokens %>
         <% end %>
 
+        <%= simple_form_for @need do |f| %>
+          <%= f.association :skills, as: :check_boxes %>
+          <%= submit_tag "Save Roles", class: 'action-btn' %>
+        <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
