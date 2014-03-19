@@ -63,6 +63,25 @@ class NeedsController < ApplicationController
   # GET /needs/1.json
   def show
     @expense = Expense.new
+    @needs = Need.where(params["id"])
+    @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
+      marker.lat need.latitude
+      marker.lng need.longitude
+      marker.infowindow need.title
+      # marker.picture({
+      #   :url    => "http://www.clker.com/cliparts/3/v/I/F/6/V/light-blue-circle-md.png",
+      #   :width  => "32",
+      #   :height => "32"
+      # })
+      marker.shadow({
+      anchor: [2,22],
+      url: '',
+      width: 29,
+      height: 22 })
+      marker.json({ title: need.title })
+    end
+
+
   end
 
   # GET /needs/new

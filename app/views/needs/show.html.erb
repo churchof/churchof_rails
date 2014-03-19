@@ -167,7 +167,10 @@
       </div>
 
       <div class="map-location">
-        <%= image_tag("placeholder-map.png", alt: "Map Placeholder") %>
+          <script>
+            var map_hash = <%= raw @hash.to_json %>;
+          </script>
+          <%= render 'layouts/small_map' %>
       </div>
 
       <div class="row responsibility-bar">

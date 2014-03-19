@@ -213,10 +213,10 @@ p.unsupported-feature{
   padding: 0px;
 }
 
-.map-location img{
+.map-location{
   width: 100%;
   @include border-radius(2px);
-  margin: 10px auto 0px;
+  margin-top: 20px;
 }
 
 .toggle-container{
