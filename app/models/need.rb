@@ -29,6 +29,13 @@ class Need < ActiveRecord::Base
   geocoded_by :full_street_address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
+  after_create :mail
+
+  def mail
+    logger.info("this is here")
+    Mailer.church_admin_new_need_admin_incoming(self).deliver
+  end
+
   def validate_is_public
     	if self.need_stage.admin_incoming?
 		self.is_public = false
