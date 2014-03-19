@@ -152,7 +152,13 @@
           <h3>Skills needed</h3>
           <div class="skills-bar">
             <span class="progress-bar"></span>
-            <span class="skills-count"><%= @need.total_contributed %> Skills</span>
+            <span class="skills-count"><%= @need.skills_count %> 
+            <% if @need.skills_count == 1 %>
+              Skill
+            <% else %>
+              Skills
+            <% end %>
+            </span>
             <span class="expense-details" data-toggle="modal" data-target="#skillsModal">
               Details
             </span>

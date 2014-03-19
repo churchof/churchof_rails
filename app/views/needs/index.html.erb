@@ -39,7 +39,7 @@
               <h3>Expenses</h3>
                 <div class="expenses-bar">
                   <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
-                  <span class="amount-raised">$<%= need.total_contributed %> / $<%= need.total_expenses %></span>
+                  <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
                   <span class="expense-details" data-toggle="modal" data-target="#expensesModal">
                     Details
                   </span>
@@ -49,7 +49,13 @@
               <h3>Skills needed</h3>
               <div class="skills-bar">
                 <span class="progress-bar"></span>
-                <span class="skills-count">1 Skill</span>
+                <span class="skills-count"><%= need.skills_count %> 
+                <% if need.skills_count == 1 %>
+                  Skill
+                <% else %>
+                  Skills
+                <% end %>
+                </span>
                 <span class="skill-details">Details</span>
               </div>
             </div>
