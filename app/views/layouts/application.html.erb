@@ -20,7 +20,7 @@
         <% if user_signed_in? %>
           <li class="menu-link">
             <a href="#" class="dropdown-toggle highlighted" data-toggle="dropdown">
-              <span class="hide-on-xs"><%= current_user.full_name %></span>
+              <span class="hide-on-xs"><%= current_user.full_name %> (<%= current_user.church_admin_needs_admin_incoming_count %>)</span>
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
@@ -33,7 +33,7 @@
                 <% if current_user.has_role? :pending_church_admin %>
                   <li><%= link_to "Church Admin Agreement", church_admin_panel_index_path %></li>
                 <% elsif current_user.has_role? :church_admin %>
-                  <li><%= link_to "Church Admin Panel", church_admin_panel_index_path %></li>
+                  <li><%= link_to "Church Admin Panel (#{current_user.church_admin_needs_admin_incoming_count})", church_admin_panel_index_path %></li>
                 <% end %>
                 <% if current_user.has_role? :super_admin %>
                   <li><%= link_to "Super Admin Panel", users_index_path %></li>

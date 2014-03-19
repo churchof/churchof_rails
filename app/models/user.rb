@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
   	first_name + " " + last_name
   end
 
+  def church_admin_needs_admin_incoming_count
+    self.needs_church_admin.where(need_stage: 1).count
+  end
+
   # after the initial creation this will take the contributions from the appropriate contributor.
   # in the event that the email has been changed to another contributor account it will pick up those records as well.
   def assign_past_contributor_contributions_to_user
