@@ -29,16 +29,16 @@
 
 
 Skill.create!(
-  title: 'Skill 1',
+  title: 'Handyman',
   description: 'This is a skill.',
-  icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/726-star%402x.png?AWSAccessKeyId=ASIAILF7YYCQXNY2GFOA&Expires=1394246290&Signature=F4wNTVSpCCNEVGxhXC%2B4Drtmo/k%3D&x-amz-security-token=AQoDYXdzEIP//////////wEakAKbZx6itNHYwi46/u4xJDj4dosHBapQvf0nX/cADKULVxWefEzg/364vO9stlQjMCKloJRs3jYp6jYqPyki4a2eAGWNUdoAKempFN/h%2B9m3MVeUWzz/JGuf64IzHbd7eU1QRVWonT/nCORawnf34wTRyTnZfpGcV9F0weccgMbOLHND5wDMHTbz7Lb0%2ByzV%2Bf1IBa6VSdosQ94iTOsdysfs2Y8F7t%2B7iCopwaOd9gN8vrHNxD5T/A8J4lhmhxtOIBIvgUmsy%2BIEVhjIdfuNfHx8w4bcv1WdvfoVNqnzWwUAAB8UlfWpdISuWX4prQ2dfhVSLe7btxm82fScJR%2Bnp7P%2B2daYUZ89dtoR4BSHVOZ%2BjyDC8umYBQ%3D%3D')
+  icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/742-wrench%402x.png')
 
 Skill.create!(
-  title: 'Skill 2',
+  title: 'Papering',
   description: 'This is a skill.',
-  icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/726-star%402x.png?AWSAccessKeyId=ASIAILF7YYCQXNY2GFOA&Expires=1394246290&Signature=F4wNTVSpCCNEVGxhXC%2B4Drtmo/k%3D&x-amz-security-token=AQoDYXdzEIP//////////wEakAKbZx6itNHYwi46/u4xJDj4dosHBapQvf0nX/cADKULVxWefEzg/364vO9stlQjMCKloJRs3jYp6jYqPyki4a2eAGWNUdoAKempFN/h%2B9m3MVeUWzz/JGuf64IzHbd7eU1QRVWonT/nCORawnf34wTRyTnZfpGcV9F0weccgMbOLHND5wDMHTbz7Lb0%2ByzV%2Bf1IBa6VSdosQ94iTOsdysfs2Y8F7t%2B7iCopwaOd9gN8vrHNxD5T/A8J4lhmhxtOIBIvgUmsy%2BIEVhjIdfuNfHx8w4bcv1WdvfoVNqnzWwUAAB8UlfWpdISuWX4prQ2dfhVSLe7btxm82fScJR%2Bnp7P%2B2daYUZ89dtoR4BSHVOZ%2BjyDC8umYBQ%3D%3D')
+  icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/757-paper-airplane%402x.png')
 
 Skill.create!(
-  title: 'Skill 3',
+  title: 'Credit Carding',
   description: 'This is a skill.',
-  icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/726-star%402x.png?AWSAccessKeyId=ASIAILF7YYCQXNY2GFOA&Expires=1394246290&Signature=F4wNTVSpCCNEVGxhXC%2B4Drtmo/k%3D&x-amz-security-token=AQoDYXdzEIP//////////wEakAKbZx6itNHYwi46/u4xJDj4dosHBapQvf0nX/cADKULVxWefEzg/364vO9stlQjMCKloJRs3jYp6jYqPyki4a2eAGWNUdoAKempFN/h%2B9m3MVeUWzz/JGuf64IzHbd7eU1QRVWonT/nCORawnf34wTRyTnZfpGcV9F0weccgMbOLHND5wDMHTbz7Lb0%2ByzV%2Bf1IBa6VSdosQ94iTOsdysfs2Y8F7t%2B7iCopwaOd9gN8vrHNxD5T/A8J4lhmhxtOIBIvgUmsy%2BIEVhjIdfuNfHx8w4bcv1WdvfoVNqnzWwUAAB8UlfWpdISuWX4prQ2dfhVSLe7btxm82fScJR%2Bnp7P%2B2daYUZ89dtoR4BSHVOZ%2BjyDC8umYBQ%3D%3D')
+  icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/752-credit-card%402x.png')

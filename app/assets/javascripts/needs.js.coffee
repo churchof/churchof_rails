@@ -17,7 +17,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
   rich_marker_options: ->
     marker = document.createElement("div")
     marker.setAttribute 'class', 'marker_container'
-    marker.innerHTML = '<img src="https://s3.amazonaws.com/church_of/assets/skill_icons/715-globe%402x.png" alt="Smiley face" width="40" height="40">' # @args.title
+    marker.innerHTML = '<img src="' + @args.image_url + '" alt="Smiley face" width="40" height="40">' # @args.title
     { content: marker }
 
 
