@@ -18,9 +18,10 @@
 //= require underscore
 //= require jquery.tokeninput
 
-  $(function () {
+  jQuery(function () {
     $("#need_skill_tokens").tokenInput("/skills.json", {
       crossDomain: false
       propertyToSearch: "title"
+      prePopulate: $("#need_skill_tokens").data("pre"),
     });
   });
