@@ -16,3 +16,4 @@
 //= require_tree .
 //= require bootstrap
 //= require underscore
+//= require jquery.tokeninput

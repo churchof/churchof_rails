@@ -29,6 +29,12 @@ class Need < ActiveRecord::Base
   geocoded_by :full_street_address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
+  attr_reader :skill_tokens
+
+  def skill_tokens=(ids)
+    self.skill_ids = ids.split(",")
+  end
+
   def validate_is_public
     	if self.need_stage.admin_incoming?
 		self.is_public = false

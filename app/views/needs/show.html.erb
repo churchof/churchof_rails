@@ -1,9 +1,18 @@
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $("#need_skill_tokens").tokenInput("/skills.json", {
+      crossDomain: false
+      propertyToSearch: "title"
+    });
+  });
+  </script>
+
   <!-- The required Stripe lib -->
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
  
   <!-- jQuery is used only for this example; it isn't required to use Stripe -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
- 
+
   <script type="text/javascript">
     // This identifies your website in the createToken call below
     Stripe.setPublishableKey('pk_test_EvYspVJmIJvMohKKhAykkgwA');
@@ -304,13 +313,9 @@
       </div>
       <div class="modal-body">
         All Skills Listed Here.
-        <%= simple_form_for @need do |f| %>
-          <div class="inner-content">
-            <div class="form form-actions">
-              <%= f.association :skills, as: :check_boxes %>
-            </div>
-          </div>
-          <%= submit_tag "Save Skills", class: 'action-btn' %>
+        <%= form_for @need do |f| %>
+          <%= f.label :skill_tokens, "Skills" %><br />
+          <%= f.text_field :skill_tokens %>
         <% end %>
 
       </div>

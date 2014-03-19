@@ -12,6 +12,7 @@ gem 'aws-sdk'
 gem 'geocoder'
 gem 'money'
 gem 'money-rails'
+gem 'rails_tokeninput'
 
 group :development, :test do
 	gem 'sqlite3'
