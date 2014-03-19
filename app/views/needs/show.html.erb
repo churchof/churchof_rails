@@ -143,9 +143,6 @@
           <div class="expenses-bar">
             <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
             <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
-            <span class="expense-details" data-toggle="modal" data-target="#expensesModal">
-              Details
-            </span>
           </div>
         </div>
         <div class="skills col-xs-12 col-sm-6">
@@ -159,10 +156,15 @@
               Skills
             <% end %>
             </span>
-            <span class="expense-details" data-toggle="modal" data-target="#skillsModal">
-              Details
-            </span>
           </div>
+
+
+          <% @need.skills.each do |skill| %>
+            <p>
+              <img src=<%= skill.icon_url%> style="background-color:grey;"> <%= skill.title %>
+            </p>
+          <% end %>
+
         </div>
       </div>
 

@@ -17,7 +17,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
   rich_marker_options: ->
     marker = document.createElement("div")
     marker.setAttribute 'class', 'marker_container'
-    marker.innerHTML = '<img src="' + @args.image_url + '" alt="Smiley face" width="40" height="40">' # @args.title
+    marker.innerHTML = '<img src="' + @args.image_url + '" alt="Smiley face" width="30" height="30">' # @args.title
     { content: marker }
 
 
@@ -25,7 +25,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
   handler = Gmaps.build(
     'Google', { builders: { Marker: RichMarkerBuilder}, markers:
           clusterer:
-            gridSize: 40
+            gridSize: 10
             maxZoom: 10
             styles: [
               textSize: 10
