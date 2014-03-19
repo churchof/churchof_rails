@@ -32,6 +32,7 @@ class Need < ActiveRecord::Base
   attr_reader :skill_tokens
 
   def skill_tokens=(ids)
+    # this will likely need to change
     self.skill_ids = ids.split(",")
   end
 

@@ -17,3 +17,10 @@
 //= require bootstrap
 //= require underscore
 //= require jquery.tokeninput
+
+  $(function () {
+    $("#need_skill_tokens").tokenInput("/skills.json", {
+      crossDomain: false
+      propertyToSearch: "title"
+    });
+  });
