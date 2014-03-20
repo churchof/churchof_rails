@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316013700) do
+ActiveRecord::Schema.define(version: 20140320182802) do
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -64,10 +64,13 @@ ActiveRecord::Schema.define(version: 20140316013700) do
     t.text     "recipient_contribution"
     t.string   "date_of_birth"
     t.string   "leader"
-    t.float    "latitude"
-    t.float    "longitude"
     t.string   "full_street_address"
-    t.string   "last_four_ssn",          limit: 4
+    t.string   "last_four_ssn",                  limit: 4
+    t.decimal  "latitude",                                 precision: 15, scale: 10
+    t.decimal  "longitude",                                precision: 15, scale: 10
+    t.decimal  "approx_latitude",                          precision: 15, scale: 10
+    t.decimal  "approx_longitude",                         precision: 15, scale: 10
+    t.boolean  "shows_real_location_publically"
   end
 
   add_index "needs", ["age"], name: "index_needs_on_age"
@@ -84,6 +87,11 @@ ActiveRecord::Schema.define(version: 20140316013700) do
   add_index "needs", ["title_public"], name: "index_needs_on_title_public"
   add_index "needs", ["user_id_church_admin"], name: "index_needs_on_user_id_church_admin"
   add_index "needs", ["user_id_posted_by"], name: "index_needs_on_user_id_posted_by"
+
+  create_table "needs_skills", force: true do |t|
+    t.integer "need_id"
+    t.integer "skill_id"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"

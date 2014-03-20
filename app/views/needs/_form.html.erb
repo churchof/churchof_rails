@@ -58,6 +58,9 @@
       <div class="field-group-3">
         <%= f.input :full_street_address %>
       </div>
+      <div class="field-group-3">
+        <%= f.input :shows_real_location_publically %>
+      </div>
       <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
       <div class="field-group-3">
         <%= f.input :leader %>

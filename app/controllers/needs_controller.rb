@@ -42,8 +42,13 @@ class NeedsController < ApplicationController
   def index
     @needs = Need.where(is_public: true)
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
-      marker.lat need.latitude
-      marker.lng need.longitude
+      if need.shows_real_location_publically
+        marker.lat need.latitude
+        marker.lng need.longitude
+      else
+        marker.lat need.approx_latitude
+        marker.lng need.approx_longitude
+      end
       marker.infowindow need.title
       # marker.picture({
       #   :url    => "http://www.clker.com/cliparts/3/v/I/F/6/V/light-blue-circle-md.png",
@@ -63,10 +68,15 @@ class NeedsController < ApplicationController
   # GET /needs/1.json
   def show
     @expense = Expense.new
-    @needs = Need.where(params["id"])
+    @needs = Need.where(params["id"]) # This isnt working.
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
-      marker.lat need.latitude
-      marker.lng need.longitude
+      if need.shows_real_location_publically
+        marker.lat need.latitude
+        marker.lng need.longitude
+      else
+        marker.lat need.approx_latitude
+        marker.lng need.approx_longitude
+      end
       marker.infowindow need.title
       # marker.picture({
       #   :url    => "http://www.clker.com/cliparts/3/v/I/F/6/V/light-blue-circle-md.png",
@@ -141,6 +151,6 @@ class NeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def need_params
-      params.require(:need).permit(:id, :full_street_address, :recipient_size, :frequency_type, :recipient_contribution, :date_of_birth, :latitude, :longitude, :leader, :is_public, :first_name, :last_name, :last_four_ssn, :street_address, :drivers_license, :age, :gender, :title_public, :description_public, :need_stage, :title, :description, :user_id_posted_by, :user_id_church_admin)
+      params.require(:need).permit(:shows_real_location_publically, :id, :full_street_address, :recipient_size, :frequency_type, :recipient_contribution, :date_of_birth, :latitude, :longitude, :leader, :is_public, :first_name, :last_name, :last_four_ssn, :street_address, :drivers_license, :age, :gender, :title_public, :description_public, :need_stage, :title, :description, :user_id_posted_by, :user_id_church_admin)
     end
 end

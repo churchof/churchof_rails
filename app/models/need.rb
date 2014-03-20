@@ -29,7 +29,26 @@ class Need < ActiveRecord::Base
   geocoded_by :full_street_address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
+  before_create :create_approx_location_values
   after_create :mail
+
+  def create_approx_location_values
+    miles = 0.25;
+    percent_inner_not_selectable = 40;
+    # These calculations will result in roughly this many miles various to the left/right which results not in a circle. The max distance then can be sqrt(miles^2+miles^2).
+    # Inner % not an option.
+    dither=0.0004 * miles;
+    rand1 = rand(100)-50
+    rand2 = rand(100)-50
+    if rand1 < percent_inner_not_selectable / 2 && rand1 >= 0
+      rand1 = percent_inner_not_selectable / 2
+    end
+    if rand2 > -percent_inner_not_selectable / 2 && rand2 < 0
+      rand2 = -percent_inner_not_selectable / 2
+    end
+    self.approx_latitude = self.latitude + rand1*dither;
+    self.approx_longitude = self.longitude + rand2*dither;
+  end
 
   def mail
     logger.info("this is here")
