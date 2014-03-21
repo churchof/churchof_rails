@@ -5,3 +5,28 @@ Skills would all be listed here:
 And if this is you, you'd be able to edit those skills.
 
 You'd then recieve email alerts based on those skills as stuff pops up.
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/src/jquery.tokeninput.js"></script>
+<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/styles/token-input.css" />
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $("#user_skill_tokens").tokenInput("/skills.json", {
+      crossDomain: false,
+      prePopulate: $("#user_skill_tokens").data("pre")
+    });
+});
+
+</script>
+
+<% @user.skills.each do |skill| %>
+  <p>
+    <img src=<%= skill.icon_url%> style="background-color:grey;"> <%= skill.name %>
+  </p>
+<% end %>
+<%= form_for @user do |f| %>
+  <%= f.label :skill_tokens, "Skills" %><br />
+  <%= f.text_field :skill_tokens, "data-pre" => @user.skills.map(&:attributes).to_json %>
+  <%= f.submit %>
+<% end %>

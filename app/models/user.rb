@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   rolify # :pending_need_poster, :need_poster, :pending_church_admin, :church_admin, :super_admin
   
+  has_and_belongs_to_many :skills
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -25,6 +27,16 @@ class User < ActiveRecord::Base
   }
 
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/jpg', 'image/png']
+
+  attr_reader :skill_tokens
+
+  def skill_tokens=(ids)
+    self.skills.delete_all
+    ids.split(",").each do |id|
+      self.skills << Skill.find(id)
+    end
+    self.save
+  end
 
   def full_name
   	first_name + " " + last_name
