@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317222011) do
+ActiveRecord::Schema.define(version: 20140321164301) do
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -64,10 +64,13 @@ ActiveRecord::Schema.define(version: 20140317222011) do
     t.text     "recipient_contribution"
     t.string   "date_of_birth"
     t.string   "leader"
-    t.float    "latitude"
-    t.float    "longitude"
     t.string   "full_street_address"
-    t.string   "last_four_ssn",          limit: 4
+    t.string   "last_four_ssn",                  limit: 4
+    t.decimal  "latitude",                                 precision: 15, scale: 10
+    t.decimal  "longitude",                                precision: 15, scale: 10
+    t.decimal  "approx_latitude",                          precision: 15, scale: 10
+    t.decimal  "approx_longitude",                         precision: 15, scale: 10
+    t.boolean  "shows_real_location_publically"
   end
 
   add_index "needs", ["age"], name: "index_needs_on_age"
@@ -102,11 +105,11 @@ ActiveRecord::Schema.define(version: 20140317222011) do
   add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "skills", force: true do |t|
-    t.string   "title"
     t.text     "description"
     t.string   "icon_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "users", force: true do |t|

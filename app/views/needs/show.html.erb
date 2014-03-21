@@ -5,19 +5,26 @@
   <!-- jQuery is used only for this example; it isn't required to use Stripe -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+
+
+<script type="text/javascript" src="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/src/jquery.tokeninput.js"></script>
+<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/styles/token-input.css" />
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $("#need_skill_tokens").tokenInput("/skills.json", {
+      crossDomain: false,
+      prePopulate: $("#need_skill_tokens").data("pre")
+    });
+});
+
+</script>
+
+
+
+
   <script type="text/javascript">
 
-
-  jQuery(function () {
-    $("#need_skill_tokens").tokenInput("/skills.json", {
-      crossDomain: false
-      propertyToSearch: "title"
-      prePopulate: $("#need_skill_tokens").data("pre"),
-    });
-  });
-
-
-  
     // This identifies your website in the createToken call below
     Stripe.setPublishableKey('pk_test_EvYspVJmIJvMohKKhAykkgwA');
  
@@ -170,6 +177,11 @@
               Details
             </span>
           </div>
+        <%= form_for @need do |f| %>
+          <%= f.label :skill_tokens, "Skills" %><br />
+          <%= f.text_field :skill_tokens, "data-pre" => @need.skills.map(&:attributes).to_json %>
+          <%= f.submit %>
+        <% end %>
         </div>
       </div>
 
@@ -316,16 +328,7 @@
         <h4 class="modal-title" id="myModalLabel">Skills</h4>
       </div>
       <div class="modal-body">
-        All Skills Listed Here.
-        <%= form_for @need do |f| %>
-          <%= f.label :skill_tokens, "Skills" %><br />
-          <%= f.text_field :skill_tokens %>
-        <% end %>
 
-        <%= simple_form_for @need do |f| %>
-          <%= f.association :skills, as: :check_boxes %>
-          <%= submit_tag "Save Roles", class: 'action-btn' %>
-        <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

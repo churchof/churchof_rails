@@ -1,7 +1,7 @@
 class SkillsController < ApplicationController
 
   def index
-	@skills = Skill.where("title like ?", "%#{params[:q]}%")
+	@skills = Skill.where("name like ?", "%#{params[:q]}%")
 	respond_to do |format|
 		format.html
 		format.json { render :json => @skills.map(&:attributes) }
@@ -17,7 +17,7 @@ class SkillsController < ApplicationController
   private
 
   def skills_params
-    params.require(:skill).permit(:title, :description, :icon_url)
+    params.require(:skill).permit(:name, :description, :icon_url)
   end
 
 end
