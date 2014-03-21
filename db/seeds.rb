@@ -27,7 +27,6 @@
 #   need_stage: 'admin_in_progress',
 #   is_public: true)
 
-
 Skill.create!(
   name: 'Handyman',
   description: 'This is a skill.',

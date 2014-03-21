@@ -17,7 +17,11 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
   rich_marker_options: ->
     marker = document.createElement("div")
     marker.setAttribute 'class', 'marker_container'
-    marker.innerHTML = '<img src="' + if @args.image_url then @args.image_url else "https://s3.amazonaws.com/church_of/assets/skill_icons/715-globe%402x.png" + '" width="30" height="30">' # @args.title
+    
+    string = "https://s3.amazonaws.com/church_of/assets/skill_icons/715-globe%402x.png"
+    if @args.image_url  
+      string = @args.image_url
+    marker.innerHTML = '<img src="' + string + '" width="30" height="30">' # @args.title
     { content: marker }
 
 

@@ -179,7 +179,7 @@ $(document).ready(function () {
           </div>
           <% @need.skills.each do |skill| %>
             <p>
-              <img src=<%= skill.icon_url%> style="background-color:grey;"> <%= skill.title %>
+              <img src=<%= skill.icon_url%> style="background-color:grey;"> <%= skill.name %>
             </p>
           <% end %>
         <%= form_for @need do |f| %>
