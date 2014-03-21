@@ -11,6 +11,7 @@
  *= require bootstrap
  *= require_self
  *= require_tree .
+ *= require token-input
  */
 
 body { padding-top: 50px; }

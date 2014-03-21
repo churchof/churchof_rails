@@ -29,16 +29,16 @@
 
 
 Skill.create!(
-  title: 'Handyman',
+  name: 'Handyman',
   description: 'This is a skill.',
   icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/742-wrench%402x.png')
 
 Skill.create!(
-  title: 'Papering',
+  name: 'Papering',
   description: 'This is a skill.',
   icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/757-paper-airplane%402x.png')
 
 Skill.create!(
-  title: 'Credit Carding',
+  name: 'Credit Carding',
   description: 'This is a skill.',
   icon_url: 'https://s3.amazonaws.com/church_of/assets/skill_icons/752-credit-card%402x.png')

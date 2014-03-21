@@ -151,6 +151,6 @@ class NeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def need_params
-      params.require(:need).permit(:shows_real_location_publically, :id, :full_street_address, :recipient_size, :frequency_type, :recipient_contribution, :date_of_birth, :latitude, :longitude, :leader, :is_public, :first_name, :last_name, :last_four_ssn, :street_address, :drivers_license, :age, :gender, :title_public, :description_public, :need_stage, :title, :description, :user_id_posted_by, :user_id_church_admin)
+      params.require(:need).permit(:skill_ids, :skill_tokens, :shows_real_location_publically, :id, :full_street_address, :recipient_size, :frequency_type, :recipient_contribution, :date_of_birth, :latitude, :longitude, :leader, :is_public, :first_name, :last_name, :last_four_ssn, :street_address, :drivers_license, :age, :gender, :title_public, :description_public, :need_stage, :title, :description, :user_id_posted_by, :user_id_church_admin)
     end
 end

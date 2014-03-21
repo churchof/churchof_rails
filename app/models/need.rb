@@ -32,6 +32,16 @@ class Need < ActiveRecord::Base
   before_create :create_approx_location_values
   after_create :mail
 
+  attr_reader :skill_tokens
+
+  def skill_tokens=(ids)
+    self.skills.delete_all
+    ids.split(",").each do |id|
+      self.skills << Skill.find(id)
+    end
+    self.save
+  end
+
   def create_approx_location_values
     miles = 0.25;
     percent_inner_not_selectable = 40;
