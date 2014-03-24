@@ -1,4 +1,16 @@
-<%= link_to "Back", :back %>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/src/jquery.tokeninput.js"></script>
+<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/styles/token-input.css" />
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#user_skill_tokens").tokenInput("/skills.json", {
+      crossDomain: false,
+      prePopulate: $("#user_skill_tokens").data("pre")
+    });
+});
+</script>
+
 <div class="container devise">
   <h2>Edit Account</h2>
 
@@ -45,6 +57,11 @@
         <div>
           <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
           <%= f.password_field :current_password %>
+        </div>
+
+        <div>
+          <%= f.label :skill_tokens, "Skills" %><br />
+          <%= f.text_field :skill_tokens, "data-pre" => @user.skills.map(&:attributes).to_json %>
         </div>
 
         <div>
