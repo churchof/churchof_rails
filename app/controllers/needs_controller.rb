@@ -50,6 +50,7 @@ class NeedsController < ApplicationController
         marker.lng need.approx_longitude
       end
       marker.infowindow need.title
+
       # marker.picture({
       #   :url    => "http://www.clker.com/cliparts/3/v/I/F/6/V/light-blue-circle-md.png",
       #   :width  => "32",
@@ -60,7 +61,8 @@ class NeedsController < ApplicationController
       url: '',
       width: 29,
       height: 22 })
-      marker.json({ title: need.title, image_url: if need.skills.first then need.skills.first.icon_url else '' end })
+      # This should use the path helper.
+      marker.json({ title: need.title, image_url: if need.skills.first then need.skills.first.icon_url else '' end, custom_infowindow: "<a href='needs/#{need.id}'> #{need.title_public} </a>" })
     end
   end
 
