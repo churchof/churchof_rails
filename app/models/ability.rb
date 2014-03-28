@@ -19,6 +19,7 @@ class Ability
         can :update, Need, :user_id_church_admin => user.id
         can :set_is_public, Need, :user_id_church_admin => user.id
         can :manage, Expense, :need => { :user_id_church_admin => user.id }
+        can :manage, Update # this needs to be only for the appropriate ones
     end
     if user.has_role? :super_admin
         can :update, User

@@ -157,6 +157,16 @@ $(document).ready(function () {
  -->        </div>
       <% end %>
 
+      <% @need.updates.each do |update| %>
+        <div class="public-update-bar">
+          <span class="record-count" data-toggle="modal" data-target="#PublicUpdateModal"><%= update.title %></span>
+<!--           This should only show up for the right people 
+ -->          
+          <span class="details"><%= link_to "Edit", edit_need_update_path(@need, update) %></span>
+        </div>
+      <% end %>
+
+      <%= link_to "New Update", new_need_update_path(@need) %>
       <div class="row need-details">
         <div class="expenses col-xs-12 col-sm-6">
           <h3>Expenses</h3>
@@ -344,3 +354,34 @@ $(document).ready(function () {
     </div>
   </div>
 </div>
+
+<!-- PublicUpdateModal -->
+<div class="modal fade" id="PublicUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= @need.updates.first.title %></h4>
+      </div>
+      <div class="modal-body">
+<!--         This only shows the first...
+ -->        
+        <%= @need.updates.first.content %>
+
+        <br>
+        <br>
+        <% @need.updates.first.images.each do |image| %>
+          <%= image_tag(image.image) %>
+          <br>
+          <%= image.caption %>
+          <br>
+          <br>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

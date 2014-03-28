@@ -1,4 +1,6 @@
 Churchof::Application.routes.draw do
+  resources :updates
+
   get "church_admin_panel/index"
   get "need_poster_panel/index"
   get "user_panel/index"
@@ -26,6 +28,7 @@ Churchof::Application.routes.draw do
     resources :contributions
     resources :expenses
     resources :skills
+    resources :updates
   end
 
   # The following was proposed by Todd Willey and adds it as a subroute.
