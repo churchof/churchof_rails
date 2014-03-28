@@ -1,19 +1,33 @@
+
+
+
+
+
+
 <%= simple_form_for [@need, @update] do |f| %>
   <%= f.error_notification %>
-
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :content %>
   </div>
 
-<%= f.fields_for :images do |builder| %>
-  <div class="field">
-    <%= builder.label :image %><br />
-    <%= f.file_field :image %>
-  </div>
-<% end %>
+  <h3>Ingredients</h3>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+<%= f.fields_for :images do |image| %>
+  <div class="field">
+    <%= image.label :image %><br />
+    <%= f.file_field :image %>
+          <%= image.check_box :_destroy %>
+      <%= image.label :_destroy, 'delete' %>
+
   </div>
+<% end -%>
+
+
+
+  <p>
+    <%= f.submit 'Add Image', :name => "add_image" %>
+    <%= f.submit 'Delete Checked Images', :name => "remove_image" %>
+    <%= f.submit %>
+  </p>
 <% end %>
