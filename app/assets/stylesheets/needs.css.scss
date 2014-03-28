@@ -151,6 +151,11 @@ p.unsupported-feature{
   margin: 10px auto;
 }
 
+.public-update-bar{
+  @include content-bar(#5ca2e8);
+  margin: 10px auto;
+}
+
 .potential-benefits-bar{
   @include content-bar($primary-blue);
   margin: 10px auto;

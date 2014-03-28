@@ -157,6 +157,18 @@ $(document).ready(function () {
  -->        </div>
       <% end %>
 
+      <% @need.updates.each do |update| %>
+        <div class="public-update-bar">
+          <span class="record-count">
+            <%= update.title %>
+          </span>
+<!--           This should only show up for the right people 
+ -->          
+          <span class="details"><%= link_to "Edit", edit_need_update_path(@need, update) %></span>
+        </div>
+      <% end %>
+
+      <%= link_to "New Update", new_need_update_path(@need) %>
       <div class="row need-details">
         <div class="expenses col-xs-12 col-sm-6">
           <h3>Expenses</h3>

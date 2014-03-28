@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140321190858) do
+ActiveRecord::Schema.define(version: 20140328153251) do
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(version: 20140321190858) do
   end
 
   add_index "expenses", ["need_id"], name: "index_expenses_on_need_id"
+
+  create_table "images", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "update_id"
+  end
+
+  add_index "images", ["update_id"], name: "index_images_on_update_id"
 
   create_table "needs", force: true do |t|
     t.string   "title"
@@ -116,6 +128,16 @@ ActiveRecord::Schema.define(version: 20140321190858) do
     t.integer "skill_id"
     t.integer "user_id"
   end
+
+  create_table "updates", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "need_id"
+  end
+
+  add_index "updates", ["need_id"], name: "index_updates_on_need_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"

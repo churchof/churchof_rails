@@ -1,4 +1,6 @@
 Churchof::Application.routes.draw do
+  resources :updates
+
   get "church_admin_panel/index"
   get "need_poster_panel/index"
   get "user_panel/index"
@@ -20,12 +22,11 @@ Churchof::Application.routes.draw do
 
   resources :users # Not sure if this is ok to do with Devise also.
 
-  resources :skills
-
   resources :needs do
     resources :contributions
     resources :expenses
     resources :skills
+    resources :updates
   end
 
   # The following was proposed by Todd Willey and adds it as a subroute.
