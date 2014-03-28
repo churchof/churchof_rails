@@ -20,7 +20,7 @@ class UpdatesController < ApplicationController
   # GET /updates/new
   def new
     @need = Need.find(params[:need_id])
-    @update = @need.updates.new(update_params)
+    @update = @need.updates.new
     @update.images.build
 
     respond_to do |format|
