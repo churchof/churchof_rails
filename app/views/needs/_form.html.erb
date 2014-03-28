@@ -1,3 +1,22 @@
+  <!-- jQuery is used only for this example; it isn't required to use Stripe -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/src/jquery.tokeninput.js"></script>
+<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/styles/token-input.css" />
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $("#need_skill_tokens").tokenInput("/skills.json", {
+      crossDomain: false,
+      prePopulate: $("#need_skill_tokens").data("pre")
+    });
+});
+
+</script>
+
+
 <%= simple_form_for(@need, html: {class: "form-horizontal need-form"}) do |f| %>
   <div class="inner-content">
     <p class="form-instructions">Please title and describe the need:</p>
@@ -68,7 +87,38 @@
 
     </div>
   </div>
+
+          <%= f.label :skill_tokens, "Skills" %><br />
+          <%= f.text_field :skill_tokens, "data-pre" => @need.skills.map(&:attributes).to_json %>
+<br><br>
+
+Expenses
+<br>
+<br>
+
+<%= f.fields_for :expenses do |expense| %>
+      <div class="field-pair">
+        <%= expense.input :title %>
+      </div>
+      <div class="field-pair">
+        <%= expense.input :description %>
+      </div>
+      <div class="field-pair">
+        <%= expense.input :documentation %>
+      </div>
+      <div class="field-pair">
+        <%= expense.input :amount %>
+      </div>
+                <%= expense.check_box :_destroy %>
+      <%= expense.label :_destroy, 'delete' %>
+
+<% end -%>
+
+    <%= f.submit 'Add Expense', :name => "add_expense" %>
+    <%= f.submit 'Delete Checked Expenses', :name => "remove_expenses" %>
+
   <div class="form-actions submit-new-need">
+
     <%= f.button :submit, "Submit" %>
   </div>
 <% end %>

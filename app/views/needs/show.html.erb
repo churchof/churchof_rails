@@ -7,22 +7,6 @@
 
 
 
-<script type="text/javascript" src="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/src/jquery.tokeninput.js"></script>
-<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/styles/token-input.css" />
-<script type="text/javascript">
-
-$(document).ready(function () {
-    $("#need_skill_tokens").tokenInput("/skills.json", {
-      crossDomain: false,
-      prePopulate: $("#need_skill_tokens").data("pre")
-    });
-});
-
-</script>
-
-
-
-
   <script type="text/javascript">
 
     // This identifies your website in the createToken call below
@@ -192,11 +176,6 @@ $(document).ready(function () {
               <img src=<%= skill.icon_url%> style="background-color:grey;"> <%= skill.name %>
             </p>
           <% end %>
-        <%= form_for @need do |f| %>
-          <%= f.label :skill_tokens, "Skills" %><br />
-          <%= f.text_field :skill_tokens, "data-pre" => @need.skills.map(&:attributes).to_json %>
-          <%= f.submit %>
-        <% end %>
         </div>
       </div>
 

@@ -2,6 +2,7 @@ class Need < ActiveRecord::Base
 	extend Enumerize
 	resourcify
 
+
 	enumerize :need_stage, in: {:admin_incoming => 1, :admin_in_progress => 2, :admin_completed => 3}, default: :admin_incoming
 	enumerize :gender, in: {:unknown => 1, :male => 2, :female => 3}
   enumerize :recipient_size, in: {:unknown => 1, :individual => 2, :group => 3}
@@ -33,6 +34,9 @@ class Need < ActiveRecord::Base
   before_create :create_approx_location_values
   after_create :mail_to_church_admin_whos_recieving_the_need
   after_save :mail_to_users_with_relevant_skills
+
+  accepts_nested_attributes_for :expenses, :allow_destroy => true
+  accepts_nested_attributes_for :skills, :allow_destroy => true
 
   attr_reader :skill_tokens
 

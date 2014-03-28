@@ -28,10 +28,10 @@ class Contribution < ActiveRecord::Base
 
   def assign_to_user_or_contributor
     self.user ||= User.find_by_email(email)
-    unless user?
-      self.contributor = Contributor.where(email: email).first_or_create
-    else
+    if user
       self.email ||= user.email
+    else
+      self.contributor = Contributor.where(email: email).first_or_create
     end
   end
 end

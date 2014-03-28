@@ -20,6 +20,6 @@ class ContributionsController < ApplicationController
   private
 
   def contribution_params
-    params.require(:contribution).permit(:amount_cents, :stripe_token, :stripe_currency, :email)
+    params.require(:contribution).permit(:amount, :amount_cents, :stripe_token, :stripe_currency, :email)
   end
 end
