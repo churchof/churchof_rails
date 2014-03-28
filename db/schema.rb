@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328153251) do
+ActiveRecord::Schema.define(version: 20140328180809) do
 
   create_table "contributions", force: true do |t|
     t.integer  "contributor_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140328153251) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "update_id"
+    t.text     "caption"
   end
 
   add_index "images", ["update_id"], name: "index_images_on_update_id"

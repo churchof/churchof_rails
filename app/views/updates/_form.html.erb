@@ -16,9 +16,11 @@
 <%= f.fields_for :images do |image| %>
   <div class="field">
     <%= image.label :image %><br />
-    <%= f.file_field :image %>
+    <%= image.file_field :image %>
           <%= image.check_box :_destroy %>
       <%= image.label :_destroy, 'delete' %>
+
+    <%= image.input :caption %>
 
   </div>
 <% end -%>
