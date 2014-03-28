@@ -30,9 +30,33 @@ class Need < ActiveRecord::Base
   after_validation :geocode          # auto-fetch coordinates
 
   before_create :create_approx_location_values
-  after_create :mail
+  after_create :mail_to_church_admin_whos_recieving_the_need
+  after_save :mail_to_users_with_relevant_skills
 
   attr_reader :skill_tokens
+
+  def mail_to_church_admin_whos_recieving_the_need
+    # should this be async?
+    Mailer.church_admin_new_need_admin_incoming(self, self.user_posted_by, self.user_church_admin).deliver
+  end
+
+  def mail_to_users_with_relevant_skills
+    # should this be async?
+    # this needs to be after its set public... also should keep a record of who its sent to really...
+    if self.is_public
+      @users = Array.new
+      self.skills.each do |skill|
+        skill.users.each do |user|
+          @users << user
+        end
+      end
+      @users.uniq.each do |user|
+        logger.debug user.full_name
+        Mailer.user_new_need_with_matching_skills(user, self, self.skills).deliver
+      end
+    end
+    # Also this should only send once... or send with an update... or something? Keep records on it some how.
+  end
 
   def skill_tokens=(ids)
     self.skills.delete_all
@@ -58,11 +82,6 @@ class Need < ActiveRecord::Base
     end
     self.approx_latitude = self.latitude + rand1*dither;
     self.approx_longitude = self.longitude + rand2*dither;
-  end
-
-  def mail
-    logger.info("this is here")
-    Mailer.church_admin_new_need_admin_incoming(self).deliver
   end
 
   def validate_is_public

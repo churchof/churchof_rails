@@ -1,0 +1,8 @@
+Hello, <%= @user.full_name %>
+ 
+A new need has been posted that matched your skills: 
+<%= @need.title_public %>
+
+<% @skills.each do |skill| %>
+<%= skill.name %>
+<% end %>

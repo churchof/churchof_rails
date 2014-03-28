@@ -1,5 +1,10 @@
-Hello, Zach
+Hello, <%= @user_church_admin.full_name %>
  
-This need: NEED
+A new need has been pushed to you as a Church Admin: 
+<%= @need.title_public %>
 
-Was posted by: PERSON
+It was pushed to you by:
+<%= @user_posted_by.full_name %>
+
+Please log in to review the need.
+http://www.church-of.com
