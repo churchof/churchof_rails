@@ -1,9 +1,31 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/src/jquery.tokeninput.js"></script>
+<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/loopj/jquery-tokeninput/master/styles/token-input.css" />
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#skills_input").tokenInput("/skills.json", {
+      crossDomain: false,
+    });
+});
+</script>
+
 <% content_for :map do %>
   <script>
     var map_hash = <%= raw @hash.to_json %>;
   </script>
   <%= render 'layouts/map' %>
 <% end %>
+
+<br>
+<br>
+
+<div>
+    <%= text_field_tag "skills_input", "" %>
+</div>
+
+
+
 
 <div class="page-header-block">
   <h1>All Needs</h1>

@@ -41,6 +41,7 @@ class NeedsController < ApplicationController
   # GET /needs.json
   def index
     @needs = Need.where(is_public: true)
+    @skills = Skill.all
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
         marker.lat need.latitude
