@@ -13,12 +13,15 @@ Churchof::Application.routes.draw do
   post "needs/set_is_public"
   post "users/agree_to_need_poster_agreement"
   post "users/agree_to_church_admin_agreement"
+  get '/beta' => 'pages#beta'
+
   devise_for :users
 
   devise_scope :user do
     get 'register', to: 'devise/registrations#new', as: :register
     get 'login', to: 'devise/sessions#new', as: :login
   end
+
 
   resources :users # Not sure if this is ok to do with Devise also.
 
