@@ -192,9 +192,15 @@
             <div class="user-title">
               <h3>Posted By</h3>
             </div>
-            <div class="user-image">
-              <%= image_tag(@need.user_posted_by.avatar, class: "img-circle") %>
-            </div>
+
+            <% if !@need.user_posted_by.avatar_file_name.nil? %>
+              <div class="user-image">
+                <%= image_tag(@need.user_posted_by.avatar, class: "img-circle") %>
+              </div>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
             <div class="user-details">
               <%= @need.user_posted_by.full_name %>
             </div>
@@ -205,9 +211,17 @@
           <div class="user-title">
             <h3>Admin</h3>
           </div>
-          <div class="user-image">
-            <%= image_tag(@need.user_church_admin.avatar, class: "img-circle") %>
-          </div>
+
+            <% if !@need.user_church_admin.avatar_file_name.nil? %>
+              <div class="user-image">
+                <%= image_tag(@need.user_church_admin.avatar, class: "img-circle") %>
+              </div>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
+
+
           <div class="user-details">
             <%= @need.user_church_admin.full_name %>
           </div>
@@ -228,16 +242,8 @@
     </div>
     <% if can? :update, @need %>
       <%= link_to 'Edit Need', edit_need_path(@need), :class => "full-width-btn" %>
-    <% else %>
-      <%= link_to 'Contribute!', new_need_contribution_path(@need) %>
-      <%= form_tag needs_create_charge_path do %>
-        <%= hidden_field_tag(:user_id, (current_user || @need.user_church_admin).id) %>
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                data-description="<%= @need.title %>"
-                data-amount="500"></script>
-      <% end %>
     <% end %>
+      <%= link_to 'Contribute', new_need_contribution_path(@need), :class => "full-width-btn-green" %>
   </div>
 
 <!--   <form url= <%needs_create_charge_path%> method="POST" id="payment-form">

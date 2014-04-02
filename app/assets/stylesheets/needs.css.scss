@@ -194,6 +194,30 @@ p.unsupported-feature{
    font-size: 18px;
 }
 
+.full-width-btn-green{
+  display: block;
+   width: 100%;
+   background: $green;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
+
+.full-width-btn-green:hover{
+  display: block;
+   width: 100%;
+   background: $dark-green;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+     text-decoration: none;
+}
+
+
 .full-width-btn:hover{
   background: $dark-blue;
   color: #FFF;
