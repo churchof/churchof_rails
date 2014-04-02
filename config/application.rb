@@ -6,8 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-require 'dotenv'
-Dotenv.load
+if Rails.env.development? || Rails.env.test?
+    require 'dotenv'
+    Dotenv.load
+end
 
 module Churchof
   class Application < Rails::Application
