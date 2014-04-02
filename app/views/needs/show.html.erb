@@ -335,7 +335,12 @@
 </div>
 
 <!-- PublicUpdateModal -->
-<div class="modal fade" id="PublicUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+
+      <% @need.updates.each do |update| %>
+
+<div class="modal fade" id="PublicUpdateModal<%= update.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -345,11 +350,11 @@
       <div class="modal-body">
 <!--         This only shows the first...
  -->        
-        <%= @need.updates.first.content %>
+        <%= update.content %>
 
         <br>
         <br>
-        <% @need.updates.first.images.each do |image| %>
+        <% update.images.each do |image| %>
           <%= image_tag(image.image) %>
           <br>
           <%= image.caption %>
@@ -363,4 +368,5 @@
     </div>
   </div>
 </div>
+      <% end %>
 
