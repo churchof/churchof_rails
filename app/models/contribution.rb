@@ -10,6 +10,20 @@ class Contribution < ActiveRecord::Base
 
   before_create :assign_to_user_or_contributor
 
+  after_create :mail_to_church_admin
+  after_create :mail_to_user_posted_by
+
+  def mail_to_church_admin
+    # should this be async?
+    Mailer.church_admin_need_recieved_contribution(self.need.user_church_admin, self.need, self).deliver
+  end
+
+  def mail_to_user_posted_by
+    # should this be async?
+    Mailer.user_posted_by_need_recieved_contribution(self.need.user_posted_by, self.need, self).deliver
+  end
+
+
   # Probably don't want these, just so there is no way money gets lost
   #validates :need, presence: true
   #validates :contributor, presence: true
