@@ -46,6 +46,9 @@ class Need < ActiveRecord::Base
   end
 
   def mail_to_users_with_relevant_skills
+
+            logger.debug "Mailing to users"
+
     # should this be async?
     # this needs to be after its set public... also should keep a record of who its sent to really...
     if self.is_public
@@ -56,10 +59,30 @@ class Need < ActiveRecord::Base
         end
       end
       @users.uniq.each do |user|
+                    logger.debug "Mailing to user"
+
         logger.debug user.full_name
-        Mailer.user_new_need_with_matching_skills(user, self, self.skills).deliver
+        past_relevant_activities = Activity.where(user_id: user.id, subject: self, description: 'Mailed about need due to relevant skills.')
+        if past_relevant_activities.count == 0
+          logger.debug "Mailing: Yea! First time this user knows."
+          Mailer.user_new_need_with_matching_skills(user, self, self.skills).deliver
+          Activity.create(
+            subject: self,
+            description: 'Mailed about need due to relevant skills.',
+            user: user
+          )
+        else
+          logger.debug "Mailing: Nope, user was already told."
+        end
+
+
       end
     end
+
+
+
+
+
     # Also this should only send once... or send with an update... or something? Keep records on it some how.
   end
 

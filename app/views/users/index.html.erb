@@ -23,3 +23,9 @@
     <% end %>
   </div>
 </div>
+
+<% @activities.each do |activity| %>
+<p>
+  <%= activity.subject_type %>:<%= activity.subject_id %> | <%= activity.description %> | <%= activity.user.full_name %>
+</p>
+<% end %>
