@@ -6,7 +6,6 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
-
   <script type="text/javascript">
 
     // This identifies your website in the createToken call below
@@ -44,9 +43,17 @@
         return false;
       });
     });
+
+    jQuery(function($) {
+      $('#rosmModal').on('show.bs.modal', function() {
+          logger.debug "FUN"
+          $.post('/logs', {message: 'Your log message'})
+          $.ajax("/needs/record")
+      });
+    });
+
   </script>
 
-  
 <div class="page-header-block">
 </div>
 
@@ -126,9 +133,10 @@
         <div class="private-records-block">
           <div class="previous-records-bar">
             <span class="record-count">
-              0 Previous Records for
-              <%= @need.first_name %>
-              <%=  @need.last_name %>
+
+              <span class="record-count" data-toggle="modal" data-target="#rosmModal">0 Previous Records for <%= @need.first_name %> <%=  @need.last_name %></span>
+
+              
             </span>
             <span class="details">Show Results</span>
           </div>
@@ -340,6 +348,27 @@
   </div>
 </div>
 
+
+<!-- rosmModal -->
+<div class="modal fade" id="rosmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Skills</h4>
+      </div>
+      <div class="modal-body">
+ROSM MODAL
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- PublicUpdateModal -->
 
 
@@ -375,4 +404,6 @@
   </div>
 </div>
       <% end %>
+
+
 

@@ -23,6 +23,8 @@ Churchof::Application.routes.draw do
     get 'login', to: 'devise/sessions#new', as: :login
   end
 
+  resources :logs 
+
 
   resources :users # Not sure if this is ok to do with Devise also.
 

@@ -11,6 +11,10 @@ class NeedsController < ApplicationController
     redirect_to root_path
   end
 
+  def record
+    logger.debug "Would record that activity here"
+  end
+
   def create_charge
     # Amount in cents
     @amount = 500
