@@ -2,6 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+
+      $("#rosmModal").on "show.bs.modal", ->
+  alert "hi"
+  return
+
+
 class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from builtin builder
   #override create_marker method
   create_marker: ->
@@ -58,3 +64,10 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     markers = handler.addMarkers(markers)
     # handler.bounds.extendWith(markers)
     handler.fitMapToBounds()
+
+
+
+
+
+
+

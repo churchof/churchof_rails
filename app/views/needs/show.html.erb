@@ -47,12 +47,15 @@
     jQuery(function($) {
       $('#rosmModal').on('show.bs.modal', function() {
           logger.debug "FUN"
+          alert('hi');
           $.post('/logs', {message: 'Your log message'})
           $.ajax("/needs/record")
       });
     });
 
   </script>
+
+
 
 <div class="page-header-block">
 </div>
