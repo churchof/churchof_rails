@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  rolify # :pending_need_poster, :need_poster, :pending_church_admin, :church_admin, :super_admin
+  rolify # :pending_need_poster, :need_poster, :pending_church_admin, :church_admin, :super_admin, :validation_partner
   
   has_and_belongs_to_many :skills
 

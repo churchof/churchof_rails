@@ -1,0 +1,13 @@
+<% @church_admins.each do |user| %>
+	<p><%= user.full_name %></p>
+	<% if user.is_full_rosm_member %>
+		<%= simple_form_for user do |f| %>
+		    <%= f.input :is_full_rosm_member, :as => :hidden, :input_html => { :value => false } %><%= submit_tag "Remove as ROSM Member", class: 'action-btn' %>
+		<% end %>
+	<% else %>
+		<%= simple_form_for user do |f| %>
+		    <%= f.input :is_full_rosm_member, :as => :hidden, :input_html => { :value => true } %><%= submit_tag "Add as ROSM Member", class: 'action-btn' %>
+		<% end %>
+	<% end %>
+	<br>
+<% end %>

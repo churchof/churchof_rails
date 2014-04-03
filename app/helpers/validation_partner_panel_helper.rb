@@ -1,0 +1,2 @@
+module ValidationPartnerPanelHelper
+end
