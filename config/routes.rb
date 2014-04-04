@@ -15,7 +15,6 @@ Churchof::Application.routes.draw do
   post "users/agree_to_need_poster_agreement"
   post "users/agree_to_church_admin_agreement"
   get '/beta' => 'pages#beta'
-
   devise_for :users
 
   devise_scope :user do
@@ -24,6 +23,10 @@ Churchof::Application.routes.draw do
   end
 
   resources :logs 
+
+
+resources :patient_records do
+end
 
 
   resources :users # Not sure if this is ok to do with Devise also.

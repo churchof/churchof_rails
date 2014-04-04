@@ -3,9 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-      $("#rosmModal").on "show.bs.modal", ->
-  alert "hi"
-  return
+  #     $("#rosmModal").on "show.bs.modal", ->
+  # alert "hi"
+  # return
 
 
 class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from builtin builder

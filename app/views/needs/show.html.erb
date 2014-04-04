@@ -1,4 +1,23 @@
 
+<% content_for :head do %>
+  <script type="text/javascript">
+    jQuery(function($) {
+      $('#rosmModal').on('show.bs.modal', function() {
+          // logger.debug "FUN"
+          //alert('hi');
+          // $.post('/logs', {message: 'Your log message'})
+
+          <% if current_user.is_full_rosm_member %>
+            <% Activity.create( subject: @need, description: 'User viewed ROSM records. Paid Member at time? YES', user: current_user ) %>
+          <% else %>
+            <% Activity.create( subject: @need, description: 'User viewed ROSM records. Paid Member at time? NO', user: current_user ) %>
+          <% end %>
+
+      });
+    });
+  </script>
+<% end %>
+
   <!-- The required Stripe lib -->
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
  
@@ -44,14 +63,6 @@
       });
     });
 
-    jQuery(function($) {
-      $('#rosmModal').on('show.bs.modal', function() {
-          logger.debug "FUN"
-          alert('hi');
-          $.post('/logs', {message: 'Your log message'})
-          $.ajax("/needs/record")
-      });
-    });
 
   </script>
 
