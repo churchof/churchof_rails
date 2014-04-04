@@ -34,15 +34,36 @@ class Need < ActiveRecord::Base
   after_create :mail_to_church_admin_whos_recieving_the_need
   after_save :mail_to_users_with_relevant_skills
 
-  accepts_nested_attributes_for :expenses, :allow_destroy => true
-  accepts_nested_attributes_for :skills, :allow_destroy => true
-
-  attr_reader :skill_tokens
+  after_update :mail_to_need_poster_if_just_approved
 
   def mail_to_church_admin_whos_recieving_the_need
     # should this be async?
     Mailer.church_admin_new_need_admin_incoming(self, self.user_posted_by, self.user_church_admin).deliver
   end
+
+
+  def mail_to_need_poster_if_just_approved
+    if (self.need_stage_changed? && self.need_stage == 2)
+        # Only email the user if they haven't been emailed about it yet.
+        past_relevant_activities = Activity.where(user_id: self.user_posted_by.id, subject: self, description: 'Mailed because need they posted was approved (moved to In Progress).')
+        if past_relevant_activities.count == 0
+          Mailer.user_posted_by_need_moved_to_in_progress(self.user_posted_by, self, self.user_church_admin).deliver
+          Activity.create(
+            subject: self,
+            description: 'Mailed because need they posted was approved (moved to In Progress).',
+            user: self.user_posted_by
+          )
+        end
+    end
+  end
+
+
+
+  accepts_nested_attributes_for :expenses, :allow_destroy => true
+  accepts_nested_attributes_for :skills, :allow_destroy => true
+
+  attr_reader :skill_tokens
+
 
   def mail_to_users_with_relevant_skills
 

@@ -28,4 +28,11 @@ def user_posted_by_need_recieved_contribution(user_posted_by, need, contribution
 	mail :to => user_posted_by.email, :from => "churchoflexington@gmail.com", :subject => "Need (You Posted) Recieved Contribution: #{need.title}, #{contribution.amount}"
 end
 
+def user_posted_by_need_moved_to_in_progress(user_posted_by, need, user_church_admin)
+	@user_posted_by = user_posted_by
+	@need = need
+	@user_church_admin = user_church_admin
+	mail :to => user_posted_by.email, :from => "churchoflexington@gmail.com", :subject => "Need (You Posted) Moved to In Progress: #{need.title}"
+end
+
 end
