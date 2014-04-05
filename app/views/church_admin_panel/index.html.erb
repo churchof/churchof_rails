@@ -65,13 +65,18 @@
                 </div>
                 <div class="skills col-xs-12 col-sm-6">
                   <h3>Skills needed</h3>
-                  <div class="skills-bar">
-                    <span class="progress-bar"></span>
-                    <span class="skills-count"><%= need.skills_count %> 
-                    <% if need.skills_count == 1 %>
-                      Skill
+                  <ul class="skills-list">
+                    <% if need.skills_count > 0 %>
+                      <% need.skills.each do |skill| %>
+                        <li class="skill-tag">
+                          <span class="skill-icon">
+                            <%= image_tag(skill.icon_url) %>
+                          </span>
+                          <%= skill.name %>
+                        </li>
+                      <% end %>
                     <% else %>
-                      Skills
+                      No skills added yet.
                     <% end %>
                     </span>
                   </div>
@@ -169,7 +174,7 @@
                   <h3>Skills needed</h3>
                   <div class="skills-bar">
                     <span class="progress-bar"></span>
-                    <span class="skills-count"><%= need.skills_count %> 
+                    <span class="skills-count"><%= need.skills_count %>
                     <% if need.skills_count == 1 %>
                       Skill
                     <% else %>
@@ -264,7 +269,7 @@
                     <h3>Skills needed</h3>
                     <div class="skills-bar">
                       <span class="progress-bar"></span>
-                      <span class="skills-count"><%= need.skills_count %> 
+                      <span class="skills-count"><%= need.skills_count %>
                       <% if need.skills_count == 1 %>
                         Skill
                       <% else %>

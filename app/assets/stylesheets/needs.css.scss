@@ -72,6 +72,27 @@
   .need-details h3{
     color: $text-grey;
   }
+.skills-list{
+  padding:0px;
+}
+  .skill-tag{
+    list-style: none;
+    margin: 0px auto 5px;
+    padding: 8px;
+    padding-right: 10px;
+    color: #FFF;
+    display: inline-block;
+    background: $light-grey;
+    width: auto;
+    vertical-align: top;
+    @include border-radius(2px);
+  }
+    .skill-icon img{
+      max-height: 20px;
+      max-width: 20px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
 
 .expenses-bar,
 .skills-bar{
