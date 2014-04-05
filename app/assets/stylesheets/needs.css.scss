@@ -79,7 +79,7 @@
     list-style: none;
     margin: 0px auto 5px;
     padding: 8px;
-    padding-right: 10px;
+    padding-right: 15px;
     color: #FFF;
     display: inline-block;
     background: $light-grey;
@@ -542,4 +542,37 @@ display: inline-block;
     height: 80px;
     margin: 0px auto 10px;
   }
+}
+
+li.token-input-token-facebook.custom {
+    overflow: hidden;
+    margin-right: 5px, !important;
+    height: 40px !important;
+    cursor: default;
+    border: 0px;
+    font-size: 11px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    float: left;
+    white-space: nowrap;
+        list-style: none;
+    margin: 0px auto 5px;
+    margin-right: 5px;
+    padding: 10px 8px;
+    color: #FFF;
+    display: inline-block;
+    background: $light-grey;
+    width: auto;
+    vertical-align: top;
+    @include border-radius(2px);
+}
+
+li.token-input-token-facebook.custom p{
+  margin-right: 10px;
+}
+
+li.token-input-token-facebook.custom span{
+  margin-left: 0px;
+  margin-right: 10px;
 }
