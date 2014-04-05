@@ -3,13 +3,14 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <%= javascript_include_tag "jquery.tokeninput.js" %>
-<%= stylesheet_link_tag "token-input.css" %>
+<%= stylesheet_link_tag "token-input-facebook.css" %>
 
 <script>
 
 $(document).ready(function () {
     $("#need_skill_tokens").tokenInput("/skills.json", {
       crossDomain: false,
+      theme: "facebook",
       prePopulate: $("#need_skill_tokens").data("pre")
     });
 });
