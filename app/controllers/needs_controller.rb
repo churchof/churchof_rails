@@ -115,74 +115,29 @@ class NeedsController < ApplicationController
   def create
     @need = current_user.needs_posted_by.new(need_params)
 
-    if params[:add_expense]
-      # add empty ingredient associated with @recipe
-      @need.expenses.build
-    elsif params[:remove_expenses]
-      # nested model that have _destroy attribute = 1 automatically deleted by rails
-    else
-      # save goes like usually
+    respond_to do |format|
       if @need.save
-        flash[:notice] = "Successfully created need."
-        redirect_to root_path and return
+        format.html { redirect_to @need, notice: 'Need was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @need }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @need.errors, status: :unprocessable_entity }
       end
     end
-    render :action => 'new'
-
-    # respond_to do |format|
-    #   if @need.save
-    #     format.html { redirect_to @need, notice: 'Need was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @need }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @need.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /needs/1
   # PATCH/PUT /needs/1.json
   def update
-
-
-    if params[:add_expense]
-      # rebuild the ingredient attributes that doesn't have an id
-      unless params[:need][:expenses_attributes].blank?
-    for attribute in params[:need][:expenses_attributes]
-      @need.expenses.build(attribute.last.except(:_destroy)) unless attribute.last.has_key?(:id)
-    end
-      end
-      # add one more empty ingredient attribute
-      @need.expenses.build
-    elsif params[:remove_expenses]
-      # collect all marked for delete ingredient ids
-      removed_expenses = params[:need][:expenses_attributes].collect { |i, att| att[:id] if (att[:id] && att[:_destroy].to_i == 1) }
-      # physically delete the ingredients from database
-      Expense.delete(removed_expenses)
-      flash[:notice] = "Ingredients removed."
-      for attribute in params[:need][:expenses_attributes]
-        # rebuild ingredients attributes that doesn't have an id and its _destroy attribute is not 1
-        @need.expenses.build(attribute.last.except(:_destroy)) if (!attribute.last.has_key?(:id) && attribute.last[:_destroy].to_i == 0)
-      end
-    else
-      # save goes like usual
+    respond_to do |format|
       if @need.update(need_params)
-        flash[:notice] = "Successful updated need."
-        redirect_to root_path and return
+        format.html { redirect_to @need, notice: 'Need was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @need.errors, status: :unprocessable_entity }
       end
     end
-    render :action => 'edit'
-
-
-    # respond_to do |format|
-    #   if @need.update(need_params)
-    #     format.html { redirect_to @need, notice: 'Need was successfully updated.' }
-    #     format.json { head :no_content }
-    #   else
-    #     format.html { render action: 'edit' }
-    #     format.json { render json: @need.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # DELETE /needs/1
