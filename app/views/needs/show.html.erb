@@ -1,4 +1,20 @@
 
+<% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+
+YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED AND ARE THE ADMIN FOR THE NEED.
+
+<% elsif current_user == @need.user_posted_by %>
+
+YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
+
+<% elsif current_user == @need.user_church_admin %>
+
+YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
+
+<% end %>
+
+
+
 <% content_for :head do %>
   <script type="text/javascript">
     jQuery(function($) {
@@ -7,10 +23,13 @@
           //alert('hi');
           // $.post('/logs', {message: 'Your log message'})
 
+<% if user_signed_in? %>
+
           <% if current_user.is_full_rosm_member %>
             <% Activity.create( subject: @need, description: 'User viewed ROSM records. Paid Member at time? YES', user: current_user ) %>
           <% else %>
             <% Activity.create( subject: @need, description: 'User viewed ROSM records. Paid Member at time? NO', user: current_user ) %>
+          <% end %>
           <% end %>
 
       });
@@ -83,6 +102,18 @@
         <% end %>
       </h2>
 
+<% if @need.recipient_size_value == 2 %>
+ INDIVIDUAL
+<% elsif @need.recipient_size_value == 3 %>
+ GROUP
+<% end %>
+
+<% if @need.frequency_type_value == 2 %>
+ ONETIME
+<% elsif @need.frequency_type_value == 3 %>
+ ONGOING
+<% end %>
+
       <div class="need-description">
         <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
           <p><%= @need.description %></p>
@@ -90,7 +121,65 @@
           <p><%= @need.description_public %></p>
         <% end %>
       </div>
-      <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+
+
+
+
+      <% if @need.updates.count > 0 %>
+        <h3><%= @need.updates.count %> Public Updates</h3>
+      <% end %>
+
+      <% @need.updates.each do |update| %>
+        <div class="public-update-bar">
+          <span class="record-count" data-toggle="modal" data-target="#PublicUpdateModal<%= update.id%>"><%= update.title %></span>
+<!--           This should only show up for the right people 
+ -->          
+          <span class="details"><%= link_to "Edit", edit_need_update_path(@need, update) %></span>
+        </div>
+      <% end %>
+
+<!--       <%= link_to "New Update", new_need_update_path(@need) %>
+ -->      <div class="row need-details">
+        <div class="expenses col-xs-12 col-sm-6">
+          <h3>Expenses</h3>
+          <div class="expenses-bar">
+            <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
+            <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
+          </div>
+          <% @need.expenses.each do |expense| %>
+            <p>
+              <%= expense.title %> - <%= expense.amount %>
+            </p>
+          <% end %>
+
+        </div>
+        <div class="skills col-xs-12 col-sm-6">
+          <h3>Skills needed</h3>
+          <div class="skills-bar">
+            <span class="progress-bar"></span>
+            <span class="skills-count"><%= @need.skills_count %> 
+            <% if @need.skills_count == 1 %>
+              Skill
+            <% else %>
+              Skills
+            <% end %>
+            </span>
+          </div>
+          <% @need.skills.each do |skill| %>
+            <p>
+              <img src=<%= skill.icon_url%> style="background-color:grey;"> <%= skill.name %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+
+
+<% if @need.recipient_size_value == 2 %>
+
+  <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+
+    <h3> Individual Info </h3>
+
         <div class="private-information">
           <% if @need.first_name? %>
             <p class="first-name">
@@ -140,10 +229,17 @@
               <%= @need.gender %>
             </p>
           <% end %>
-        </div>
-      <% end %>
 
-      <% if current_user == @need.user_church_admin %>
+          <% if @need.recipient_contribution %>
+            <p class="gender">
+              <strong>Recipient Contribution: </strong>
+              <%= @need.recipient_contribution %>
+            </p>
+          <% end %>
+
+        </div>
+
+
         <div class="private-records-block">
           <div class="previous-records-bar">
             <span class="record-count">
@@ -163,43 +259,8 @@
  -->        </div>
       <% end %>
 
-      <% @need.updates.each do |update| %>
-        <div class="public-update-bar">
-          <span class="record-count" data-toggle="modal" data-target="#PublicUpdateModal<%= update.id%>"><%= update.title %></span>
-<!--           This should only show up for the right people 
- -->          
-          <span class="details"><%= link_to "Edit", edit_need_update_path(@need, update) %></span>
-        </div>
-      <% end %>
 
-      <%= link_to "New Update", new_need_update_path(@need) %>
-      <div class="row need-details">
-        <div class="expenses col-xs-12 col-sm-6">
-          <h3>Expenses</h3>
-          <div class="expenses-bar">
-            <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
-            <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
-          </div>
-        </div>
-        <div class="skills col-xs-12 col-sm-6">
-          <h3>Skills needed</h3>
-          <div class="skills-bar">
-            <span class="progress-bar"></span>
-            <span class="skills-count"><%= @need.skills_count %> 
-            <% if @need.skills_count == 1 %>
-              Skill
-            <% else %>
-              Skills
-            <% end %>
-            </span>
-          </div>
-          <% @need.skills.each do |skill| %>
-            <p>
-              <img src=<%= skill.icon_url%> style="background-color:grey;"> <%= skill.name %>
-            </p>
-          <% end %>
-        </div>
-      </div>
+<% end %>
 
       <div class="map-location">
           <script>

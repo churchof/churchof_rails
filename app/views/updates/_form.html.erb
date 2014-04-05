@@ -4,32 +4,26 @@
 
 
 
-<%= simple_form_for [@need, @update] do |f| %>
+<%= simple_nested_form_for [@need, @update] do |f| %>
   <%= f.error_notification %>
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :content %>
   </div>
 
-  <h3>Ingredients</h3>
+  <h3>Images</h3>
 
 <%= f.fields_for :images do |image| %>
   <div class="field">
-    <%= image.label :image %><br />
     <%= image.file_field :image %>
-          <%= image.check_box :_destroy %>
-      <%= image.label :_destroy, 'delete' %>
-
     <%= image.input :caption %>
-
+    <%= image.link_to_remove "Remove this image" %>
   </div>
-<% end -%>
+<% end %>
 
-
+<p><%= f.link_to_add "Add an image", :images %></p>
 
   <p>
-    <%= f.submit 'Add Image', :name => "add_image" %>
-    <%= f.submit 'Delete Checked Images', :name => "remove_image" %>
     <%= f.submit %>
   </p>
 <% end %>

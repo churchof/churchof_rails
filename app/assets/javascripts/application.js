@@ -16,3 +16,4 @@
 //= require bootstrap
 //= require underscore
 //= require jquery.tokeninput
+//= require jquery_nested_form
