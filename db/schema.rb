@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403023058) do
+ActiveRecord::Schema.define(version: 20140405224744) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 20140403023058) do
     t.string   "last_name"
     t.string   "street_address"
     t.string   "drivers_license"
-    t.integer  "age"
     t.integer  "gender"
     t.string   "title_public"
     t.text     "description_public"
@@ -95,7 +94,6 @@ ActiveRecord::Schema.define(version: 20140403023058) do
     t.boolean  "shows_real_location_publically"
   end
 
-  add_index "needs", ["age"], name: "index_needs_on_age"
   add_index "needs", ["description_public"], name: "index_needs_on_description_public"
   add_index "needs", ["drivers_license"], name: "index_needs_on_drivers_license"
   add_index "needs", ["first_name"], name: "index_needs_on_first_name"
