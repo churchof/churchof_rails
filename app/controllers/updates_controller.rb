@@ -4,6 +4,8 @@ class UpdatesController < ApplicationController
   load_and_authorize_resource :need
   load_and_authorize_resource :update, :through => :need
 
+  # no views for any of this stuff so get rid of it?
+
   # GET /updates
   # GET /updates.json
   def index

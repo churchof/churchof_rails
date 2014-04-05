@@ -18,7 +18,7 @@ $(document).ready(function () {
 </script>
 
 
-<%= simple_form_for(@need, html: {class: "form-horizontal need-form"}) do |f| %>
+<%= simple_nested_form_for(@need, html: {class: "form-horizontal need-form"}) do |f| %>
   <div class="inner-content">
     <p class="form-instructions">Please title and describe the need:</p>
     <% if @need.errors.any? %>
@@ -110,13 +110,39 @@ Expenses
       <div class="field-pair">
         <%= expense.input :amount %>
       </div>
-                <%= expense.check_box :_destroy %>
-      <%= expense.label :_destroy, 'delete' %>
+      <%= expense.link_to_remove "Remove this expense" %>
+<% end %>
+<p><%= f.link_to_add "Add an expense", :expenses %></p>
 
-<% end -%>
 
-    <%= f.submit 'Add Expense', :name => "add_expense" %>
-    <%= f.submit 'Delete Checked Expenses', :name => "remove_expenses" %>
+Public Updates
+<br>
+<br>
+<%= f.fields_for :updates do |update| %>
+  <div class="form-inputs">
+    <%= update.input :title %>
+    <%= update.input :content %>
+  </div>
+
+<%= update.fields_for :images do |image| %>
+  <div class="field">
+    <%= image.file_field :image %>
+    <%= image.input :caption %>
+    <%= image.link_to_remove "Remove this image" %>
+  </div>
+<% end %>
+
+<p><%= update.link_to_add "Add an image", :images %></p>
+
+
+
+
+  <%= update.link_to_remove "Remove this public update." %>
+
+<% end %>
+
+<p><%= f.link_to_add "Add a public update.", :updates %></p>
+
 
   <div class="form-actions submit-new-need">
 

@@ -61,6 +61,7 @@ class Need < ActiveRecord::Base
 
   accepts_nested_attributes_for :expenses, :allow_destroy => true
   accepts_nested_attributes_for :skills, :allow_destroy => true
+  accepts_nested_attributes_for :updates, :allow_destroy => true
 
   attr_reader :skill_tokens
 
