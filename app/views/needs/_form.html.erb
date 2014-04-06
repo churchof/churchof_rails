@@ -8,8 +8,33 @@
 <script>
 
 $(document).ready(function () {
+    updateSkills();
+    function updateSkills(){
+        $.ajax({
+        url: '/skills.json',
+        type: "GET",
+        dataType: 'json',
+        success: function(data) {
+          skillsArray = data;
+          $('.token-input-token-facebook').each(function(){
+            $(this).addClass('custom');
+            var skillText = $(this).find('p').text();
+            for (i=0; i < skillsArray.length; i++){
+              if(skillsArray[i].name == skillText){
+                $(this).find('> p').html('<span class="skill-icon"><img src="' + skillsArray[i].icon_url + '"></span>' + skillsArray[i].name)
+              }
+            };
+          });
+        }
+      });
+    };
+
     $("#need_skill_tokens").tokenInput("/skills.json", {
       crossDomain: false,
+      onAdd: function(item){
+        updateSkills();
+      },
+      preventDuplicates: "true",
       theme: "facebook",
       prePopulate: $("#need_skill_tokens").data("pre")
     });
@@ -17,162 +42,163 @@ $(document).ready(function () {
 
 </script>
 
-
 <%= simple_nested_form_for(@need, html: {class: "form-horizontal need-form"}) do |f| %>
-  <div class="inner-content">
-    <p class="form-instructions">Please title and describe the need:</p>
-    <% if @need.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@need.errors.count, "error") %> prohibited this need from being saved:</h2>
-        <ul>
-          <% @need.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div class="private-fields">
-      <%= f.input :title %>
-      <%= f.input :description %>
+  <% if @need.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@need.errors.count, "error") %> prohibited this need from being saved:</h2>
+      <ul>
+        <% @need.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
-    <div class="public-fields">
-      <%= f.input :title_public %>
-      <%= f.input :description_public %>
-    </div>
-    <div class="field-group-3">
-      <%= f.input :recipient_size %>
-    </div>
-    <div class="field-group-3">
-      <%= f.input :frequency_type %>
-    </div>
-
-    <div class="all-private-fields">
-      <p class="form-instructions ">The following fields will remain private, and viewed only by church admins:</p>
-      <div class="field-pair">
-        <%= f.input :first_name%>
-      </div>
-      <div class="field-pair">
-        <%= f.input :last_name %>
-      </div>
-      <div class="field-pair">
-        <%= f.input :last_four_ssn %>
-      </div>
-      <div class="field-pair">
-        <%= f.input :street_address %>
-      </div>
-      <div class="field-group-3">
-        <%= f.input :drivers_license %>
-      </div>
-      <div class="field-group-3">
-        <%= f.input :gender %>
-      </div>
-      <div class="field-group-3">
-        <%= f.input :recipient_contribution %>
-      </div>
-      <div class="field-group-3">
-        <%= f.input :date_of_birth %>
-      </div>
-      <div class="field-group-3">
-        <%= f.input :full_street_address %>
-      </div>
-      <div class="field-group-3">
-        <%= f.input :shows_real_location_publically %>
-      </div>
-      <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
-      <div class="field-group-3">
-        <%= f.input :leader %>
-      </div>
-
-    </div>
-  </div>
-
-          <%= f.label :skill_tokens, "Skills" %><br />
+  <% end %>
+  <div class="form-divider">
+    <div class="col-xs-12 col-sm-6">
+      <div class="public-label">Public</div>
+      <div class="inner-content">
+        <div class="public-fields">
+          <p class="form-instructions">Please title and describe the need:</p>
+          <%= f.input :title_public %>
+          <%= f.input :description_public %>
+        </div>
+        <div class="lone-field">
+          <%= f.input :recipient_size, :as => :radio_buttons %>
+        </div>
+        <div class="lone-field">
+          <%= f.input :frequency_type, :as => :radio_buttons  %>
+        </div>
+        <div class="lone-field">
+          <%= f.input :full_street_address %>
+        </div>
+        <div class="lone-field">
+          <%= f.input :shows_real_location_publically %>
+        </div>
+        <div class="lone-field">
+          <%= f.input :recipient_contribution %>
+        </div>
+        <div class="lone-field ">
+          <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
+        </div>
+        <div class="lone-field hide">
+          <%= f.input :leader %>
+        </div>
+        <div class="lone-field">
+          <h4><%= f.label :skill_tokens, "Skills" %></h4>
           <%= f.text_field :skill_tokens, "data-pre" => @need.skills.map(&:attributes).to_json %>
-<br><br>
+        </div>
+        <div class="lone-field">
+          <h4>Expenses</h4>
+          <%= f.fields_for :expenses do |expense| %>
+            <div class="field-pair">
+              <%= expense.input :title %>
+            </div>
+            <div class="field-pair">
+              <%= expense.input :description %>
+            </div>
+            <div class="field-pair">
+              <%= expense.input :documentation %>
+            </div>
+            <div class="field-pair">
+              <%= expense.input :amount %>
+            </div>
+            <%= expense.link_to_remove "Remove this expense" %>
+          <% end %>
+          <p><%= f.link_to_add "Add an expense", :expenses %></p>
+        </div>
+        <div class="lone-field">
 
-Expenses
-<br>
-<br>
+          <h4>Public Updates</h4>
 
-<%= f.fields_for :expenses do |expense| %>
-      <div class="field-pair">
-        <%= expense.input :title %>
-      </div>
-      <div class="field-pair">
-        <%= expense.input :description %>
-      </div>
-      <div class="field-pair">
-        <%= expense.input :documentation %>
-      </div>
-      <div class="field-pair">
-        <%= expense.input :amount %>
-      </div>
-      <%= expense.link_to_remove "Remove this expense" %>
-<% end %>
-<p><%= f.link_to_add "Add an expense", :expenses %></p>
+          <%= f.fields_for :updates do |update| %>
+            <div class="form-inputs">
+              <%= update.input :title %>
+              <%= update.input :content %>
+            </div>
 
+            <%= update.fields_for :images do |image| %>
+              <div class="field">
+                <%= image.file_field :image %>
+                <%= image.input :caption %>
+                <%= image.link_to_remove "Remove this image" %>
+              </div>
+            <% end %>
 
-Public Updates
-<br>
-<br>
-<%= f.fields_for :updates do |update| %>
-  <div class="form-inputs">
-    <%= update.input :title %>
-    <%= update.input :content %>
+            <p><%= update.link_to_add "Add an image", :images %></p>
+            <%= update.link_to_remove "Remove this public update." %>
+
+          <% end %>
+
+          <p><%= f.link_to_add "Add a public update.", :updates %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6" id="private-block">
+      <div class="private-label">Private</div>
+        <div class="inner-content">
+          <div class="private-fields">
+            <p class="form-instructions">Please title and describe the need:</p>
+            <%= f.input :title %>
+            <%= f.input :description %>
+          </div>
+          <div class="form-for-individuals">
+            <div class="field-pair">
+              <%= f.input :first_name%>
+            </div>
+            <div class="field-pair">
+              <%= f.input :last_name %>
+            </div>
+            <div class="field-pair">
+              <%= f.input :last_four_ssn %>
+            </div>
+            <div class="field-pair">
+              <%= f.input :street_address %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :drivers_license %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :date_of_birth %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :gender %>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
-
-<%= update.fields_for :images do |image| %>
-  <div class="field">
-    <%= image.file_field :image %>
-    <%= image.input :caption %>
-    <%= image.link_to_remove "Remove this image" %>
-  </div>
-<% end %>
-
-<p><%= update.link_to_add "Add an image", :images %></p>
-
-
-
-
-  <%= update.link_to_remove "Remove this public update." %>
-
-<% end %>
-
-<p><%= f.link_to_add "Add a public update.", :updates %></p>
-
 
   <div class="form-actions submit-new-need">
-
     <%= f.button :submit, "Submit" %>
   </div>
 <% end %>
 
 <script>
-  $(document).ready(function(){
-    $('.token-input-input-token-facebook').on('keyup', function(){
-    updateSkills();
-    })
+  $(document).on('ready', function(){
+    $('ul.token-input-list-facebook').addClass('custom');
+    $('.need_recipient_size .radio_buttons#need_recipient_size_individual').parent().addClass('selected');
 
-    updateSkills();
-      function updateSkills(){
-          $.ajax({
-          url: '/skills.json',
-          type: "GET",
-          dataType: 'json',
-          success: function(data) {
-            skillsArray = data;
-            $('.token-input-token-facebook').each(function(){
-              $(this).addClass('custom');
-              var skillText = $(this).find('p').text();
-              for (i=0; i < skillsArray.length; i++){
-                if(skillsArray[i].name == skillText){
-                  $(this).find('> p').html('<span class="skill-icon"><img src="' + skillsArray[i].icon_url + '"></span>' + skillsArray[i].name)
-                }
-              };
-            });
-          }
-        });
-      };
-  })
+    $('.need_recipient_size .radio_buttons').on('click', function(){
+      $('.need_recipient_size .radio').each(function(){
+        $(this).removeClass('selected');
+      })
+      $(this).parent().addClass('selected');
+      if($(this).val() == "individual"){
+        console.log('i should show the individual');
+        $('.form-for-individuals').show();
+      }else{
+        $('.form-for-individuals').hide();
+      }
+    });
 
+    $('.need_frequency_type .radio_buttons#need_frequency_type_one_time').parent().addClass('selected');
+    $('.need_frequency_type .radio_buttons').on('click', function(){
+      $('.need_frequency_type .radio').each(function(){
+        $(this).removeClass('selected');
+      })
+      $(this).parent().addClass('selected');
+    });
+  });
 </script>
+
