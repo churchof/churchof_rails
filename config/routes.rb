@@ -22,11 +22,7 @@ Churchof::Application.routes.draw do
     get 'login', to: 'devise/sessions#new', as: :login
   end
 
-  resources :logs 
-
-
-resources :patient_records do
-end
+  resources :activities, only: [:create]
 
 
   resources :users # Not sure if this is ok to do with Devise also.

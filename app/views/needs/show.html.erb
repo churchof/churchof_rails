@@ -16,25 +16,27 @@ YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
 
 
 <% content_for :head do %>
+
   <script type="text/javascript">
     jQuery(function($) {
       $('#rosmModal').on('show.bs.modal', function() {
-          // logger.debug "FUN"
-          //alert('hi');
-          // $.post('/logs', {message: 'Your log message'})
+        var subjectId = $(this).data("need-id");
 
-<% if user_signed_in? %>
-
-          <% if current_user.is_full_rosm_member %>
-            <% Activity.create( subject: @need, description: 'User viewed ROSM records. Paid Member at time? YES', user: current_user ) %>
-          <% else %>
-            <% Activity.create( subject: @need, description: 'User viewed ROSM records. Paid Member at time? NO', user: current_user ) %>
-          <% end %>
-          <% end %>
+        $.ajax({
+          type: "POST",
+          url: "/activities",
+          data: {
+            subject_id: subjectId,
+            subject_type: "Need",
+            user_id: <%= current_user.id %>,
+            description: "User viewed ROSM records. Paid Member at time? <%= current_user.is_full_rosm_member ? 'YES' : 'NO' %>"
+          }
+        });
 
       });
     });
   </script>
+
 <% end %>
 
   <!-- The required Stripe lib -->
@@ -418,7 +420,7 @@ YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
 
 
 <!-- rosmModal -->
-<div class="modal fade" id="rosmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="rosmModal" data-need-id="<%= @need.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
