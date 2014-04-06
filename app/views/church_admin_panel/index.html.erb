@@ -78,8 +78,7 @@
                     <% else %>
                       No skills added yet.
                     <% end %>
-                    </span>
-                  </div>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -159,28 +158,37 @@
                   </div>
                 <% end %>
             <% end %>
-              <div class="row need-details">
-                <div class="expenses col-xs-12 col-sm-6">
-                  <h3>Expenses</h3>
-                  <div class="expenses-bar">
-                    <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
-                    <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
-                    <span class="expense-details" data-toggle="modal" data-target="#expensesModal">
-                      Details
-                    </span>
+            <div class="inner-content">
+              <h2 class="need-title">
+                <%= link_to need.title, need %>
+              </h2>
+              <div class="need-description">
+                <p><%= need.description %></p>
+
+                <div class="row need-details">
+                  <div class="expenses col-xs-12 col-sm-6">
+                    <h3>Expenses</h3>
+                    <div class="expenses-bar">
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                      <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
+                    </div>
                   </div>
-                </div>
-                <div class="skills col-xs-12 col-sm-6">
-                  <h3>Skills needed</h3>
-                  <div class="skills-bar">
-                    <span class="progress-bar"></span>
-                    <span class="skills-count"><%= need.skills_count %>
-                    <% if need.skills_count == 1 %>
-                      Skill
-                    <% else %>
-                      Skills
-                    <% end %>
-                    </span>
+                  <div class="skills col-xs-12 col-sm-6">
+                    <h3>Skills needed</h3>
+                    <ul class="skills-list">
+                      <% if need.skills_count > 0 %>
+                        <% need.skills.each do |skill| %>
+                          <li class="skill-tag">
+                            <span class="skill-icon">
+                              <%= image_tag(skill.icon_url) %>
+                            </span>
+                            <%= skill.name %>
+                          </li>
+                        <% end %>
+                      <% else %>
+                        No skills added yet.
+                      <% end %>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -261,22 +269,26 @@
                   <div class="expenses col-xs-12 col-sm-6">
                     <h3>Expenses</h3>
                     <div class="expenses-bar">
-                      <span class="progress-bar"></span>
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
                       <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
                     </div>
                   </div>
                   <div class="skills col-xs-12 col-sm-6">
                     <h3>Skills needed</h3>
-                    <div class="skills-bar">
-                      <span class="progress-bar"></span>
-                      <span class="skills-count"><%= need.skills_count %>
-                      <% if need.skills_count == 1 %>
-                        Skill
+                    <ul class="skills-list">
+                      <% if need.skills_count > 0 %>
+                        <% need.skills.each do |skill| %>
+                          <li class="skill-tag">
+                            <span class="skill-icon">
+                              <%= image_tag(skill.icon_url) %>
+                            </span>
+                            <%= skill.name %>
+                          </li>
+                        <% end %>
                       <% else %>
-                        Skills
+                        No skills added yet.
                       <% end %>
-                      </span>
-                    </div>
+                    </ul>
                   </div>
                 </div>
               </div>
