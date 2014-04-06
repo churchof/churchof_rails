@@ -15,13 +15,10 @@ class NeedsController < ApplicationController
   #   logger.debug "Would record that activity here"
   # end
 
-  def filtered_needs
-    logger.debug "filtered_needs"
-  end
-
-
-
-
+  # def filtered
+  #   puts "Hello Mel"
+  #   respond_to :js
+  # end
 
   def create_charge
     # Amount in cents
@@ -47,7 +44,17 @@ class NeedsController < ApplicationController
   # GET /needs
   # GET /needs.json
   def index
-    @needs = Need.public
+    if params[:selected_skills].present?
+      skills_hash = params[:selected_skills]
+      skills = []
+      skills_hash.each do |key, value|
+        skills << value["id"] if value.is_a?(Hash)
+      end
+      @needs = Need.public.joins(:skills).where("skills.id IN (?)", skills).uniq
+    else
+      @needs = Need.public
+    end
+
     @skills = Skill.all
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
@@ -72,6 +79,14 @@ class NeedsController < ApplicationController
       # This should use the path helper.
       marker.json({ title: need.title, image_url: if need.skills.first then need.skills.first.icon_url else '' end, custom_infowindow: "<a href='needs/#{need.id}'> #{need.title_public} </a>" })
     end
+
+    # respond_to :html, :js
+
+    respond_to do |format|
+      format.html
+    format.js
+  end
+
   end
 
   # GET /needs/1
