@@ -79,12 +79,13 @@
   .skill-tag{
     list-style: none;
     margin: 0px auto 5px;
-    padding: 8px;
+    padding: 9px;
     padding-right: 15px;
     color: #FFF;
     display: inline-block;
     background: $light-grey;
     width: auto;
+    font-size: 16px;
     vertical-align: top;
     @include border-radius(2px);
   }
@@ -285,7 +286,7 @@ p.unsupported-feature{
   height: 25px;
   font-size: .9em;
   float: right;
-  margin-top: 10px;
+  margin-top: 25px;
   margin-right: 20px;
 }
 
@@ -485,16 +486,43 @@ display: inline-block;
     color: #FFF;
     margin-right: 5px;
     font-size: 18px;
+    max-width: 95%;
   }
   .notice-icon{
     background: url('http://s3.amazonaws.com/church_of/assets/skill_icons/720-keyhole%402x.png') no-repeat center center;
     background-size: 100%;
     width: 25px;
     height: 25px;
-    display: inline-block;
+    float: left;
     vertical-align: top;
     margin-right: 5px;
   }
+h2.need-title{
+  width: 75%;
+  display: inline-block;
+  vertical-align: top;
+}
+.frequency-type{
+  width: 24%;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  text-align: right;
+}
+
+.frequency-tag{
+  list-style: none;
+  margin: 0px auto 5px;
+  padding: 9px;
+  color: #FFF;
+  display: inline-block;
+  background: $light-grey;
+  width: auto;
+  font-size: 16px;
+  vertical-align: top;
+  @include border-radius(2px);
+}
+
 .show-need{
   padding-top: 15px;
   font-family: $body-font;
@@ -542,6 +570,12 @@ display: inline-block;
   -webkit-box-shadow: none !important;
   box-shadow: none;
   text-shadow: none !important;
+}
+@media(max-width: 990px){
+  .need-container .disclaimer-block .inner-content p{
+    display: inherit;
+    width: 90%;
+  }
 }
 
 @media(max-width: 767px){

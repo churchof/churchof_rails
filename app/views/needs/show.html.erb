@@ -109,17 +109,19 @@
         <% end %>
       </h2>
 
-      <% if @need.recipient_size_value == 2 %>
-       INDIVIDUAL
-      <% elsif @need.recipient_size_value == 3 %>
-       GROUP
-      <% end %>
+      <div class="frequency-type">
+        <% if @need.recipient_size_value == 2 %>
+         <span class="frequency-tag">Individual</span>
+        <% elsif @need.recipient_size_value == 3 %>
+         <span class="frequency-tag">Group</span>
+        <% end %>
 
-      <% if @need.frequency_type_value == 2 %>
-       ONETIME
-      <% elsif @need.frequency_type_value == 3 %>
-       ONGOING
-      <% end %>
+        <% if @need.frequency_type_value == 2 %>
+         <span class="frequency-tag">One-Time</span>
+        <% elsif @need.frequency_type_value == 3 %>
+         <span class="frequency-tag">Ongoing</span>
+        <% end %>
+      </div>
 
       <div class="need-description">
         <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
@@ -184,8 +186,7 @@
 
   <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
 
-    <h3> Individual Info </h3>
-
+      <h3> Individual Info </h3>
         <div class="private-information">
           <% if @need.first_name? %>
             <p class="first-name">
