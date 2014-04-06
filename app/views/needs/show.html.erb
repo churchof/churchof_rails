@@ -1,20 +1,4 @@
 
-<% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
-
-YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED AND ARE THE ADMIN FOR THE NEED.
-
-<% elsif current_user == @need.user_posted_by %>
-
-YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
-
-<% elsif current_user == @need.user_church_admin %>
-
-YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
-
-<% end %>
-
-
-
 <% content_for :head do %>
 
   <script type="text/javascript">
@@ -94,6 +78,27 @@ YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
 
 <div class="needs main-content">
   <div class="need-container">
+    <div class="disclaimer-block">
+      <div class="inner-content">
+      <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+              <span class="notice-icon"></span>
+              <p class="disclaimer">
+          Note: You are seeing private information here because you
+          posted the need and are the Church Admin for the need.
+        </p>
+      <% elsif current_user == @need.user_posted_by %>
+       <span class="notice-icon"></span>
+        <p class="disclaimer">
+          Note: You are seeing private information here because you posted the need.
+        </p>
+      <% elsif current_user == @need.user_church_admin %>
+        <span class="notice-icon"></span>
+        <p class="disclaimer">
+          Note: You are seeing private information here because you are the Church Amdin.
+        </p>
+      <% end %>
+    </div>
+  </div>
     <div class="inner-content">
 
       <h2 class="need-title">
@@ -104,17 +109,17 @@ YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
         <% end %>
       </h2>
 
-<% if @need.recipient_size_value == 2 %>
- INDIVIDUAL
-<% elsif @need.recipient_size_value == 3 %>
- GROUP
-<% end %>
+      <% if @need.recipient_size_value == 2 %>
+       INDIVIDUAL
+      <% elsif @need.recipient_size_value == 3 %>
+       GROUP
+      <% end %>
 
-<% if @need.frequency_type_value == 2 %>
- ONETIME
-<% elsif @need.frequency_type_value == 3 %>
- ONGOING
-<% end %>
+      <% if @need.frequency_type_value == 2 %>
+       ONETIME
+      <% elsif @need.frequency_type_value == 3 %>
+       ONGOING
+      <% end %>
 
       <div class="need-description">
         <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
@@ -235,26 +240,18 @@ YOU ARE SEEING PRIVATE INFORMATION HERE BECUASE YOU POSTED THE NEED.
 
 
         <div class="private-records-block">
-          <div class="previous-records-bar">
+          <div class="previous-records-bar" data-toggle="modal" data-target="#rosmModal">
             <span class="record-count">
-
-              <span class="record-count" data-toggle="modal" data-target="#rosmModal">0 Previous Records for <%= @need.first_name %> <%=  @need.last_name %></span>
-
-
+              0 Previous Records
+              <% if @need.first_name? %>
+                <span class="hide-on-xs"> for <%= @need.first_name %> <%=  @need.last_name %></span>
+              <% end %>
             </span>
             <span class="details">Show Results</span>
           </div>
-<!--           <div class="potential-benefits-bar">
-            <span class="record-count">
-              0 Potential Benefits Available
-            </span>
-            <span class="details">Show Results</span>
-          </div>
- -->        </div>
+        </div>
       <% end %>
-
-
-<% end %>
+    <% end %>
 
       <div class="map-location">
           <script>

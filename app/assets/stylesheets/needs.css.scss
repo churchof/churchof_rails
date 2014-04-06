@@ -12,7 +12,7 @@
 
 .need-container {
   border-bottom: solid 1px #CCC;
-  padding-top: 10px;
+  padding-top: 0px;
   margin: 25px auto;
   background: #FFF;
   position: relative;
@@ -24,6 +24,7 @@
 }
 
 .need-container .inner-content{
+  margin-top: 10px;
   padding-bottom: 25px;
 }
 
@@ -170,6 +171,7 @@ p.unsupported-feature{
 .previous-records-bar{
   @include content-bar($green);
   margin: 10px auto;
+  cursor: pointer;
 }
 
 .public-update-bar{
@@ -466,6 +468,33 @@ display: inline-block;
 }
 
 /*SHOW*/
+
+.disclaimer-block{
+  padding-top: 15px;
+  padding-bottom: 5px;
+  background: $orange;
+}
+.need-container .disclaimer-block .inner-content{
+    margin-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  p{
+    display: inline-block;
+    vertical-align: top;
+    color: #FFF;
+    margin-right: 5px;
+    font-size: 18px;
+  }
+  .notice-icon{
+    background: url('http://s3.amazonaws.com/church_of/assets/skill_icons/720-keyhole%402x.png') no-repeat center center;
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+  }
 .show-need{
   padding-top: 15px;
   font-family: $body-font;
