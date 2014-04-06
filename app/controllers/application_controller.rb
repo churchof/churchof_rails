@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Added to make Devise work with Rails 4.
-  before_filter :configure_devise_params, if: :devise_controller?
+  before_action :configure_devise_params, if: :devise_controller?
+  before_action :cancan_parameter_sanitizer
 
   # Added for cancan. Currently causing too many side errors.
   # check_authorization :unless => :devise_controller?
@@ -25,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Part of a workaround for cancan described here: https://github.com/ryanb/cancan/issues/835
-  before_filter do
+  def cancan_parameter_sanitizer
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)

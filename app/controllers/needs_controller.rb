@@ -1,7 +1,7 @@
 class NeedsController < ApplicationController
   load_and_authorize_resource
   before_action :set_need, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def set_is_public
     @need = Need.find(params["need"]["id"])
@@ -36,15 +36,10 @@ class NeedsController < ApplicationController
     redirect_to root_path
   end
 
-  # Part of a workaround for cancan described here: https://github.com/ryanb/cancan/issues/835
-  def needs_params
-    params.require(:needs).permit(:what, :ever)
-  end
-
   # GET /needs
   # GET /needs.json
   def index
-    @needs = Need.where(is_public: true)
+    @needs = Need.public
     @skills = Skill.all
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
@@ -97,8 +92,6 @@ class NeedsController < ApplicationController
       height: 22 })
       marker.json({ title: need.title })
     end
-
-
   end
 
   # GET /needs/new

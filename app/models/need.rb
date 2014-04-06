@@ -36,6 +36,8 @@ class Need < ActiveRecord::Base
 
   after_update :mail_to_need_poster_if_just_approved
 
+  scope :public, -> { where(is_public: true) }
+
   def mail_to_church_admin_whos_recieving_the_need
     # should this be async?
     Mailer.church_admin_new_need_admin_incoming(self, self.user_posted_by, self.user_church_admin).deliver

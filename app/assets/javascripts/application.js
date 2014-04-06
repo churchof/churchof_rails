@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require bootstrap
 //= require underscore
 //= require jquery.tokeninput
 //= require jquery_nested_form
+//= require_tree .

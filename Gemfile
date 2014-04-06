@@ -13,7 +13,7 @@ gem 'geocoder'
 gem 'money'
 gem 'money-rails'
 gem 'rails_tokeninput'
-gem "nested_form"
+gem 'nested_form'
 
 group :development, :test do
 	gem 'sqlite3'
