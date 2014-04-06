@@ -1,6 +1,9 @@
 Churchof::Application.routes.draw do
   resources :updates
 
+  # get "whatever", to: "posts#show"
+  # get "whatever/:name", to: "posts#show"
+  # link_to "My Link", whatever_path(name: "Jack")
   get "church_admin_panel/index"
   get "need_poster_panel/index"
   get "validation_partner_panel/index"

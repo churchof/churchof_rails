@@ -15,6 +15,14 @@ class NeedsController < ApplicationController
   #   logger.debug "Would record that activity here"
   # end
 
+  def filtered_needs
+    logger.debug "filtered_needs"
+  end
+
+
+
+
+
   def create_charge
     # Amount in cents
     @amount = 500

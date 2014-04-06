@@ -7,6 +7,22 @@
 $(document).ready(function () {
     $("#skills_input").tokenInput("/skills.json", {
       crossDomain: false,
+        onAdd: function (item) {
+          $.ajax({
+            type: "GET",
+            url: "needs/filtered_needs",
+            data: {
+              skill_name: item.name
+            }
+          });
+        },
+        onDelete: function (item) {
+            alert("Deleted " + item.name);
+        }
+
+
+
+
     });
 });
 </script>
