@@ -356,9 +356,6 @@ input.toggle-btn.right{
 }
 
 /*Forms*/
-.need-form{
-  padding-top: 10px;
-}
 
 input:focus, textarea:focus, select:focus{
   outline:none;
@@ -385,10 +382,13 @@ p.form-instructions{
   font-family: $body-font;
 }
 
+.form-for-individuals input{
+  width: 100%;
+}
+
 .need-form .private-fields,
 .need-form .public-fields{
-  width: 48.7%;
-  margin-right: 1%;
+  width: 80%;
   display: inline-block;
   vertical-align: top;
 }
@@ -403,7 +403,7 @@ p.form-instructions{
 .need-form .private-fields textarea,
 .need-form .public-fields textarea{
   width: 100%;
-  height: 60px;
+  height: 80px;
 }
 
 .need-form .all-private-fields{
@@ -434,15 +434,34 @@ p.form-instructions{
   height: 60px;
 }
 
+.need-form .lone-field{
+  width: 100%;
+  margin-right: 0px;
+  display: block;
+}
+
+.need-form input{
+  height: 45px;
+}
+
+.need-container .need-form .lone-field h4{
+  color: #000;
+  margin-top: 25px;
+}
+
+.need-form .lone-field textarea{
+  width: 80%;
+}
+
 .need-form .field-pair{
-width: 48.7%;
-margin-right: 1%;
-display: inline-block;
+  width: 47%;
+  margin-right: 1%;
+  display: inline-block;
   vertical-align: top;
 }
 
 .need-form .field-group-3{
-  width: 32%;
+  width: 30%;
   margin-right: 1%;
   display: inline-block;
   vertical-align: top;
@@ -480,7 +499,7 @@ display: inline-block;
     padding-bottom: 0px;
   }
 
-  p{
+.need-container .disclaimer-block .inner-content p{
     display: inline-block;
     vertical-align: top;
     color: #FFF;
@@ -488,7 +507,7 @@ display: inline-block;
     font-size: 18px;
     max-width: 95%;
   }
-  .notice-icon{
+.need-container .disclaimer-block .inner-content .notice-icon{
     background: url('http://s3.amazonaws.com/church_of/assets/skill_icons/720-keyhole%402x.png') no-repeat center center;
     background-size: 100%;
     width: 25px;
@@ -607,6 +626,10 @@ h2.need-title{
   }
 }
 
+ul.token-input-list-facebook.custom{
+  padding: 5px;
+}
+
 li.token-input-token-facebook.custom {
     overflow: hidden;
     margin-right: 5px, !important;
@@ -638,4 +661,76 @@ li.token-input-token-facebook.custom p{
 li.token-input-token-facebook.custom span{
   margin-left: 0px;
   margin-right: 10px;
+}
+
+.form-divider .col-sm-6,
+.form-divider .col-xs-12{
+  padding: 0px;
+}
+
+.public-label{
+  width: 100%;
+  color: #FFF;
+  background: $green;
+  font-size: 20px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+
+.private-label{
+  margin-bottom: 10px;
+  padding: 15px;
+  width: 100%;
+  color: #FFF;
+  background: $orange;
+  font-size: 20px;
+}
+
+.need_recipient_size .radio,
+.need_frequency_type .radio{
+  background: transparent;
+  border: solid 1px $light-grey;
+  width: auto;
+  display: inline-block;
+  margin-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.need_recipient_size .radio:hover,
+.need_frequency_type .radio:hover{
+  background: $light-grey;
+  color: #FFF;
+}
+
+.need_recipient_size .radio.selected,
+.need_frequency_type .radio.selected{
+  background: $light-grey;
+  width: auto;
+  display: inline-block;
+  color: #FFF;
+}
+
+.need-form.form-horizontal .need_recipient_size label,
+.need-form.form-horizontal .need_frequency_type label{
+  width: auto;
+}
+
+.need_recipient_size input.radio_buttons,
+.need_frequency_type input.radio_buttons{
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+}
+
+.need_frequency_type .need_recipient_size_unknown{
+  background: url('https://s3.amazonaws.com/church_of/assets/skill_icons/739-question%402x.png') no-repeat left center;
+}
+
+#need_full_street_address{
+  width: 80%;
+  height: 45px;
 }
