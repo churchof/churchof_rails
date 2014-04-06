@@ -63,64 +63,64 @@
                   <div class="expenses-bar">
                     <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
                     <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
-                    <span class="expense-details" data-toggle="modal" data-target="#expensesModal">
-                      Details
-                    </span>
                   </div>
                 </div>
                 <div class="skills col-xs-12 col-sm-6">
                   <h3>Skills needed</h3>
-                  <div class="skills-bar">
-                    <span class="progress-bar"></span>
-                    <span class="skills-count"><%= need.skills_count %> 
-                    <% if need.skills_count == 1 %>
-                      Skill
+                  <ul class="skills-list">
+                    <% if need.skills_count > 0 %>
+                      <% need.skills.each do |skill| %>
+                        <li class="skill-tag">
+                          <span class="skill-icon">
+                            <%= image_tag(skill.icon_url) %>
+                          </span>
+                          <%= skill.name %>
+                        </li>
+                      <% end %>
                     <% else %>
-                      Skills
+                      No skills added yet.
                     <% end %>
-                    </span>
-                  </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="row responsibility-bar">
+              <div class="responsible-user col-xs-4">
+                <div class="user-title">
+                  <h3>Posted By</h3>
+                </div>
+                <div class="user-image">
+                  <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
+                </div>
+                <div class="user-details">
+                  <%= need.user_posted_by.full_name %>
                 </div>
               </div>
 
-              <div class="row responsibility-bar">
-                <div class="responsible-user col-xs-4">
-                  <div class="user-title">
-                    <h3>Posted By</h3>
-                  </div>
-                  <div class="user-image">
-                    <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
-                  </div>
-                  <div class="user-details">
-                    <%= need.user_posted_by.full_name %>
-                    <p class="role">Member- Church of Lexington</p>
-                  </div>
+              <div class="responsible-user col-xs-4">
+                <div class="user-title">
+                  <h3>Admin</h3>
                 </div>
-                <div class="responsible-user col-xs-4">
-                  <div class="user-title">
-                    <h3>Admin</h3>
-                  </div>
-                  <div class="user-image">
-                    <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
-                  </div>
-                  <div class="user-details">
-                    <%= need.user_church_admin.full_name %>
-                    <p class="role">Admin- Church of Lexington</p>
-                  </div>
+                <div class="user-image">
+                  <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
                 </div>
-                <div class="responsible-user col-xs-4">
-                  <div class="user-title">
-                    <h3>Leader</h3>
-                  </div>
-                  <div class="user-image">
-                    <div class="placeholder-leader-image"></div>
-                    <div class="user-details">
-                      <p class="unsupported-feature">This feature is not yet supported yet.</p>
-                    </div>
-                  </div>
+                <div class="user-details">
+                  <%= need.user_church_admin.full_name %>
                 </div>
               </div>
 
+              <div class="responsible-user col-xs-4">
+                <div class="user-title">
+                  <h3>Leader</h3>
+                </div>
+                <div class="user-image">
+                  <div class="placeholder-leader-image"></div>
+                  <div class="user-details">
+                    <p class="unsupported-feature">This feature is not yet supported yet.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -138,69 +138,70 @@
               <div class="need-description">
                 <p><%= need.description %></p>
 
-              <div class="row need-details">
-                <div class="expenses col-xs-12 col-sm-6">
-                  <h3>Expenses</h3>
-                  <div class="expenses-bar">
-                    <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
-                    <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
-                    <span class="expense-details" data-toggle="modal" data-target="#expensesModal">
-                      Details
-                    </span>
+                <div class="row need-details">
+                  <div class="expenses col-xs-12 col-sm-6">
+                    <h3>Expenses</h3>
+                    <div class="expenses-bar">
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                      <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
+                    </div>
+                  </div>
+                  <div class="skills col-xs-12 col-sm-6">
+                    <h3>Skills needed</h3>
+                    <ul class="skills-list">
+                      <% if need.skills_count > 0 %>
+                        <% need.skills.each do |skill| %>
+                          <li class="skill-tag">
+                            <span class="skill-icon">
+                              <%= image_tag(skill.icon_url) %>
+                            </span>
+                            <%= skill.name %>
+                          </li>
+                        <% end %>
+                      <% else %>
+                        No skills added yet.
+                      <% end %>
+                    </ul>
                   </div>
                 </div>
-                <div class="skills col-xs-12 col-sm-6">
-                  <h3>Skills needed</h3>
-                  <div class="skills-bar">
-                    <span class="progress-bar"></span>
-                    <span class="skills-count"><%= need.skills_count %> 
-                    <% if need.skills_count == 1 %>
-                      Skill
-                    <% else %>
-                      Skills
-                    <% end %>
-                    </span>
+              </div>
+
+              <div class="row responsibility-bar">
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Posted By</h3>
+                  </div>
+                  <div class="user-image">
+                    <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
+                  </div>
+                  <div class="user-details">
+                    <%= need.user_posted_by.full_name %>
                   </div>
                 </div>
 
-                <div class="row responsibility-bar">
-                  <div class="responsible-user col-xs-4">
-                    <div class="user-title">
-                      <h3>Posted By</h3>
-                    </div>
-                    <div class="user-image">
-                      <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
-                    </div>
-                    <div class="user-details">
-                      <%= need.user_posted_by.full_name %>
-                      <p class="role">Member- Church of Lexington</p>
-                    </div>
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Admin</h3>
                   </div>
-                  <div class="responsible-user col-xs-4">
-                    <div class="user-title">
-                      <h3>Admin</h3>
-                    </div>
-                    <div class="user-image">
-                      <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
-                    </div>
-                    <div class="user-details">
-                      <%= need.user_church_admin.full_name %>
-                      <p class="role">Admin- Church of Lexington</p>
-                    </div>
+                  <div class="user-image">
+                    <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
                   </div>
-                  <div class="responsible-user col-xs-4">
-                    <div class="user-title">
-                      <h3>Leader</h3>
-                    </div>
-                    <div class="user-image">
-                      <div class="placeholder-leader-image"></div>
-                      <div class="user-details">
-                        <p class="unsupported-feature">This feature is not yet supported yet.</p>
-                      </div>
-                    </div>
+                  <div class="user-details">
+                    <%= need.user_church_admin.full_name %>
                   </div>
                 </div>
 
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Leader</h3>
+                  </div>
+                  <div class="user-image">
+                    <div class="placeholder-leader-image"></div>
+                    <div class="user-details">
+                      <p class="unsupported-feature">This feature is not yet supported yet.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -223,61 +224,66 @@
                   <div class="expenses col-xs-12 col-sm-6">
                     <h3>Expenses</h3>
                     <div class="expenses-bar">
-                      <span class="progress-bar"></span>
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
                       <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
                     </div>
                   </div>
                   <div class="skills col-xs-12 col-sm-6">
                     <h3>Skills needed</h3>
-                    <div class="skills-bar">
-                      <span class="progress-bar"></span>
-                      <span class="skills-count"><%= need.skills_count %> 
-                      <% if need.skills_count == 1 %>
-                        Skill
+                    <ul class="skills-list">
+                      <% if need.skills_count > 0 %>
+                        <% need.skills.each do |skill| %>
+                          <li class="skill-tag">
+                            <span class="skill-icon">
+                              <%= image_tag(skill.icon_url) %>
+                            </span>
+                            <%= skill.name %>
+                          </li>
+                        <% end %>
                       <% else %>
-                        Skills
+                        No skills added yet.
                       <% end %>
-                      </span>
-                    </div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row responsibility-bar">
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Posted By</h3>
+                  </div>
+                  <div class="user-image">
+                    <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
+                  </div>
+                  <div class="user-details">
+                    <%= need.user_posted_by.full_name %>
                   </div>
                 </div>
 
-                <div class="row responsibility-bar">
-                  <div class="responsible-user col-xs-4">
-                    <div class="user-title">
-                      <h3>Posted By</h3>
-                    </div>
-                    <div class="user-image">
-                      <%= image_tag(need.user_posted_by.avatar, class: "img-circle") %>
-                    </div>
-                    <div class="user-details">
-                      <%= need.user_posted_by.full_name %>
-                    </div>
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Admin</h3>
                   </div>
-                  <div class="responsible-user col-xs-4">
-                    <div class="user-title">
-                      <h3>Admin</h3>
-                    </div>
-                    <div class="user-image">
-                      <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
-                    </div>
-                    <div class="user-details">
-                      <%= need.user_church_admin.full_name %>
-                    </div>
+                  <div class="user-image">
+                    <%= image_tag(need.user_church_admin.avatar, class: "img-circle") %>
                   </div>
-                  <div class="responsible-user col-xs-4">
-                    <div class="user-title">
-                      <h3>Leader</h3>
-                    </div>
-                    <div class="user-image">
-                      <div class="placeholder-leader-image"></div>
-                      <div class="user-details">
-                        <p class="unsupported-feature">This feature is not yet supported yet.</p>
-                      </div>
-                    </div>
+                  <div class="user-details">
+                    <%= need.user_church_admin.full_name %>
                   </div>
                 </div>
 
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Leader</h3>
+                  </div>
+                  <div class="user-image">
+                    <div class="placeholder-leader-image"></div>
+                    <div class="user-details">
+                      <p class="unsupported-feature">This feature is not yet supported yet.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
