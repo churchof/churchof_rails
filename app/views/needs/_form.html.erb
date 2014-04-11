@@ -80,7 +80,7 @@ $(document).ready(function () {
         <div class="lone-field ">
           <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
         </div>
-        <div class="lone-field hide">
+        <div class="lone-field">
           <%= f.input :leader %>
         </div>
         <div class="lone-field">

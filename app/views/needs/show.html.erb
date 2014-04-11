@@ -270,7 +270,7 @@
 
             <% if !@need.user_posted_by.avatar_file_name.nil? %>
               <div class="user-image">
-                <%= image_tag(@need.user_posted_by.avatar, class: "img-circle") %>
+                <%= image_tag(@need.user_posted_by.avatar(:large), class: "img-circle") %>
               </div>
             <% else %>
               <div class="placeholder-leader-image"></div>
@@ -278,6 +278,7 @@
 
             <div class="user-details">
               <%= @need.user_posted_by.full_name %>
+              <p class="small-italic"> Member - Church of Lexington </p>
             </div>
           </div>
         <% end %>
@@ -289,7 +290,7 @@
 
             <% if !@need.user_church_admin.avatar_file_name.nil? %>
               <div class="user-image">
-                <%= image_tag(@need.user_church_admin.avatar, class: "img-circle") %>
+                <%= image_tag(@need.user_church_admin.avatar(:large), class: "img-circle") %>
               </div>
             <% else %>
               <div class="placeholder-leader-image"></div>
@@ -299,6 +300,7 @@
 
           <div class="user-details">
             <%= @need.user_church_admin.full_name %>
+            <p class="small-italic"> Admin - Church of Lexington </p>
           </div>
         </div>
 
@@ -309,8 +311,12 @@
           <div class="user-image">
             <div class="placeholder-leader-image"></div>
             <div class="user-details">
-              <p class="unsupported-feature">This feature is not yet supported yet.</p>
-            </div>
+                    <% if @need.leader.length > 0 %>
+                      <%= @need.leader %>
+                    <% else %>
+                      No Leader
+                    <% end %> 
+                  </div>
           </div>
         </div>
       </div>

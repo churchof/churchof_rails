@@ -169,6 +169,11 @@ p.unsupported-feature{
   font-style: italic;
 }
 
+p.small-italic{
+  font-size: 12px;
+  font-style: italic;
+}
+
 .previous-records-bar{
   @include content-bar($green);
   margin: 10px auto;
