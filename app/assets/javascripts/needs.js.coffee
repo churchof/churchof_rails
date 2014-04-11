@@ -65,6 +65,10 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     # handler.bounds.extendWith(markers)
     handler.fitMapToBounds()
 
+# This doesnt work so just reloading the page everytime.
+@replaceMap = (markers)->
+  handler.removeMarkers(markers)
+
 
 
 
