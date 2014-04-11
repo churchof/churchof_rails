@@ -5,18 +5,18 @@
     jQuery(function($) {
       $('#rosmModal').on('show.bs.modal', function() {
         var subjectId = $(this).data("need-id");
-
-        $.ajax({
-          type: "POST",
-          url: "/activities",
-          data: {
-            subject_id: subjectId,
-            subject_type: "Need",
-            user_id: <%= current_user.id %>,
-            description: "User viewed ROSM records. Paid Member at time? <%= current_user.is_full_rosm_member ? 'YES' : 'NO' %>"
-          }
-        });
-
+        <% if user_signed_in? %>
+          $.ajax({
+            type: "POST",
+            url: "/activities",
+            data: {
+              subject_id: subjectId,
+              subject_type: "Need",
+              user_id: <%= current_user.id %>,
+              description: "User viewed ROSM records. Paid Member at time? <%= current_user.is_full_rosm_member ? 'YES' : 'NO' %>"
+            }
+          });
+        <% end %>
       });
     });
   </script>
@@ -135,7 +135,11 @@
 
 
       <% if @need.updates.count > 0 %>
-        <h3><%= @need.updates.count %> Public Updates</h3>
+        <% if @need.updates.count == 1 %>
+          <h3><%= @need.updates.count %> Public Update</h3>
+        <% else %>
+          <h3><%= @need.updates.count %> Public Updates</h3>
+        <% end %>
       <% end %>
 
       <% @need.updates.each do |update| %>
@@ -143,7 +147,7 @@
           <span class="record-count" data-toggle="modal" data-target="#PublicUpdateModal<%= update.id%>"><%= update.title %></span>
 <!--           This should only show up for the right people
  -->
-          <span class="details"><%= link_to "Edit", edit_need_update_path(@need, update) %></span>
+          <span class="details"><%= time_ago_in_words(update.created_at) %> ago</span>
         </div>
       <% end %>
 
@@ -231,7 +235,7 @@
             </p>
           <% end %>
 
-          <% if @need.recipient_contribution %>
+          <% if @need.recipient_contribution? %>
             <p class="gender">
               <strong>Recipient Contribution: </strong>
               <%= @need.recipient_contribution %>

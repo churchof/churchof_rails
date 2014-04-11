@@ -69,9 +69,7 @@ class Need < ActiveRecord::Base
 
 
   def mail_to_users_with_relevant_skills
-
     # should this be async?
-    # this needs to be after its set public... also should keep a record of who its sent to really...
     if self.is_public
       @users = Array.new
       self.skills.each do |skill|
@@ -90,17 +88,10 @@ class Need < ActiveRecord::Base
             user: user
           )
         end
-
-
       end
     end
-
-
-
-
-
-    # Also this should only send once... or send with an update... or something? Keep records on it some how.
   end
+
 
   def skill_tokens=(ids)
     self.skills.delete_all
