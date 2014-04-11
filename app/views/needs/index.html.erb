@@ -1,13 +1,36 @@
 <%= javascript_include_tag "jquery.tokeninput.js" %>
-<%= stylesheet_link_tag "token-input.css" %>
+<%= stylesheet_link_tag "token-input-facebook.css" %>
 
 <% content_for :head do %>
   <script type="text/javascript">
 
-  $(document).ready(function () {
+
+$(document).ready(function () {
+    updateSkills();
+    function updateSkills(){
+        $.ajax({
+        url: '/skills.json',
+        type: "GET",
+        dataType: 'json',
+        success: function(data) {
+          skillsArray = data;
+          $('.token-input-token-facebook').each(function(){
+            $(this).addClass('custom');
+            var skillText = $(this).find('p').text();
+            for (i=0; i < skillsArray.length; i++){
+              if(skillsArray[i].name == skillText){
+                $(this).find('> p').html('<span class="skill-icon"><img src="' + skillsArray[i].icon_url + '"></span>' + skillsArray[i].name)
+              }
+            };
+          });
+        }
+      });
+    };
+
     $("#skills_input").tokenInput("/skills.json", {
       crossDomain: false,
       onAdd: function (item) {
+        updateSkills();
         var selectedValues = $('#skills_input').tokenInput("get");
         $.ajax({
           type: "GET",
@@ -28,9 +51,17 @@
           },
           dataType: "script",
         });
-      }
+      },
+      preventDuplicates: "true",
+      theme: "facebook",
+      prePopulate: $("#need_skill_tokens").data("pre")
     });
-  });
+});
+
+
+
+
+
 
   </script>
 <% end %>
