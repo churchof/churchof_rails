@@ -26,6 +26,11 @@
 
 <% @activities.each do |activity| %>
 <p>
-  <%= activity.subject_type %>:<%= activity.subject_id %> | <%= activity.description %> | <%= activity.user.full_name %>
+  <%= activity.subject_type %>:<%= activity.subject_id %> | <%= activity.description %> | 
+
+  <% if activity.user %>
+
+    <%= activity.user.full_name %>
+    <% end %>
 </p>
 <% end %>

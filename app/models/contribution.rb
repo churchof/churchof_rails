@@ -45,8 +45,18 @@ class Contribution < ActiveRecord::Base
     self.user ||= User.find_by_email(email)
     if user
       self.email ||= user.email
+      Activity.create(
+        subject: self,
+        description: 'User made contribution.',
+        user: self.user
+      )
     else
       self.contributor = Contributor.where(email: email).first_or_create
+      Activity.create(
+        subject: self,
+        description: 'Contributor made contribution.',
+        user: self.user
+      )
     end
   end
 

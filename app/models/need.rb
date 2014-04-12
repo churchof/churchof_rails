@@ -31,12 +31,20 @@ class Need < ActiveRecord::Base
   after_validation :geocode          # auto-fetch coordinates
 
   before_create :create_approx_location_values
-  after_create :mail_to_church_admin_whos_recieving_the_need
+  after_create :mail_to_church_admin_whos_recieving_the_need, :log_creation
   after_save :mail_to_users_with_relevant_skills
 
   after_update :mail_to_need_poster_if_just_approved
 
   scope :public, -> { where(is_public: true) }
+
+  def log_creation
+    Activity.create(
+      subject: self,
+      description: 'User created Need.',
+      user: self.user_posted_by
+    )
+  end
 
   def mail_to_church_admin_whos_recieving_the_need
     # should this be async?
