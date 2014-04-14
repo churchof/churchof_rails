@@ -34,6 +34,21 @@ a:hover, a:focus{
 
 .navbar a.navbar-brand{
   font-size: 18px;
+  padding-right: 5px;
+}
+
+.navbar a.navbar-brand.beta-btn{
+  margin-top: 9px;
+  padding: 4px 18px;
+  border: solid 2px #FFF;
+  font-size: 18px;
+  margin-left: 5px;
+  border-radius: 4px 4px 4px 4px;
+}
+
+.navbar a.navbar-brand.beta-btn:hover{
+  background: #FFF;
+  color: #5CA2E8;
 }
 
 ul.menu-links{
@@ -227,6 +242,15 @@ ul.menu-links{
     margin-right: 0px;
     margin-top: 15px;
     text-align: center;
+  }
+  .navbar a.navbar-brand,
+  .navbar a.navbar-brand.beta-btn{
+    font-size: 14px;
+  }
+
+  .navbar a.navbar-brand.beta-btn{
+    padding: 3px 10px;
+    margin-top: 10px;
   }
 
 }
