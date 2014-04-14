@@ -505,6 +505,7 @@ p.form-instructions{
 .disclaimer-block{
   padding-top: 15px;
   padding-bottom: 5px;
+  padding-left: 0px;
   background: $orange;
 }
 .need-container .disclaimer-block .inner-content{
@@ -546,9 +547,9 @@ h2.need-title{
   list-style: none;
   margin: 0px auto 5px;
   padding: 9px;
-  color: #FFF;
+  color: $light-grey;
   display: inline-block;
-  background: $light-grey;
+  background: $lighter-grey;
   width: auto;
   font-size: 16px;
   vertical-align: top;
