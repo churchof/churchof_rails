@@ -135,6 +135,7 @@
 
 
       <% if @need.updates.count > 0 %>
+      <br>
         <% if @need.updates.count == 1 %>
           <h3><%= @need.updates.count %> Public Update</h3>
         <% else %>
@@ -159,15 +160,15 @@
             <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
             <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
           </div>
-          <% @need.expenses.each do |expense| %>
+<!--           <% @need.expenses.each do |expense| %>
             <p>
               <%= expense.title %> - <%= expense.amount %>
             </p>
           <% end %>
-
+ -->
         </div>
         <div class="skills col-xs-12 col-sm-6">
-          <h3>Skills needed</h3>
+          <h3>Skills / Resources</h3>
           <ul class="skills-list">
             <% if @need.skills_count > 0 %>
               <% @need.skills.each do |skill| %>
@@ -341,7 +342,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Expenses</h4>
       </div>
-      <div class="modal-body">
+<!--       <div class="modal-body">
         <% @need.expenses.each do |expense| %>
           <p>
             <%= expense.title %> |
@@ -353,7 +354,7 @@
           </p>
         <% end %>
       </div>
-      <div class="modal-footer">
+ -->      <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#NewExpenseModal">Add Expense</span>
       </div>
     </div>
