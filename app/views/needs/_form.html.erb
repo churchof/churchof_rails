@@ -63,10 +63,10 @@ $(document).ready(function () {
           <%= f.input :description_public %>
         </div>
         <div class="lone-field">
-          <%= f.input :recipient_size, :as => :radio_buttons %>
+          <%= f.input :recipient_size, :as => :radio_buttons, :default  => "Unknown" %>
         </div>
         <div class="lone-field">
-          <%= f.input :frequency_type, :as => :radio_buttons  %>
+          <%= f.input :frequency_type, :as => :radio_buttons, :default  => "Unknown"  %>
         </div>
         <div class="lone-field">
           <%= f.input :full_street_address %>
@@ -176,8 +176,13 @@ $(document).ready(function () {
 
 <script>
   $(document).on('ready', function(){
+    $('.form-for-individuals').hide();
     $('ul.token-input-list-facebook').addClass('custom');
-    $('.need_recipient_size .radio_buttons#need_recipient_size_individual').parent().addClass('selected');
+    $('.radio_buttons').each(function(){
+      if($(this).attr('checked') == "checked"){
+        $(this).parent().addClass('selected');
+      }
+    });
 
     $('.need_recipient_size .radio_buttons').on('click', function(){
       $('.need_recipient_size .radio').each(function(){
@@ -185,14 +190,12 @@ $(document).ready(function () {
       })
       $(this).parent().addClass('selected');
       if($(this).val() == "individual"){
-        console.log('i should show the individual');
         $('.form-for-individuals').show();
       }else{
         $('.form-for-individuals').hide();
       }
     });
 
-    $('.need_frequency_type .radio_buttons#need_frequency_type_one_time').parent().addClass('selected');
     $('.need_frequency_type .radio_buttons').on('click', function(){
       $('.need_frequency_type .radio').each(function(){
         $(this).removeClass('selected');
