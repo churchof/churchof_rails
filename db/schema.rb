@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405224744) do
+ActiveRecord::Schema.define(version: 20140415030532) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 20140405224744) do
     t.string   "title_public"
     t.text     "description_public"
     t.boolean  "is_public"
-    t.integer  "recipient_size"
-    t.integer  "frequency_type"
+    t.integer  "recipient_size",                                                     default: 1
+    t.integer  "frequency_type",                                                     default: 1
     t.text     "recipient_contribution"
     t.string   "date_of_birth"
     t.string   "leader"
