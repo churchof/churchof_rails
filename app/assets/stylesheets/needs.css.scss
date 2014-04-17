@@ -64,6 +64,127 @@
   margin: 20px auto 25px;
 }
 
+.secondary-form-inner-content{
+  max-width: 97.5%;
+  padding: 1%;
+  margin: 15px auto;
+}
+
+.public-updates-block{
+  margin-top: 30px;
+}
+
+.update-wrapper{
+  background: #e5e5e5;
+  margin-bottom: 10px;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  @include border-radius(4px);
+}
+
+.update-inner-content{
+  max-width: 98%;
+  margin: 0px auto;
+}
+
+.secondary-form-inner-content h4{
+  color: $dark-grey;
+}
+
+.grid-block{
+  margin-bottom: 15px;
+}
+.grid-col{
+  width: 18%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.grid-col.remove-expense{
+  padding-top: 55px;
+}
+
+.grid-col.remove-expense a{
+  width: 100%;
+  background: $primary-blue;
+  color: #FFF;
+  border-radius: 2px 2px 2px 2px;
+  padding: 14px 8px;
+}
+
+.secondary-form-inner-content .error{
+  display: block;
+}
+
+.secondary-form-inner-content input,
+.secondary-form-inner-content textarea{
+  width: 100%;
+}
+
+.images-block{
+  margin: 20px auto;
+}
+
+.remove_nested_fields.remove-update{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  float: right;
+  margin-bottom: 30px;
+}
+
+@media(max-width: 767px){
+  .grid-col{
+    width: 100%;
+    display: block;
+  }
+
+  .grid-col.remove-expense{
+    padding-top: 35px;
+  }
+
+  .grid-block{
+    margin-bottom: 30px;
+  }
+}
+
+
+.need-form .grid-col input,
+.need-form .grid-col textarea{
+  width: 95%;
+}
+
+.need-form input[type="file"]{
+  -webkit-appearance: none;
+  border: none;
+  width: 200px;
+  height: 40px;
+  background-image: none;
+  cursor: pointer;
+}
+
+.fake-image-button{
+  background: $primary-blue;
+  width: 200px;
+  height: 40px;
+}
+
+.image-field{
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.field-group-30{
+  width: 28%;
+  display: inline-block;
+  vertical-align: top;
+}
+.field-group-70{
+  width: 67%;
+  display: inline-block;
+  vertical-align: top;
+}
 .edit .inner-content{
   margin-top: 25px;
 }

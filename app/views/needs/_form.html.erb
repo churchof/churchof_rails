@@ -41,19 +41,20 @@ $(document).ready(function () {
 });
 
 </script>
-
 <%= simple_nested_form_for(@need, html: {class: "form-horizontal need-form"}) do |f| %>
-  <% if @need.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@need.errors.count, "error") %> prohibited this need from being saved:</h2>
-      <ul>
-        <% @need.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
   <div class="form-divider">
+    <div class="col-xs-12">
+      <% if @need.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@need.errors.count, "error") %> prohibited this need from being saved:</h2>
+          <ul>
+            <% @need.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
     <div class="col-xs-12 col-sm-6">
       <div class="public-label">Public</div>
       <div class="inner-content">
@@ -86,50 +87,6 @@ $(document).ready(function () {
         <div class="lone-field">
           <h4><%= f.label :skill_tokens, "Skills" %></h4>
           <%= f.text_field :skill_tokens, "data-pre" => @need.skills.map(&:attributes).to_json %>
-        </div>
-        <div class="lone-field">
-          <h4>Expenses</h4>
-          <%= f.fields_for :expenses do |expense| %>
-            <div class="field-pair">
-              <%= expense.input :title %>
-            </div>
-            <div class="field-pair">
-              <%= expense.input :description %>
-            </div>
-            <div class="field-pair">
-              <%= expense.input :documentation %>
-            </div>
-            <div class="field-pair">
-              <%= expense.input :amount %>
-            </div>
-            <%= expense.link_to_remove "Remove this expense" %>
-          <% end %>
-          <p><%= f.link_to_add "Add an expense", :expenses %></p>
-        </div>
-        <div class="lone-field">
-
-          <h4>Public Updates</h4>
-
-          <%= f.fields_for :updates do |update| %>
-            <div class="form-inputs">
-              <%= update.input :title %>
-              <%= update.input :content %>
-            </div>
-
-            <%= update.fields_for :images do |image| %>
-              <div class="field">
-                <%= image.file_field :image %>
-                <%= image.input :caption %>
-                <%= image.link_to_remove "Remove this image" %>
-              </div>
-            <% end %>
-
-            <p><%= update.link_to_add "Add an image", :images %></p>
-            <%= update.link_to_remove "Remove this public update." %>
-
-          <% end %>
-
-          <p><%= f.link_to_add "Add a public update.", :updates %></p>
         </div>
       </div>
     </div>
@@ -166,6 +123,72 @@ $(document).ready(function () {
             </div>
           </div>
         </div>
+    </div>
+
+    <div class="grey-form col-xs-12">
+      <div class="secondary-form-inner-content">
+        <h4>Expenses</h4>
+
+          <%= f.fields_for :expenses do |expense| %>
+            <div class="grid-needs">
+              <div class="grid-block">
+                  <div class="grid-col">
+                    <%= expense.input :title %>
+                  </div>
+                  <div class="grid-col">
+                    <%= expense.input :description %>
+                  </div>
+                  <div class="grid-col">
+                    <%= expense.input :documentation %>
+                  </div>
+                  <div class="grid-col">
+                    <%= expense.input :amount %>
+                  </div>
+                  <div class="grid-col remove-expense"><%= expense.link_to_remove "Remove" %></div>
+                </div>
+            </div>
+        <% end %>
+        <%= f.link_to_add "+ Add an Expense", :expenses %>
+        <div class="public-updates-block">
+
+          <h4>Public Updates</h4>
+
+          <%= f.fields_for :updates do |update| %>
+          <div class="update-wrapper">
+            <div class="update-inner-content">
+              <div class="form-inputs">
+                <div class="field-pair">
+                  <%= update.input :title %>
+                </div>
+                <div class="field-pair">
+                  <%= update.input :content, :class => "long-content-textarea" %>
+                </div>
+              </div>
+
+              <div class="images-block">
+                <%= update.fields_for :images do |image| %>
+                  <div class="image-field">
+                    <div class="field-group-30">
+                      <%= image.label "Select Your Image:" %>
+                      <%= image.file_field :image %>
+                    </div>
+                    <div class="field-group-70">
+                      <%= image.input :caption %>
+                    </div>
+                  <%= image.link_to_remove "Remove Image" %>
+                  </div>
+                <% end %>
+
+                <p><%= update.link_to_add "Add an image", :images %></p>
+              </div>
+              <%= update.link_to_remove "Remove Update", :class => "remove-update" %>
+            </div>
+            </div>
+          <% end %>
+
+          <p><%= f.link_to_add "+ Add a Public Update", :updates %></p>
+        </div>
+      </div>
     </div>
   </div>
 
