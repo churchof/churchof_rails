@@ -310,6 +310,7 @@ p.small-italic{
 }
 
 .public-update-bar{
+  cursor: pointer;
   @include content-bar(#5ca2e8);
   margin: 10px auto;
 }

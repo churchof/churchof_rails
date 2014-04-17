@@ -147,8 +147,8 @@
       <% end %>
 
       <% @need.updates.each do |update| %>
-        <div class="public-update-bar">
-          <span class="record-count" data-toggle="modal" data-target="#PublicUpdateModal<%= update.id%>"><%= update.title %></span>
+        <div class="public-update-bar" data-toggle="modal" data-target="#PublicUpdateModal<%= update.id%>">
+          <span class="record-count"><%= update.title %></span>
 <!--           This should only show up for the right people
  -->
           <span class="details"><%= time_ago_in_words(update.created_at) %> ago</span>
