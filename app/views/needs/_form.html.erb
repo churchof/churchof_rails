@@ -178,6 +178,9 @@ $(document).ready(function () {
   $(document).on('ready', function(){
     $('.form-for-individuals').hide();
     $('ul.token-input-list-facebook').addClass('custom');
+    if($('#need_recipient_size_individual').attr('checked')){
+      $('.form-for-individuals').show();
+    }
     $('.radio_buttons').each(function(){
       if($(this).attr('checked') == "checked"){
         $(this).parent().addClass('selected');
