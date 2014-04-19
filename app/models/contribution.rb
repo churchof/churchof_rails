@@ -28,9 +28,9 @@ class Contribution < ActiveRecord::Base
   def mail_receipt
     # should this be async?
     if self.user
-      Mailer.receipt_to_user(self.need.user_posted_by, self.need, self).deliver
+      Mailer.receipt_to_user(self.user, self.need, self).deliver
     elsif self.contributor
-      Mailer.receipt_to_contributor(self.need.user_posted_by, self.need, self).deliver
+      Mailer.receipt_to_contributor(self.contributor, self.need, self).deliver
     end
   end
 
