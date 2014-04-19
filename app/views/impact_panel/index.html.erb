@@ -36,7 +36,7 @@
     </div>
   </div>
 	<br>
-	<% Contribution.where(user:current_user, need:need).each do |contribution| %>
+	<% Contribution.where(user:current_user, need:need).reverse.each do |contribution| %>
 		<%= contribution.amount %> | <%= time_ago_in_words(contribution.created_at) %>
 		<br>
 	<% end %>

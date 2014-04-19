@@ -14,10 +14,10 @@ class ImpactPanelController < ApplicationController
 
     @needs = Array.new
 
-	current_user.contributions.each do |contribution|
-		if contribution.need.is_public
+	current_user.contributions.reverse.each do |contribution|
+		#if contribution.need.is_public == true
 			@needs << contribution.need
-		end
+		#end
 	end
   	@needs_supported = @needs.uniq
   end
