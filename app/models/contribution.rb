@@ -13,6 +13,7 @@ class Contribution < ActiveRecord::Base
   after_create :mail_to_church_admin
   after_create :mail_to_user_posted_by
   after_create :mail_to_users_who_contributed_if_fully_funded
+  after_create :mail_receipt
 
   def mail_to_church_admin
     # should this be async?
@@ -25,17 +26,33 @@ class Contribution < ActiveRecord::Base
   end
 
 
+  def mail_receipt
+    # should this be async?
+    if self.user
+      Mailer.receipt_to_user(self.need.user_posted_by, self.need, self).deliver
+    elsif self.contributor
+      Mailer.receipt_to_contributor(self.need.user_posted_by, self.need, self).deliver
+    end
+  end
+
+
   # Probably don't want these, just so there is no way money gets lost
   #validates :need, presence: true
   #validates :contributor, presence: true
 
   def process_payment
+                                  logger.debug "-+-+- 7"
+
     charge = Stripe::Charge.create(amount: amount_cents,
                                    currency: @stripe_currency,
                                    card: @stripe_token,
                                    description: "Support of #{need.title}")
+                                  logger.debug "-+-+- 8"
+
     true
   rescue Stripe::CardError
+                                  logger.debug "-+-+- 9"
+
     false
   end
 

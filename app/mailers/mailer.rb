@@ -75,6 +75,13 @@ def user_need_contributed_to_fully_funded(user, need)
 	mail :to => user.email, :from => "churchoflexington@gmail.com", :subject => "Need (You Contributed To) Is Fully Funded: #{need.title_public}"
 end
 
+def receipt_to_user(user, need, contribution)
+	@user = user
+	@need = need
+	@contribution = contribution
+	mail :to => user.email, :from => "churchoflexington@gmail.com", :subject => "Thanks for contributing to: #{need.title_public}"
+end
+
 
 # Contributors
 
@@ -90,6 +97,14 @@ def contributor_need_contributed_to_fully_funded(contributor, need)
 	@need = need
 	mail :to => contributor.email, :from => "churchoflexington@gmail.com", :subject => "Need (You Contributed To) Is Fully Funded: #{need.title_public}"
 end
+
+def receipt_to_contributor(contributor, need, contribution)
+	@contributor = contributor
+	@need = need
+	@contribution = contribution
+	mail :to => contributor.email, :from => "churchoflexington@gmail.com", :subject => "Thanks for contributing to: #{need.title_public}"
+end
+
 
 
 end

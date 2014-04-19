@@ -1,0 +1,757 @@
+// Place all the styles related to the needs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables.css.scss";
+
+// Added by Zach, sorry Melanie to mess with you organizaion! Haha.
+
+
+// NOTE THIS IS ALL COPIED FROM NEEDS... a bad idea but I didnt know how to get the styles the same in the "Impact Panel"
+
+// BUT ITS CURRENTLY NOT MAKING A DIFFERENCE
+
+
+.marker_container { border: 0px solid black; border-radius: 50%; margin-top: 0px; background: rgb(92,162,232); padding: 15px; width: 60px; height: 60px; }
+
+.marker_info_box { border: 0px solid black; margin-top: 0px; background: white; padding: 15px; width: 280px; height: 60px; }
+
+
+.need-container {
+  border-bottom: solid 1px #CCC;
+  padding-top: 0px;
+  margin: 25px auto;
+  background: #FFF;
+  position: relative;
+}
+
+.row.no-margin{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.need-container .inner-content{
+  margin-top: 10px;
+  padding-bottom: 25px;
+}
+
+.need-container h1,
+.need-container h2,
+.need-container h3,
+.need-container h4{
+  color: $primary-blue;
+  font-weight: 400;
+}
+
+.private-information{
+ margin:30px auto;
+}
+
+.need-container h3{
+    color: $text-grey;
+  }
+
+.private-information h3{
+    color: $text-grey;
+  }
+
+.need-description p,
+.private-information p{
+  font-size: 16px;
+  color: $text-grey;
+}
+
+.need-container.edit .need-title{
+  max-width: 95%;
+  margin: 20px auto;
+}
+
+.need-title{
+  color: $primary-blue;
+  margin: 20px auto 25px;
+}
+
+.edit .inner-content{
+  margin-top: 25px;
+}
+
+  .need-description{
+    font-size: 18px;
+    color: $medium-grey;
+  }
+
+  .need-details{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .need-details h3{
+    color: $text-grey;
+  }
+.skills-list{
+  padding:0px;
+}
+  .skill-tag{
+    list-style: none;
+    margin: 0px auto 5px;
+    padding: 9px;
+    padding-right: 15px;
+    color: #FFF;
+    display: inline-block;
+    background: $light-grey;
+    width: auto;
+    font-size: 16px;
+    vertical-align: top;
+    @include border-radius(2px);
+  }
+    .skill-icon img{
+      max-height: 20px;
+      max-width: 20px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+.expenses-bar,
+.skills-bar{
+  @include content-bar($light-grey)
+}
+  .expenses-bar .progress-bar{
+    height: 100%;
+    @include border-radius(2px);
+    position: absolute;
+    width: 0%;
+    background: $green;
+  }
+
+  .amount-raised,
+  .skills-count{
+    font-size: 22px;
+    color: #FFF;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-weight: 200;
+  }
+
+  .expense-details,
+  .skill-details{
+    font-size: 16px;
+    color: #FFF;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: 200;
+  }
+
+.responsibility-bar{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+  .user-title h3{
+    color: $text-grey;
+    margin-bottom: 15px;
+  }
+
+  .responsible-user{
+    vertical-align: top;
+  }
+
+  .user-details p.role{
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  .user-image .img-circle{
+    max-width: 125px;
+    float: left;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+
+  .placeholder-leader-image{
+    float: left;
+    margin-right: 10px;
+    display: block;
+    max-width: 125px;
+    width: 125px;
+    height: 125px;
+    background: $medium-grey;
+    @include border-radius(50%);
+  }
+
+p.unsupported-feature{
+  font-size: 15px;
+  font-style: italic;
+}
+
+p.small-italic{
+  font-size: 12px;
+  font-style: italic;
+}
+
+.previous-records-bar{
+  @include content-bar($green);
+  margin: 10px auto;
+  cursor: pointer;
+}
+
+.public-update-bar{
+  @include content-bar(#5ca2e8);
+  margin: 10px auto;
+}
+
+.potential-benefits-bar{
+  @include content-bar($primary-blue);
+  margin: 10px auto;
+}
+
+.private-records-block{
+  margin: 20px auto;
+}
+
+  .record-count{
+    font-size: 16px;
+    color: #FFF;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: 200;
+  }
+
+  .details{
+    font-size: 16px;
+    color: #FFF;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: 200;
+  }
+
+.full-width-btn{
+  display: block;
+   width: 100%;
+   background: $primary-blue;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
+
+.full-width-btn-green{
+  display: block;
+   width: 100%;
+   background: $green;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
+
+.full-width-btn-green:hover{
+  display: block;
+   width: 100%;
+   background: $dark-green;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+     text-decoration: none;
+}
+
+
+.full-width-btn:hover{
+  background: $dark-blue;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.half-width-btn{
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+}
+
+.blue-btn{
+  background: $primary-blue;
+}
+
+.blue-btn:hover{
+  background: $dark-blue;
+}
+
+.change-status input{
+  border: none;
+  padding: 0px;
+}
+
+.map-location{
+  width: 100%;
+  @include border-radius(2px);
+  margin-top: 20px;
+}
+
+.toggle-container{
+  text-transform: uppercase;
+  color: #FFF;
+  width: 100px;
+  @include border-radius(20px);
+  text-align: center;
+  position: relative;
+  border: solid 1px $light-grey;
+  height: 25px;
+  font-size: .9em;
+  float: right;
+  margin-top: 25px;
+  margin-right: 20px;
+}
+
+.toggle-btn.green{
+  color: #FFF;
+  background: $green;
+  position:absolute;
+  width: 50%;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-top: 5px;
+    font-size: 10px;
+}
+.toggle-btn.red{
+  padding-top: 5px;
+  font-size: 10px;
+  color: #FFF;
+  background: #E46868;
+  position:absolute;
+  width: 50%;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+input.toggle-btn.left{
+  text-transform: uppercase;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background: #FFF;
+  color: #CCC;
+  position:absolute;
+  width: 50%;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+    font-size: 10px;
+}
+
+input.toggle-btn.left:hover{
+  background: $green;
+  color: #FFF;
+}
+
+input.toggle-btn.right:hover{
+  background: #E46868;
+  color: #FFF;
+}
+
+input.toggle-btn.right{
+  text-transform: uppercase;
+  font-size: 10px;
+  background: #FFF;
+  color: #CCC;
+  position:absolute;
+  width: 50%;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+    border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/*Forms*/
+
+input:focus, textarea:focus, select:focus{
+  outline:none;
+}
+
+.need-form.form-horizontal label{
+  color: #353535;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.need-form abbr{
+  border-bottom: none;
+  margin-right: 0px;
+}
+
+p.form-instructions{
+  margin-top: 15px;
+  color: #353535;
+  font-size: 1.25em;
+  font-weight: 200;
+  font-family: $body-font;
+}
+
+.form-for-individuals input{
+  width: 100%;
+}
+
+.need-form .private-fields,
+.need-form .public-fields{
+  width: 80%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.need-form .private-fields input,
+.need-form .public-fields input{
+  width: 100%;
+  height: 45px;
+  vertical-align: top;
+}
+
+.need-form .private-fields textarea,
+.need-form .public-fields textarea{
+  width: 100%;
+  height: 80px;
+}
+
+.need-form .all-private-fields{
+  margin-top: 25px;
+}
+
+.need-form .all-private-fields input,
+.need-form .all-private-fields select{
+  width: 100%;
+  height: 45px;
+}
+
+.need-form .all-private-fields select{
+  height: 45px;
+  background: #FFF;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  background: #FFF;
+  border: solid 1px #CCC;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.need-form .all-private-fields textarea{
+  width: 100%;
+  height: 60px;
+}
+
+.need-form .lone-field{
+  width: 100%;
+  margin-right: 0px;
+  display: block;
+}
+
+.need-form input{
+  height: 45px;
+}
+
+.need-container .need-form .lone-field h4{
+  color: #000;
+  margin-top: 25px;
+}
+
+.need-form .lone-field textarea{
+  width: 80%;
+}
+
+.need-form .field-pair{
+  width: 47%;
+  margin-right: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.need-form .field-group-3{
+  width: 30%;
+  margin-right: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.need-form .submit-new-need input{
+  margin-top: 30px;
+  height: 55px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  width: 100%;
+  background: $primary-blue;
+  color: #FFF;
+}
+
+.need-form .submit-new-need input:hover{
+  background: $dark-blue;
+}
+
+.need-form input,
+.need-form textarea{
+  border: solid 1px #CCC;
+  padding-left: 5px;
+}
+
+/*SHOW*/
+
+.disclaimer-block{
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+  background: $orange;
+}
+.need-container .disclaimer-block .inner-content{
+    margin-top: 0px;
+    padding-bottom: 0px;
+  }
+
+.need-container .disclaimer-block .inner-content p{
+    display: inline-block;
+    vertical-align: top;
+    color: #FFF;
+    margin-right: 5px;
+    font-size: 18px;
+    max-width: 95%;
+  }
+.need-container .disclaimer-block .inner-content .notice-icon{
+    background: url('http://s3.amazonaws.com/church_of/assets/skill_icons/720-keyhole%402x.png') no-repeat center center;
+    background-size: 100%;
+    width: 25px;
+    height: 30px;
+    float: left;
+    vertical-align: top;
+    margin-right: 5px;
+  }
+h2.need-title{
+  width: 75%;
+  display: inline-block;
+  vertical-align: top;
+}
+.frequency-type{
+  width: 24%;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  text-align: right;
+}
+
+.frequency-tag{
+  list-style: none;
+  margin: 0px auto 5px;
+  padding: 9px;
+  color: $light-grey;
+  display: inline-block;
+  background: $lighter-grey;
+  width: auto;
+  font-size: 16px;
+  vertical-align: top;
+  @include border-radius(2px);
+}
+
+.show-need{
+  padding-top: 15px;
+  font-family: $body-font;
+  padding-bottom: 15px;
+  margin-bottom: 0px;
+}
+
+.show-need strong{
+  font-weight: 600;
+}
+
+.show-need .need-description{
+}
+
+.show-need .about-need{
+  border-bottom: solid 1px #CCC;
+  margin-bottom: 10px;
+}
+
+.show-need h1,
+.show-need h2{
+  color: $primary-blue;
+}
+
+.stripe-button-el{
+  width: 100%;
+  background-image: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none;
+  height: 45px;
+  background: #70c769 !important;
+  text-shadow: none !important;
+  margin-bottom: 10px;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+.stripe-button-el:hover{
+  background: #6EC25D !important;
+}
+
+.stripe-button-el span{
+  background: none !important;
+  background-image: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none;
+  text-shadow: none !important;
+}
+@media(max-width: 990px){
+  .need-container .disclaimer-block .inner-content p{
+    display: inherit;
+    width: 90%;
+  }
+}
+
+@media(max-width: 767px){
+  .need-form .private-fields,
+  .need-form .public-fields,
+  .need-form .field-pair,
+  .need-form .field-group-3{
+    width: 100%;
+    margin-right: 0%;
+    display: block;
+    vertical-align: top;
+  }
+
+  .need-form .private-fields textarea,
+  .need-form .public-fields textarea{
+    height: 100px;
+  }
+
+  .responsible-user{
+    text-align: center;
+  }
+
+  .user-image .img-circle,
+  .user-image .placeholder-leader-image{
+    float: none;
+    max-width: 80px;
+    height: 80px;
+    margin: 0px auto 10px;
+  }
+}
+
+ul.token-input-list-facebook.custom{
+  padding: 5px;
+}
+
+li.token-input-token-facebook.custom {
+    overflow: hidden;
+    margin-right: 5px, !important;
+    height: 40px !important;
+    cursor: default;
+    border: 0px;
+    font-size: 11px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    float: left;
+    white-space: nowrap;
+        list-style: none;
+    margin: 0px auto 5px;
+    margin-right: 5px;
+    padding: 10px 8px;
+    color: #FFF;
+    display: inline-block;
+    background: $light-grey;
+    width: auto;
+    vertical-align: top;
+    @include border-radius(2px);
+}
+
+li.token-input-token-facebook.custom p{
+  margin-right: 10px;
+}
+
+li.token-input-token-facebook.custom span{
+  margin-left: 0px;
+  margin-right: 10px;
+}
+
+.form-divider .col-sm-6,
+.form-divider .col-xs-12{
+  padding: 0px;
+}
+
+.public-label{
+  width: 100%;
+  color: #FFF;
+  background: $green;
+  font-size: 20px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+
+.private-label{
+  margin-bottom: 10px;
+  padding: 15px;
+  width: 100%;
+  color: #FFF;
+  background: $orange;
+  font-size: 20px;
+}
+
+.need_recipient_size .radio,
+.need_frequency_type .radio{
+  background: transparent;
+  border: solid 1px $light-grey;
+  width: auto;
+  display: inline-block;
+  margin-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.need_recipient_size .radio:hover,
+.need_frequency_type .radio:hover{
+  background: $light-grey;
+  color: #FFF;
+}
+
+.need_recipient_size .radio.selected,
+.need_frequency_type .radio.selected{
+  background: $light-grey;
+  width: auto;
+  display: inline-block;
+  color: #FFF;
+}
+
+.need-form.form-horizontal .need_recipient_size label,
+.need-form.form-horizontal .need_frequency_type label{
+  width: auto;
+}
+
+.need_recipient_size input.radio_buttons,
+.need_frequency_type input.radio_buttons{
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+}
+
+.need_frequency_type .need_recipient_size_unknown{
+  background: url('https://s3.amazonaws.com/church_of/assets/skill_icons/739-question%402x.png') no-repeat left center;
+}
+
+#need_full_street_address{
+  width: 80%;
+  height: 45px;
+}
