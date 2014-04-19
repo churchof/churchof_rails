@@ -77,6 +77,7 @@ class Need < ActiveRecord::Base
 
 
   def mail_to_users_with_relevant_skills
+
     # should this be async?
     if self.is_public
       @users = Array.new
@@ -128,6 +129,7 @@ class Need < ActiveRecord::Base
   end
 
   def validate_is_public
+    
     	if self.need_stage.admin_incoming?
 		self.is_public = false
    	elsif self.need_stage.admin_completed?

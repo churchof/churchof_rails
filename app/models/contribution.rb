@@ -25,7 +25,6 @@ class Contribution < ActiveRecord::Base
     Mailer.user_posted_by_need_recieved_contribution(self.need.user_posted_by, self.need, self).deliver
   end
 
-
   def mail_receipt
     # should this be async?
     if self.user
@@ -35,24 +34,17 @@ class Contribution < ActiveRecord::Base
     end
   end
 
-
   # Probably don't want these, just so there is no way money gets lost
   #validates :need, presence: true
   #validates :contributor, presence: true
 
   def process_payment
-                                  logger.debug "-+-+- 7"
-
     charge = Stripe::Charge.create(amount: amount_cents,
                                    currency: @stripe_currency,
                                    card: @stripe_token,
                                    description: "Support of #{need.title}")
-                                  logger.debug "-+-+- 8"
-
     true
   rescue Stripe::CardError
-                                  logger.debug "-+-+- 9"
-
     false
   end
 
@@ -62,18 +54,22 @@ class Contribution < ActiveRecord::Base
     self.user ||= User.find_by_email(email)
     if user
       self.email ||= user.email
-      Activity.create(
-        subject: self,
-        description: 'User made contribution.',
-        user: self.user
-      )
+      # Would be great to have this here but it was causing an infinite loop.
+                                                      
+      # Activity.create(
+      #   subject: self,
+      #   description: 'User made contribution.',
+      #   user: self.user
+      # )
     else
       self.contributor = Contributor.where(email: email).first_or_create
-      Activity.create(
-        subject: self,
-        description: 'Contributor made contribution.',
-        user: self.user
-      )
+      # Would be great to have this here but it was causing an infinite loop.
+
+      # Activity.create(
+      #   subject: self,
+      #   description: 'Contributor made contribution.',
+      #   user: self.user
+      # )
     end
   end
 
