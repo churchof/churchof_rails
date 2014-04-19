@@ -34,6 +34,7 @@
             </a>
             <ul class="dropdown-menu">
               <div class="dropdown-wrapper">
+                <li><%= link_to "Impact Panel", impact_panel_index_path %></li>
                 <% if current_user.has_role? :pending_need_poster %>
                   <li><%= link_to "Poster Agreement", need_poster_panel_index_path %></li>
                 <% elsif current_user.has_role? :need_poster %>
