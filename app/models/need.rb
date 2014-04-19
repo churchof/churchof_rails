@@ -37,6 +37,7 @@ class Need < ActiveRecord::Base
   after_update :mail_to_need_poster_if_just_approved
 
   scope :public, -> { where(is_public: true) }
+  scope :in_progress, -> { where(need_stage: 2) }
 
   def log_creation
     Activity.create(
@@ -129,11 +130,10 @@ class Need < ActiveRecord::Base
   end
 
   def validate_is_public
-    
-    	if self.need_stage.admin_incoming?
-		self.is_public = false
-   	elsif self.need_stage.admin_completed?
-		self.is_public = false
+    if self.need_stage.admin_incoming?
+		  self.is_public = false
+   	elsif self.need_stage.admin_denied?
+		  self.is_public = false
    	end
    	true
   end

@@ -6,9 +6,22 @@ class NeedsController < ApplicationController
   def set_is_public
     @need = Need.find(params["need"]["id"])
     authorize! :set_is_public, @need
-    @need.is_public = params["need"]["is_public"]
-    @need.save
-    redirect_to root_path
+    # Should only be able to set if its in progress so the archived version stays the same.
+    if @need.need_stage_value == 2
+      if params["need"]["is_public"] == "false"
+        if @need.contributions.count == 0
+          @need.is_public = params["need"]["is_public"]
+          @need.save
+          redirect_to root_path, notice: 'Need was successfully updated.'
+        else 
+          redirect_to root_path, alert: 'Need was not updated because people have already given to it.'
+        end
+      else
+        @need.is_public = params["need"]["is_public"]
+        @need.save
+        redirect_to root_path, notice: 'Need was successfully updated.'
+      end
+    end
   end
 
   # def record_usage
@@ -50,9 +63,9 @@ class NeedsController < ApplicationController
       skills_hash.each do |key, value|
         skills << value["id"] if value.is_a?(Hash)
       end
-      @needs = Need.public.joins(:skills).where("skills.id IN (?)", skills).uniq
+      @needs = Need.public.in_progress.joins(:skills).where("skills.id IN (?)", skills).uniq
     else
-      @needs = Need.public
+      @needs = Need.public.in_progress
     end
 
     @skills = Skill.all
