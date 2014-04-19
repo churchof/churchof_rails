@@ -41,7 +41,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     boxStyle:
       width: "280px"
 
-@buildMap = (markers)->
+@buildMap = (markers, fit)->
   handler = Gmaps.build(
     'Google', { builders: { Marker: RichMarkerBuilder}, markers:
           clusterer: 
@@ -62,7 +62,8 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
          
     }, internal: {id: 'custom_style'} }, ->
     markers = handler.addMarkers(markers)
-    # handler.bounds.extendWith(markers)
+    if fit
+      handler.bounds.extendWith(markers)
     handler.fitMapToBounds()
 
 # This doesnt work so just reloading the page everytime.

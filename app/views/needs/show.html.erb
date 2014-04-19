@@ -2,6 +2,9 @@
 <% content_for :head do %>
 
   <script type="text/javascript">
+
+   jQuery(function(){ buildMap(map_hash , true); });
+
     jQuery(function($) {
       $('#rosmModal').on('show.bs.modal', function() {
         var subjectId = $(this).data("need-id");

@@ -1,1 +1,1 @@
-jQuery(function(){ buildMap(map_hash); });
+// jQuery(function(){ buildMap(map_hash); });
