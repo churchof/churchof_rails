@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415030532) do
+ActiveRecord::Schema.define(version: 20140419205557) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20140415030532) do
     t.decimal  "approx_latitude",                          precision: 15, scale: 10
     t.decimal  "approx_longitude",                         precision: 15, scale: 10
     t.boolean  "shows_real_location_publically"
+    t.datetime "date_public_posted"
   end
 
   add_index "needs", ["description_public"], name: "index_needs_on_description_public"

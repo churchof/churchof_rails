@@ -3,6 +3,10 @@
       <h2 class="need-title">
         <%= link_to need.title_public, need %>
       </h2>
+
+      <% if need.date_public_posted %>
+        <%= time_ago_in_words(need.date_public_posted) %> ago
+      <% end %>
       <div class="need-description">
         <p><%= need.description_public %></p>
         <div class="row need-details">

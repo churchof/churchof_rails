@@ -36,6 +36,8 @@ class Need < ActiveRecord::Base
 
   after_update :mail_to_need_poster_if_just_approved
 
+  after_update :update_date_public_posted_if_changed
+
   scope :public, -> { where(is_public: true) }
   scope :in_progress, -> { where(need_stage: 2) }
 
@@ -52,6 +54,13 @@ class Need < ActiveRecord::Base
     Mailer.church_admin_new_need_admin_incoming(self, self.user_posted_by, self.user_church_admin).deliver
   end
 
+  def update_date_public_posted_if_changed
+    if self.is_public_changed?
+      if self.is_public == true
+        self.update_column(:date_public_posted, Time.now)
+      end
+    end
+  end
 
   def mail_to_need_poster_if_just_approved
     if (self.need_stage_changed? && self.need_stage == 2)
