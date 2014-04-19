@@ -395,6 +395,14 @@ p.small-italic{
   background: $primary-blue;
 }
 
+.red-btn{
+  background: $primary-red;
+}
+
+.red-btn:hover{
+  background: $dark-red;
+}
+
 .blue-btn:hover{
   background: $dark-blue;
 }

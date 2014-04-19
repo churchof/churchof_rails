@@ -2,7 +2,7 @@ class Need < ActiveRecord::Base
 	extend Enumerize
 	resourcify
 
-	enumerize :need_stage, in: {:admin_incoming => 1, :admin_in_progress => 2, :admin_completed => 3}, default: :admin_incoming
+	enumerize :need_stage, in: {:admin_incoming => 1, :admin_in_progress => 2, :admin_completed => 3, :admin_denied => 4}, default: :admin_incoming
 	enumerize :gender, in: {:unknown => 1, :male => 2, :female => 3}
   enumerize :recipient_size, in: {:unknown => 1, :individual => 2, :group => 3}
   enumerize :frequency_type, in: {:unknown => 1, :one_time => 2, :ongoing => 3}

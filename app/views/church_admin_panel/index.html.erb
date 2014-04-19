@@ -41,6 +41,19 @@
           <% end %>
         </a>
       </li>
+      <li>
+        <a href="#DeniedNeeds" data-toggle="tab">
+          <% if @needs_admin_denied.count > 0 %>
+            <span class="count-number pull-left"><%= @needs_admin_denied.count %></span>
+          <% end %>
+          <% if @needs_admin_denied.count == 1 %>
+            Denied Need
+          <% else %>
+            Denied Needs
+          <% end %>
+        </a>
+      </li>
+
     </ul>
   </div>
 
@@ -137,12 +150,31 @@
             </div>
           </div>
 
-          <%= simple_form_for(need, html: {class: "change-status"}) do |f| %>
-            <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_in_progress } %>
-            <div class="form-actions">
-              <%= f.submit "Move To In Progress", :class => "full-width-btn" %>
+
+
+
+            <div class="row no-margin">
+              <%= simple_form_for(need, html: {class: "change-status"}) do |f| %>
+                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_denied } %>
+                <div class="form-actions">
+                  <%= f.submit "Mark as Denied", :class => "half-width-btn col-xs-6 red-btn" %>
+                </div>
+              <% end %>
+
+              <%= simple_form_for(need, html: {class: "change-status"}) do |f| %>
+                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_in_progress } %>
+                <div class="form-actions">
+                  <%= f.submit "Move To In Progress", :class => "half-width-btn col-xs-6 blue-btn" %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+
+
+
+
+
+
+
         </div>
       <% end %>
     </div>
@@ -375,10 +407,142 @@
                 </div>
               </div>
             </div>
+
+            <div class="row no-margin">
+              <%= simple_form_for(need, html: {class: "change-status"}) do |f| %>
+                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_in_progress } %>
+                <div class="form-actions">
+                  <%= f.submit "Move To In Progress", :class => "full-width-btn" %>
+                </div>
+              <% end %>
+            </div>
+
           </div>
         <% end %>
       <% end %>
     </div>
+
+
+
+    <div class="tab-pane" id="DeniedNeeds">
+      <% if @needs_admin_denied.length < 1 %>
+        <p>None of the needs you are responsible for have been completed at this time.</p>
+      <% end %>
+      <% @needs_admin_denied.each do |need| %>
+        <% if need.need_stage_value == 4 %>
+          <div class="need-container">
+            <div class="inner-content">
+              <h2 class="need-title">
+                <%= link_to need.title, need %>
+              </h2>
+              <div class="need-description">
+                <p><%= need.description %></p>
+
+                <div class="row need-details">
+                  <div class="expenses col-xs-12 col-sm-6">
+                    <h3>Expenses</h3>
+                    <div class="expenses-bar">
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                      <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
+                    </div>
+                  </div>
+                  <div class="skills col-xs-12 col-sm-6">
+                    <h3>Skills / Resources</h3>
+                    <ul class="skills-list">
+                      <% if need.skills_count > 0 %>
+                        <% need.skills.each do |skill| %>
+                          <li class="skill-tag">
+                            <span class="skill-icon">
+                              <%= image_tag(skill.icon_url) %>
+                            </span>
+                            <%= skill.name %>
+                          </li>
+                        <% end %>
+                      <% else %>
+                        No skills added yet.
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row responsibility-bar">
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Posted By</h3>
+                  </div>
+                  <% if !need.user_posted_by.avatar_file_name.nil? %>
+                    <div class="user-image">
+                      <%= image_tag(need.user_posted_by.avatar(:large), class: "img-circle") %>
+                    </div>
+                  <% else %>
+                    <div class="placeholder-leader-image"></div>
+                  <% end %>
+                  <div class="user-details">
+                    <%= need.user_posted_by.full_name %>
+                    <p class="small-italic"> Member - Church of Lexington </p>
+                  </div>
+                </div>
+
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Admin</h3>
+                  </div>
+            <% if !need.user_church_admin.avatar_file_name.nil? %>
+              <div class="user-image">
+                <%= image_tag(need.user_church_admin.avatar(:large), class: "img-circle") %>
+              </div>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
+                  <div class="user-details">
+                    <%= need.user_church_admin.full_name %>
+                    <p class="small-italic"> Admin - Church of Lexington </p>
+                  </div>
+                </div>
+
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Leader</h3>
+                  </div>
+                  <div class="user-image">
+                    <div class="placeholder-leader-image"></div>
+                    <div class="user-details">
+                    <% if need.leader.length > 0 %>
+                      <%= need.leader %>
+                    <% else %>
+                      No Leader
+                    <% end %> 
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row no-margin">
+              <%= simple_form_for(need, html: {class: "change-status"}) do |f| %>
+                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_incoming } %>
+                <div class="form-actions">
+                  <%= f.submit "Restore as Incoming", :class => "full-width-btn" %>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+
+
+
+
+
+
+
+
+
   </div>
 <% elsif current_user.has_role? :pending_church_admin %>
   <div class="page-header-block">
