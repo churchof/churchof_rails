@@ -12,6 +12,9 @@ class Ability
         can :read, Need, :user_id_posted_by => user.id
         can :read, Need, :is_public => true
         can :manage, Expense, :need => { :user_id_posted_by => user.id }
+
+        can :read, Contribution, :need => { :user_id_posted_by => user.id }
+
     end
     if user.has_role? :church_admin
         can :read, Need, :user_id_church_admin => user.id
@@ -20,10 +23,15 @@ class Ability
         can :set_is_public, Need, :user_id_church_admin => user.id
         can :manage, Expense, :need => { :user_id_church_admin => user.id }
         can :manage, Update # this needs to be only for the appropriate ones
+        can :read, Contribution, :need => { :user_id_church_admin => user.id }
     end
     if user.has_role? :super_admin
         can :update, User
     end
+
+    can :read, Contribution, :user_id => user.id
+
+
     can :read, Need, :is_public => true
     can :create, User
     can :update, User, :id => user.id

@@ -93,14 +93,14 @@ class NeedsController < ApplicationController
       width: 29,
       height: 22 })
       # This should use the path helper.
-      marker.json({ title: need.title, image_url: if need.skills.first then need.skills.first.icon_url else '' end, custom_infowindow: "<a href='needs/#{need.id}'> #{need.title_public} </a>" })
+      marker.json({ title: need.title, image_url: need.skills.first ? need.skills.first.icon_url : '', custom_infowindow: "<a href='needs/#{need.id}'> #{Sanitize.clean(need.title_public)} </a>" })
     end
 
     # respond_to :html, :js
 
     respond_to do |format|
       format.html
-    format.js
+      format.js
   end
 
   end
@@ -152,10 +152,10 @@ class NeedsController < ApplicationController
     respond_to do |format|
       if @need.save
         format.html { redirect_to @need, notice: 'Need was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @need }
+        # format.json { render action: 'show', status: :created, location: @need }
       else
         format.html { render action: 'new' }
-        format.json { render json: @need.errors, status: :unprocessable_entity }
+        # format.json { render json: @need.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -166,10 +166,10 @@ class NeedsController < ApplicationController
     respond_to do |format|
       if @need.update(need_params)
         format.html { redirect_to @need, notice: 'Need was successfully updated.' }
-        format.json { head :no_content }
+        # format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @need.errors, status: :unprocessable_entity }
+        # format.json { render json: @need.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -180,7 +180,7 @@ class NeedsController < ApplicationController
     @need.destroy
     respond_to do |format|
       format.html { redirect_to needs_url }
-      format.json { head :no_content }
+      # format.json { head :no_content }
     end
   end
 

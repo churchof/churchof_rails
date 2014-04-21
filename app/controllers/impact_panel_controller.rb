@@ -11,12 +11,14 @@ class ImpactPanelController < ApplicationController
 	end
 
   def index
-
     @needs = Array.new
 
-	current_user.contributions.reverse.each do |contribution|
+
+    # hash thing... loop over deal... so you can still show all but NEED GONE WHERE NEEDED
+
+	current_user.contributions.accessible_by(current_ability).reverse.each do |contribution|
 		#if contribution.need.is_public == true
-			@needs << contribution.need
+			@needs << contribution.need.accessible_by(current_ability)
 		#end
 	end
   	@needs_supported = @needs.uniq

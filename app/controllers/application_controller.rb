@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert =>  [exception.message, exception.subject, exception.action].join(' ')
   end
 
+  respond_to :html
+
   private
 
   def configure_devise_params

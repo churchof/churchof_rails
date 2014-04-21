@@ -36,10 +36,10 @@ class ExpensesController < ApplicationController
     respond_to do |format|
       if @expense.save
         format.html { redirect_to [@need, @expense], notice: 'Expense was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @expense }
+        # format.json { render action: 'show', status: :created, location: @expense }
       else
         format.html { render action: 'new' }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
+        # format.json { render json: @expense.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,10 +51,10 @@ class ExpensesController < ApplicationController
     respond_to do |format|
       if @expense.update(expense_params)
         format.html { redirect_to [@need, @expense], notice: 'Expense was successfully updated.' }
-        format.json { head :no_content }
+        # format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
+        # format.json { render json: @expense.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,7 +65,7 @@ class ExpensesController < ApplicationController
     @expense.destroy
     respond_to do |format|
       format.html { redirect_to root_path, :flash => { :notice => "Expense deleted." } }
-      format.json { head :no_content }
+      # format.json { head :no_content }
     end
   end
 
