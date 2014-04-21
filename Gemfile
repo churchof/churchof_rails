@@ -15,6 +15,7 @@ gem 'money-rails'
 gem 'rails_tokeninput'
 gem 'nested_form'
 gem 'sanitize'
+gem 'airbrake'
 
 group :development, :test do
 	gem 'sqlite3'
