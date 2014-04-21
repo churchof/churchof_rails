@@ -2,10 +2,18 @@
   <div class="page-header-block">
     <div class="page-title">
       <h2>Church Admin Panel</h2>
+
+
+      
     </div>
 
     <ul class="nav nav-pills page-options">
-      <li class="active">
+
+        <% if params.has_key?(:selected) %>
+          <li>
+        <% else %>
+          <li class= "active">
+        <% end %>
         <a href="#IncomingNeeds" data-toggle="tab">
           <% if @needs_admin_incoming.count > 0 %>
             <span class="count-number pull-left"><%= @needs_admin_incoming.count %></span>
@@ -17,7 +25,11 @@
           <% end %>
         </a>
       </li>
-      <li>
+        <% if params.has_key?(:selected) %>
+          <li class= "active">
+        <% else %>
+          <li>
+        <% end %>
         <a href="#InProgressNeeds" data-toggle="tab">
           <% if @needs_admin_in_progress.count > 0 %>
             <span class="count-number pull-left"><%= @needs_admin_in_progress.count %></span>
@@ -58,7 +70,15 @@
   </div>
 
   <div id='content' class="tab-content main-content">
+
+
+        <% if params.has_key?(:selected) %>
+    <div class="tab-pane" id="IncomingNeeds">
+        <% else %>
     <div class="tab-pane active" id="IncomingNeeds">
+        <% end %>
+
+
       <% @needs_admin_incoming.each do |need| %>
         <div class="need-container">
           <div class="inner-content">
@@ -179,7 +199,15 @@
       <% end %>
     </div>
 
-    <div class="tab-pane" id="InProgressNeeds">
+
+        <% if params.has_key?(:selected) %>
+            <div class="tab-pane active" id="InProgressNeeds">
+
+        <% else %>
+            <div class="tab-pane" id="InProgressNeeds">
+
+        <% end %>
+
       <% @needs_admin_in_progress.each do |need| %>
         <% if need.need_stage_value == 2 %>
           <div class="need-container">

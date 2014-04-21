@@ -12,14 +12,17 @@ class NeedsController < ApplicationController
         if @need.contributions.count == 0
           @need.is_public = params["need"]["is_public"]
           @need.save
-          redirect_to root_path, notice: 'Need was successfully updated.'
+
+
+          redirect_to "/church_admin_panel/index?selected=admin_in_progress", notice: 'Need was successfully updated.'
         else 
-          redirect_to root_path, alert: 'Need was not updated because people have already given to it.'
+          redirect_to "/church_admin_panel/index?selected=admin_in_progress", alert: 'Need was not updated because people have already given to it.'
         end
       else
         @need.is_public = params["need"]["is_public"]
         @need.save
-        redirect_to root_path, notice: 'Need was successfully updated.'
+        #
+          redirect_to "/church_admin_panel/index?selected=admin_in_progress", notice: 'Need was successfully updated.'
       end
     end
   end

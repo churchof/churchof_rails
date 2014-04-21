@@ -18,4 +18,5 @@ class ChurchAdminPanelController < ApplicationController
   	@needs_admin_completed = Need.where(user_church_admin: current_user, need_stage: 3)
   	@needs_admin_denied = Need.where(user_church_admin: current_user, need_stage: 4)
   end
+
 end
