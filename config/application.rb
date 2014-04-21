@@ -6,8 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-config.serve_static_assets = true
-
 if Rails.env.development? || Rails.env.test?
     require 'dotenv'
     Dotenv.load
