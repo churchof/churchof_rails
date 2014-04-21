@@ -1,7 +1,8 @@
 class SkillsController < ApplicationController
 
   def index
-	@skills = Skill.where("name like ?", "%#{params[:q]}%")
+
+	@skills = Skill.where(name: params[:q])
 	respond_to do |format|
 		format.html
 		format.json { render :json => @skills.map(&:attributes) }

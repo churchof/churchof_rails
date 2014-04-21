@@ -109,7 +109,7 @@ class NeedsController < ApplicationController
   # GET /needs/1.json
   def show
     @expense = Expense.new
-    @needs = Need.where("id like ?", "%#{params[:id]}%")
+    @needs = Need.where(id: params[:id])
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
         marker.lat need.latitude
