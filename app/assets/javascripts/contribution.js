@@ -1,5 +1,6 @@
 // Not sure how to get the .env here.
-jQuery(function($) { Stripe.setPublishableKey('pk_test_EvYspVJmIJvMohKKhAykkgwA');})
+
+jQuery(function($) { Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));})
 
   var stripeResponseHandler = function(status, response) {
     var $form = $('#new_contribution');
