@@ -4,6 +4,7 @@ jQuery(function($) { Stripe.setPublishableKey($('meta[name="stripe-key"]').attr(
 
   var stripeResponseHandler = function(status, response) {
 
+          alert("string response");
 
     var $form = $('#new_contribution');
     if (response.error) {
