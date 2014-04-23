@@ -19,6 +19,9 @@ jQuery(function($) { Stripe.setPublishableKey($('meta[name="stripe-key"]').attr(
 
   jQuery(function($) {
     $('#new_contribution').submit(function(e) {
+
+alert("hello");
+
       var $form = $(this);
       $form.find('button').prop('disabled', true);
       Stripe.createToken($form, stripeResponseHandler);
