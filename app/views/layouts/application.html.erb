@@ -16,8 +16,8 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= csrf_meta_tags %>
 
-<!--   <%= tag :meta, :name => "stripe-key", :content => ENV['PUBLISHABLE_KEY'] %>
- -->
+  <%= tag :meta, :name => "stripe-key", :content => ENV['PUBLISHABLE_KEY'] %>
+
   <%= yield :head %>
 
 </head>
