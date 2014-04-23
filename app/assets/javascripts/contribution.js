@@ -1,35 +1,35 @@
 // Not sure how to get the .env here.
 
-jQuery(function($) { Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));})
+// jQuery(function($) { Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));})
 
-  var stripeResponseHandler = function(status, response) {
+//   var stripeResponseHandler = function(status, response) {
 
-          alert("string response");
+//           alert("string response");
 
-    var $form = $('#new_contribution');
-    if (response.error) {
+//     var $form = $('#new_contribution');
+//     if (response.error) {
 
-          alert("string response - error");
-      $form.find('.payment-errors').text(response.error.message);
-      $form.find('button').prop('disabled', false);
-    } else {
-                alert("string response - good");
+//           alert("string response - error");
+//       $form.find('.payment-errors').text(response.error.message);
+//       $form.find('button').prop('disabled', false);
+//     } else {
+//                 alert("string response - good");
 
-      var token = response.id;
-      var currency = response.currency || 'USD';
-      $form.append($('<input type="hidden" name="contribution[stripe_token]" />').val(token));
-      $form.append($('<input type="hidden" name="contribution[stripe_currency]" />').val(currency));
-      // and re-submit
-      $form.get(0).submit();
-    }
-  };
+//       var token = response.id;
+//       var currency = response.currency || 'USD';
+//       $form.append($('<input type="hidden" name="contribution[stripe_token]" />').val(token));
+//       $form.append($('<input type="hidden" name="contribution[stripe_currency]" />').val(currency));
+//       // and re-submit
+//       $form.get(0).submit();
+//     }
+//   };
 
-  jQuery(function($) {
-    $('#new_contribution').submit(function(e) {
-      alert("submit");
-      var $form = $(this);
-      $form.find('button').prop('disabled', true);
-      Stripe.createToken($form, stripeResponseHandler);
-      return false;
-    });
-  });
+//   jQuery(function($) {
+//     $('#new_contribution').submit(function(e) {
+//       alert("submit");
+//       var $form = $(this);
+//       $form.find('button').prop('disabled', true);
+//       Stripe.createToken($form, stripeResponseHandler);
+//       return false;
+//     });
+//   });
