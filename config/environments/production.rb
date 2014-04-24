@@ -10,8 +10,6 @@ Churchof::Application.configure do
     }
   }
   
-  config.action_mailer.async = true
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
