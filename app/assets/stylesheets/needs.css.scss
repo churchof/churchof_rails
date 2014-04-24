@@ -48,9 +48,17 @@
     color: $text-grey;
   }
 
-.need-description p,
-.private-information p{
+.need-description p{
   font-size: 16px;
+  color: $text-grey;
+}
+
+.private-information p{
+  font-size: 14px;
+  color: $text-grey;
+}
+
+p.no-skills-message{
   color: $text-grey;
 }
 
@@ -543,10 +551,18 @@ p.form-instructions{
   vertical-align: top;
 }
 
+.need-form input.boolean{
+  height: auto;
+}
+
 .need-form .private-fields textarea,
 .need-form .public-fields textarea{
   width: 100%;
   height: 80px;
+}
+
+.need-form textarea{
+  padding-top: 12px;
 }
 
 .need-form .all-private-fields{
@@ -575,6 +591,14 @@ p.form-instructions{
 .need-form .all-private-fields textarea{
   width: 100%;
   height: 60px;
+}
+
+.need-form .grid-col textarea{
+  height: 45px;
+}
+
+.need-form textarea{
+  height: 45px;
 }
 
 .need-form .lone-field{
