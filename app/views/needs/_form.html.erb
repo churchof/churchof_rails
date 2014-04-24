@@ -60,8 +60,8 @@ $(document).ready(function () {
       <div class="inner-content">
         <div class="public-fields">
           <p class="form-instructions">Please title and describe the need:</p>
-          <%= f.input :title_public %>
-          <%= f.input :description_public %>
+          <%= f.input :title_public, label: "Title Public" %>
+          <%= f.input :description_public, label: "Description Public" %>
         </div>
         <div class="lone-field">
           <%= f.input :recipient_size, :as => :radio_buttons, :default  => "Unknown" %>
@@ -73,16 +73,13 @@ $(document).ready(function () {
           <%= f.input :full_street_address %>
         </div>
         <div class="lone-field">
-          <%= f.input :shows_real_location_publically %>
-        </div>
-        <div class="lone-field">
-          <%= f.input :recipient_contribution %>
+          <%= f.input :shows_real_location_publically, label: "Show real location publicly", class: "public-checkbox" %>
         </div>
         <div class="lone-field ">
-          <%= f.input :user_id_church_admin, collection: User.with_role(:church_admin), label_method: :full_name %>
+          <%= f.input :user_id_church_admin, label: "Church Admin", collection: User.with_role(:church_admin), label_method: :full_name %>
         </div>
         <div class="lone-field">
-          <%= f.input :leader %>
+          <%= f.input :leader, label: "Leader" %>
         </div>
         <div class="lone-field">
           <h4><%= f.label :skill_tokens, "Skills" %></h4>
@@ -96,8 +93,8 @@ $(document).ready(function () {
         <div class="inner-content">
           <div class="private-fields">
             <p class="form-instructions">Please title and describe the need:</p>
-            <%= f.input :title %>
-            <%= f.input :description %>
+            <%= f.input :title, label: "Title Private" %>
+            <%= f.input :description, label: "Description Private" %>
           </div>
           <div class="form-for-individuals">
             <div class="field-pair">
@@ -120,6 +117,9 @@ $(document).ready(function () {
             </div>
             <div class="field-group-3">
               <%= f.input :gender %>
+            </div>
+            <div class="lone-field">
+              <%= f.input :recipient_contribution, label: "Recipient's Contribution" %>
             </div>
           </div>
         </div>
