@@ -29,10 +29,31 @@ $(document).ready(function () {
       });
     };
 
+    $("#skills_list").on("change", function () {
+      var selectedValue = ""
+      $('#needs-full-list').html();
+      selectedValue = $('#skills_list option:selected').val();
+      $('.need-category-title').html(selectedValue + " Needs");
+      $.ajax({
+          type: "GET",
+          url: "/needs",
+          data: {
+            selected_skills: selectedValue
+          },
+          dataType: "script",
+          success: function(data) {
+            if ($('.need-container').length == 0){
+              $('#needs-full-list').html('There are no needs yet listed under this skill set.');
+            }
+          }
+        });
+    });
+
     $("#skills_input").tokenInput("/skills.json", {
       crossDomain: false,
       onAdd: function (item) {
         updateSkills();
+
         var selectedValues = $('#skills_input').tokenInput("get");
         $.ajax({
           type: "GET",
@@ -60,36 +81,31 @@ $(document).ready(function () {
     });
 });
 
-
-
-
-
-
   </script>
 <% end %>
 
 <% content_for :map do %>
-    <script>
-      var map_hash = <%= raw @hash.to_json %>;
-    </script>
-    <%= render 'layouts/map' %>
+  <script>
+    var map_hash = <%= raw @hash.to_json %>;
+  </script>
+  <%= render 'layouts/map' %>
 <% end %>
 
-<div>
-
-</div>
-
-<br>
-<br>
-
-<div>
-    <%= text_field_tag "skills_input", "" %>
-</div>
-
 <div class="page-header-block">
-  <h1>All Needs</h1>
+  <h1 class="need-category-title">All Needs</h1>
+  <div class="skills-filter">
+    <label>Filter:</label>
+    <select id="skills_list" class="skill-select">
+      <option value="">All Needs</option>
+      <%- Skill.all.each do | skill | %>
+        <option data-tag="#{skill.name}">
+          <%= skill.name %>
+        </div>
+      <% end %>
+    </select>
+  </div>
 </div>
 
-<div class="needs main-content">
+<div class="needs main-content" id="needs-full-list">
   <%= render @needs %>
 </div>

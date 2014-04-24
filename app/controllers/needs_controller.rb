@@ -15,7 +15,7 @@ class NeedsController < ApplicationController
 
 
           redirect_to "/church_admin_panel/index?selected=admin_in_progress", notice: 'Need was successfully updated.'
-        else 
+        else
           redirect_to "/church_admin_panel/index?selected=admin_in_progress", alert: 'Need was not updated because people have already given to it.'
         end
       else
@@ -61,12 +61,8 @@ class NeedsController < ApplicationController
   # GET /needs.json
   def index
     if params[:selected_skills].present?
-      skills_hash = params[:selected_skills]
-      skills = []
-      skills_hash.each do |key, value|
-        skills << value["id"] if value.is_a?(Hash)
-      end
-      @needs = Need.public.in_progress.joins(:skills).where("skills.id IN (?)", skills).uniq
+      skill_name = params[:selected_skills]
+      @needs = Need.public.in_progress.joins(:skills).where("skills.name == ?", skill_name).uniq
     else
       @needs = Need.public.in_progress
     end

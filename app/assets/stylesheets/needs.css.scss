@@ -28,6 +28,42 @@
   padding-bottom: 25px;
 }
 
+.skills-filter{
+  margin-top: 15px;
+  display: inline-block;
+  vertical-align: top;
+  float: right;
+}
+
+.skills-filter label{
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+.skills-filter select{
+  cursor: pointer;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('https://s3.amazonaws.com/church_of/assets/ui_assets/dropdown-arrow.jpg') #FFF no-repeat right center;
+  background-size: 10%;
+  background-position: right 5px center;
+  border-radius: 0px;
+  -webkit-appearance: none;
+  padding-left: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: solid 1px #C1C1C1;
+}
+
+h1.need-category-title{
+  width: auto;
+  display: inline-block;
+}
+
 .need-container h1,
 .need-container h2,
 .need-container h3,
@@ -143,6 +179,11 @@ p.no-skills-message{
 }
 
 @media(max-width: 767px){
+  .skills-filter{
+    display:block;
+    float: none;
+  }
+
   .grid-col{
     width: 100%;
     display: block;
