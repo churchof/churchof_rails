@@ -39,10 +39,20 @@ class Contribution < ActiveRecord::Base
   #validates :contributor, presence: true
 
   def process_payment
+
+
+# if email
+#   emailAddress = email
+# end
+
+# logger.debug "---+++++++++---"
+# logger.debug email
+# logger.debug "---+++++++++---"
+
     charge = Stripe::Charge.create(amount: amount_cents,
                                    currency: @stripe_currency,
                                    card: @stripe_token,
-                                   description: "Support of #{need.title}")
+                                   description: "TEST/PRODUCTION - id:#{need.id} email:EMAIL GOES HERE title:#{need.title}")
     true
   rescue Stripe::CardError
     false

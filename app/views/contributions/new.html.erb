@@ -11,21 +11,37 @@
 
       var stripeResponseHandler = function(status, response) {
 
-              alert("string response");
 
         var $form = $('#new_contribution');
         if (response.error) {
 
               alert("string response - error");
+
           $form.find('.payment-errors').text(response.error.message);
           $form.find('button').prop('disabled', false);
+
+                  //REMOVE REMOVE REMOVE
+                  // <% if user_signed_in? %>
+                  //     $form.append($('<input type="hidden" name="contribution[email]" />').val(<%= current_user.full_name %>));
+                  // <% end %>
+                  // $form.get(0).submit();
+                  //REMOVE REMOVE REMOVE
+
         } else {
-                    alert("string response - good");
 
           var token = response.id;
           var currency = response.currency || 'USD';
           $form.append($('<input type="hidden" name="contribution[stripe_token]" />').val(token));
           $form.append($('<input type="hidden" name="contribution[stripe_currency]" />').val(currency));
+
+
+// <% if user_signed_in? %>
+//   $form.append($('<input type="hidden" name="email" />').val(<%= current_user.full_name %>));
+// <% end %>
+
+          //ADDING CURRENT USER HERE!!! / CONTIBUTOR EMAIL IF THATS NEEDED. CHECK ON THE OTHER SIDE WHICH TO SEND...
+
+
           // and re-submit
           $form.get(0).submit();
         }
@@ -33,7 +49,6 @@
 
       jQuery(function($) {
         $('#new_contribution').submit(function(e) {
-          alert("submit");
           var $form = $(this);
           $form.find('button').prop('disabled', true);
           Stripe.createToken($form, stripeResponseHandler);
