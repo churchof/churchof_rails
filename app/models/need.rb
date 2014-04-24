@@ -51,7 +51,7 @@ class Need < ActiveRecord::Base
 
   def mail_to_church_admin_whos_recieving_the_need
     # should this be async?
-    Mailer.church_admin_new_need_admin_incoming(self, self.user_posted_by, self.user_church_admin).deliver
+    Mailer.church_admin_new_need_admin_incoming(self.id, self.user_posted_by.id, self.user_church_admin.id).deliver
   end
 
   def update_date_public_posted_if_changed
@@ -67,7 +67,7 @@ class Need < ActiveRecord::Base
         # Only email the user if they haven't been emailed about it yet.
         past_relevant_activities = Activity.where(user_id: self.user_posted_by.id, subject: self, description: 'Mailed because need they posted was approved (moved to In Progress).')
         if past_relevant_activities.count == 0
-          Mailer.user_posted_by_need_moved_to_in_progress(self.user_posted_by, self, self.user_church_admin).deliver
+          Mailer.user_posted_by_need_moved_to_in_progress(self.user_posted_by.id, self.id, self.user_church_admin.id).deliver
           Activity.create(
             subject: self,
             description: 'Mailed because need they posted was approved (moved to In Progress).',
@@ -100,7 +100,7 @@ class Need < ActiveRecord::Base
         past_relevant_activities = Activity.where(user_id: user.id, subject: self, description: 'Mailed about need due to relevant skills.')
         if past_relevant_activities.count == 0
           # Only email the user if they haven't been emailed about it yet.
-          Mailer.user_new_need_with_matching_skills(user, self, self.skills).deliver
+          Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skills.id).deliver
           Activity.create(
             subject: self,
             description: 'Mailed about need due to relevant skills.',
