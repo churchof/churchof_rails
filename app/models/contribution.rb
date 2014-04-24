@@ -10,10 +10,14 @@ class Contribution < ActiveRecord::Base
 
   before_create :assign_to_user_or_contributor
 
-  after_create :mail_to_church_admin
-  after_create :mail_to_user_posted_by
-  after_create :mail_to_users_who_contributed_if_fully_funded
-  after_create :mail_receipt
+  # Switched these to only if the contribution succeeds.
+  # after_create :mail_to_church_admin
+  # after_create :mail_to_user_posted_by
+  # after_create :mail_to_users_who_contributed_if_fully_funded
+  # after_create :mail_receipt
+
+  scope :succeded, -> { where(succeded: true) }
+  scope :not_reimbursed, -> { where(reimbursed: false) }
 
   def mail_to_church_admin
     # should this be async?
@@ -40,21 +44,25 @@ class Contribution < ActiveRecord::Base
 
   def process_payment
 
-
-# if email
+# emailAddress = "nil"
+# if defined? email
 #   emailAddress = email
 # end
-
-# logger.debug "---+++++++++---"
-# logger.debug email
-# logger.debug "---+++++++++---"
 
     charge = Stripe::Charge.create(amount: amount_cents,
                                    currency: @stripe_currency,
                                    card: @stripe_token,
-                                   description: "TEST/PRODUCTION - id:#{need.id} email:EMAIL GOES HERE title:#{need.title}")
-    true
+                                   description: "#{Rails.env} - contribution_id:#{id} need_id:#{need.id} email:#{email} title:#{need.title}")
+  mail_to_church_admin
+  mail_to_user_posted_by
+  mail_to_users_who_contributed_if_fully_funded
+  mail_receipt
+  self.update_column(:succeded, true)
+  self.update_column(:reimbursed, false)
+  true
   rescue Stripe::CardError
+    self.update_column(:succeded, false)
+    self.update_column(:reimbursed, false)
     false
   end
 
@@ -109,7 +117,7 @@ class Contribution < ActiveRecord::Base
           )
         end
         # Alert the contributors (with/without accounts)
-        self.need.contributions.each do |contribution|
+        self.need.contributions.succeded.not_reimbursed.each do |contribution|
           if contribution.user
             past_relevant_activities = Activity.where(user_id: contribution.user.id, subject: self.need, description: 'Mailed news that need is fully funded to contributor (with account).')
             if past_relevant_activities.count == 0

@@ -9,7 +9,7 @@ class NeedsController < ApplicationController
     # Should only be able to set if its in progress so the archived version stays the same.
     if @need.need_stage_value == 2
       if params["need"]["is_public"] == "false"
-        if @need.contributions.count == 0
+        if @need.contributions.succeded.not_reimbursed.count == 0
           @need.is_public = params["need"]["is_public"]
           @need.save
 

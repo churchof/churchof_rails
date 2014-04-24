@@ -153,7 +153,7 @@ class Need < ActiveRecord::Base
 
   def total_contributed
     money = Money.new(0, "USD")
-    	self.contributions.each do |contribution|
+    	self.contributions.succeded.not_reimbursed.each do |contribution|
 		    money = money + contribution.amount
     	end
     	money

@@ -20,12 +20,6 @@
           $form.find('.payment-errors').text(response.error.message);
           $form.find('button').prop('disabled', false);
 
-                  //REMOVE REMOVE REMOVE
-                  // <% if user_signed_in? %>
-                  //     $form.append($('<input type="hidden" name="contribution[email]" />').val(<%= current_user.full_name %>));
-                  // <% end %>
-                  // $form.get(0).submit();
-                  //REMOVE REMOVE REMOVE
 
         } else {
 
@@ -34,12 +28,6 @@
           $form.append($('<input type="hidden" name="contribution[stripe_token]" />').val(token));
           $form.append($('<input type="hidden" name="contribution[stripe_currency]" />').val(currency));
 
-
-// <% if user_signed_in? %>
-//   $form.append($('<input type="hidden" name="email" />').val(<%= current_user.full_name %>));
-// <% end %>
-
-          //ADDING CURRENT USER HERE!!! / CONTIBUTOR EMAIL IF THATS NEEDED. CHECK ON THE OTHER SIDE WHICH TO SEND...
 
 
           // and re-submit
@@ -97,9 +85,12 @@
     <div class="form-row">
       <label>
         <span>Email this should only show if the user is not logged in </span>
-        <%= f.text_field :email %>
+        <%= f.text_field :email, :required => true %>
       </label>
     </div>
+  <% else %>
+      <%= f.input :email, :as => :hidden, :input_html => { :value => current_user.email } %>
+
   <% end %>
 
   <button type="submit">Submit Payment</button>
