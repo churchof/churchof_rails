@@ -20,7 +20,7 @@ class Update < ActiveRecord::Base
           )
         end
 
-	    self.need.contributions.each do |contribution|
+	    self.need.contributions.succeded.not_reimbursed.each do |contribution|
 	      if contribution.user
 	        past_relevant_activities = Activity.where(user_id: contribution.user.id, subject: self, description: 'Mailed news that need recieved public update to contributor (with account).')
 	        if past_relevant_activities.count == 0

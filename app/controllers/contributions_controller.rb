@@ -9,8 +9,8 @@ class ContributionsController < ApplicationController
     @need = Need.find(params[:need_id])
     # if a current user is signed in it will set them as the user for this contribution.
     @contribution = @need.contributions.build(contribution_params.merge(user: current_user))
+    @contribution.save
     if @contribution.process_payment
-      @contribution.save
       redirect_to need_path(params[:need_id]), :flash => { :notice => "Payment accepted" }
     else
       redirect_to need_path(params[:need_id]), :error => { :notice => "Your donation was not accepted" }

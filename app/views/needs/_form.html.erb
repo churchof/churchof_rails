@@ -60,20 +60,20 @@ $(document).ready(function () {
       <div class="inner-content">
         <div class="public-fields">
           <p class="form-instructions">Please title and describe the need:</p>
-          <%= f.input :title_public, label: "Title Public" %>
-          <%= f.input :description_public, label: "Description Public" %>
+          <%= f.input :title_public, label: "Public Title" %>
+          <%= f.input :description_public, label: "Public Description" %>
         </div>
         <div class="lone-field">
-          <%= f.input :recipient_size, :as => :radio_buttons, :default  => "Unknown" %>
+          <%= f.input :recipient_size, :as => :radio_buttons, :default  => "Unknown", label: "Recipient Size" %>
         </div>
         <div class="lone-field">
-          <%= f.input :frequency_type, :as => :radio_buttons, :default  => "Unknown"  %>
+          <%= f.input :frequency_type, :as => :radio_buttons, :default  => "Unknown", label: "Frequency"  %>
         </div>
         <div class="lone-field">
-          <%= f.input :full_street_address %>
+          <%= f.input :full_street_address, label: "Full Street Address" %>
         </div>
         <div class="lone-field">
-          <%= f.input :shows_real_location_publically, label: "Show real location publicly", class: "public-checkbox" %>
+          <%= f.input :shows_real_location_publically, label: "Show Real Location Publicly", class: "public-checkbox" %>
         </div>
         <div class="lone-field ">
           <%= f.input :user_id_church_admin, label: "Church Admin", collection: User.with_role(:church_admin), label_method: :full_name %>
@@ -93,30 +93,30 @@ $(document).ready(function () {
         <div class="inner-content">
           <div class="private-fields">
             <p class="form-instructions">Please title and describe the need:</p>
-            <%= f.input :title, label: "Title Private" %>
-            <%= f.input :description, label: "Description Private" %>
+            <%= f.input :title, label: "Private Title" %>
+            <%= f.input :description, label: "Private Description" %>
           </div>
           <div class="form-for-individuals">
             <div class="field-pair">
-              <%= f.input :first_name%>
+              <%= f.input :first_name, label: "First Name"%>
             </div>
             <div class="field-pair">
-              <%= f.input :last_name %>
+              <%= f.input :last_name, label: "Last Name" %>
             </div>
             <div class="field-pair">
-              <%= f.input :last_four_ssn %>
+              <%= f.input :last_four_ssn, label: "Last 4 SSN" %>
             </div>
             <div class="field-pair">
-              <%= f.input :street_address %>
+              <%= f.input :street_address, label: "Street Address" %>
             </div>
             <div class="field-group-3">
-              <%= f.input :drivers_license %>
+              <%= f.input :drivers_license, label: "Driver's License" %>
             </div>
             <div class="field-group-3">
-              <%= f.input :date_of_birth %>
+              <%= f.input :date_of_birth, label: "DOB (mm/dd/yy)" %>
             </div>
             <div class="field-group-3">
-              <%= f.input :gender %>
+              <%= f.input :gender, label: "Gender" %>
             </div>
             <div class="lone-field">
               <%= f.input :recipient_contribution, label: "Recipient's Contribution" %>

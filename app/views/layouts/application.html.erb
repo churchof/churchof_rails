@@ -6,7 +6,7 @@
 
   <title>Churchof</title>
 
-  <%= stylesheet_link_tag 'http://fast.fonts.net/cssapi/0925c21f-6a07-4baa-b4a0-c0d0ba302974.css' %>
+  <%= stylesheet_link_tag 'https://fast.fonts.net/cssapi/0925c21f-6a07-4baa-b4a0-c0d0ba302974.css' %>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Muli:400,400italic' %>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,700'%>
   <%= stylesheet_link_tag  "application", media: "all", "data-turbolinks-track" => false %>
@@ -15,6 +15,8 @@
   <%= javascript_include_tag "https://js.stripe.com/v1/" %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= csrf_meta_tags %>
+
+  <%= tag :meta, :name => "stripe-key", :content => ENV['PUBLISHABLE_KEY'] %>
 
   <%= yield :head %>
 
