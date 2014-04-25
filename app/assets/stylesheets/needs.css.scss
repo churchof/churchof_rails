@@ -274,6 +274,12 @@ p.no-skills-message{
       margin-right: 5px;
     }
 
+    .image-modal img{
+      max-height: 100%;
+      max-width: 100%;
+    }
+
+
 .expenses-bar,
 .skills-bar{
   @include content-bar($light-grey)

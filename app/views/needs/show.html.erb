@@ -410,7 +410,9 @@
           <br>
           <br>
           <% update.images.each do |image| %>
+          <div class="image-modal">
             <%= image_tag(image.image) %>
+          </div>
             <br>
             <%= image.caption %>
             <br>
