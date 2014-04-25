@@ -5,7 +5,9 @@
       </h2>
 
       <% if need.date_public_posted %>
-        <%= time_ago_in_words(need.date_public_posted) %> ago
+        <p class="timestamp-label">
+          <%= time_ago_in_words(need.date_public_posted) %> ago
+        </p>
       <% end %>
       <div class="need-description">
         <p><%= need.description_public %></p>
