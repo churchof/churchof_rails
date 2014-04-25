@@ -38,6 +38,7 @@
   display: inline-block;
   vertical-align: top;
   float: right;
+  min-width: 100px;
 }
 
 .skills-filter label{
@@ -62,6 +63,8 @@
   padding-top: 8px;
   padding-bottom: 8px;
   border: solid 1px #C1C1C1;
+    min-width: 160px;
+
 }
 
 h1.need-category-title{

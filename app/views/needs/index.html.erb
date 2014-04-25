@@ -97,7 +97,7 @@ $(document).ready(function () {
     <label>Filter:</label>
     <select id="skills_list" class="skill-select">
       <option value="">All Needs</option>
-      <%- Skill.all.each do | skill | %>
+      <%- @skills_represented.each do | skill | %>
         <option data-tag="#{skill.name}">
           <%= skill.name %>
         </div>

@@ -68,6 +68,19 @@ class NeedsController < ApplicationController
     end
 
     @skills = Skill.all
+
+    skills_represented = Array.new
+    @needs.each do |need|
+      logger.debug "+++++++"
+
+      need.skills.each do |skill|
+skills_represented << skill
+      end
+      
+    end
+    @skills_represented = skills_represented.uniq
+
+    
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
         marker.lat need.latitude
