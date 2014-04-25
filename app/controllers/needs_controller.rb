@@ -71,10 +71,9 @@ class NeedsController < ApplicationController
 
     skills_represented = Array.new
     @needs.each do |need|
-      logger.debug "+++++++"
 
       need.skills.each do |skill|
-skills_represented << skill
+        skills_represented << skill
       end
       
     end
