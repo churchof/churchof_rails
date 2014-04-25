@@ -1,47 +1,32 @@
-<h2>Impact Panel</h2>
+<div class="page-header-block">
+  <div class="page-title">
+    <h2>Impact Panel</h2>
+  </div>
+</div>
 
-<% @needs_supported.each do |need| %>
-  <div class="need-container">
-    <div class="inner-content">
-      <h2 class="need-title">
-        <%= link_to need.title_public, need %>
-      </h2>
-      <div class="need-description">
-        <p><%= need.description_public %></p>
-        <div class="row need-details">
-          <div class="expenses col-xs-12 col-sm-6">
-            <h3>Expenses</h3>
-              <div class="expenses-bar">
-                <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
-                <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
+<div class="main-content">
+  <% if @needs_supported.length > 0 %>
+    <% @needs_supported.each do |need| %>
+      <div class="need-container">
+        <div class="inner-content">
+          <h2 class="need-title">
+            <%= link_to need.title_public, need %>
+          </h2>
+          <div class="contributions-list">
+            <% Contribution.where(user:current_user, need:need).succeded.not_reimbursed.reverse.each do |contribution| %>
+              <div class="contribution-item">
+                <span class="contribution-icon"></span>
+                <span class="contribution-text">
+                  You contributed <strong>$<%= contribution.amount %></strong>
+                  <%= time_ago_in_words(contribution.created_at) %> ago
+                </span>
               </div>
-          </div>
-          <div class="skills col-xs-12 col-sm-6">
-            <h3>Skills / Resources</h3>
-            <ul class="skills-list">
-              <% if need.skills_count > 0 %>
-                <% need.skills.each do |skill| %>
-                  <li class="skill-tag">
-                    <span class="skill-icon">
-                      <%= image_tag(skill.icon_url) %>
-                    </span>
-                    <%= skill.name %>
-                  </li>
-                <% end %>
-              <% else %>
-                No skills added yet.
-              <% end %>
-            </ul>
+            <% end %>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-	<br>
-	<% Contribution.where(user:current_user, need:need).succeded.not_reimbursed.reverse.each do |contribution| %>
-		<%= contribution.amount %> | <%= time_ago_in_words(contribution.created_at) %>
-		<br>
-	<% end %>
-	<br>
-	<br>
-<% end %>
+    <% end %>
+  <% else %>
+    <p>You have not contributed to any <a href="/">needs</a> yet. </p>
+  <% end %>
+</div>

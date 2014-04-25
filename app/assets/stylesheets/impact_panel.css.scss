@@ -755,3 +755,30 @@ li.token-input-token-facebook.custom span{
   width: 80%;
   height: 45px;
 }
+
+/*Contributions*/
+.contribution-item{
+  overflow: auto;
+}
+.contribution-icon{
+  background: url('https://s3.amazonaws.com/church_of/assets/skill_icons/826-money-1.png') #1DD174 no-repeat center center;
+  background-size: 60%;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  float: left;
+}
+
+.contribution-text{
+  padding-top: 9px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.contribution-text strong{
+  color: #000;
+}
