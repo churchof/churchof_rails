@@ -9,6 +9,11 @@
 
 .marker_info_box { border: 0px solid black; margin-top: 0px; background: white; padding: 15px; width: 280px; height: 60px; }
 
+.timestamp-label{
+  position: absolute;
+  top: 30px;
+  right: 25px;
+}
 
 .need-container {
   border-bottom: solid 1px #CCC;
@@ -195,6 +200,11 @@ p.no-skills-message{
 
   .grid-block{
     margin-bottom: 30px;
+  }
+
+  .timestamp-label{
+    top: 25px;
+    right: 5px;
   }
 }
 
@@ -943,3 +953,5 @@ li.token-input-token-facebook.custom span{
   width: 80%;
   height: 45px;
 }
+
+
