@@ -82,6 +82,10 @@ $(document).ready(function () {
           <%= f.input :leader, label: "Leader" %>
         </div>
         <div class="lone-field">
+
+              <%= link_to "Full list of Skills", skills_path %>
+
+          
           <h4><%= f.label :skill_tokens, "Skills" %></h4>
           <%= f.text_field :skill_tokens, "data-pre" => @need.skills.map(&:attributes).to_json %>
         </div>

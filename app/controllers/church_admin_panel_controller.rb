@@ -1,5 +1,7 @@
 class ChurchAdminPanelController < ApplicationController
 
+  # This is here becasue of the pending portion, the authorize! below should still work.
+      skip_authorization_check
 
 	before_filter :is_allowed_to_view_page?
 

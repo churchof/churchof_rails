@@ -10,9 +10,9 @@
             <span class="count-number pull-left"><%= @needs_admin_incoming.count %></span>
           <% end %>
           <% if @needs_admin_incoming.count == 1 %>
-            Incoming Need
+            Awaiting Approval Need
           <% else %>
-            Incoming Needs
+            Awaiting Approval Needs
           <% end %>
         </a>
       </li>
@@ -336,11 +336,32 @@
 <% elsif current_user.has_role? :pending_need_poster %>
   <div class="page-header-block">
     <div class="page-title">
-      <h2>Poster Agreement</h2>
+      <h2>Need Poster Agreement</h2>
     </div>
-    <p>
-      In order to be a poster you'll need to agree to the following. It's a lot of legaleez so we'll try and point out the highlights. Basically confidentiality, etc.
-    </p>
+      
+<br>
+<br>
+<i>Confidentiality:</i>
+<br>
+<br>
+<p>
+As a Need Poster you will be able to see private information that is intended to be managed by those seeing that the Need is met properly. As such you must not share any information that is not public. Additionally know that the information you post may be shared to whom the Church Admin sees fit, including other Church Admins or persons they work with the complete the Need. The "Church of" organization will also have access to the information to insure that the system is being used effectively and with integrity.
+</p>
+<br>
+<br>
+<i>Need Completion:</i>
+<br>
+<br>
+<p>
+By posting a need your information will be available to the Church Admin the need is posted to. They will likely reach out to you for confirmation of details. Please be willing to help in the process as the Admin’s role is to make sure the Need is valid before posting it publically.
+</p>
+<br>
+<br>
+
+
+
+
+
     <%= simple_form_for(current_user, :url => users_agree_to_need_poster_agreement_path, :method => :post, html: {class: "change-status"}) do |f| %>
       <%= f.submit "I Agree to the Above" %>
     <% end %>

@@ -577,9 +577,38 @@
     <div class="page-title">
       <h2>Church Admin Agreement</h2>
     </div>
-    <p>
-      In order to be a church admin you'll need to agree to the following. It's a lot of legaleez so we'll try and point out the highlights. Basically confidentiality, etc. Also, you'll be a sudo member of ROSM. This means you must adhear to all of there stuff. Also, this is an ecumenical effort meant to unite the Christian Church. As such, in order to be an admin, you must agree to one of the most widely held statements of faith: The Apostles Creed.
-    </p>
+      
+<br>
+<br>
+<i><h3>Receiving Funding:</h3></i>
+<br>
+<br>
+<p>
+All contributions are sent directly to ROSM. ROSM will be sending checks out weekly to the Churches that each Church Admin is associated with. For now this means that most Needs will need to be covered upfront by each individual church. If your church needs assistance in this please let us know at support@church-of.com.
+
+
+MONEY Can be taken back if there are disputes. We dont anticipate much of this.
+</p>
+<br>
+<br>
+<i><h3>ROSM Agreement:</h3></i>
+<br>
+<br>
+<p>
+Church of Lexington strives to provide the necessary tools for Church Admins to make informed decisions about the needs that come to their attention. As such we have partnered with ROSM. ROSM holds a database that is contributed by a large number of Churches and Non-Profits. The Church of Lexington platform (1) records all Needs into ROSM and (2) Provides Church Admins with information from the ROSM database that pertains to the Need at hand. Because of this all Church Admins need to agree to ROSM’s Confidentiality Form shown below:
+
+[ROSM’S CONFIDENTIALITY FORM GOES HERE]
+</p>
+<br>
+<br>
+<i><h3>Confidentiality:</h3></i>
+<br>
+<br>
+<p>
+As a Church Admin you will be able to see private information that is intended to be managed by those seeing that the Need is met properly. As such you must not share any information that is not public outside of any appropriate paths. The "Church of" organization will also have access to the information to insure that the system is being used effectively and with integrity.
+</p>
+<br>
+<br>
     <%= simple_form_for(current_user, :url => users_agree_to_church_admin_agreement_path, :method => :post, html: {class: "change-status"}) do |f| %>
       <%= f.submit "I Agree to the Above" %>
     <% end %>

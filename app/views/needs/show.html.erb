@@ -217,6 +217,8 @@
         </div>
 
 
+      <% if current_user == @need.user_church_admin %>
+
         <div class="private-records-block">
           <div class="previous-records-bar" data-toggle="modal" data-target="#rosmModal">
             <span class="record-count">
@@ -228,6 +230,9 @@
             <span class="details">Show Results</span>
           </div>
         </div>
+
+
+        <% end %>
       <% end %>
     <% end %>
 
