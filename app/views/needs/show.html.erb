@@ -301,7 +301,10 @@
     <% if can? :update, @need %>
       <%= link_to 'Edit Need', edit_need_path(@need), :class => "full-width-btn" %>
     <% end %>
+
+      <% if @need.is_public %>
       <%= link_to 'Contribute', new_need_contribution_path(@need), :class => "full-width-btn-green" %>
+      <% end %>
   </div>
 </div>
 

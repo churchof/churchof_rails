@@ -37,8 +37,13 @@ class Ability
         end
         at_least_one
     end
-    can :create, Contribution
 
+    # This didnt work... will just lock it at the view level for now.
+    # can :create, Contribution do |contribution|
+    #     contribution.need.is_public
+    # end
+
+    can :create, Contribution
 
     can :read, Expense
     can :read, Update
