@@ -1,5 +1,6 @@
 class ImpactPanelController < ApplicationController
 
+
 	before_filter :is_allowed_to_view_page?
 
 	def is_allowed_to_view_page?
@@ -11,16 +12,26 @@ class ImpactPanelController < ApplicationController
 	end
 
   def index
-    @needs = Array.new
+    needs = Array.new
 
 
     # hash thing... loop over deal... so you can still show all but NEED GONE WHERE NEEDED
 
 	current_user.contributions.succeded.not_reimbursed.reverse.each do |contribution|
 		#if contribution.need.is_public == true
-			@needs << contribution.need
+			needs << contribution.need
 		#end
 	end
-  	@needs_supported = @needs.uniq
+  	@needs_supported = needs.uniq
+
+
+  	current_user.contributions.each do |contribution|
+  		authorize! :read, contribution
+  	end
+
+  	@needs_supported.each do |need|
+  		authorize! :read, need
+  	end
+
   end
 end

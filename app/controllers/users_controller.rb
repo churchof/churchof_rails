@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+load_and_authorize_resource
+
   before_filter :is_allowed_to_view_page?, only: [:new, :create, :edit, :update, :index]
 
   def agree_to_need_poster_agreement

@@ -1,5 +1,6 @@
 class SkillsController < ApplicationController
 
+load_and_authorize_resource
   def index
 
 	@skills = Skill.where(name: params[:q])

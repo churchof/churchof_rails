@@ -1,5 +1,6 @@
 class NeedPosterPanelController < ApplicationController
 
+
 	before_filter :is_allowed_to_view_page?
 
 	def is_allowed_to_view_page?
@@ -18,5 +19,20 @@ class NeedPosterPanelController < ApplicationController
   	# accessable by...
   	@needs_admin_in_progress = Need.where(user_posted_by: current_user, need_stage: 2)
   	@needs_admin_completed = Need.where(user_posted_by: current_user, need_stage: 3)
+
+
+  	@needs_admin_incoming.each do |need|
+  		authorize! :read, need
+  	end
+
+  	@needs_admin_in_progress.each do |need|
+  		authorize! :read, need
+  	end
+
+  	@needs_admin_completed.each do |need|
+  		authorize! :read, need
+  	end
+
+
   end
 end

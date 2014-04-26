@@ -1,5 +1,6 @@
 class ValidationPartnerPanelController < ApplicationController
 
+
 	before_filter :is_allowed_to_view_page?
 
 	def is_allowed_to_view_page?
@@ -12,6 +13,12 @@ class ValidationPartnerPanelController < ApplicationController
 
 	def index
 	  	@church_admins = User.with_role(:church_admin)
+
+
+	  	@church_admins.each do |user|
+  			authorize! :read, user
+  		end
+
 	end
 
 end

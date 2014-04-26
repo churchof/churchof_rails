@@ -12,9 +12,7 @@ class Ability
         can :read, Need, :user_id_posted_by => user.id
         can :read, Need, :is_public => true
         can :manage, Expense, :need => { :user_id_posted_by => user.id }
-
         can :read, Contribution, :need => { :user_id_posted_by => user.id }
-
     end
     if user.has_role? :church_admin
         can :read, Need, :user_id_church_admin => user.id
@@ -28,15 +26,31 @@ class Ability
     if user.has_role? :super_admin
         can :update, User
     end
+    if user.has_role? :validation_partner
+        can :read, User
+    end
+
+    can :read, Need do |need|
+        at_least_one = false
+        need.contributions.each do |contribution|
+            at_least_one = true if contribution.user_id == user.id && contribution.succeded? && !contribution.reimbursed?
+        end
+        at_least_one
+    end
+    can :create, Contribution
+
+
+    can :read, Expense
+    can :read, Update
 
     can :read, Contribution, :user_id => user.id
-
-
     can :read, Need, :is_public => true
     can :create, User
     can :update, User, :id => user.id
     can :read, User
     can :create_charge, Need
+
+    can :read, Skill
 
     # can :manage, :all
     

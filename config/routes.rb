@@ -13,7 +13,6 @@ Churchof::Application.routes.draw do
   get "user_panel/create"
   get "users/index"
   get "users_controller/index"
-  get "profiles/show"
   post "needs/create_charge"
   post "needs/set_is_public"
   post "users/agree_to_need_poster_agreement"
@@ -51,7 +50,6 @@ Churchof::Application.routes.draw do
 
   root :to => 'needs#index'
 
-  get '/:id', to: 'profiles#show'
 
   # Added for create_charge method.
   # resources :needs, :member => {:create_charge => :post}
