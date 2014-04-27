@@ -31,10 +31,15 @@
 
       jQuery(function($) {
         $('#new_contribution').submit(function(e) {
+        if ($('#contribution_email').val().length > 5){
           var $form = $(this);
           $form.find('button').prop('disabled', true);
           Stripe.createToken($form, stripeResponseHandler);
           return false;
+        }else{
+          $('.contribution-error').html('*Email Address is Required');
+          return false;
+        }
         });
       });
   </script>
@@ -46,6 +51,7 @@
   <div class="page-header-block contribution">
     <div class="page-title">
       <h2>Contributing to <%= @need.title %></h2>
+      <p class="contribution-error"></p>
     </div>
   </div>
 
@@ -87,13 +93,14 @@
           <% if !user_signed_in? %>
             <div class="form-row">
               <label>
-                <span>Email this should only show if the user is not logged in </span>
+                Email Address<br>
                 <%= f.text_field :email, :required => true %>
               </label>
             </div>
           <% else %>
             <%= f.input :email, :as => :hidden, :input_html => { :value => current_user.email } %>
           <% end %>
+
           <div class="terms-block">
             By Submitting this form, you agree to the
             <%= link_to "TERMS AND CONDITIONS", contribution_terms_path, target: "_blank" %>
