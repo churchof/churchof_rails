@@ -1,7 +1,20 @@
-Thanks for your contribution. A tax-deductible receipt has been emailed to you. <a href="mailto:support@church-of.com" target="_top">Contact us</a> if you have any questions. 
+<div class="page-header-block">
+  <div class="page-title">
+  </div>
+</div>
 
-<p>
-	<%= link_to "Register", register_path %> in order to see all your contributions in your Impact Panel (located in the menu after you sign up). Make sure to register with the same email you've made gifts with.
-</p>
+<div class="main-content main-bg">
+  <div class="contribution-completed-message">
+    <div class="inner-content">
+      <h1>Thanks for your contribution.</h1>
+       A tax-deductible receipt has been emailed to you. <a href="mailto:support@church-of.com" target="_top">Contact us</a> if you have any questions.
+      <div class="register-intro-block">
+        <p>
+          In order to see all your contributions in your Impact Panel (located in the menu after you sign up), register now by clicking the link below.<br> Make sure to register with the same email you've made gifts with.
+        </p>
+      </div>
+    </div>
+    <%= link_to "Register", register_path, :class => "register-now-from-contribution" %>
+  </div>
+</div>
 
-      

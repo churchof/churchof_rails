@@ -37,6 +37,42 @@ button.full-width-btn.contribution{
   font-size: 12px;
 }
 
+.contribution-completed-message{
+  padding-top: 10px;
+  padding-bottom: 0px;
+  text-align: center;
+}
+
+.contribution-completed-message.green{
+  padding-bottom: 25px;
+  border-bottom: solid 4px $green;
+}
+
+.contribution-completed-message.red{
+  padding-bottom: 25px;
+  border-bottom: solid 4px red;
+}
+
+.register-now-from-contribution{
+  display: block;
+  background: $primary-blue;
+  padding: 15px 20px;
+  margin: 10px auto 0px;
+  text-align: center;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.register-now-from-contribution:hover{
+  color: #FFF;
+  text-decoration: none;
+    background: $dark-blue;
+}
+
+.register-intro-block{
+  margin-top: 50px;
+}
+
 @media(max-width: 767px){
   .hide-on-mobile{
     display: none;
