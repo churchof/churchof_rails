@@ -18,9 +18,9 @@ class ContributionsController < ApplicationController
         @contribution = @need.contributions.build(contribution_params.merge(user: current_user))
         @contribution.save
         if true #@contribution.process_payment
-          redirect_to need_path(params[:need_id]), :flash => { :notice => "Payment accepted" }
+          redirect_to contribution_succeeded_path
         else
-          redirect_to need_path(params[:need_id]), :error => { :notice => "Your donation was not accepted" }
+          redirect_to contribution_failed_path
         end
     else 
       redirect_to root_path, :flash => { :alert => "This need is no longer available to give to." }

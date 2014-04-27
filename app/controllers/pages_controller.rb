@@ -10,4 +10,10 @@ class PagesController < ApplicationController
   def contribution_terms
   end
 
+  def contribution_succeeded
+  end
+
+  def contribution_failed
+  end
+
 end

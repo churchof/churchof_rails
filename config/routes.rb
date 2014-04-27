@@ -20,6 +20,8 @@ Churchof::Application.routes.draw do
   get '/beta' => 'pages#beta'
   get '/contribution_terms' => 'pages#contribution_terms'
   get '/skills' => 'pages#skills'
+  get '/contribution_succeeded' => 'pages#contribution_succeeded'
+  get '/contribution_failed' => 'pages#contribution_failed'
 
   devise_for :users
 
