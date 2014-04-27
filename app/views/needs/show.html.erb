@@ -1,6 +1,30 @@
 
 <% content_for :head do %>
 
+
+<!-- for Google -->
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+
+<meta name="author" content="" />
+<meta name="copyright" content="" />
+<meta name="application-name" content="" />
+
+<!-- for Facebook -->          
+<meta property="og:title" content=<%= @need.title_public %> />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="" />
+<meta property="og:url" content="https://www.church-of.com/needs/<%= @need.id %>" />
+<meta property="og:description" content="" />
+
+<!-- for Twitter -->          
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content=<%= @need.title_public %> />
+<meta name="twitter:description" content="" />
+<meta name="twitter:image" content="" />
+
+
+
   <script type="text/javascript">
 
    jQuery(function(){ buildMap(map_hash , true); });
