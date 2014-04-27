@@ -13,6 +13,9 @@ class PagesController < ApplicationController
   def contribution_succeeded
   end
 
+  def contribution_succeeded_account_invite
+  end
+
   def contribution_failed
   end
 

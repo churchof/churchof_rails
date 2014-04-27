@@ -22,7 +22,7 @@ Churchof::Application.routes.draw do
   get '/skills' => 'pages#skills'
   get '/contribution_succeeded' => 'pages#contribution_succeeded'
   get '/contribution_failed' => 'pages#contribution_failed'
-
+  get '/contribution_succeeded_account_invite' => 'pages#contribution_succeeded_account_invite'
   devise_for :users
 
   devise_scope :user do
