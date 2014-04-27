@@ -1,5 +1,24 @@
-Here are all the skills,
+  <div class="page-header-block">
+    <div class="page-title">
+      <h2>Skills / Resources List</h2>
 
-we are contantly trying to grow this.
 
-REQUEST A SKILL ADDED
+      
+    </div>
+</div>
+
+Below are all the Skills / Resources currently available. We want to grow this list to accomodate the Needs of the city. Please feel free to <a href="mailto:support@church-of.com?Subject=Skill Requested&body=I'd like to request the following Skill(s) be added:" target="_top">
+request a Skill / Resource be listed</a>.
+
+
+<br>
+<br>
+
+<% Skill.all.each do |skill| %>
+  <li class="skill-tag">
+    <span class="skill-icon">
+      <%= image_tag(skill.icon_url) %>
+    </span>
+    <%= skill.name %>
+  </li>
+<% end %>
