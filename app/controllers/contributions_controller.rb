@@ -18,7 +18,12 @@ class ContributionsController < ApplicationController
         @contribution = @need.contributions.build(contribution_params.merge(user: current_user))
         @contribution.save
         if true #@contribution.process_payment
-          redirect_to contribution_succeeded_path
+
+          if user_signed_in?
+              redirect_to contribution_succeeded_path
+            else
+              redirect_to contribution_succeeded_account_invite_path
+          end
         else
           redirect_to contribution_failed_path
         end
