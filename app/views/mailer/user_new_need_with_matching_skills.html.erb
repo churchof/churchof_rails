@@ -1,8 +1,14 @@
 Hello, <%= @user.full_name %>
- 
+ <br>
+<br>
 A new need has been posted that matched your skills: 
-<%= @need.title_public %>
-
+<a href="https://www.church-of.com/needs/<%=@need.id%>"><%= @need.title_public %></a>
+<br>
+<br>
+Skills Matched:
 <% @skills.each do |skill| %>
+<p>
 <%= skill.name %>
+</p>
+<br>
 <% end %>

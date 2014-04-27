@@ -1,9 +1,7 @@
 Hello <%= @user_church_admin.full_name %>,
-
-The need that you are Admin for: <%= @need.title %>
-
+<br>
+<br>
+The need that you are Admin for: <a href="https://www.church-of.com/needs/<%=@need.id%>"><%= @need.title %></a>
+<br>
+<br>
 Has recieved a contribution: <%= @contribution.amount %>
-
-	
-	
-	

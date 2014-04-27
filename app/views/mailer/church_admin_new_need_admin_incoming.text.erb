@@ -1,10 +1,13 @@
 Hello, <%= @user_church_admin.full_name %>
- 
+ <br>
+<br>
 A new need has been pushed to you as a Church Admin: 
-<%= @need.title %>
-
+<a href="https://www.church-of.com/needs/<%=@need.id%>"><%= @need.title %></a>
+<br>
+<br>
 It was pushed to you by:
 <%= @user_posted_by.full_name %>
-
+<br>
+<br>
 Please log in to review the need.
 http://www.church-of.com

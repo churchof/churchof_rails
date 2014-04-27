@@ -1,5 +1,7 @@
 Hello <%= @contributor.email %>,
-
-The need that you contributed to: <%= @need.title_public %>
-
-Has a new public update: <%= @update.title %> <%= @update.content %>
+<br>
+<br>
+The need that you contributed to: <a href="https://www.church-of.com/needs/<%=@need.id%>"><%= @need.title_public %></a>
+<br>
+<br>
+Has a new public update: <%= @update.title %> - <%= @update.content %> 

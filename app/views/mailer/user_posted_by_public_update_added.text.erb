@@ -1,5 +1,7 @@
 Hello <%= @user_posted_by.full_name %>,
-
-The need that you are posted: <%= @need.title %>
-
-Has a new public update: <%= @update.title %> <%= @update.content %>
+<br>
+<br>
+The need that you are posted: <a href="https://www.church-of.com/needs/<%=@need.id%>"><%= @need.title %></a>
+<br>
+<br>
+Has a new public update: <%= @update.title %> - <%= @update.content %>
