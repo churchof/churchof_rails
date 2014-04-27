@@ -3,7 +3,7 @@
 
 
 <!-- for Google -->
-<meta name="description" content="" />
+<meta name="description" content="<%= @need.description_public %>" />
 <meta name="keywords" content="" />
 
 <meta name="author" content="" />
@@ -11,9 +11,9 @@
 <meta name="application-name" content="" />
 
 <!-- for Facebook -->          
-<meta property="og:title" content="This title override now??" />
+<meta property="og:title" content="<%= @need.title_public %>" />
 <meta property="og:type" content="article" />
-<meta property="og:image" content="" />
+<meta property="og:image" content=" " />
 <meta property="og:url" content="https://www.church-of.com/needs/<%= @need.id %>" />
 <meta property="og:description" content="<%= @need.description_public %>" />
 
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="<%= @need.title_public %>" />
 <meta name="twitter:description" content="<%= @need.description_public %>" />
-<meta name="twitter:image" content="" />
+<meta name="twitter:image" content=" " />
 
 
 
