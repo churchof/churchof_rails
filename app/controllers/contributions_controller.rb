@@ -17,8 +17,7 @@ class ContributionsController < ApplicationController
         # if a current user is signed in it will set them as the user for this contribution.
         @contribution = @need.contributions.build(contribution_params.merge(user: current_user))
         @contribution.save
-        if true #@contribution.process_payment
-
+        if @contribution.process_payment
           if user_signed_in?
               redirect_to contribution_succeeded_path
             else
