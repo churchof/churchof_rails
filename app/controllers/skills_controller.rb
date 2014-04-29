@@ -3,7 +3,9 @@ class SkillsController < ApplicationController
 load_and_authorize_resource
   def index
 
-	@skills = Skill.where(name: params[:q])
+	# @skills = Skill.where(name: params[:q])
+  @skills = Skill.where("name like ?", "%#{params[:q]}%")
+
 	respond_to do |format|
 		format.html
 		format.json { render :json => @skills.map(&:attributes) }

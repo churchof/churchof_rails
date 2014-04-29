@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def beta
   end
 
-  def skills
+  def skills_list
   end
 
   def contribution_terms

@@ -51,7 +51,7 @@ $(document).ready(function () {
           <%= f.text_field :skill_tokens, "data-pre" => @user.skills.map(&:attributes).to_json %>
         </div>
 
-              <%= link_to "Full list of Skills", skills_path %>
+              <%= link_to "Full list of Skills", skills_list_path %>
 
 
         <div>
