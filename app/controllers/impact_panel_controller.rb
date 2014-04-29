@@ -1,5 +1,6 @@
 class ImpactPanelController < ApplicationController
 
+      skip_authorization_check
 
 	before_filter :is_allowed_to_view_page?
 
