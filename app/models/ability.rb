@@ -29,6 +29,13 @@ class Ability
     if user.has_role? :validation_partner
         can :read, User
     end
+    if user.has_role? :pending_church_admin
+        can :agree_to_church_admin_agreement, User
+    end
+    if user.has_role? :pending_need_poster
+        can :agree_to_need_poster_agreement, User
+    end
+
 
     can :read, Need do |need|
         at_least_one = false

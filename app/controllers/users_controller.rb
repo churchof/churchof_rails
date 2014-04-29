@@ -8,14 +8,14 @@ load_and_authorize_resource
     current_user.remove_role "pending_need_poster"
     current_user.add_role "need_poster"
     current_user.save
-    redirect_to root_path
+    redirect_to need_poster_panel_index_path
   end
 
   def agree_to_church_admin_agreement
     current_user.remove_role "pending_church_admin"
     current_user.add_role "church_admin"
     current_user.save
-    redirect_to root_path
+    redirect_to church_admin_panel_index_path
   end
 
   def is_allowed_to_view_page?
