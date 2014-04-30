@@ -59,9 +59,7 @@ $(document).ready(function () {
           <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
           <%= f.password_field :current_password %>
         </div>
-
-              <%= link_to "Full list of Skills", skills_list_path %>
-
+          <%= link_to "Full list of Skills", skills_list_path, target: "_blank" %>
         <div>
           <%= f.label :skill_tokens, "Skills" %><br />
           <%= f.text_field :skill_tokens, "data-pre" => @user.skills.map(&:attributes).to_json %>
