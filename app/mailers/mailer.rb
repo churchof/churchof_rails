@@ -1,6 +1,6 @@
 class Mailer < ActionMailer::Base
 
-include Resque::Mailer
+# include Resque::Mailer
 
 # Church Admins
 
