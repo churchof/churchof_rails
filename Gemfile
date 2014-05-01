@@ -16,8 +16,8 @@ gem 'rails_tokeninput'
 gem 'nested_form'
 gem 'sanitize'
 gem 'airbrake'
-gem 'resque'
-gem 'resque_mailer'
+# gem 'resque'
+# gem 'resque_mailer'
 
 group :development, :test do
 	gem 'sqlite3'
