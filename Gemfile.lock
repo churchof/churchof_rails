@@ -67,6 +67,7 @@ GEM
     erubis (2.7.0)
     execjs (2.0.2)
     gmaps4rails (2.1.1)
+    google-analytics-rails (0.0.5)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -192,6 +193,7 @@ DEPENDENCIES
   enumerize
   geocoder!
   gmaps4rails
+  google-analytics-rails
   jbuilder (~> 1.2)
   jquery-rails
   money

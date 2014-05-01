@@ -10,6 +10,8 @@ Churchof::Application.configure do
     }
   }
   
+  GA.tracker = ENV['GOOGLE_ANALYTICS_ID']
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

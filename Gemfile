@@ -18,6 +18,7 @@ gem 'sanitize'
 gem 'airbrake'
 # gem 'resque'
 # gem 'resque_mailer'
+gem 'google-analytics-rails'
 
 group :development, :test do
 	gem 'sqlite3'
