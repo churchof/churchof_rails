@@ -35,6 +35,11 @@
   right: 25px;
 }
 
+.need-title{
+  color: $primary-blue;
+  margin: 20px auto 25px;
+}
+
 .need-container {
   border-bottom: solid 1px #CCC;
   padding-top: 0px;
@@ -129,11 +134,6 @@ p.no-skills-message{
 .need-container.edit .need-title{
   max-width: 95%;
   margin: 20px auto;
-}
-
-.need-title{
-  color: $primary-blue;
-  margin: 20px auto 25px;
 }
 
 .secondary-form-inner-content{
