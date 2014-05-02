@@ -89,26 +89,26 @@ class Need < ActiveRecord::Base
   def mail_to_users_with_relevant_skills
 
     # should this be async?
-    if self.is_public
-      @users = Array.new
-      self.skills.each do |skill|
-        skill.users.each do |user|
-          @users << user
-        end
-      end
-      @users.uniq.each do |user|
-        past_relevant_activities = Activity.where(user_id: user.id, subject: self, description: 'Mailed about need due to relevant skills.')
-        if past_relevant_activities.count == 0
-          # Only email the user if they haven't been emailed about it yet.
-          Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skills.id).deliver
-          Activity.create(
-            subject: self,
-            description: 'Mailed about need due to relevant skills.',
-            user: user
-          )
-        end
-      end
-    end
+    # if self.is_public
+    #   @users = Array.new
+    #   self.skills.each do |skill|
+    #     skill.users.each do |user|
+    #       @users << user
+    #     end
+    #   end
+    #   @users.uniq.each do |user|
+    #     past_relevant_activities = Activity.where(user_id: user.id, subject: self, description: 'Mailed about need due to relevant skills.')
+    #     if past_relevant_activities.count == 0
+    #       # Only email the user if they haven't been emailed about it yet.
+    #       Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skills.id).deliver
+    #       Activity.create(
+    #         subject: self,
+    #         description: 'Mailed about need due to relevant skills.',
+    #         user: user
+    #       )
+    #     end
+    #   end
+    # end
   end
 
 
