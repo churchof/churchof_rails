@@ -7,6 +7,26 @@
 // Added by Zach, sorry Melanie to mess with you organizaion! Haha.
 .marker_container { border: 0px solid black; border-radius: 50%; margin-top: 0px; background: rgb(92,162,232); padding: 15px; width: 60px; height: 60px; }
 
+
+.custom_style {
+  @media(max-width:767px){
+      width: 100%; 
+    height: 200px;
+  }
+  @media(min-width:768px){
+      width: 100%; 
+    height: 430px;
+  }
+  @media(min-width:992px){
+      width: 100%; 
+    height: 430px;
+  }
+  @media(min-width:1200px){
+      width: 100%; 
+    height: 430px;
+  }
+}
+
 .marker_info_box { border: 0px solid black; margin-top: 0px; background: white; padding: 15px; width: 280px; height: 60px; }
 
 .timestamp-label{
