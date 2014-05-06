@@ -62,9 +62,9 @@ class NeedsController < ApplicationController
   def index
     if params[:selected_skills].present?
       skill_name = params[:selected_skills]
-      @needs = Need.public.in_progress.joins(:skills).where("skills.name ILIKE ?", skill_name).uniq
+      @needs = Need.public.in_progress.reverse.joins(:skills).where("skills.name ILIKE ?", skill_name).uniq
     else
-      @needs = Need.public.in_progress
+      @needs = Need.public.in_progress.reverse
     end
 
     @skills = Skill.all
