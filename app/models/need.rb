@@ -27,7 +27,7 @@ class Need < ActiveRecord::Base
 
 	before_save :validate_is_public
 
-  geocoded_by :full_street_address   # can also be an IP address
+  geocoded_by :full_street_address, :if => :full_street_address_changed?   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
   before_create :create_approx_location_values
