@@ -20,7 +20,6 @@
 
   <%= tag :meta, :name => "stripe-key", :content => ENV['PUBLISHABLE_KEY'] %>
 
-  <%= yield :head %>
 
 <!-- for Google -->
 <meta name="description" content="Uniting the Church through crowd-sourced service." />
@@ -43,6 +42,7 @@
 <meta name="twitter:description" content="Uniting the Church through crowd-sourced service." />
 <meta name="twitter:image" content="https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png" />
 
+  <%= yield :head %>
 
 
 </head>
