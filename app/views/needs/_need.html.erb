@@ -12,13 +12,16 @@
       <div class="need-description">
         <p><%= need.description_public %></p>
         <div class="row need-details">
-          <div class="expenses col-xs-12 col-sm-6">
-            <h3>Expenses</h3>
-              <div class="expenses-bar">
-                <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
-                <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
-              </div>
-          </div>
+
+          <% if need.expenses.count > 0 %>
+            <div class="expenses col-xs-12 col-sm-6">
+              <h3>Expenses</h3>
+                <div class="expenses-bar">
+                  <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                  <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
+                </div>
+            </div>
+          <% end %>
           <div class="skills col-xs-12 col-sm-6">
             <h3>Skills / Resources</h3>
             <ul class="skills-list">

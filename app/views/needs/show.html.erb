@@ -143,25 +143,31 @@
 
 <!--       <%= link_to "New Update", new_need_update_path(@need) %>
  -->      <div class="row need-details">
-        <div class="expenses col-xs-12 col-sm-6">
-          <h3>Expenses</h3>
-          <div class="expenses-bar" data-toggle="modal" data-target="#expensesModal">
-            <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
-            <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
-            <span class="details">Details</span>
+
+        <% if @need.expenses.count > 0 %>
+
+          <div class="expenses col-xs-12 col-sm-6">
+            <h3>Expenses</h3>
+            <div class="expenses-bar" data-toggle="modal" data-target="#expensesModal">
+              <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
+              <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
+              <span class="details">Details</span>
+            </div>
+  <!--           <% @need.expenses.each do |expense| %>
+              <p>
+                <%= expense.title %> - <%= expense.amount %>
+              </p>
+            <% end %>
+
+
+   -->            
+
+
+
           </div>
-<!--           <% @need.expenses.each do |expense| %>
-            <p>
-              <%= expense.title %> - <%= expense.amount %>
-            </p>
-          <% end %>
 
+        <% end %>
 
- -->            
-
-
-
-        </div>
         <div class="skills col-xs-12 col-sm-6">
           <h3>Skills / Resources</h3>
           <ul class="skills-list">
