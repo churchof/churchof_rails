@@ -346,10 +346,14 @@
 
 
 
-          <div class="user-details">
-            <%= @need.user_church_admin.full_name %>
-            <p class="small-italic"> Admin - Church of Lexington </p>
-          </div>
+                <div class="user-details">
+                  <%= @need.user_church_admin.full_name %>
+                  <% if @need.user_church_admin.associated_organization && @need.user_church_admin.associated_organization_url %>
+                    <p class="small-italic"> Admin - <a href=<%=@need.user_church_admin.associated_organization_url%>><%=@need.user_church_admin.associated_organization%></a> </p>
+                  <% else %>
+                    <p class="small-italic"> Admin - Church of Lexington </p>
+                  <% end %>
+                </div>
         </div>
 
         <div class="responsible-user col-xs-4">
@@ -370,9 +374,14 @@
               <div class="placeholder-leader-image"></div>
             <% end %>
 
-            <div class="user-details">
+                  <div class="user-details">
                     <% if @need.user_need_leader %>
                       <%= @need.user_need_leader.full_name %>
+                      <% if @need.user_need_leader.associated_organization && @need.user_need_leader.associated_organization_url %>
+                        <p class="small-italic"> Leader - <a href=<%=@need.user_need_leader.associated_organization_url%>><%=@need.user_need_leader.associated_organization%></a> </p>
+                      <% else %>
+                        <p class="small-italic"> Leader - Church of Lexington </p>
+                      <% end %>
                     <% else %>
                       No Leader
                     <% end %> 
