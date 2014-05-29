@@ -64,6 +64,11 @@ class Ability
 
     can :read, Skill
 
+    can :new, TimeContribution
+    can :create, TimeContribution # this should only be if signed in...
+    can :manage, TimeContribution
+
+
     # can :manage, :all
     
     # def initialize(user)

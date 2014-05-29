@@ -11,6 +11,7 @@ class Need < ActiveRecord::Base
   belongs_to :user_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "User"
 
   has_many :contributions
+  has_many :time_contributions
   has_many :expenses
   has_many :updates
   has_and_belongs_to_many :skills
@@ -77,8 +78,6 @@ class Need < ActiveRecord::Base
     end
   end
 
-
-
   accepts_nested_attributes_for :expenses, :allow_destroy => true
   accepts_nested_attributes_for :skills, :allow_destroy => true
   accepts_nested_attributes_for :updates, :allow_destroy => true
@@ -119,6 +118,16 @@ class Need < ActiveRecord::Base
     end
     self.save
   end
+
+  def time_contribution_for_user(user_id_to_check)
+    self.time_contributions.where(user: User.find(user_id_to_check)).first
+  end
+
+  def time_contribution_for_user_id(user_id_to_check)
+    time_contribution = self.time_contributions.where(user: User.find(user_id_to_check)).first
+    time_contribution.id
+  end
+
 
   def create_approx_location_values
     miles = 0.25;
@@ -177,5 +186,26 @@ class Need < ActiveRecord::Base
     end
     i
   end
+
+
+  def total_volunteers
+    self.time_contributions.where(cancelled: false).count + (self.additionalVolunteersSignedUpCount.nil? ? 0 : self.additionalVolunteersSignedUpCount)
+  end
+
+  def total_needed_volunteers
+    self.volunteersNeededCount.nil? ? 0 : self.volunteersNeededCount
+  end
+
+  def percent_volunteers_secured
+    i = (Float(total_volunteers) / Float(total_needed_volunteers)) * 100.0
+    if i < 0
+      i = 0
+    end
+    if i > 100
+      i = 100
+    end
+    i
+  end
+
 
 end

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :needs_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "Need"
 
   has_many :contributions
+  has_many :time_contributions
   has_many :activities
 
   has_attached_file :avatar, {

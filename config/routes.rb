@@ -40,6 +40,7 @@ Churchof::Application.routes.draw do
 
   resources :needs do
     resources :contributions
+    resources :time_contributions
     resources :expenses
     resources :skills
     resources :updates

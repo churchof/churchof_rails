@@ -325,6 +325,23 @@ p.no-skills-message{
     background: $green;
   }
 
+
+
+.volunteers-bar,
+.skills-bar{
+  @include content-bar($light-grey)
+}
+  .volunteers-bar .progress-bar{
+    height: 100%;
+    @include border-radius(2px);
+    position: absolute;
+    width: 0%;
+    background: $primary-purple;
+  }
+
+
+
+
   .amount-raised,
   .skills-count{
     font-size: 22px;
@@ -441,6 +458,12 @@ p.small-italic{
    font-size: 18px;
 }
 
+.full-width-btn:hover{
+  background: $dark-blue;
+  color: #FFF;
+  text-decoration: none;
+}
+
 .full-width-btn-green{
   display: block;
    width: 100%;
@@ -464,12 +487,90 @@ p.small-italic{
      text-decoration: none;
 }
 
+.full-width-btn-purple{
+  display: block;
+   width: 100%;
+   background: $primary-purple;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
 
-.full-width-btn:hover{
+.full-width-btn-purple:hover{
+  display: block;
+   width: 100%;
+   background: $dark-purple;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+     text-decoration: none;
+}
+
+
+
+
+
+
+.not-full-width-btn{
+display:inline-block;
+    min-width:auto;
+   background: $primary-blue;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
+
+.not-full-width-btn:hover{
   background: $dark-blue;
   color: #FFF;
   text-decoration: none;
 }
+
+.not-full-width-btn-green{
+display:inline-block;
+    min-width:auto;
+   background: $green;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
+
+.not-full-width-btn-green:hover{
+   background: $dark-green;
+   color: #FFF;
+  text-decoration: none;
+}
+
+.not-full-width-btn-purple{
+display:inline-block;
+    min-width:auto;
+   background: $primary-purple;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
+
+.not-full-width-btn-purple:hover{
+   background: $dark-purple;
+   color: #FFF;
+     text-decoration: none;
+}
+
+
+
+
+
+
 
 .half-width-btn{
   color: #FFF;

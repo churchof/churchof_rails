@@ -131,6 +131,31 @@ $(document).ready(function () {
 
     <div class="grey-form col-xs-12">
       <div class="secondary-form-inner-content">
+
+
+        <h4>Volunteers</h4>
+            <div class="field-group-3">
+              <%= f.input :volunteersNeededCount, label: "Number of Volunteers Needed" %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :additionalVolunteersSignedUpCount, label: "Number of Additional Volunteers" %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :volunteerTime, label: "Volunteer Time" %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :volunteerLocation, label: "Volunteer Location" %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :volunteerDescription, label: "Volunteer Description" %>
+            </div>
+
+
+            <br>
+                        <br>
+                        <br>
+
+
         <h4>Expenses</h4>
 
           <%= f.fields_for :expenses do |expense| %>
@@ -153,6 +178,10 @@ $(document).ready(function () {
             </div>
         <% end %>
         <%= f.link_to_add "+ Add an Expense", :expenses %>
+
+                                <br>
+                        <br>
+
         <div class="public-updates-block">
 
           <h4>Public Updates</h4>

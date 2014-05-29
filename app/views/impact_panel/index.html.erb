@@ -13,6 +13,75 @@
             <%= link_to need.title_public, need %>
           </h2>
           <div class="contributions-list">
+
+            <% TimeContribution.where(user:current_user, need:need).reverse.each do |time_contribution| %>
+
+              <% if time_contribution.cancelled %>
+
+                <div class="contribution-item">
+                  <span class="volunteer-icon-cancelled"></span>
+                  <span class="contribution-text">
+                    You cancelled volunteering for this.
+                  </span>
+                </div>
+
+                <p class="first-name">
+                  <strong>When: </strong>
+                  <%= need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+                </p>
+                <p class="first-name">
+                  <strong>Where: </strong>
+                  <%= need.volunteerLocation %>
+                </p>
+                <p class="first-name">
+                  <strong>What: </strong>
+                  <%= need.volunteerDescription %>
+                </p>
+
+                <p>
+                  Contact Leader
+                </p>
+                <p>
+                  Re-sign Up for Volunteering
+                </p>
+
+
+
+              <% else %>
+                <div class="contribution-item">
+                  <span class="volunteer-icon"></span>
+                  <span class="contribution-text">
+                    You volunteered for this!
+                  </span>
+                </div>
+
+                <p class="first-name">
+                  <strong>When: </strong>
+                  <%= need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+                </p>
+                <p class="first-name">
+                  <strong>Where: </strong>
+                  <%= need.volunteerLocation %>
+                </p>
+                <p class="first-name">
+                  <strong>What: </strong>
+                  <%= need.volunteerDescription %>
+                </p>
+
+                <p>
+                  Contact Leader
+                </p>
+                <p>
+                  Add to Calander
+                </p>
+                <p>
+                  Cancel Volunteering
+                </p>
+
+
+              <% end %>
+            <% end %>
+
             <% Contribution.where(user:current_user, need:need).succeded.not_reimbursed.reverse.each do |contribution| %>
               <div class="contribution-item">
                 <span class="contribution-icon"></span>

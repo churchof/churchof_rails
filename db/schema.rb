@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424032810) do
+ActiveRecord::Schema.define(version: 20140528202515) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -82,19 +82,24 @@ ActiveRecord::Schema.define(version: 20140424032810) do
     t.string   "title_public"
     t.text     "description_public"
     t.boolean  "is_public"
-    t.integer  "recipient_size",                                                     default: 1
-    t.integer  "frequency_type",                                                     default: 1
+    t.integer  "recipient_size",                                                        default: 1
+    t.integer  "frequency_type",                                                        default: 1
     t.text     "recipient_contribution"
     t.string   "date_of_birth"
     t.string   "leader"
     t.string   "full_street_address"
-    t.string   "last_four_ssn",                  limit: 4
-    t.decimal  "latitude",                                 precision: 15, scale: 10
-    t.decimal  "longitude",                                precision: 15, scale: 10
-    t.decimal  "approx_latitude",                          precision: 15, scale: 10
-    t.decimal  "approx_longitude",                         precision: 15, scale: 10
+    t.string   "last_four_ssn",                     limit: 4
+    t.decimal  "latitude",                                    precision: 15, scale: 10
+    t.decimal  "longitude",                                   precision: 15, scale: 10
+    t.decimal  "approx_latitude",                             precision: 15, scale: 10
+    t.decimal  "approx_longitude",                            precision: 15, scale: 10
     t.boolean  "shows_real_location_publically"
     t.datetime "date_public_posted"
+    t.integer  "volunteersNeededCount"
+    t.integer  "additionalVolunteersSignedUpCount"
+    t.datetime "volunteerTime"
+    t.string   "volunteerLocation"
+    t.string   "volunteerDescription"
   end
 
   add_index "needs", ["description_public"], name: "index_needs_on_description_public"
@@ -143,6 +148,14 @@ ActiveRecord::Schema.define(version: 20140424032810) do
   create_table "skills_users", force: true do |t|
     t.integer "skill_id"
     t.integer "user_id"
+  end
+
+  create_table "time_contributions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "need_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "cancelled"
   end
 
   create_table "updates", force: true do |t|

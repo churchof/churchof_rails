@@ -770,6 +770,29 @@ li.token-input-token-facebook.custom span{
   float: left;
 }
 
+.volunteer-icon{
+  background: url('https://s3.amazonaws.com/church_of/assets/skill_icons/888-checkmark%402x.png') $primary-purple no-repeat center center;
+  background-size: 60%;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  float: left;
+}
+
+
+.volunteer-icon-cancelled{
+  background: url('https://s3.amazonaws.com/church_of/assets/skill_icons/888-checkmark%402x.png') $primary-red no-repeat center center;
+  background-size: 60%;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  float: left;
+}
+
+
+
 .contribution-text{
   padding-top: 9px;
   margin-left: 10px;
