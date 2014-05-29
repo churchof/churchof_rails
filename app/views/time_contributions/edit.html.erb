@@ -9,15 +9,56 @@
   <div class="row">
     <div class="main-content col-xs-12 col-sm-8">
       <div class="need-container contribute-form">
-        <div class="inner-content">
           <% if @time_contribution.cancelled %>
+        <div class="inner-content">
+
+<p>
+            You had cancelled volunteering and we notified the Leader of this Need. Want to sign back up again to volunteer?
+</p>
+<br>
+
+            <p class="first-name">
+              <strong>When: </strong>
+              <%= @need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+            </p>
+            <p class="first-name">
+              <strong>Where: </strong>
+              <%= @need.volunteerLocation %>
+            </p>
+            <p class="first-name">
+              <strong>What: </strong>
+              <%= @need.volunteerDescription %>
+            </p>
+
             <%= f.input :cancelled, :as => :hidden, :input_html => { :value => false } %>
-            <button type="submit" class="contribution full-width-btn">Re-sign Up</button>
+                    </div>
+            <button type="submit" class="contribution full-width-btn-purple">Volunteer</button>
+
           <% else %>
+        <div class="inner-content">
+
+<p>
+            Unable to volunteer? Click cancel below and we will notify this Need's Leader. You can always sign up again from your <%= link_to "Impact Panel", impact_panel_index_path %> located in the menu.
+</p>
+<br>
+            <p class="first-name">
+              <strong>When: </strong>
+              <%= @need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+            </p>
+            <p class="first-name">
+              <strong>Where: </strong>
+              <%= @need.volunteerLocation %>
+            </p>
+            <p class="first-name">
+              <strong>What: </strong>
+              <%= @need.volunteerDescription %>
+            </p>
+
             <%= f.input :cancelled, :as => :hidden, :input_html => { :value => true } %>
-            <button type="submit" class="contribution full-width-btn">Cancell Volunteering</button>
+                    </div>
+            <button type="submit" class="contribution full-width-btn-red">Cancel Volunteering</button>
+
           <% end %>
-        </div>
       </div>
     <% end %>
   </div>

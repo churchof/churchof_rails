@@ -510,6 +510,29 @@ p.small-italic{
      text-decoration: none;
 }
 
+.full-width-btn-red{
+  display: block;
+   width: 100%;
+   background: $primary-red;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+}
+
+.full-width-btn-red:hover{
+  display: block;
+   width: 100%;
+   background: $dark-red;
+   color: #FFF;
+   padding-top: 15px;
+   text-align: center;
+   height: 55px;
+   font-size: 18px;
+     text-decoration: none;
+}
+
 
 
 

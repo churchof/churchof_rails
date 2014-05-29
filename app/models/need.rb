@@ -188,6 +188,23 @@ class Need < ActiveRecord::Base
     i
   end
 
+  def volunteer_date_passed
+    if volunteerTime
+      Time.current > volunteerTime
+    else
+      false
+    end
+  end
+
+  def should_accept_volunteers
+    # for user?
+  end
+
+  def should_accept_contributions
+    # for user?
+  end
+
+
 
   def total_volunteers
     self.time_contributions.where(cancelled: false).count + (self.additionalVolunteersSignedUpCount.nil? ? 0 : self.additionalVolunteersSignedUpCount)

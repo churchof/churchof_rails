@@ -38,11 +38,15 @@
                   <%= need.volunteerDescription %>
                 </p>
 
+
+                <% if time_contribution.need.user_need_leader %>
+                  <p>
+                    <a href="mailto:<%= time_contribution.user.email %>" target="_top">Contact <%= time_contribution.user.full_name %> (Leader)</a>
+                  </p>
+                <% end %>
+
                 <p>
-                  Contact Leader
-                </p>
-                <p>
-                  Re-sign Up for Volunteering
+                  <%= link_to "Re-sign Up for Volunteering", edit_need_time_contribution_path(need, time_contribution) %>
                 </p>
 
 
@@ -68,14 +72,13 @@
                   <%= need.volunteerDescription %>
                 </p>
 
+                <% if time_contribution.need.user_need_leader %>
+                  <p>
+                    <a href="mailto:<%= time_contribution.user.email %>" target="_top">Contact <%= time_contribution.user.full_name %> (Leader)</a>
+                  </p>
+                <% end %>
                 <p>
-                  Contact Leader
-                </p>
-                <p>
-                  Add to Calander
-                </p>
-                <p>
-                  Cancel Volunteering
+                  <%= link_to "Cancel Volunteering", edit_need_time_contribution_path(need, time_contribution) %>
                 </p>
 
 
