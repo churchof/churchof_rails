@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :needs_posted_by, :foreign_key => 'user_id_posted_by', :class_name => "Need"
   has_many :needs_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "Need"
+  has_many :needs_need_leader, :foreign_key => 'user_id_need_leader', :class_name => "Need"
 
   has_many :contributions
   has_many :time_contributions

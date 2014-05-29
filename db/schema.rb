@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528202515) do
+ActiveRecord::Schema.define(version: 20140529172237) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20140528202515) do
     t.integer  "frequency_type",                                                        default: 1
     t.text     "recipient_contribution"
     t.string   "date_of_birth"
-    t.string   "leader"
     t.string   "full_street_address"
     t.string   "last_four_ssn",                     limit: 4
     t.decimal  "latitude",                                    precision: 15, scale: 10
@@ -100,6 +99,7 @@ ActiveRecord::Schema.define(version: 20140528202515) do
     t.datetime "volunteerTime"
     t.string   "volunteerLocation"
     t.string   "volunteerDescription"
+    t.integer  "user_id_need_leader"
   end
 
   add_index "needs", ["description_public"], name: "index_needs_on_description_public"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20140528202515) do
   add_index "needs", ["street_address"], name: "index_needs_on_street_address"
   add_index "needs", ["title_public"], name: "index_needs_on_title_public"
   add_index "needs", ["user_id_church_admin"], name: "index_needs_on_user_id_church_admin"
+  add_index "needs", ["user_id_need_leader"], name: "index_needs_on_user_id_need_leader"
   add_index "needs", ["user_id_posted_by"], name: "index_needs_on_user_id_posted_by"
 
   create_table "needs_skills", force: true do |t|

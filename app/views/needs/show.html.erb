@@ -64,26 +64,13 @@
 
 <div class="needs main-content">
   <div class="need-container">
-    <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+    <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
       <div class="disclaimer-block">
         <div class="inner-content">
-          <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
             <span class="notice-icon"></span>
             <p class="disclaimer">
-              Note: You are seeing private information here because you
-              posted the need and are the Church Admin for the need.
+              Note: You are seeing private information here because or your role with this need.
             </p>
-          <% elsif current_user == @need.user_posted_by %>
-            <span class="notice-icon"></span>
-            <p class="disclaimer">
-              Note: You are seeing private information here because you posted the need.
-            </p>
-          <% elsif current_user == @need.user_church_admin %>
-            <span class="notice-icon"></span>
-            <p class="disclaimer">
-              Note: You are seeing private information here because you are the Church Amdin.
-            </p>
-          <% end %>
         </div>
       </div>
     <% end %>
@@ -91,7 +78,7 @@
     <div class="inner-content">
 
       <h2 class="need-title">
-        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
           <%= @need.title %>
         <% else %>
           <%= @need.title_public %>
@@ -113,7 +100,7 @@
       </div>
 
       <div class="need-description">
-        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
           <p><%= @need.description %></p>
         <% else %>
           <p><%= @need.description_public %></p>
@@ -218,13 +205,28 @@
               <strong>What: </strong>
               <%= @need.volunteerDescription %>
             </p>
+            <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
+
+              <p class="first-name">
+                <strong>Who: </strong>
+                  <% @need.time_contributions.each do |time_contribution| %>
+                    
+
+                  <p>
+                  <a href="mailto:<%= time_contribution.user.email %>" target="_top"><%= time_contribution.user.full_name %></a>
+                </p>
+                  <% end %>
+              </p>
+
+            <% end %>
+
           </div>
       <% end %>
 
 
 <% if @need.recipient_size_value == 2 %>
 
-  <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+  <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
 
         <div class="private-information">
           <h3> Individual Info </h3>
@@ -308,7 +310,7 @@
       </div>
 
       <div class="row responsibility-bar">
-        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
           <div class="responsible-user col-xs-4">
             <div class="user-title">
               <h3>Posted By</h3>
@@ -355,13 +357,25 @@
             <h3>Leader</h3>
           </div>
           <div class="user-image">
-            <div class="placeholder-leader-image"></div>
+
+            <% if @need.user_need_leader %>
+              <% if !@need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(@need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
             <div class="user-details">
-                    <% if @need.leader.length > 0 %>
-                      <%= @need.leader %>
+                    <% if @need.user_need_leader %>
+                      <%= @need.user_need_leader.full_name %>
                     <% else %>
                       No Leader
-                    <% end %>
+                    <% end %> 
                   </div>
           </div>
         </div>

@@ -157,10 +157,22 @@
                   <h3>Leader</h3>
                 </div>
                 <div class="user-image">
-                  <div class="placeholder-leader-image"></div>
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
                   <div class="user-details">
-                    <% if need.leader.length > 0 %>
-                      <%= need.leader %>
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
                     <% else %>
                       No Leader
                     <% end %> 
@@ -308,10 +320,22 @@
                     <h3>Leader</h3>
                   </div>
                   <div class="user-image">
-                    <div class="placeholder-leader-image"></div>
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
                     <div class="user-details">
-                    <% if need.leader.length > 0 %>
-                      <%= need.leader %>
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
                     <% else %>
                       No Leader
                     <% end %> 
@@ -423,10 +447,22 @@
                     <h3>Leader</h3>
                   </div>
                   <div class="user-image">
-                    <div class="placeholder-leader-image"></div>
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
                     <div class="user-details">
-                    <% if need.leader.length > 0 %>
-                      <%= need.leader %>
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
                     <% else %>
                       No Leader
                     <% end %> 
@@ -535,10 +571,22 @@
                     <h3>Leader</h3>
                   </div>
                   <div class="user-image">
-                    <div class="placeholder-leader-image"></div>
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
                     <div class="user-details">
-                    <% if need.leader.length > 0 %>
-                      <%= need.leader %>
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
                     <% else %>
                       No Leader
                     <% end %> 

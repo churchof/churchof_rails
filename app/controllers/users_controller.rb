@@ -11,6 +11,13 @@ load_and_authorize_resource
     redirect_to need_poster_panel_index_path
   end
 
+  def agree_to_need_leader_agreement
+    current_user.remove_role "pending_need_leader"
+    current_user.add_role "need_leader"
+    current_user.save
+    redirect_to need_leader_panel_index_path
+  end
+
   def agree_to_church_admin_agreement
     current_user.remove_role "pending_church_admin"
     current_user.add_role "church_admin"
