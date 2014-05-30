@@ -36,6 +36,8 @@ class Need < ActiveRecord::Base
   after_create :mail_to_church_admin_whos_recieving_the_need, :log_creation
   after_save :mail_to_users_with_relevant_skills
 
+  after_save :mail_to_leader_if_just_appointed
+
   after_update :mail_to_need_poster_if_just_approved
 
   after_update :update_date_public_posted_if_changed
@@ -63,6 +65,23 @@ class Need < ActiveRecord::Base
       end
     end
   end
+
+  def mail_to_leader_if_just_appointed
+    if self.user_id_need_leader_changed?
+      if self.user_need_leader
+        past_relevant_activities = Activity.where(user_id: self.user_need_leader.id, subject: self, description: 'Mailed because new Need pushed to this Leader.')
+        if past_relevant_activities.count == 0
+          Mailer.need_leader_new_need_assigned(self.user_need_leader.id, self.user_church_admin.id, self.id).deliver
+          Activity.create(
+            subject: self,
+            description: 'Mailed because new Need pushed to this Leader.',
+            user: self.user_need_leader
+          )
+        end
+      end
+    end
+  end
+
 
   def mail_to_need_poster_if_just_approved
     if (self.need_stage_changed? && self.need_stage == 2)

@@ -119,6 +119,14 @@ end
 
 # Need Leaders
 
+!!!
+def need_leader_new_need_assigned(need_leader_user_id, church_admin_user_id, need_id)
+	@need_leader = User.find(need_leader_user_id)
+	@church_admin = User.find(church_admin_user_id)
+	@need = Need.find(need_id)
+	mail :to => @need_leader.email, :from => "churchoflexington@gmail.com", :subject => "Leading New Need: #{@need.title_public}"
+end
+
 def need_leader_new_volunteer_added(need_leader_user_id, volunteer_user_id, need_id)
 	@need_leader = User.find(need_leader_user_id)
 	@volunteer = User.find(volunteer_user_id)
