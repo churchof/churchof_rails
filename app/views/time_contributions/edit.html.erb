@@ -12,10 +12,10 @@
           <% if @time_contribution.cancelled %>
         <div class="inner-content">
 
-<p>
+            <p>
             You had cancelled volunteering and we notified the Leader of this Need. Want to sign back up again to volunteer?
-</p>
-<br>
+            </p>
+            <br>
 
             <p class="first-name">
               <strong>When: </strong>
@@ -37,10 +37,11 @@
           <% else %>
         <div class="inner-content">
 
-<p>
+            <p>
             Unable to volunteer? Click cancel below and we will notify this Need's Leader. You can always sign up again from your <%= link_to "Impact Panel", impact_panel_index_path %> located in the menu.
-</p>
-<br>
+            </p>
+            <br>
+            
             <p class="first-name">
               <strong>When: </strong>
               <%= @need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
