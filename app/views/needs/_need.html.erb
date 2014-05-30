@@ -81,6 +81,8 @@
         <% else %>
           <%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "need-btn-link full-width-btn-purple" %>
         <% end %>
+      <% else %>
+        <%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "need-btn-link full-width-btn-purple" %>
       <% end %>
     <% end %>
   </div>

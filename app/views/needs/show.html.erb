@@ -399,28 +399,22 @@
       <% end %>
 
 
-      <% if !@need.volunteer_date_passed %>
 
-
-      <% if @need.total_needed_volunteers > 0 %>
-
-
+    <% if @need.should_accept_volunteers %>
       <% if user_signed_in? %>
         <% if @need.time_contribution_for_user(current_user.id) %>
           <% if @need.time_contribution_for_user(current_user.id).cancelled %>
-            <%= link_to 'Volunteer', edit_need_time_contribution_path(@need, @need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-purple", :style => 'width: 100%'  %>
+            <%= link_to 'Volunteer', edit_need_time_contribution_path(@need, @need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-purple" %>
           <%else%>
-            <%= link_to 'Cancel Volunteer', edit_need_time_contribution_path(@need, @need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-red", :style => 'width: 100%'  %>
+            <%= link_to 'Cancel Volunteering', edit_need_time_contribution_path(@need, @need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-red" %>
           <% end %>
         <% else %>
-          <%= link_to 'Volunteer', new_need_time_contribution_path(@need), :class => "full-width-btn-purple", :style => 'width: 100%'  %>
+          <%= link_to 'Volunteer', new_need_time_contribution_path(@need), :class => "full-width-btn-purple" %>
         <% end %>
+      <% else %>
+        <%= link_to 'Volunteer', new_need_time_contribution_path(@need), :class => "full-width-btn-purple" %>
       <% end %>
-
-      <% end %>
-
-
-      <% end %>
+    <% end %>
 
 
 

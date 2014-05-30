@@ -77,8 +77,10 @@ class Ability
     can :read, Skill
 
     can :new, TimeContribution
-    can :create, TimeContribution # this should only be if signed in...
-    can :manage, TimeContribution
+    can :create, TimeContribution, :user_id => user.id
+    can :update, TimeContribution, :user_id => user.id
+    can :show, TimeContribution, :user_id => user.id
+    can :read, TimeContribution, :user_id => user.id
 
 
     # can :manage, :all

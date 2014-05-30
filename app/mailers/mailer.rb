@@ -1,6 +1,7 @@
 class Mailer < ActionMailer::Base
 
 # include Resque::Mailer
+# In order to turn this back on and use ids user_new_need_with_matching_skills would need to be changed since it uses more than just ids.
 
 # Church Admins
 
@@ -57,10 +58,10 @@ end
 
 # Users
 
-def user_new_need_with_matching_skills(user_id, need_id, skills_id)
+def user_new_need_with_matching_skills(user_id, need_id, skills)
 	@user = User.find(user_id)
 	@need = Need.find(need_id)
-	@skills = Skill.find(skills_id)
+	@skills = skills
 	mail :to => @user.email, :from => "churchoflexington@gmail.com", :subject => "New Need Matching Skills: #{@need.title_public}"
 end
 
@@ -106,6 +107,35 @@ def receipt_to_contributor(contributor_id, need_id, contribution_id)
 	@contribution = Contribution.find(contribution_id)
 	mail :to => @contributor.email, :from => "churchoflexington@gmail.com", :subject => "Thanks for contributing to: #{@need.title_public}"
 end
+
+
+# TimeContributors (Volunteers)
+
+# def volunteer_need_contributed_to_public_update_added(user_id, need_id, update_id)
+# 	@user = User.find(user_id)
+# 	@need = Need.find(need_id)
+# 	@update = Update.find(update_id)
+# 	mail :to => @contributor.email, :from => "churchoflexington@gmail.com", :subject => "Need (You Signed Up to Volunteer for) Has a New Public Update: #{@need.title_public}"
+# end
+
+# def volunteer_need_contributed_to_fully_funded(time_contributor_id, need_id)
+# 	@contributor = Contributor.find(contributor_id)
+# 	@need = Need.find(need_id)
+# 	mail :to => @contributor.email, :from => "churchoflexington@gmail.com", :subject => "Need (You Signed Up to Volunteer for) Is Fully Funded: #{@need.title_public}"
+# end
+
+# def volunteer_instructions_to_volunteer(time_contributor_id, need_id, contribution_id)
+# 	@contributor = Contributor.find(contributor_id)
+# 	@need = Need.find(need_id)
+# 	@contribution = Contribution.find(contribution_id)
+# 	mail :to => @contributor.email, :from => "churchoflexington@gmail.com", :subject => "Thanks for contributing to: #{@need.title_public}"
+# end
+
+
+
+# Leaders need notified of lots of things...
+
+# Also, leaders should know when someone signs up to volunteer and cancels and resignes up, etc.
 
 
 
