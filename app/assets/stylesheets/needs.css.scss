@@ -312,7 +312,6 @@ p.no-skills-message{
       max-width: 100%;
     }
 
-
 .expenses-bar,
 .skills-bar{
   @include content-bar($light-grey)
@@ -325,8 +324,6 @@ p.no-skills-message{
     background: $green;
   }
 
-
-
 .volunteers-bar,
 .skills-bar{
   @include content-bar($light-grey)
@@ -338,9 +335,6 @@ p.no-skills-message{
     width: 0%;
     background: $primary-purple;
   }
-
-
-
 
   .amount-raised,
   .skills-count{
@@ -449,13 +443,13 @@ p.small-italic{
 
 .full-width-btn{
   display: block;
-   width: 100%;
-   background: $primary-blue;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
+  width: 100%;
+  background: $primary-blue;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
 }
 
 .full-width-btn:hover{
@@ -466,88 +460,87 @@ p.small-italic{
 
 .full-width-btn-green{
   display: block;
-   width: 100%;
-   background: $green;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
+  width: 100%;
+  background: $green;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
 }
 
 .full-width-btn-green:hover{
   display: block;
-   width: 100%;
-   background: $dark-green;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
-     text-decoration: none;
+  width: 100%;
+  background: $dark-green;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  text-decoration: none;
 }
 
 .full-width-btn-purple{
   display: block;
-   width: 100%;
-   background: $primary-purple;
-   color: #FFF;
-   padding-top: 5px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
-   border: none;
+  width: 100%;
+  background: $primary-purple;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  border: none;
 }
 
 .full-width-btn-purple:hover{
   display: block;
-   width: 100%;
-   background: $dark-purple;
-   color: #FFF;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
-     text-decoration: none;
+  width: 100%;
+  background: $dark-purple;
+  color: #FFF;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  text-decoration: none;
 }
 
 .full-width-btn-red{
   display: block;
-   width: 100%;
-   background: $primary-red;
-   color: #FFF;
-   padding-top: 5px;
-   text-align: center;
-   height: 55px;
- font-size: 18px;
-      border:none
+  width: 100%;
+  background: $primary-red;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  border:none
 }
 
 .full-width-btn-red:hover{
   display: block;
-   width: 100%;
-   background: $dark-red;
-   color: #FFF;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
-     text-decoration: none;
-
+  width: 100%;
+  background: $dark-red;
+  color: #FFF;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  text-decoration: none;
 }
 
-
-
-
-
+button.full-width-btn-red,
+button.full-width-btn-purple{
+  padding-top: 5px;
+}
 
 .not-full-width-btn{
-display:inline-block;
-    min-width:auto;
-   background: $primary-blue;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
+  display:inline-block;
+  min-width:auto;
+  background: $primary-blue;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
 }
 
 .not-full-width-btn:hover{
@@ -557,14 +550,14 @@ display:inline-block;
 }
 
 .not-full-width-btn-green{
-display:inline-block;
-    min-width:auto;
-   background: $green;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
+  display:inline-block;
+  min-width:auto;
+  background: $green;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
 }
 
 .not-full-width-btn-green:hover{
@@ -574,27 +567,21 @@ display:inline-block;
 }
 
 .not-full-width-btn-purple{
-display:inline-block;
-    min-width:auto;
-   background: $primary-purple;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
+  display:inline-block;
+  min-width:auto;
+  background: $primary-purple;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
 }
 
 .not-full-width-btn-purple:hover{
-   background: $dark-purple;
-   color: #FFF;
-     text-decoration: none;
+  background: $dark-purple;
+  color: #FFF;
+  text-decoration: none;
 }
-
-
-
-
-
-
 
 .half-width-btn{
   color: #FFF;
@@ -657,7 +644,7 @@ display:inline-block;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   padding-top: 5px;
-    font-size: 10px;
+  font-size: 10px;
 }
 .toggle-btn.red{
   padding-top: 5px;
@@ -684,7 +671,7 @@ input.toggle-btn.left{
   left: 0px;
   top: 0px;
   height: 100%;
-    font-size: 10px;
+  font-size: 10px;
 }
 
 input.toggle-btn.left:hover{
@@ -707,7 +694,7 @@ input.toggle-btn.right{
   right: 0px;
   top: 0px;
   height: 100%;
-    border-top-right-radius: 20px;
+  border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
 
