@@ -21,6 +21,7 @@ Churchof::Application.routes.draw do
   post "users/agree_to_church_admin_agreement"
   get '/beta' => 'pages#beta'
   get '/contribution_terms' => 'pages#contribution_terms'
+  get '/volunteering_terms' => 'pages#volunteering_terms'
   get '/skills_list' => 'pages#skills_list'
   get '/contribution_succeeded' => 'pages#contribution_succeeded'
   get '/contribution_failed' => 'pages#contribution_failed'
