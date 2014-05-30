@@ -1,17 +1,4 @@
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<%= javascript_include_tag "jquery.tokeninput.js" %>
-<%= stylesheet_link_tag "token-input.css" %>
-
-<script type="text/javascript">
-
-$(document).ready(function () {
-    $("#user_skill_tokens").tokenInput("/skills.json", {
-      crossDomain: false,
-      prePopulate: $("#user_skill_tokens").data("pre")
-    });
-});
-</script>
 
 <div class="container devise">
   <div class="row">
@@ -46,12 +33,13 @@ $(document).ready(function () {
           <%= f.password_field :password_confirmation %>
         </div>
 
+
         <div>
-          <%= f.label :skill_tokens, "Skills" %><br />
-          <%= f.text_field :skill_tokens, "data-pre" => @user.skills.map(&:attributes).to_json %>
+          <%= f.association :skills, as: :check_boxes %>
         </div>
 
-          <%= link_to "Full list of Skills", skills_list_path, target: "_blank" %>
+
+
 
 
         <div>

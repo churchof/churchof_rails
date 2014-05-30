@@ -43,6 +43,8 @@ load_and_authorize_resource
   end
 
   def update
+    # Added for the checkboxes from this tutorial: http://railscasts.com/episodes/17-habtm-checkboxes?view=comments
+
    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to :back, notice: 'User was successfully updated.'

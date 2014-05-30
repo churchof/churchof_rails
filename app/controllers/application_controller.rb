@@ -20,10 +20,10 @@ class ApplicationController < ActionController::Base
 
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:skill_tokens, :first_name, :last_name, :name, :avatar, :avatar_cache, :email, :password, :password_confirmation)
+      u.permit(:skill_tokens, :first_name, :last_name, :name, :avatar, :avatar_cache, :email, :password, :password_confirmation, {:skill_ids => []})
     end
     devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:skill_tokens, :first_name, :last_name, :name, :avatar, :remove_avatar, :avatar_cache, :email, :password, :password_confirmation, :current_password)
+      u.permit(:skill_tokens, :first_name, :last_name, :name, :avatar, :remove_avatar, :avatar_cache, :email, :password, :password_confirmation, :current_password, {:skill_ids => []})
     end
   end
 
