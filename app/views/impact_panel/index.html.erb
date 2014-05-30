@@ -38,10 +38,9 @@
                   <%= need.volunteerDescription %>
                 </p>
 
-
                 <% if time_contribution.need.user_need_leader %>
                   <p>
-                    <a href="mailto:<%= time_contribution.user.email %>" target="_top">Contact <%= time_contribution.user.full_name %> (Leader)</a>
+                    <a href="mailto:<%= time_contribution.need.user_need_leader.email %>" target="_top">Contact <%= time_contribution.need.user_need_leader.full_name %> (Leader)</a>
                   </p>
                 <% end %>
 

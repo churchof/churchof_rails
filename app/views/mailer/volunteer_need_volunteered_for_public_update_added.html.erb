@@ -1,0 +1,16 @@
+Hello <%= @user.full_name %>,
+<br>
+<br>
+The need that you signed up to Volunteer for: <a href="https://www.church-of.com/needs/<%=@need.id%>"><%= @need.title %></a>
+<br>
+<br>
+Has a new public update: <%= @update.title %> - <%= @update.content %>
+<br>
+<br>
+<% @update.images.each do |image| %>
+<%= image_tag(image.image) %>
+<br>
+<%= image.caption %>
+<br>
+<br>
+<% end %>

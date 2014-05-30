@@ -11,6 +11,23 @@
       <div class="need-container contribute-form">
         <div class="inner-content">
 
+            <p>
+            Here are the details about this volunteer opportunity.
+            </p>
+            <br>
+
+            <p class="first-name">
+              <strong>When: </strong>
+              <%= @need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+            </p>
+            <p class="first-name">
+              <strong>Where: </strong>
+              <%= @need.volunteerLocation %>
+            </p>
+            <p class="first-name">
+              <strong>What: </strong>
+              <%= @need.volunteerDescription %>
+            </p>
 
           <div class="terms-block">
             By clicking below this form, you agree to the

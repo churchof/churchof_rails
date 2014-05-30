@@ -29,6 +29,14 @@ class Contribution < ActiveRecord::Base
     Mailer.user_posted_by_need_recieved_contribution(self.need.user_posted_by.id, self.need.id, self.id).deliver
   end
 
+  def mail_to_need_leader_if_exists
+    # should this be async?
+    if self.need.user_need_leader
+      Mailer.need_leader_need_recieved_contribution(self.need.user_need_leader.id, self.need.id, self.id).deliver
+    end
+  end
+
+
   def mail_receipt
     # should this be async?
     if self.user
@@ -53,12 +61,13 @@ class Contribution < ActiveRecord::Base
                                    currency: @stripe_currency,
                                    card: @stripe_token,
                                    description: "#{Rails.env} - contribution_id:#{id} need_id:#{need.id} email:#{email} title:#{need.title}")
+  self.update_column(:succeded, true)
+  self.update_column(:reimbursed, false)
   mail_to_church_admin
+  mail_to_need_leader_if_exists
   mail_to_user_posted_by
   mail_to_users_who_contributed_if_fully_funded
   mail_receipt
-  self.update_column(:succeded, true)
-  self.update_column(:reimbursed, false)
   true
   rescue Stripe::CardError
     self.update_column(:succeded, false)
@@ -92,7 +101,7 @@ class Contribution < ActiveRecord::Base
   end
 
   def mail_to_users_who_contributed_if_fully_funded
-    if self.need.percent_raised == 100
+    if self.need.percent_raised >= 100.0
       if self.need.total_expenses > Money.new(0, "USD")
         # Alert the church admin
         past_relevant_activities = Activity.where(user_id: self.need.user_church_admin.id, subject: self.need, description: 'Mailed news that need is fully funded to Church Admin.')
@@ -116,6 +125,21 @@ class Contribution < ActiveRecord::Base
             user: self.need.user_posted_by
           )
         end
+        # Alert the need leader if exists
+
+        if self.need.user_need_leader
+          past_relevant_activities = Activity.where(user_id: self.need.user_need_leader.id, subject: self.need, description: 'Mailed news that need is fully funded to Need Leader.')
+          if past_relevant_activities.count == 0
+            # Only email the user if they haven't been emailed about it yet.
+            Mailer.need_leader_need_fully_funded(self.need.user_need_leader.id, self.need.id).deliver
+            Activity.create(
+              subject: self.need,
+              description: 'Mailed news that need is fully funded to Need Leader.',
+              user: self.need.user_need_leader
+            )
+          end
+        end 
+
         # Alert the contributors (with/without accounts)
         self.need.contributions.succeded.not_reimbursed.each do |contribution|
           if contribution.user
@@ -142,8 +166,22 @@ class Contribution < ActiveRecord::Base
             end
           end
         end
+        # Alert the volunteers
+        self.need.time_contributions.each do |time_contribution|
+          if time_contribution.user
+            past_relevant_activities = Activity.where(user_id: time_contribution.user.id, subject: self.need, description: 'Mailed news that need is fully funded to volunteer.')
+            if past_relevant_activities.count == 0
+              # Only email the user if they haven't been emailed about it yet.
+              Mailer.volunteer_need_volunteered_for_fully_funded(time_contribution.user.id, self.need.id).deliver
+              Activity.create(
+                subject: self.need,
+                description: 'Mailed news that need is fully funded to volunteer.',
+                user: time_contribution.user
+              )
+            end
+          end
+        end
       end
     end
   end
-
 end
