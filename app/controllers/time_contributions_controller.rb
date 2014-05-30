@@ -8,6 +8,11 @@ class TimeContributionsController < ApplicationController
   def new
     @need = Need.find(params[:need_id])
     @time_contribution = @need.time_contributions.build
+
+    if !@need.should_accept_volunteers
+      redirect_to root_path, :flash => { :alert => "Can no longer change volunteering for this Need." }
+    end
+
   end
 
   def show
@@ -51,6 +56,11 @@ end
   def edit
     @need = Need.find(params[:need_id])
     @time_contribution = TimeContribution.find(params[:id])
+
+    if !@need.should_accept_volunteers
+      redirect_to root_path, :flash => { :alert => "Can no longer change volunteering for this Need." }
+    end
+
   end
 
 

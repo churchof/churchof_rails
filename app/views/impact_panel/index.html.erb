@@ -45,9 +45,11 @@
                   </p>
                 <% end %>
 
-                <p>
-                  <%= link_to "Re-sign Up for Volunteering", edit_need_time_contribution_path(need, time_contribution) %>
-                </p>
+                <% if !need.volunteer_date_passed %>
+                  <p>
+                    <%= link_to "Re-sign Up for Volunteering", edit_need_time_contribution_path(need, time_contribution) %>
+                  </p>
+                <% end %>
 
 
 
@@ -55,7 +57,16 @@
                 <div class="contribution-item">
                   <span class="volunteer-icon"></span>
                   <span class="contribution-text">
-                    You volunteered for this!
+
+
+                    <% if need.volunteer_date_passed %>
+
+                    You volunteered for this <%= time_ago_in_words(need.volunteerTime) %> ago.
+
+                    <% else %>
+
+                    You signed up to volunteer for this in <%= time_ago_in_words(need.volunteerTime) %>.
+                    <% end %>
                   </span>
                 </div>
 
@@ -77,9 +88,15 @@
                     <a href="mailto:<%= time_contribution.user.email %>" target="_top">Contact <%= time_contribution.user.full_name %> (Leader)</a>
                   </p>
                 <% end %>
-                <p>
-                  <%= link_to "Cancel Volunteering", edit_need_time_contribution_path(need, time_contribution) %>
-                </p>
+
+                <% if !need.volunteer_date_passed %>
+                  <p>
+                    <%= link_to "Cancel Volunteering", edit_need_time_contribution_path(need, time_contribution) %>
+                  </p>
+                <% end %>
+
+
+
 
 
               <% end %>

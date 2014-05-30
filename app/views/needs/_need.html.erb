@@ -62,22 +62,28 @@
  -->
 
 
-    <% if need.expenses.count > 0 && if need.total_needed_volunteers > 0 %>
-<!--     This code needs to be pushed together becasue of spacing issues with inline-block.
- -->      
-    <%= link_to 'Read More', need_path(need), :class => "not-full-width-btn", :style => 'width: 34%' %><%= link_to 'Contribute', new_need_contribution_path(need), :class => "not-full-width-btn-green", :style => 'width: 33%'  %><% if user_signed_in? %><% if need.time_contribution_for_user(current_user.id) %><% if need.time_contribution_for_user(current_user.id).cancelled %><%= link_to 'Volunteer', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "not-full-width-btn-purple", :style => 'width: 33%'  %><%else%><%= link_to 'Cancel Volunteer', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "not-full-width-btn-purple", :style => 'width: 33%'  %><% end %><% else %><%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "not-full-width-btn-purple", :style => 'width: 33%'  %><% end %><% end %>
-    <% end %>
-    <% elsif need.expenses.count <= 0 && if need.total_needed_volunteers > 0 %>
-    <!--     This code needs to be pushed together becasue of spacing issues with inline-block.
- --> 
-      <%= link_to 'Read More', need_path(need), :class => "not-full-width-btn", :style => 'width: 50%' %><% if user_signed_in? %><% if need.time_contribution_for_user(current_user.id) %><% if need.time_contribution_for_user(current_user.id).cancelled %><%= link_to 'Volunteer', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "not-full-width-btn-purple", :style => 'width: 33%'  %><%else%><%= link_to 'Cancel Volunteer', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "not-full-width-btn-purple", :style => 'width: 33%'  %><% end %><% else %><%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "not-full-width-btn-purple", :style => 'width: 33%'  %><% end %><% end %>
-    <% end %>
-    <% elsif need.expenses.count > 0 && if need.total_needed_volunteers <= 0 %>
-      <%= link_to 'Read More', need_path(need), :class => "not-full-width-btn", :style => 'width: 50%' %><%= link_to 'Contribute', new_need_contribution_path(need), :class => "not-full-width-btn-green", :style => 'width: 50%'  %>
-    <% end %>
+<%= link_to 'Read More', need_path(need), :class => "full-width-btn" %>
+
+
+<% if need.expenses.count > 0 %>
+  <%= link_to 'Contribute', new_need_contribution_path(need), :class => "full-width-btn-green" %>
+<% end %>
+
+
+<% if need.should_accept_volunteers %>
+  <% if user_signed_in? %>
+    <% if need.time_contribution_for_user(current_user.id) %>
+      <% if need.time_contribution_for_user(current_user.id).cancelled %>
+        <%= link_to 'Volunteer', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-purple" %>
+      <%else%>
+        <%= link_to 'Cancel Volunteering', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-red" %>
+      <% end %>
     <% else %>
-      <%= link_to 'Read More', need_path(need), :class => "not-full-width-btn", :style => 'width: 100%' %>
+      <%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "full-width-btn-purple" %>
     <% end %>
+  <% end %>
+<% end %>
+
 
 
   </div>

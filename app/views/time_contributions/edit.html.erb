@@ -69,11 +69,23 @@
       <%= @need.description_public %>
     </div>
     <div class="expenses">
-      <h4>Expenses</h4>
-      <div class="expenses-bar" data-toggle="modal" data-target="#expensesModal">
-        <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
-        <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
-      </div>
+
+      <% if @need.total_expenses > 0 %>
+        <h4>Expenses</h4>
+        <div class="expenses-bar" data-toggle="modal" data-target="#expensesModal">
+          <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
+          <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
+        </div>
+      <% end %>
+
+      <% if @need.total_needed_volunteers > 0 %>
+        <h4>Volunteers</h4>
+        <div class="volunteers-bar" data-toggle="modal" data-target="#expensesModal">
+          <span class="progress-bar" style="width:<%= @need.percent_volunteers_secured %>%"></span>
+          <span class="amount-raised"><%= @need.total_volunteers %> / <%= @need.total_needed_volunteers %></span>
+        </div>
+      <% end %>
+      
     </div>
   </div>
 </div>

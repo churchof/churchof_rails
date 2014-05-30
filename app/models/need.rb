@@ -120,16 +120,6 @@ class Need < ActiveRecord::Base
     self.save
   end
 
-  def time_contribution_for_user(user_id_to_check)
-    self.time_contributions.where(user: User.find(user_id_to_check)).first
-  end
-
-  def time_contribution_for_user_id(user_id_to_check)
-    time_contribution = self.time_contributions.where(user: User.find(user_id_to_check)).first
-    time_contribution.id
-  end
-
-
   def create_approx_location_values
     miles = 0.25;
     percent_inner_not_selectable = 40;
@@ -196,15 +186,22 @@ class Need < ActiveRecord::Base
     end
   end
 
+  def time_contribution_for_user(user_id_to_check)
+    self.time_contributions.where(user: User.find(user_id_to_check)).first
+  end
+
+  def time_contribution_for_user_id(user_id_to_check)
+    time_contribution = self.time_contributions.where(user: User.find(user_id_to_check)).first
+    time_contribution.id
+  end
+
   def should_accept_volunteers
-    # for user?
+    i = self.volunteersNeededCount.nil? ? 0 : self.volunteersNeededCount
+    (i > 0) && !volunteer_date_passed
   end
 
   def should_accept_contributions
-    # for user?
   end
-
-
 
   def total_volunteers
     self.time_contributions.where(cancelled: false).count + (self.additionalVolunteersSignedUpCount.nil? ? 0 : self.additionalVolunteersSignedUpCount)
