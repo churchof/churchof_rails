@@ -112,3 +112,26 @@ $(document).ready(function () {
 <div class="needs main-content" id="needs-full-list">
   <%= render @needs %>
 </div>
+
+
+
+<script>
+  $(document).ready(function(){
+    $('.need-button-block').each(function(){
+      var className;
+      var needButtonCount = $(this).find('.need-btn-link').length;
+        if (needButtonCount == 1){
+          className = "need-xs-12";
+        }else if(needButtonCount == 2){
+          className = "need-xs-6";
+        }else if(needButtonCount == 3){
+          className = "need-xs-4";
+        }
+
+      $(this).find('.need-btn-link').each(function(){
+        $(this).addClass(className);
+      });
+    });
+  })
+
+</script>

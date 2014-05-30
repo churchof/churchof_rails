@@ -1096,3 +1096,67 @@ li.token-input-token-facebook.custom span{
 }
 
 
+/*Width of Buttons*/
+.need-btn-block{
+  position: relative;
+  overflow: auto;
+}
+
+a.need-btn-length-1{
+  width: 100%;
+}
+
+a.need-btn-length-2{
+  width: 47.99%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.need-xs-4, .need-xs-6, .need-xs-12 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.need-xs-4, .need-xs-6, .need-xs-12 {
+  float: left;
+}
+.need-xs-12,
+.need-xs-12:hover {
+  width: 100%;
+}
+
+.need-xs-6,
+.need-xs-6:hover {
+  width: 50%;
+}
+
+.need-xs-4,
+.need-xs-4:hover {
+  width: 33.33333333%;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+
+
+@media(max-width: 767px){
+  a.need-btn-link{
+    font-size: 14px;
+  }
+}

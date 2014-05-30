@@ -61,29 +61,27 @@
 <!-- need.volunteer_date_passed
  -->
 
-
-<%= link_to 'Read More', need_path(need), :class => "full-width-btn" %>
-
-
-<% if need.expenses.count > 0 %>
-  <%= link_to 'Contribute', new_need_contribution_path(need), :class => "full-width-btn-green" %>
-<% end %>
+  <div class="need-button-block cf">
+    <%= link_to 'Read More', need_path(need), :class => "need-btn-link full-width-btn" %>
 
 
-<% if need.should_accept_volunteers %>
-  <% if user_signed_in? %>
-    <% if need.time_contribution_for_user(current_user.id) %>
-      <% if need.time_contribution_for_user(current_user.id).cancelled %>
-        <%= link_to 'Volunteer', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-purple" %>
-      <%else%>
-        <%= link_to 'Cancel Volunteering', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-red" %>
-      <% end %>
-    <% else %>
-      <%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "full-width-btn-purple" %>
+    <% if need.expenses.count > 0 %>
+      <%= link_to 'Contribute', new_need_contribution_path(need), :class => "need-btn-link full-width-btn-green" %>
     <% end %>
-  <% end %>
-<% end %>
 
 
-
+    <% if need.should_accept_volunteers %>
+      <% if user_signed_in? %>
+        <% if need.time_contribution_for_user(current_user.id) %>
+          <% if need.time_contribution_for_user(current_user.id).cancelled %>
+            <%= link_to 'Volunteer', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-purple" %>
+          <%else%>
+            <%= link_to 'Cancel Volunteering', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "need-btn-link full-width-btn-purple" %>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
+</div>
