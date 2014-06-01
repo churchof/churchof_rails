@@ -886,19 +886,56 @@ h2.need-title{
 
 
 
-.time-block{
+.time-block-blue{
   margin-top: 20px;
   display: inline-block;
     height: 50px;
   width: 100%;
     color: #FFF;
   font-size: 18px;
+  background: $primary-blue;
+      float: right;
+  text-align: center;
+}
 
+.time-block-green{
+  margin-top: 20px;
+  display: inline-block;
+    height: 50px;
+  width: 100%;
+    color: #FFF;
+  font-size: 18px;
+  background: $green;
+      float: right;
+  text-align: center;
+}
+
+.time-block-orange{
+  margin-top: 20px;
+  display: inline-block;
+    height: 50px;
+  width: 100%;
+    color: #FFF;
+  font-size: 18px;
   background: $orange;
       float: right;
   text-align: center;
-
 }
+
+.time-block-red{
+  margin-top: 20px;
+  display: inline-block;
+    height: 50px;
+  width: 100%;
+    color: #FFF;
+  font-size: 18px;
+  background: $primary-red;
+      float: right;
+  text-align: center;
+}
+
+
+
 
 .share-block-facebook{
   vertical-align: top;

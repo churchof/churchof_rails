@@ -107,19 +107,39 @@
 
           </div>
           <div class="col-xs-12 col-sm-3">
-            <div class="time-block">
               <% if @need.completion_goal_date %>
                 <% if @need.completion_goal_date > Time.current %>
                   <% if @need.completion_goal_date > Time.current + 1.days %>
-                    <%= time_ago_in_words(@need.completion_goal_date) %> left
+                    <div class="time-block-green">
+                      <%= time_ago_in_words(@need.completion_goal_date) %> left
+                      <% if @need.date_public_posted %>
+                        posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                      <% end %>
+                    </div>
                   <% else %>
-                    <%= time_ago_in_words(@need.completion_goal_date) %> left
+                    <div class="time-block-orange">
+                      <%= time_ago_in_words(@need.completion_goal_date) %> left
+                      <% if @need.date_public_posted %>
+                        posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                      <% end %>
+                    </div>
                   <% end %>
                 <% else %>
-                  <%= time_ago_in_words(@need.completion_goal_date) %> past goal
+                  <div class="time-block-red">
+                    <%= time_ago_in_words(@need.completion_goal_date) %> past goal
+                    <% if @need.date_public_posted %>
+                      posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                    <% end %>
+                  </div>
                 <% end %>
+              <% else %>
+                <div class="time-block-blue">
+                  No Goal Date
+                  <% if @need.date_public_posted %>
+                    posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                  <% end %>
+                </div>
               <% end %>
-            </div>
 
             <div class="share-block-facebook">
             </div><div class="share-block-twitter">
