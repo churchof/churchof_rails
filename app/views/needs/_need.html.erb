@@ -5,9 +5,57 @@
       </h2>
 
       <% if need.date_public_posted %>
-        <p class="timestamp-label">
-          posted <%= time_ago_in_words(need.date_public_posted) %> ago
-        </p>
+            <div class="col-xs-12 col-sm-3" id="time-block-on-index">
+              <% if need.completion_goal_date %>
+                <% if need.completion_goal_date > Time.current %>
+                  <% if need.completion_goal_date > Time.current + 1.days %>
+                    <div class="time-block time-green">
+                      <div class="time-remaining">
+                        <%= time_ago_in_words(need.completion_goal_date) %> left
+                      </div>
+                      <div class="time-posted">
+                        <% if need.date_public_posted %>
+                          posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                        <% end %>
+                      </div>
+                    </div>
+                  <% else %>
+                    <div class="time-block time-orange">
+                      <div class="time-remaining">
+                        <%= time_ago_in_words(need.completion_goal_date) %> left
+                      </div>
+                      <div class="time-posted">
+                        <% if need.date_public_posted %>
+                          posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="time-block time-red">
+                    <div class="time-remaining">
+                      <%= time_ago_in_words(need.completion_goal_date) %> past goal
+                    </div>
+                    <div class="time-posted">
+                      <% if need.date_public_posted %>
+                        posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="time-block time-blue">
+                  <div class="time-remaining">
+                    No Goal Date
+                  </div>
+                  <div class="time-posted">
+                    <% if need.date_public_posted %>
+                      posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+          </div>
       <% end %>
       <div class="need-description">
         <p><%= need.description_public %></p>
@@ -54,6 +102,8 @@
           </div>
         </div>
       </div>
+
+
     </div>
 
 

@@ -35,6 +35,12 @@
   right: 25px;
 }
 
+#time-block-on-index{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
 .need-title{
   color: $primary-blue;
   margin: 20px auto 25px;
@@ -207,6 +213,10 @@ p.no-skills-message{
 }
 
 @media(max-width: 767px){
+  #time-block-on-index{
+    position: relative;
+  }
+
   .skills-filter{
     display:block;
     float: none;
