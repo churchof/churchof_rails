@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529184802) do
+ActiveRecord::Schema.define(version: 20140601031103) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20140529184802) do
     t.string   "volunteerLocation"
     t.string   "volunteerDescription"
     t.integer  "user_id_need_leader"
+    t.datetime "completion_goal_date"
   end
 
   add_index "needs", ["description_public"], name: "index_needs_on_description_public"

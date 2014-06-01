@@ -108,8 +108,17 @@
           </div>
           <div class="col-xs-12 col-sm-3">
             <div class="time-block">
-              Time block
-
+              <% if @need.completion_goal_date %>
+                <% if @need.completion_goal_date > Time.current %>
+                  <% if @need.completion_goal_date > Time.current + 1.days %>
+                    <%= time_ago_in_words(@need.completion_goal_date) %> left
+                  <% else %>
+                    <%= time_ago_in_words(@need.completion_goal_date) %> left
+                  <% end %>
+                <% else %>
+                  <%= time_ago_in_words(@need.completion_goal_date) %> past goal
+                <% end %>
+              <% end %>
             </div>
 
             <div class="share-block-facebook">

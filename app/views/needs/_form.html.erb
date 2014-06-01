@@ -81,6 +81,13 @@ $(document).ready(function () {
         <div class="lone-field">
           <%= f.input :user_id_need_leader, label: "Leader", collection: User.with_role(:need_leader), label_method: :full_name %>
         </div>
+
+
+        <div class="lone-field">
+          <%= f.input :completion_goal_date, label: "Goal Date" %>
+        </div>
+
+
         <div class="lone-field">
 
           <%= link_to "Full list of Skills", skills_list_path, target: "_blank" %>

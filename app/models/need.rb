@@ -239,5 +239,4 @@ class Need < ActiveRecord::Base
     i
   end
 
-
 end
