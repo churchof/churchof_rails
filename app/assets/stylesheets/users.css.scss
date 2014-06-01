@@ -58,6 +58,19 @@ label{
   padding: 5px;
 }
 
+.devise label.checkbox{
+  width: auto;
+  display: inline-block;
+  margin-top: 0px;
+  margin-right: 10px;
+}
+
+.devise input.check_boxes{
+  width: auto;
+  height: auto;
+  padding: auto;
+}
+
 .devise abbr{
   border-bottom: none;
   margin-right: 0px;
