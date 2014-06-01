@@ -184,7 +184,7 @@
     var needID = $('.share-block-facebook').data('need-id');
     FB.ui({
       method: 'feed',
-      name: "New opportunity to serve in Lexington: " + needTitle,
+      name: needTitle,
       link: "http://church-of.com/needs/" + needID,
       picture: 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png',
       description: needDescription
