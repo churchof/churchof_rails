@@ -77,15 +77,20 @@
 
     <div class="inner-content">
 
-      <h2 class="need-title">
-        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
-          <%= @need.title %>
-        <% else %>
-          <%= @need.title_public %>
-        <% end %>
-      </h2>
 
-      <div class="frequency-type">
+
+   <div class="row">
+          <div class="col-xs-12 col-sm-9">
+            <h2 class="need-title">
+              <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
+                <%= @need.title %>
+              <% else %>
+                <%= @need.title_public %>
+              <% end %>
+            </h2>
+
+
+                  <div class="frequency-type">
         <% if @need.recipient_size_value == 2 %>
          <span class="frequency-tag">Individual</span>
         <% elsif @need.recipient_size_value == 3 %>
@@ -98,6 +103,28 @@
          <span class="frequency-tag">Ongoing</span>
         <% end %>
       </div>
+
+
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <div class="time-block">
+              Time block
+
+            </div>
+
+            <div class="share-block-facebook">
+            </div><div class="share-block-twitter">
+            </div>
+
+
+
+          </div>
+   </div>
+
+
+
+
+
 
       <div class="need-description">
         <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>

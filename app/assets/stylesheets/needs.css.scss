@@ -272,6 +272,8 @@ p.no-skills-message{
 }
 
   .need-description{
+      margin-top: 16px;
+
     font-size: 18px;
     color: $medium-grey;
   }
@@ -877,16 +879,72 @@ p.form-instructions{
     margin-right: 5px;
   }
 h2.need-title{
-  width: 75%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
 }
-.frequency-type{
-  width: 24%;
-  display: inline-block;
+
+
+
+.time-block{
   vertical-align: top;
   margin-top: 20px;
-  text-align: right;
+  display: inline-block;
+    height: 50px;
+  width: 100%;
+
+  vertical-align: top;
+  background: $orange;
+}
+
+.share-block-facebook{
+  vertical-align: top;
+  margin-top: 0px;
+  display: inline-block;
+    height: 48px;
+  width: 50%;
+
+
+
+  vertical-align: top;
+
+  background: url('https://s3.amazonaws.com/church_of/assets/ui_assets/facebook_share_icon.png') $dark-blue no-repeat center center;
+
+}
+
+.share-block-twitter{
+  vertical-align: top;
+  margin-top: 0px;
+  display: inline-block;
+    height: 48px;
+  width: 50%;
+
+  vertical-align: top;
+
+    background: url('https://s3.amazonaws.com/church_of/assets/ui_assets/twitter_share_icon.png') $primary-blue no-repeat center center;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.frequency-type{
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 0px;
+  text-align: left;
 }
 
 .frequency-tag{
