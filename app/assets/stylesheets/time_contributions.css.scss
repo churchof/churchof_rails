@@ -1,0 +1,80 @@
+// Place all the styles related to the time_contributions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables.css.scss";
+
+button.full-width-btn.time_contribution{
+  -webkit-appearance: none;
+  border: none;
+  padding-top: 5px;
+}
+
+.page-header-block.time_contribution{
+  margin-bottom: 0px;
+}
+
+.contribute-form.need-container{
+  padding-top: 10px;
+}
+
+.time_contribution-info-wrapper{
+  background: #d3d1d1;
+  margin-top: 25px;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  border-radius: 2px 2px 2px 2px;
+}
+.expiration-divider{
+  display: inline-block;
+}
+
+.contribute-form input{
+  height: 35px;
+}
+
+.terms-block{
+  margin-top: 25px;
+  font-size: 12px;
+}
+
+.time_contribution-completed-message{
+  padding-top: 10px;
+  padding-bottom: 0px;
+  text-align: center;
+}
+
+.time_contribution-completed-message.green{
+  padding-bottom: 25px;
+  border-bottom: solid 4px $green;
+}
+
+.time_contribution-completed-message.red{
+  padding-bottom: 25px;
+  border-bottom: solid 4px red;
+}
+
+.register-now-from-time_contribution{
+  display: block;
+  background: $primary-blue;
+  padding: 15px 20px;
+  margin: 10px auto 0px;
+  text-align: center;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.register-now-from-time_contribution:hover{
+  color: #FFF;
+  text-decoration: none;
+    background: $dark-blue;
+}
+
+.register-intro-block{
+  margin-top: 50px;
+}
+
+@media(max-width: 767px){
+  .hide-on-mobile{
+    display: none;
+  }
+}

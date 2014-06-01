@@ -46,6 +46,22 @@ class Update < ActiveRecord::Base
 	      end
 	    end
 
+	   	self.need.time_contributions.each do |time_contribution|
+	      	if time_contribution.user
+		        past_relevant_activities = Activity.where(user_id: time_contribution.user.id, subject: self, description: 'Mailed news that need recieved public update to volunteer.')
+		        if past_relevant_activities.count == 0
+		          # Only email the user if they haven't been emailed about it yet.
+		          Mailer.volunteer_need_volunteered_for_public_update_added(time_contribution.user.id, self.need.id, self.id).deliver
+		          Activity.create(
+		            subject: self,
+		            description: 'Mailed news that need recieved public update to volunteer.',
+		            user: time_contribution.user
+		          )
+		        end
+			end
+	    end
+
+
 	end
 
 

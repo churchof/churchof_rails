@@ -1,0 +1,333 @@
+<% if current_user.has_role? :need_leader %>
+  <div class="page-header-block">
+    <div class="page-title">
+      <h2>Leader Panel</h2>
+    </div>
+    <ul class="nav nav-pills page-options">
+      <li class="active">
+        <a href="#InProgressNeeds" data-toggle="tab">
+          <% if @needs_admin_in_progress.count > 0 %>
+            <span class="count-number pull-left"><%= @needs_admin_in_progress.count %></span>
+          <% end %>
+          <% if @needs_admin_in_progress.count == 1 %>
+            In Progress Need
+          <% else %>
+            In Progress Needs
+          <% end %>
+        </a>
+      </li>
+      <li>
+        <a href="#CompletedNeeds" data-toggle="tab">
+          <% if @needs_admin_completed.count > 0 %>
+            <span class="count-number pull-left"><%= @needs_admin_completed.count %></span>
+          <% end %>
+          <% if @needs_admin_completed.count == 1 %>
+            Completed Need
+          <% else %>
+            Completed Needs
+          <% end %>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div id='content' class="tab-content main-content">
+    <div class="tab-pane active" id="InProgressNeeds">
+      <% @needs_admin_in_progress.each do |need| %>
+        <% if need.need_stage_value == 2 %>
+          <div class="need-container">
+            <div class="inner-content">
+              <h2 class="need-title">
+                <%= link_to need.title, need %>
+              </h2>
+              <div class="need-description">
+                <p><%= need.description %></p>
+
+                <div class="row need-details">
+                  <div class="expenses col-xs-12 col-sm-6">
+                    <h3>Expenses</h3>
+                    <div class="expenses-bar">
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                      <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
+                    </div>
+                  </div>
+                  <div class="skills col-xs-12 col-sm-6">
+                    <h3>Skills / Resources</h3>
+                    <ul class="skills-list">
+                      <% if need.skills_count > 0 %>
+                        <% need.skills.each do |skill| %>
+                          <li class="skill-tag">
+                            <span class="skill-icon">
+                              <%= image_tag(skill.icon_url) %>
+                            </span>
+                            <%= skill.name %>
+                          </li>
+                        <% end %>
+                      <% else %>
+                        No skills added yet.
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row responsibility-bar">
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Posted By</h3>
+                  </div>
+            <% if !need.user_posted_by.avatar_file_name.nil? %>
+              <div class="user-image">
+                <%= image_tag(need.user_posted_by.avatar(:large), class: "img-circle") %>
+              </div>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+                  <div class="user-details">
+                    <%= need.user_posted_by.full_name %>
+                    <p class="small-italic"> Member - Church of Lexington </p>
+                  </div>
+                </div>
+
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Admin</h3>
+                  </div>
+            <% if !need.user_church_admin.avatar_file_name.nil? %>
+              <div class="user-image">
+                <%= image_tag(need.user_church_admin.avatar(:large), class: "img-circle") %>
+              </div>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+                <div class="user-details">
+                  <%= need.user_church_admin.full_name %>
+                  <% if need.user_church_admin.associated_organization && need.user_church_admin.associated_organization_url %>
+                    <p class="small-italic"> Admin - <a href=<%=need.user_church_admin.associated_organization_url%>><%=need.user_church_admin.associated_organization%></a> </p>
+                  <% else %>
+                    <p class="small-italic"> Admin - Church of Lexington </p>
+                  <% end %>
+                </div>
+                </div>
+
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Leader</h3>
+                  </div>
+                  <div class="user-image">
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
+                  <div class="user-details">
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
+                      <% if need.user_need_leader.associated_organization && need.user_need_leader.associated_organization_url %>
+                        <p class="small-italic"> Leader - <a href=<%=need.user_need_leader.associated_organization_url%>><%=need.user_need_leader.associated_organization%></a> </p>
+                      <% else %>
+                        <p class="small-italic"> Leader - Church of Lexington </p>
+                      <% end %>
+                    <% else %>
+                      No Leader
+                    <% end %> 
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+                          </div>
+
+            <div class="row no-margin">
+
+              <%= simple_form_for(need, html: {class: "change-status"}) do |f| %>
+                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_completed } %>
+                <div class="form-actions">
+                  <%= f.submit "Move To Completed", :class => "full-width-btn col-xs-12 blue-btn" %>
+                </div>
+              <% end %>
+
+
+
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="tab-pane" id="CompletedNeeds">
+      <% @needs_admin_completed.each do |need| %>
+        <% if need.need_stage_value == 3 %>
+          <div class="need-container">
+            <div class="inner-content">
+              <h2 class="need-title">
+                <%= link_to need.title, need %>
+              </h2>
+              <div class="need-description">
+                <p><%= need.description %></p>
+
+                <div class="row need-details">
+                  <div class="expenses col-xs-12 col-sm-6">
+                    <h3>Expenses</h3>
+                    <div class="expenses-bar">
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                      <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
+                    </div>
+                  </div>
+                  <div class="skills col-xs-12 col-sm-6">
+                    <h3>Skills / Resources</h3>
+                    <ul class="skills-list">
+                      <% if need.skills_count > 0 %>
+                        <% need.skills.each do |skill| %>
+                          <li class="skill-tag">
+                            <span class="skill-icon">
+                              <%= image_tag(skill.icon_url) %>
+                            </span>
+                            <%= skill.name %>
+                          </li>
+                        <% end %>
+                      <% else %>
+                        No skills added yet.
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row responsibility-bar">
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Posted By</h3>
+                  </div>
+            <% if !need.user_posted_by.avatar_file_name.nil? %>
+              <div class="user-image">
+                <%= image_tag(need.user_posted_by.avatar(:large), class: "img-circle") %>
+              </div>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+                  <div class="user-details">
+                    <%= need.user_posted_by.full_name %>
+                    <p class="small-italic"> Member - Church of Lexington </p>
+                  </div>
+                </div>
+
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Admin</h3>
+                  </div>
+            <% if !need.user_church_admin.avatar_file_name.nil? %>
+              <div class="user-image">
+                <%= image_tag(need.user_church_admin.avatar(:large), class: "img-circle") %>
+              </div>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+                <div class="user-details">
+                  <%= need.user_church_admin.full_name %>
+                  <% if need.user_church_admin.associated_organization && need.user_church_admin.associated_organization_url %>
+                    <p class="small-italic"> Admin - <a href=<%=need.user_church_admin.associated_organization_url%>><%=need.user_church_admin.associated_organization%></a> </p>
+                  <% else %>
+                    <p class="small-italic"> Admin - Church of Lexington </p>
+                  <% end %>
+                </div>
+                </div>
+
+                <div class="responsible-user col-xs-4">
+                  <div class="user-title">
+                    <h3>Leader</h3>
+                  </div>
+                  <div class="user-image">
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
+                  <div class="user-details">
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
+                      <% if need.user_need_leader.associated_organization && need.user_need_leader.associated_organization_url %>
+                        <p class="small-italic"> Leader - <a href=<%=need.user_need_leader.associated_organization_url%>><%=need.user_need_leader.associated_organization%></a> </p>
+                      <% else %>
+                        <p class="small-italic"> Leader - Church of Lexington </p>
+                      <% end %>
+                    <% else %>
+                      No Leader
+                    <% end %> 
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+                          <div class="row no-margin">
+              <%= simple_form_for(need, html: {class: "change-status"}) do |f| %>
+                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_in_progress } %>
+                <div class="form-actions">
+                  <%= f.submit "Move To In Progress", :class => "full-width-btn" %>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% elsif current_user.has_role? :pending_need_leader %>
+  <div class="page-header-block">
+    <div class="page-title">
+      <h2>Need Leader Agreement</h2>
+    </div>
+      
+<br>
+<br>
+<i><h3>Confidentiality:</h3></i>
+<br>
+<p>
+As a Need Leader you will be able to see private information that is intended to be managed by those seeing that the Need is met properly. As such you must not share any information that is not public. Additionally know that the information you post may be shared to whom the Church Admin sees fit, including other Church Admins or persons they work with the complete the Need. The "Church of" organization will also have access to the information to insure that the system is being used effectively and with integrity.
+</p>
+<br>
+<br>
+<i><h3>Need Completion:</h3></i>
+<br>
+<p>
+Not all needs will be completed. Due to lack of contributed finances or other similar circumstances a need may not be met.
+</p>
+<br>
+<br>
+<i><h3>Integrity:</h3></i>
+<br>
+<p>
+Especially when leading a group of volunteers set up healthy boundaries. The Church of Lexington is not liable for any unintended harm that may come as a result of groups meeting to volunteer together.
+</p>
+<br>
+<br>
+
+
+
+
+
+
+    <%= simple_form_for(current_user, :url => users_agree_to_need_leader_agreement_path, :method => :post, html: {class: "change-status"}) do |f| %>
+      <%= f.submit "I Agree to the Above" %>
+    <% end %>
+  </div>
+<% end %>
+

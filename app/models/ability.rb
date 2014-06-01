@@ -23,6 +23,15 @@ class Ability
         can :manage, Update # this needs to be only for the appropriate ones
         can :read, Contribution, :need => { :user_id_church_admin => user.id }
     end
+    if user.has_role? :need_leader
+        can :read, Need, :user_id_need_leader => user.id
+        can :read, Need, :is_public => true
+        can :update, Need, :user_id_need_leader => user.id
+        # can :set_is_public, Need, :user_id_church_admin => user.id
+        can :manage, Expense, :need => { :user_id_need_leader => user.id }
+        can :manage, Update # this needs to be only for the appropriate ones
+        can :read, Contribution, :need => { :user_id_need_leader => user.id }
+    end
     if user.has_role? :super_admin
         can :update, User
     end
@@ -34,6 +43,9 @@ class Ability
     end
     if user.has_role? :pending_need_poster
         can :agree_to_need_poster_agreement, User
+    end
+    if user.has_role? :pending_need_leader
+        can :agree_to_need_leader_agreement, User
     end
 
 
@@ -63,6 +75,13 @@ class Ability
     can :create_charge, Need
 
     can :read, Skill
+
+    can :new, TimeContribution
+    can :create, TimeContribution, :user_id => user.id
+    can :update, TimeContribution, :user_id => user.id
+    can :show, TimeContribution, :user_id => user.id
+    can :read, TimeContribution, :user_id => user.id
+
 
     # can :manage, :all
     

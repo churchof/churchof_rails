@@ -10,14 +10,14 @@
 <meta name="copyright" content="" />
 <meta name="application-name" content="" />
 
-<!-- for Facebook -->          
+<!-- for Facebook -->
 <meta property="og:title" content="<%= @need.title_public %>" />
 <meta property="og:type" content="article" />
 <meta property="og:image" content="https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png" />
 <meta property="og:url" content="https://www.church-of.com/needs/<%= @need.id %>" />
 <meta property="og:description" content="<%= @need.description_public %>" />
 
-<!-- for Twitter -->          
+<!-- for Twitter -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="<%= @need.title_public %>" />
 <meta name="twitter:description" content="<%= @need.description_public %>" />
@@ -64,39 +64,31 @@
 
 <div class="needs main-content">
   <div class="need-container">
-    <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+    <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
       <div class="disclaimer-block">
         <div class="inner-content">
-          <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
             <span class="notice-icon"></span>
             <p class="disclaimer">
-              Note: You are seeing private information here because you
-              posted the need and are the Church Admin for the need.
+              Note: You are seeing private information here because or your role with this need.
             </p>
-          <% elsif current_user == @need.user_posted_by %>
-            <span class="notice-icon"></span>
-            <p class="disclaimer">
-              Note: You are seeing private information here because you posted the need.
-            </p>
-          <% elsif current_user == @need.user_church_admin %>
-            <span class="notice-icon"></span>
-            <p class="disclaimer">
-              Note: You are seeing private information here because you are the Church Amdin.
-            </p>
-          <% end %>
         </div>
       </div>
     <% end %>
 
     <div class="inner-content">
 
-      <h2 class="need-title">
-        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
-          <%= @need.title %>
-        <% else %>
-          <%= @need.title_public %>
-        <% end %>
-      </h2>
+
+
+   <div class="row">
+          <div class="col-xs-12 col-sm-9">
+            <h2 class="need-title">
+              <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
+                <%= @need.title %>
+              <% else %>
+                <%= @need.title_public %>
+              <% end %>
+            </h2>
+
 
       <div class="frequency-type">
         <% if @need.recipient_size_value == 2 %>
@@ -112,8 +104,105 @@
         <% end %>
       </div>
 
+
+          </div>
+          <div class="col-xs-12 col-sm-3">
+              <% if @need.completion_goal_date %>
+                <% if @need.completion_goal_date > Time.current %>
+                  <% if @need.completion_goal_date > Time.current + 1.days %>
+                    <div class="time-block time-green">
+                      <div class="time-remaining">
+                        <%= time_ago_in_words(@need.completion_goal_date) %> left
+                      </div>
+                      <div class="time-posted">
+                        <% if @need.date_public_posted %>
+                          posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                        <% else %>
+                          not posted publicly
+                        <% end %>
+                      </div>
+                    </div>
+                  <% else %>
+                    <div class="time-block time-orange">
+                      <div class="time-remaining">
+                        <%= time_ago_in_words(@need.completion_goal_date) %> left
+                      </div>
+                      <div class="time-posted">
+                        <% if @need.date_public_posted %>
+                          posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                        <% else %>
+                          not posted publicly
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="time-block time-red">
+                    <div class="time-remaining">
+                      <%= time_ago_in_words(@need.completion_goal_date) %> past goal
+                    </div>
+                    <div class="time-posted">
+                      <% if @need.date_public_posted %>
+                        posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                      <% else %>
+                          not posted publicly
+                        <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="time-block time-blue">
+                  <div class="time-remaining">
+                    No Goal Date
+                  </div>
+                  <div class="time-posted">
+                    <% if @need.date_public_posted %>
+                      posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                    <% else %>
+                          not posted publicly
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+
+            <% if @need.date_public_posted %>
+
+              <div onclick="shareNeed();" data-need-title="<%= @need.title_public %>" data-need-description="<%= @need.description_public %>" data-need-id="<%= @need.id %>" class="share-block-facebook">
+              </div><div onclick="tweetNeed();" data-need-title="<%= @need.title_public %>" data-need-description="<%= @need.description_public %>" data-need-id="<%= @need.id %>" class="share-block-twitter">
+              </div>
+
+            <% end %>
+
+
+          </div>
+   </div>
+
+<script>
+  function shareNeed() {
+    var needTitle = $('.share-block-facebook').data('need-title');
+    var needDescription = $('.share-block-facebook').data('need-description');
+    var needID = $('.share-block-facebook').data('need-id');
+    FB.ui({
+      method: 'feed',
+      name: needTitle,
+      link: "http://church-of.com/needs/" + needID,
+      picture: 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png',
+      description: needDescription
+    });
+  };
+
+  function tweetNeed() {
+    var needID = $('.share-block-twitter').data('need-id');
+    var tweetUrl = "https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fchurch-of.com&text=New%20opportunity%20to%20serve%20in%20Lexington:%20http%3A%2F%2Fchurch-of.com%2Fneeds%2F" + needID;
+    window.open(tweetUrl,'','height=400,width=500');
+  };
+</script>
+
+
+
+
       <div class="need-description">
-        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
           <p><%= @need.description %></p>
         <% else %>
           <p><%= @need.description_public %></p>
@@ -160,13 +249,28 @@
             <% end %>
 
 
-   -->            
+   -->
 
 
 
           </div>
 
         <% end %>
+
+
+                <% if @need.total_needed_volunteers > 0 %>
+
+          <div class="volunteers col-xs-12 col-sm-6">
+            <h3>Volunteers</h3>
+
+            <div class="volunteers-bar">
+              <span class="progress-bar" style="width:<%= @need.percent_volunteers_secured %>%"></span>
+              <span class="amount-raised"><%= @need.total_volunteers %> / <%= @need.total_needed_volunteers %></span>
+            </div>
+          </div>
+          <% end %>
+
+
 
         <div class="skills col-xs-12 col-sm-6">
           <h3>Skills / Resources</h3>
@@ -188,9 +292,43 @@
       </div>
 
 
+      <% if @need.total_needed_volunteers > 0 %>
+        <div class="private-information">
+          <h3> Volunteering Info </h3>
+            <p class="first-name">
+              <strong>When: </strong>
+              <%= @need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+            </p>
+            <p class="first-name">
+              <strong>Where: </strong>
+              <%= @need.volunteerLocation %>
+            </p>
+            <p class="first-name">
+              <strong>What: </strong>
+              <%= @need.volunteerDescription %>
+            </p>
+            <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
+
+              <p class="first-name">
+                <strong>Who: </strong>
+                  <% @need.time_contributions.each do |time_contribution| %>
+
+
+                  <p>
+                  <a href="mailto:<%= time_contribution.user.email %>" target="_top"><%= time_contribution.user.full_name %></a>
+                </p>
+                  <% end %>
+              </p>
+
+            <% end %>
+
+          </div>
+      <% end %>
+
+
 <% if @need.recipient_size_value == 2 %>
 
-  <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+  <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
 
         <div class="private-information">
           <h3> Individual Info </h3>
@@ -274,7 +412,7 @@
       </div>
 
       <div class="row responsibility-bar">
-        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin %>
+        <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
           <div class="responsible-user col-xs-4">
             <div class="user-title">
               <h3>Posted By</h3>
@@ -310,10 +448,14 @@
 
 
 
-          <div class="user-details">
-            <%= @need.user_church_admin.full_name %>
-            <p class="small-italic"> Admin - Church of Lexington </p>
-          </div>
+                <div class="user-details">
+                  <%= @need.user_church_admin.full_name %>
+                  <% if @need.user_church_admin.associated_organization && @need.user_church_admin.associated_organization_url %>
+                    <p class="small-italic"> Admin - <a href=<%=@need.user_church_admin.associated_organization_url%>><%=@need.user_church_admin.associated_organization%></a> </p>
+                  <% else %>
+                    <p class="small-italic"> Admin - Church of Lexington </p>
+                  <% end %>
+                </div>
         </div>
 
         <div class="responsible-user col-xs-4">
@@ -321,10 +463,27 @@
             <h3>Leader</h3>
           </div>
           <div class="user-image">
-            <div class="placeholder-leader-image"></div>
-            <div class="user-details">
-                    <% if @need.leader.length > 0 %>
-                      <%= @need.leader %>
+
+            <% if @need.user_need_leader %>
+              <% if !@need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(@need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
+                  <div class="user-details">
+                    <% if @need.user_need_leader %>
+                      <%= @need.user_need_leader.full_name %>
+                      <% if @need.user_need_leader.associated_organization && @need.user_need_leader.associated_organization_url %>
+                        <p class="small-italic"> Leader - <a href=<%=@need.user_need_leader.associated_organization_url%>><%=@need.user_need_leader.associated_organization%></a> </p>
+                      <% else %>
+                        <p class="small-italic"> Leader - Church of Lexington </p>
+                      <% end %>
                     <% else %>
                       No Leader
                     <% end %>
@@ -340,6 +499,28 @@
       <% if @need.is_public %>
       <%= link_to 'Contribute', new_need_contribution_path(@need), :class => "full-width-btn-green" %>
       <% end %>
+
+
+
+    <% if @need.should_accept_volunteers %>
+      <% if user_signed_in? %>
+        <% if @need.time_contribution_for_user(current_user.id) %>
+          <% if @need.time_contribution_for_user(current_user.id).cancelled %>
+            <%= link_to 'Volunteer', edit_need_time_contribution_path(@need, @need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-purple" %>
+          <%else%>
+            <%= link_to 'Cancel Volunteering', edit_need_time_contribution_path(@need, @need.time_contribution_for_user_id(current_user.id)), :class => "full-width-btn-red" %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Volunteer', new_need_time_contribution_path(@need), :class => "full-width-btn-purple" %>
+        <% end %>
+      <% else %>
+        <%= link_to 'Volunteer', new_need_time_contribution_path(@need), :class => "full-width-btn-purple" %>
+      <% end %>
+    <% end %>
+
+
+
+
   </div>
 </div>
 

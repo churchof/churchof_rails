@@ -79,8 +79,18 @@ $(document).ready(function () {
           <%= f.input :user_id_church_admin, label: "Church Admin", collection: User.with_role(:church_admin), label_method: :full_name %>
         </div>
         <div class="lone-field">
-          <%= f.input :leader, label: "Leader" %>
+          <%= f.input :user_id_need_leader, label: "Leader", collection: User.with_role(:need_leader), label_method: :full_name %>
         </div>
+
+
+        <div class="lone-field">
+          <%= f.input :completion_goal_date, :include_blank => true, label: "Goal Date" %>
+
+
+
+        </div>
+
+
         <div class="lone-field">
 
           <%= link_to "Full list of Skills", skills_list_path, target: "_blank" %>
@@ -131,6 +141,31 @@ $(document).ready(function () {
 
     <div class="grey-form col-xs-12">
       <div class="secondary-form-inner-content">
+
+
+        <h4>Volunteers</h4>
+            <div class="field-group-3">
+              <%= f.input :volunteersNeededCount, label: "Number of Volunteers Needed" %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :additionalVolunteersSignedUpCount, label: "Number of Additional Volunteers" %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :volunteerTime, :include_blank => true, label: "Volunteer Time" %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :volunteerLocation, label: "Volunteer Location" %>
+            </div>
+            <div class="field-group-3">
+              <%= f.input :volunteerDescription, label: "Volunteer Description" %>
+            </div>
+
+
+            <br>
+                        <br>
+                        <br>
+
+
         <h4>Expenses</h4>
 
           <%= f.fields_for :expenses do |expense| %>
@@ -153,6 +188,10 @@ $(document).ready(function () {
             </div>
         <% end %>
         <%= f.link_to_add "+ Add an Expense", :expenses %>
+
+                                <br>
+                        <br>
+
         <div class="public-updates-block">
 
           <h4>Public Updates</h4>

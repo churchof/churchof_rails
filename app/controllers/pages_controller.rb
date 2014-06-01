@@ -19,4 +19,8 @@ class PagesController < ApplicationController
   def contribution_failed
   end
 
+  def volunteering_failed
+  end
+
+
 end

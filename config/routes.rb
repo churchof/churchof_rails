@@ -6,6 +6,7 @@ Churchof::Application.routes.draw do
   # link_to "My Link", whatever_path(name: "Jack")
   get "church_admin_panel/index"
   get "need_poster_panel/index"
+  get "need_leader_panel/index"
   get "impact_panel/index"
   get "validation_partner_panel/index"
   get "user_panel/index"
@@ -16,9 +17,11 @@ Churchof::Application.routes.draw do
   post "needs/create_charge"
   post "needs/set_is_public"
   post "users/agree_to_need_poster_agreement"
+  post "users/agree_to_need_leader_agreement"
   post "users/agree_to_church_admin_agreement"
   get '/beta' => 'pages#beta'
   get '/contribution_terms' => 'pages#contribution_terms'
+  get '/volunteering_terms' => 'pages#volunteering_terms'
   get '/skills_list' => 'pages#skills_list'
   get '/contribution_succeeded' => 'pages#contribution_succeeded'
   get '/contribution_failed' => 'pages#contribution_failed'
@@ -40,6 +43,7 @@ Churchof::Application.routes.draw do
 
   resources :needs do
     resources :contributions
+    resources :time_contributions
     resources :expenses
     resources :skills
     resources :updates

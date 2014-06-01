@@ -1,0 +1,13 @@
+Hello, <%= @need_leader.full_name %>
+ <br>
+<br>
+You are now Leading a new Need: 
+<a href="https://www.church-of.com/needs/<%=@need.id%>"><%= @need.title %></a>
+<br>
+<br>
+It was assaigned to you by:
+<%= @church_admin.full_name %> (Church Admin)
+<br>
+<br>
+Please log in to review the need in your "Leader Panel".
+http://www.church-of.com

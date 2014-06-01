@@ -10,19 +10,19 @@
 
 .custom_style {
   @media(max-width:767px){
-      width: 100%; 
+      width: 100%;
     height: 200px;
   }
   @media(min-width:768px){
-      width: 100%; 
+      width: 100%;
     height: 430px;
   }
   @media(min-width:992px){
-      width: 100%; 
+      width: 100%;
     height: 430px;
   }
   @media(min-width:1200px){
-      width: 100%; 
+      width: 100%;
     height: 430px;
   }
 }
@@ -33,6 +33,12 @@
   position: absolute;
   top: 30px;
   right: 25px;
+}
+
+#time-block-on-index{
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .need-title{
@@ -207,6 +213,10 @@ p.no-skills-message{
 }
 
 @media(max-width: 767px){
+  #time-block-on-index{
+    position: relative;
+  }
+
   .skills-filter{
     display:block;
     float: none;
@@ -272,6 +282,8 @@ p.no-skills-message{
 }
 
   .need-description{
+      margin-top: 16px;
+
     font-size: 18px;
     color: $medium-grey;
   }
@@ -312,7 +324,6 @@ p.no-skills-message{
       max-width: 100%;
     }
 
-
 .expenses-bar,
 .skills-bar{
   @include content-bar($light-grey)
@@ -323,6 +334,18 @@ p.no-skills-message{
     position: absolute;
     width: 0%;
     background: $green;
+  }
+
+.volunteers-bar,
+.skills-bar{
+  @include content-bar($light-grey)
+}
+  .volunteers-bar .progress-bar{
+    height: 100%;
+    @include border-radius(2px);
+    position: absolute;
+    width: 0%;
+    background: $primary-purple;
   }
 
   .amount-raised,
@@ -432,41 +455,142 @@ p.small-italic{
 
 .full-width-btn{
   display: block;
-   width: 100%;
-   background: $primary-blue;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
+  width: 100%;
+  background: $primary-blue;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+}
+
+.full-width-btn:hover{
+  background: $dark-blue;
+  color: #FFF;
+  text-decoration: none;
 }
 
 .full-width-btn-green{
   display: block;
-   width: 100%;
-   background: $green;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
+  width: 100%;
+  background: $green;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
 }
 
 .full-width-btn-green:hover{
   display: block;
-   width: 100%;
-   background: $dark-green;
-   color: #FFF;
-   padding-top: 15px;
-   text-align: center;
-   height: 55px;
-   font-size: 18px;
-     text-decoration: none;
+  width: 100%;
+  background: $dark-green;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  text-decoration: none;
 }
 
+.full-width-btn-purple{
+  display: block;
+  width: 100%;
+  background: $primary-purple;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  border: none;
+}
 
-.full-width-btn:hover{
+.full-width-btn-purple:hover{
+  display: block;
+  width: 100%;
+  background: $dark-purple;
+  color: #FFF;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.full-width-btn-red{
+  display: block;
+  width: 100%;
+  background: $primary-red;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  border:none
+}
+
+.full-width-btn-red:hover{
+  display: block;
+  width: 100%;
+  background: $dark-red;
+  color: #FFF;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+button.full-width-btn-red,
+button.full-width-btn-purple{
+  padding-top: 5px;
+}
+
+.not-full-width-btn{
+  display:inline-block;
+  min-width:auto;
+  background: $primary-blue;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+}
+
+.not-full-width-btn:hover{
   background: $dark-blue;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.not-full-width-btn-green{
+  display:inline-block;
+  min-width:auto;
+  background: $green;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+}
+
+.not-full-width-btn-green:hover{
+   background: $dark-green;
+   color: #FFF;
+  text-decoration: none;
+}
+
+.not-full-width-btn-purple{
+  display:inline-block;
+  min-width:auto;
+  background: $primary-purple;
+  color: #FFF;
+  padding-top: 15px;
+  text-align: center;
+  height: 55px;
+  font-size: 18px;
+}
+
+.not-full-width-btn-purple:hover{
+  background: $dark-purple;
   color: #FFF;
   text-decoration: none;
 }
@@ -532,7 +656,7 @@ p.small-italic{
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   padding-top: 5px;
-    font-size: 10px;
+  font-size: 10px;
 }
 .toggle-btn.red{
   padding-top: 5px;
@@ -559,7 +683,7 @@ input.toggle-btn.left{
   left: 0px;
   top: 0px;
   height: 100%;
-    font-size: 10px;
+  font-size: 10px;
 }
 
 input.toggle-btn.left:hover{
@@ -582,7 +706,7 @@ input.toggle-btn.right{
   right: 0px;
   top: 0px;
   height: 100%;
-    border-top-right-radius: 20px;
+  border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
 
@@ -765,16 +889,84 @@ p.form-instructions{
     margin-right: 5px;
   }
 h2.need-title{
-  width: 75%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
 }
+
+/*Time Block*/
+
+.time-block{
+  margin-top: 20px;
+  display: inline-block;
+  height: 65px;
+  width: 100%;
+  color: #FFF;
+  font-size: 18px;
+  float: right;
+  text-align: center;
+}
+
+.time-block.time-blue{
+  background: $primary-blue;
+}
+
+.time-block.time-green{
+  background: $green;
+}
+
+.time-block.time-orange{
+  background: $orange;
+}
+
+.time-block.time-red{
+  background: $primary-red;
+}
+
+.share-block-facebook{
+  vertical-align: top;
+  margin-top: 0px;
+  display: inline-block;
+  height: 48px;
+  width: 50%;
+  vertical-align: top;
+  background: url('https://s3.amazonaws.com/church_of/assets/ui_assets/facebook_share_icon.png') $dark-blue no-repeat center center;
+  background-size: 20px;
+  cursor: pointer;
+}
+
+.share-block-twitter{
+  vertical-align: top;
+  margin-top: 0px;
+  display: inline-block;
+  height: 48px;
+  width: 50%;
+  vertical-align: top;
+  background: url('https://s3.amazonaws.com/church_of/assets/ui_assets/twitter_share_icon.png') $primary-blue no-repeat center center;
+  background-size: 22.5px;
+  cursor: pointer;
+}
+
+.share-block-facebook:hover,
+.share-block-twitter:hover{
+  opacity: .92;
+}
+
+.time-remaining{
+  padding-top: 10px;
+}
+
+.time-posted{
+  font-size: 12px;
+  line-height: 14px;
+}
+
 .frequency-type{
-  width: 24%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
-  margin-top: 20px;
-  text-align: right;
+  margin-top: 0px;
+  text-align: left;
 }
 
 .frequency-tag{
@@ -984,3 +1176,67 @@ li.token-input-token-facebook.custom span{
 }
 
 
+/*Width of Buttons*/
+.need-btn-block{
+  position: relative;
+  overflow: auto;
+}
+
+a.need-btn-length-1{
+  width: 100%;
+}
+
+a.need-btn-length-2{
+  width: 47.99%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.need-xs-4, .need-xs-6, .need-xs-12 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.need-xs-4, .need-xs-6, .need-xs-12 {
+  float: left;
+}
+.need-xs-12,
+.need-xs-12:hover {
+  width: 100%;
+}
+
+.need-xs-6,
+.need-xs-6:hover {
+  width: 50%;
+}
+
+.need-xs-4,
+.need-xs-4:hover {
+  width: 33.33333333%;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+
+
+@media(max-width: 767px){
+  a.need-btn-link{
+    font-size: 14px;
+  }
+}

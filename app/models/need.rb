@@ -9,8 +9,10 @@ class Need < ActiveRecord::Base
 
   belongs_to :user_posted_by, :foreign_key => 'user_id_posted_by', :class_name => "User"
   belongs_to :user_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "User"
+  belongs_to :user_need_leader, :foreign_key => 'user_id_need_leader', :class_name => "User"
 
   has_many :contributions
+  has_many :time_contributions
   has_many :expenses
   has_many :updates
   has_and_belongs_to_many :skills
@@ -33,6 +35,8 @@ class Need < ActiveRecord::Base
   before_create :create_approx_location_values
   after_create :mail_to_church_admin_whos_recieving_the_need, :log_creation
   after_save :mail_to_users_with_relevant_skills
+
+  after_save :mail_to_leader_if_just_appointed
 
   after_update :mail_to_need_poster_if_just_approved
 
@@ -62,6 +66,23 @@ class Need < ActiveRecord::Base
     end
   end
 
+  def mail_to_leader_if_just_appointed
+    if self.user_id_need_leader_changed?
+      if self.user_need_leader
+        past_relevant_activities = Activity.where(user_id: self.user_need_leader.id, subject: self, description: 'Mailed because new Need pushed to this Leader.')
+        if past_relevant_activities.count == 0
+          Mailer.need_leader_new_need_assigned(self.user_need_leader.id, self.user_church_admin.id, self.id).deliver
+          Activity.create(
+            subject: self,
+            description: 'Mailed because new Need pushed to this Leader.',
+            user: self.user_need_leader
+          )
+        end
+      end
+    end
+  end
+
+
   def mail_to_need_poster_if_just_approved
     if (self.need_stage_changed? && self.need_stage == 2)
         # Only email the user if they haven't been emailed about it yet.
@@ -77,8 +98,6 @@ class Need < ActiveRecord::Base
     end
   end
 
-
-
   accepts_nested_attributes_for :expenses, :allow_destroy => true
   accepts_nested_attributes_for :skills, :allow_destroy => true
   accepts_nested_attributes_for :updates, :allow_destroy => true
@@ -87,28 +106,26 @@ class Need < ActiveRecord::Base
 
 
   def mail_to_users_with_relevant_skills
-
-    # should this be async?
-    # if self.is_public
-    #   @users = Array.new
-    #   self.skills.each do |skill|
-    #     skill.users.each do |user|
-    #       @users << user
-    #     end
-    #   end
-    #   @users.uniq.each do |user|
-    #     past_relevant_activities = Activity.where(user_id: user.id, subject: self, description: 'Mailed about need due to relevant skills.')
-    #     if past_relevant_activities.count == 0
-    #       # Only email the user if they haven't been emailed about it yet.
-    #       Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skills.id).deliver
-    #       Activity.create(
-    #         subject: self,
-    #         description: 'Mailed about need due to relevant skills.',
-    #         user: user
-    #       )
-    #     end
-    #   end
-    # end
+    if self.is_public
+      @users = Array.new
+      self.skills.each do |skill|
+        skill.users.each do |user|
+          @users << user
+        end
+      end
+      @users.uniq.each do |user|
+        past_relevant_activities = Activity.where(user_id: user.id, subject: self, description: 'Mailed about need due to relevant skills.')
+        if past_relevant_activities.count == 0
+          # Only email the user if they haven't been emailed about it yet.
+          Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skills).deliver
+          Activity.create(
+            subject: self,
+            description: 'Mailed about need due to relevant skills.',
+            user: user
+          )
+        end
+      end
+    end
   end
 
 
@@ -169,6 +186,50 @@ class Need < ActiveRecord::Base
 
   def percent_raised
     i = (Float(total_contributed) / Float(total_expenses)) * 100.0
+    if i < 0
+      i = 0
+    end
+    if i > 100
+      i = 100
+    end
+    i
+  end
+
+  def volunteer_date_passed
+    if volunteerTime
+      Time.current > volunteerTime
+    else
+      false
+    end
+  end
+
+  def time_contribution_for_user(user_id_to_check)
+    self.time_contributions.where(user: User.find(user_id_to_check)).first
+  end
+
+  def time_contribution_for_user_id(user_id_to_check)
+    time_contribution = self.time_contributions.where(user: User.find(user_id_to_check)).first
+    time_contribution.id
+  end
+
+  def should_accept_volunteers
+    i = self.volunteersNeededCount.nil? ? 0 : self.volunteersNeededCount
+    (i > 0) && !volunteer_date_passed
+  end
+
+  def should_accept_contributions
+  end
+
+  def total_volunteers
+    self.time_contributions.where(cancelled: false).count + (self.additionalVolunteersSignedUpCount.nil? ? 0 : self.additionalVolunteersSignedUpCount)
+  end
+
+  def total_needed_volunteers
+    self.volunteersNeededCount.nil? ? 0 : self.volunteersNeededCount
+  end
+
+  def percent_volunteers_secured
+    i = (Float(total_volunteers) / Float(total_needed_volunteers)) * 100.0
     if i < 0
       i = 0
     end

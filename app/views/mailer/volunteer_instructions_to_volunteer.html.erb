@@ -1,0 +1,26 @@
+Hello <%= @volunteer.full_name %>,
+<br>
+<br>
+Thanks for volunteering for: <a href="https://www.church-of.com/needs/<%=@need.id%>"><%= @need.title %></a>
+<br>
+<br>
+Here are the details you'll need:
+<br>
+<br>
+<p>
+  <strong>When: </strong>
+  <%= @need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+</p>
+<p>
+  <strong>Where: </strong>
+  <%= @need.volunteerLocation %>
+</p>
+<p>
+  <strong>What: </strong>
+  <%= @need.volunteerDescription %>
+</p>
+<% if @need.user_need_leader %>
+  <p>
+    <a href="mailto:<%= @need.user_need_leader.email %>" target="_top">Contact <%= @need.user_need_leader.full_name %> (Leader)</a>
+  </p>
+<% end %>

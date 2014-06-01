@@ -9,6 +9,8 @@ Churchof::Application.configure do
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
+
+  config.time_zone = 'Eastern Time (US & Canada)'
   
   GA.tracker = ENV['GOOGLE_ANALYTICS_ID']
 

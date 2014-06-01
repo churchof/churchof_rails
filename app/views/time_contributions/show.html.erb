@@ -1,0 +1,30 @@
+<div class="page-header-block">
+  <div class="page-title">
+  </div>
+</div>
+
+<div class="main-content main-bg">
+
+	<% if @time_contribution.cancelled %>
+
+        <div class="contribution-completed-message red">
+    		<div class="inner-content">
+      		<h1>Volunteering Cancelled</h1>
+       		We've notified the leader that you will no longer be able to volunteer. You can see all your volunteering instances (as well as un-cancel them) in your <%= link_to "Impact Panel", impact_panel_index_path %> located in the menu.
+    	</div>
+
+
+        <% else %>
+  		<div class="contribution-completed-message green">
+    		<div class="inner-content">
+      		<h1>Thanks for Volunteering</h1>
+       		An email with the details of your volunteering has been sent to you. You can see all your volunteering instances in your <%= link_to "Impact Panel", impact_panel_index_path %> located in the menu.
+    	</div>
+
+    	<% end %>
+
+  </div>
+</div>
+
+
+

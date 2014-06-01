@@ -116,7 +116,11 @@
                 <% end %>
                 <div class="user-details">
                   <%= need.user_church_admin.full_name %>
-                  <p class="small-italic"> Admin - Church of Lexington </p>
+                  <% if need.user_church_admin.associated_organization && need.user_church_admin.associated_organization_url %>
+                    <p class="small-italic"> Admin - <a href=<%=need.user_church_admin.associated_organization_url%>><%=need.user_church_admin.associated_organization%></a> </p>
+                  <% else %>
+                    <p class="small-italic"> Admin - Church of Lexington </p>
+                  <% end %>
                 </div>
               </div>
 
@@ -125,10 +129,27 @@
                   <h3>Leader</h3>
                 </div>
                 <div class="user-image">
-                  <div class="placeholder-leader-image"></div>
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
                   <div class="user-details">
-                    <% if need.leader.length > 0 %>
-                      <%= need.leader %>
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
+                      <% if need.user_need_leader.associated_organization && need.user_need_leader.associated_organization_url %>
+                        <p class="small-italic"> Leader - <a href=<%=need.user_need_leader.associated_organization_url%>><%=need.user_need_leader.associated_organization%></a> </p>
+                      <% else %>
+                        <p class="small-italic"> Leader - Church of Lexington </p>
+                      <% end %>
                     <% else %>
                       No Leader
                     <% end %> 
@@ -209,10 +230,13 @@
             <% else %>
               <div class="placeholder-leader-image"></div>
             <% end %>
-                  <div class="user-details">
-                    <%= need.user_church_admin.full_name %>
+                <div class="user-details">
+                  <%= need.user_church_admin.full_name %>
+                  <% if need.user_church_admin.associated_organization && need.user_church_admin.associated_organization_url %>
+                    <p class="small-italic"> Admin - <a href=<%=need.user_church_admin.associated_organization_url%>><%=need.user_church_admin.associated_organization%></a> </p>
+                  <% else %>
                     <p class="small-italic"> Admin - Church of Lexington </p>
-                  </div>
+                  <% end %>
                 </div>
 
                 <div class="responsible-user col-xs-4">
@@ -220,10 +244,27 @@
                     <h3>Leader</h3>
                   </div>
                   <div class="user-image">
-                    <div class="placeholder-leader-image"></div>
-                    <div class="user-details">
-                    <% if need.leader.length > 0 %>
-                      <%= need.leader %>
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
+                  <div class="user-details">
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
+                      <% if need.user_need_leader.associated_organization && need.user_need_leader.associated_organization_url %>
+                        <p class="small-italic"> Leader - <a href=<%=need.user_need_leader.associated_organization_url%>><%=need.user_need_leader.associated_organization%></a> </p>
+                      <% else %>
+                        <p class="small-italic"> Leader - Church of Lexington </p>
+                      <% end %>
                     <% else %>
                       No Leader
                     <% end %> 
@@ -305,10 +346,14 @@
             <% else %>
               <div class="placeholder-leader-image"></div>
             <% end %>
-                  <div class="user-details">
-                    <%= need.user_church_admin.full_name %>
+                <div class="user-details">
+                  <%= need.user_church_admin.full_name %>
+                  <% if need.user_church_admin.associated_organization && need.user_church_admin.associated_organization_url %>
+                    <p class="small-italic"> Admin - <a href=<%=need.user_church_admin.associated_organization_url%>><%=need.user_church_admin.associated_organization%></a> </p>
+                  <% else %>
                     <p class="small-italic"> Admin - Church of Lexington </p>
-                  </div>
+                  <% end %>
+                </div>
                 </div>
 
                 <div class="responsible-user col-xs-4">
@@ -316,10 +361,27 @@
                     <h3>Leader</h3>
                   </div>
                   <div class="user-image">
-                    <div class="placeholder-leader-image"></div>
-                    <div class="user-details">
-                    <% if need.leader.length > 0 %>
-                      <%= need.leader %>
+
+            <% if need.user_need_leader %>
+              <% if !need.user_need_leader.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(need.user_need_leader.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+            <% else %>
+              <div class="placeholder-leader-image"></div>
+            <% end %>
+
+                  <div class="user-details">
+                    <% if need.user_need_leader %>
+                      <%= need.user_need_leader.full_name %>
+                      <% if need.user_need_leader.associated_organization && need.user_need_leader.associated_organization_url %>
+                        <p class="small-italic"> Leader - <a href=<%=need.user_need_leader.associated_organization_url%>><%=need.user_need_leader.associated_organization%></a> </p>
+                      <% else %>
+                        <p class="small-italic"> Leader - Church of Lexington </p>
+                      <% end %>
                     <% else %>
                       No Leader
                     <% end %> 

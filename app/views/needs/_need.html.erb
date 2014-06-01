@@ -1,14 +1,73 @@
   <div class="need-container">
     <div class="inner-content">
-      <h2 class="need-title">
-        <%= link_to need.title_public, need %>
-      </h2>
 
-      <% if need.date_public_posted %>
-        <p class="timestamp-label">
-          posted <%= time_ago_in_words(need.date_public_posted) %> ago
-        </p>
-      <% end %>
+
+   <div class="row">
+      <div class="col-xs-12 col-sm-9">
+
+        <h2 class="need-title">
+          <%= link_to need.title_public, need %>
+        </h2>
+
+      </div>
+
+
+        <% if need.date_public_posted %>
+              <div class="col-xs-12 col-sm-3" id="time-block-on-index">
+                <% if need.completion_goal_date %>
+                  <% if need.completion_goal_date > Time.current %>
+                    <% if need.completion_goal_date > Time.current + 1.days %>
+                      <div class="time-block time-green">
+                        <div class="time-remaining">
+                          <%= time_ago_in_words(need.completion_goal_date) %> left
+                        </div>
+                        <div class="time-posted">
+                          <% if need.date_public_posted %>
+                            posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                          <% end %>
+                        </div>
+                      </div>
+                    <% else %>
+                      <div class="time-block time-orange">
+                        <div class="time-remaining">
+                          <%= time_ago_in_words(need.completion_goal_date) %> left
+                        </div>
+                        <div class="time-posted">
+                          <% if need.date_public_posted %>
+                            posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% else %>
+                    <div class="time-block time-red">
+                      <div class="time-remaining">
+                        <%= time_ago_in_words(need.completion_goal_date) %> past goal
+                      </div>
+                      <div class="time-posted">
+                        <% if need.date_public_posted %>
+                          posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="time-block time-blue">
+                    <div class="time-remaining">
+                      No Goal Date
+                    </div>
+                    <div class="time-posted">
+                      <% if need.date_public_posted %>
+                        posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+        <% end %>
+
+      </div>
+      </div>
+
       <div class="need-description">
         <p><%= need.description_public %></p>
         <div class="row need-details">
@@ -22,6 +81,19 @@
                 </div>
             </div>
           <% end %>
+
+          <% if need.total_needed_volunteers > 0 %>
+
+          <div class="volunteers col-xs-12 col-sm-6">
+            <h3>Volunteers</h3>
+
+            <div class="volunteers-bar">
+              <span class="progress-bar" style="width:<%= need.percent_volunteers_secured %>%"></span>
+              <span class="amount-raised"><%= need.total_volunteers %> / <%= need.total_needed_volunteers %></span>
+            </div>
+          </div>
+          <% end %>
+
           <div class="skills col-xs-12 col-sm-6">
             <h3>Skills / Resources</h3>
             <ul class="skills-list">
@@ -41,5 +113,38 @@
           </div>
         </div>
       </div>
+
+
     </div>
+
+
+
+<!-- need.volunteer_date_passed
+ -->
+
+  <div class="need-button-block cf">
+    <%= link_to 'Read More', need_path(need), :class => "need-btn-link full-width-btn" %>
+
+
+    <% if need.expenses.count > 0 %>
+      <%= link_to 'Contribute', new_need_contribution_path(need), :class => "need-btn-link full-width-btn-green" %>
+    <% end %>
+
+
+    <% if need.should_accept_volunteers %>
+      <% if user_signed_in? %>
+        <% if need.time_contribution_for_user(current_user.id) %>
+          <% if need.time_contribution_for_user(current_user.id).cancelled %>
+            <%= link_to 'Volunteer', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-purple" %>
+          <%else%>
+            <%= link_to 'Cancel Volunteering', edit_need_time_contribution_path(need, need.time_contribution_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "need-btn-link full-width-btn-purple" %>
+        <% end %>
+      <% else %>
+        <%= link_to 'Volunteer', new_need_time_contribution_path(need), :class => "need-btn-link full-width-btn-purple" %>
+      <% end %>
+    <% end %>
   </div>
+</div>
