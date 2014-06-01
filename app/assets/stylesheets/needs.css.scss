@@ -884,100 +884,72 @@ h2.need-title{
   vertical-align: top;
 }
 
+/*Time Block*/
 
-
-.time-block-blue{
+.time-block{
   margin-top: 20px;
   display: inline-block;
-    height: 50px;
+  height: 65px;
   width: 100%;
-    color: #FFF;
+  color: #FFF;
   font-size: 18px;
+  float: right;
+  text-align: center;
+}
+
+.time-block.time-blue{
   background: $primary-blue;
-      float: right;
-  text-align: center;
 }
 
-.time-block-green{
-  margin-top: 20px;
-  display: inline-block;
-    height: 50px;
-  width: 100%;
-    color: #FFF;
-  font-size: 18px;
+.time-block.time-green{
   background: $green;
-      float: right;
-  text-align: center;
 }
 
-.time-block-orange{
-  margin-top: 20px;
-  display: inline-block;
-    height: 50px;
-  width: 100%;
-    color: #FFF;
-  font-size: 18px;
+.time-block.time-orange{
   background: $orange;
-      float: right;
-  text-align: center;
 }
 
-.time-block-red{
-  margin-top: 20px;
-  display: inline-block;
-    height: 50px;
-  width: 100%;
-    color: #FFF;
-  font-size: 18px;
+.time-block.time-red{
   background: $primary-red;
-      float: right;
-  text-align: center;
 }
-
-
-
 
 .share-block-facebook{
   vertical-align: top;
   margin-top: 0px;
   display: inline-block;
-    height: 48px;
+  height: 48px;
   width: 50%;
-
-
-
   vertical-align: top;
-
   background: url('https://s3.amazonaws.com/church_of/assets/ui_assets/facebook_share_icon.png') $dark-blue no-repeat center center;
-
+  background-size: 20px;
+  cursor: pointer;
 }
 
 .share-block-twitter{
   vertical-align: top;
   margin-top: 0px;
   display: inline-block;
-    height: 48px;
+  height: 48px;
   width: 50%;
-
   vertical-align: top;
-
-    background: url('https://s3.amazonaws.com/church_of/assets/ui_assets/twitter_share_icon.png') $primary-blue no-repeat center center;
-
+  background: url('https://s3.amazonaws.com/church_of/assets/ui_assets/twitter_share_icon.png') $primary-blue no-repeat center center;
+  background-size: 22.5px;
+  cursor: pointer;
 }
 
+.share-block-facebook:hover,
+.share-block-twitter:hover{
+  opacity: .92;
+}
 
+.time-remaining{
+  padding-top: 10px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.time-posted{
+  font-size: 12px;
+  line-height: 14px;
+}
 
 .frequency-type{
   width: 100%;

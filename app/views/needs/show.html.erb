@@ -10,14 +10,14 @@
 <meta name="copyright" content="" />
 <meta name="application-name" content="" />
 
-<!-- for Facebook -->          
+<!-- for Facebook -->
 <meta property="og:title" content="<%= @need.title_public %>" />
 <meta property="og:type" content="article" />
 <meta property="og:image" content="https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png" />
 <meta property="og:url" content="https://www.church-of.com/needs/<%= @need.id %>" />
 <meta property="og:description" content="<%= @need.description_public %>" />
 
-<!-- for Twitter -->          
+<!-- for Twitter -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="<%= @need.title_public %>" />
 <meta name="twitter:description" content="<%= @need.description_public %>" />
@@ -110,39 +110,55 @@
               <% if @need.completion_goal_date %>
                 <% if @need.completion_goal_date > Time.current %>
                   <% if @need.completion_goal_date > Time.current + 1.days %>
-                    <div class="time-block-green">
-                      <%= time_ago_in_words(@need.completion_goal_date) %> left
-                      <% if @need.date_public_posted %>
-                        posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
-                      <% end %>
+                    <div class="time-block time-green">
+                      <div class="time-remaining">
+                        <%= time_ago_in_words(@need.completion_goal_date) %> left
+                      </div>
+                      <div class="time-posted">
+                        <% if @need.date_public_posted %>
+                          posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                        <% end %>
+                      </div>
                     </div>
                   <% else %>
-                    <div class="time-block-orange">
-                      <%= time_ago_in_words(@need.completion_goal_date) %> left
-                      <% if @need.date_public_posted %>
-                        posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
-                      <% end %>
+                    <div class="time-block time-orange">
+                      <div class="time-remaining">
+                        <%= time_ago_in_words(@need.completion_goal_date) %> left
+                      </div>
+                      <div class="time-posted">
+                        <% if @need.date_public_posted %>
+                          posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                        <% end %>
+                      </div>
                     </div>
                   <% end %>
                 <% else %>
-                  <div class="time-block-red">
-                    <%= time_ago_in_words(@need.completion_goal_date) %> past goal
+                  <div class="time-block time-red">
+                    <div class="time-remaining">
+                      <%= time_ago_in_words(@need.completion_goal_date) %> past goal
+                    </div>
+                    <div class="time-posted">
+                      <% if @need.date_public_posted %>
+                        posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="time-block time-blue">
+                  <div class="time-remaining">
+                    No Goal Date
+                  </div>
+                  <div class="time-posted">
                     <% if @need.date_public_posted %>
                       posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
                     <% end %>
                   </div>
-                <% end %>
-              <% else %>
-                <div class="time-block-blue">
-                  No Goal Date
-                  <% if @need.date_public_posted %>
-                    posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
-                  <% end %>
                 </div>
               <% end %>
 
-            <div class="share-block-facebook">
-            </div><div class="share-block-twitter">
+            <div onclick="shareNeed();" data-need-title="<%= @need.title_public %>" data-need-description="<%= @need.description_public %>" data-need-id="<%= @need.id %>" class="share-block-facebook">
+            </div><div onclick="tweetNeed();" data-need-title="<%= @need.title_public %>" data-need-description="<%= @need.description_public %>" data-need-id="<%= @need.id %>" class="share-block-twitter">
             </div>
 
 
@@ -150,7 +166,26 @@
           </div>
    </div>
 
+<script>
+  function shareNeed() {
+    var needTitle = $('.share-block-facebook').data('need-title');
+    var needDescription = $('.share-block-facebook').data('need-description');
+    var needID = $('.share-block-facebook').data('need-id');
+    FB.ui({
+      method: 'feed',
+      name: "Check out this opportunity to serve in Lexington: " + needTitle,
+      link: "http://church-of.com/needs/" + needID,
+      picture: '',
+      description: "Check out this opportunity to serve in Lexington: " + needTitle
+    });
+  };
 
+  function tweetNeed() {
+    var needID = $('.share-block-twitter').data('need-id');
+    var tweetUrl = "https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fchurch-of.com&text=Check%20out%20this%20opportunity%20to%20serve%20in%20Lexington:%20http%3A%2F%2Fchurch-of.com%2Fneeds%2F" + needID;
+    window.open(tweetUrl,'','height=400,width=500');
+  };
+</script>
 
 
 
@@ -203,7 +238,7 @@
             <% end %>
 
 
-   -->            
+   -->
 
 
 
@@ -266,7 +301,7 @@
               <p class="first-name">
                 <strong>Who: </strong>
                   <% @need.time_contributions.each do |time_contribution| %>
-                    
+
 
                   <p>
                   <a href="mailto:<%= time_contribution.user.email %>" target="_top"><%= time_contribution.user.full_name %></a>
@@ -440,7 +475,7 @@
                       <% end %>
                     <% else %>
                       No Leader
-                    <% end %> 
+                    <% end %>
                   </div>
           </div>
         </div>
