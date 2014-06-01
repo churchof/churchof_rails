@@ -84,7 +84,7 @@ $(document).ready(function () {
 
 
         <div class="lone-field">
-          <%= f.input :completion_goal_date, label: "Goal Date" %>
+          <%= f.input :completion_goal_date, :include_blank => true, label: "Goal Date" %>
 
 
 
@@ -151,7 +151,7 @@ $(document).ready(function () {
               <%= f.input :additionalVolunteersSignedUpCount, label: "Number of Additional Volunteers" %>
             </div>
             <div class="field-group-3">
-              <%= f.input :volunteerTime, label: "Volunteer Time" %>
+              <%= f.input :volunteerTime, :include_blank => true, label: "Volunteer Time" %>
             </div>
             <div class="field-group-3">
               <%= f.input :volunteerLocation, label: "Volunteer Location" %>

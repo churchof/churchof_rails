@@ -117,6 +117,8 @@
                       <div class="time-posted">
                         <% if @need.date_public_posted %>
                           posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                        <% else %>
+                          not posted publicly
                         <% end %>
                       </div>
                     </div>
@@ -128,6 +130,8 @@
                       <div class="time-posted">
                         <% if @need.date_public_posted %>
                           posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                        <% else %>
+                          not posted publicly
                         <% end %>
                       </div>
                     </div>
@@ -140,7 +144,9 @@
                     <div class="time-posted">
                       <% if @need.date_public_posted %>
                         posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
-                      <% end %>
+                      <% else %>
+                          not posted publicly
+                        <% end %>
                     </div>
                   </div>
                 <% end %>
@@ -152,15 +158,20 @@
                   <div class="time-posted">
                     <% if @need.date_public_posted %>
                       posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                    <% else %>
+                          not posted publicly
                     <% end %>
                   </div>
                 </div>
               <% end %>
 
-            <div onclick="shareNeed();" data-need-title="<%= @need.title_public %>" data-need-description="<%= @need.description_public %>" data-need-id="<%= @need.id %>" class="share-block-facebook">
-            </div><div onclick="tweetNeed();" data-need-title="<%= @need.title_public %>" data-need-description="<%= @need.description_public %>" data-need-id="<%= @need.id %>" class="share-block-twitter">
-            </div>
+            <% if @need.date_public_posted %>
 
+              <div onclick="shareNeed();" data-need-title="<%= @need.title_public %>" data-need-description="<%= @need.description_public %>" data-need-id="<%= @need.id %>" class="share-block-facebook">
+              </div><div onclick="tweetNeed();" data-need-title="<%= @need.title_public %>" data-need-description="<%= @need.description_public %>" data-need-id="<%= @need.id %>" class="share-block-twitter">
+              </div>
+
+            <% end %>
 
 
           </div>
@@ -173,16 +184,16 @@
     var needID = $('.share-block-facebook').data('need-id');
     FB.ui({
       method: 'feed',
-      name: "Check out this opportunity to serve in Lexington: " + needTitle,
+      name: "New opportunity to serve in Lexington: " + needTitle,
       link: "http://church-of.com/needs/" + needID,
-      picture: '',
+      picture: 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png',
       description: needDescription
     });
   };
 
   function tweetNeed() {
     var needID = $('.share-block-twitter').data('need-id');
-    var tweetUrl = "https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fchurch-of.com&text=Check%20out%20this%20opportunity%20to%20serve%20in%20Lexington:%20http%3A%2F%2Fchurch-of.com%2Fneeds%2F" + needID;
+    var tweetUrl = "https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fchurch-of.com&text=New%20opportunity%20to%20serve%20in%20Lexington:%20http%3A%2F%2Fchurch-of.com%2Fneeds%2F" + needID;
     window.open(tweetUrl,'','height=400,width=500');
   };
 </script>
