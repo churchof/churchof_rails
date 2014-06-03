@@ -515,7 +515,9 @@
     <% end %>
 
       <% if @need.is_public %>
-      <%= link_to 'Contribute', new_need_contribution_path(@need), :class => "full-width-btn-green" %>
+        <% if @need.total_expenses > Money.new(0, "USD") %>
+          <%= link_to 'Contribute', new_need_contribution_path(@need), :class => "full-width-btn-green" %>
+        <% end %>
       <% end %>
 
 
