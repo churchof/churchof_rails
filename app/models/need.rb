@@ -42,6 +42,8 @@ class Need < ActiveRecord::Base
 
   after_update :update_date_public_posted_if_changed
 
+  after_update :share_on_facebook_page
+
   scope :public, -> { where(is_public: true) }
   scope :in_progress, -> { where(need_stage: 2) }
 
@@ -237,6 +239,33 @@ class Need < ActiveRecord::Base
       i = 100
     end
     i
+  end
+
+  def share_on_facebook_page
+    if self.is_public_changed?
+      if self.is_public
+
+        past_relevant_activities = Activity.where(user_id: nil, subject: self, description: 'Facebook post for need #{self.id}.')
+        if past_relevant_activities.count == 0
+          # Only send to Facebook once.
+
+            pages = FbGraph::User.me(APP_CONFIG['facebook_access_token']).accounts.first
+            shorten_url = shorten_url(url) # create a bit.ly link
+            pages.feed!(
+              :message => "title_public",
+              :link => "http://church-of.com/needs/#{self.id}",
+              :description => "description_public",
+              :picture => 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png'
+            )
+
+          Activity.create(
+            subject: self,
+            description: 'Facebook post for need #{self.id}.',
+            user: nil
+          )
+        end
+      end
+    end
   end
 
 end

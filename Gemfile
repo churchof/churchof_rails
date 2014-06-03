@@ -19,6 +19,7 @@ gem 'airbrake'
 # gem 'resque'
 # gem 'resque_mailer'
 gem 'google-analytics-rails'
+gem 'fb_graph'
 
 group :development, :test do
 	gem 'sqlite3'
