@@ -67,6 +67,8 @@ class NeedsController < ApplicationController
       @needs = Need.public.in_progress.reverse
     end
 
+    @needs = @needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @needs.reject(&:completion_goal_date)
+
     @skills = Skill.all
 
     skills_represented = Array.new
