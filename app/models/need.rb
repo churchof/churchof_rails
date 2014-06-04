@@ -32,7 +32,8 @@ class Need < ActiveRecord::Base
   geocoded_by :full_street_address, :if => :full_street_address_changed?   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
-  after_save :create_approx_location_values, :if => :full_street_address_changed?
+  before_create :create_approx_location_values
+  after_update :create_approx_location_values, :if => :full_street_address_changed?
   after_create :mail_to_church_admin_whos_recieving_the_need, :log_creation
   after_save :mail_to_users_with_relevant_skills
 
