@@ -305,31 +305,45 @@
       </div>
 
 
+
+
+
       <% if @need.total_needed_volunteers > 0 %>
         <div class="private-information">
           <h3> Volunteering Info </h3>
             <p class="first-name">
               <strong>When: </strong>
-              <%= @need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+              <% if @need.volunteerTime %>
+                <%= @need.volunteerTime.localtime.strftime("%a, %b-%d, %I:%M %p") %>
+              <% end %>
             </p>
             <p class="first-name">
               <strong>Where: </strong>
-              <%= @need.volunteerLocation %>
+              <% if @need.volunteerLocation %>
+                <%= @need.volunteerLocation %>
+              <% end %>
             </p>
             <p class="first-name">
               <strong>What: </strong>
-              <%= @need.volunteerDescription %>
+              <% if @need.volunteerDescription %>
+                <%= @need.volunteerDescription %>
+              <% end %>
             </p>
             <% if user_signed_in? %>
               <% if current_user == @need.user_posted_by || current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
 
                 <p class="first-name">
                   <strong>Who: </strong>
+
+                    <% emails = Array.new %>
                     <% @need.time_contributions.each do |time_contribution| %>
-                    <p>
-                    <a href="mailto:<%= time_contribution.user.email %>" target="_top"><%= time_contribution.user.full_name %></a>
-                  </p>
+
+
+                    <% emails << time_contribution.user.email %>
+                    <a href="mailto:<%= time_contribution.user.email %>" target="_top"><%= time_contribution.user.full_name %>,  </a>
                     <% end %>
+
+                    <a href="mailto:<%= emails.join(",") %>" target="_top">Email All Volunteers  </a>
                 </p>
 
               <% end %>
@@ -346,6 +360,44 @@
 
         <div class="private-information">
           <h3> Individual Info </h3>
+
+
+          <% if current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
+
+              <% if @rosm_results.empty? %>
+
+                <div class="private-records-block">
+                  <div class="previous-records-bar-green">
+                    <span class="record-count">
+                    No Previous Records
+                    <% if @need.first_name? %>
+                      <span class="hide-on-xs"> for <%= @need.first_name %> <%=  @need.last_name %></span>
+                    <% end %>
+                    </span>
+                  </div>
+                </div>
+
+              <% else %>
+
+                <div class="private-records-block">
+                  <div class="previous-records-bar-orange" data-toggle="modal" data-target="#rosmModal">
+                    <span class="record-count">
+                        <% begin %>
+                          <%= @rosm_results.sort.first[1].first[1].count %> Previous Records
+                        <% rescue %>
+                          Previous Records
+                        <% end %>
+                        <% if @need.first_name? %>
+                          <span class="hide-on-xs"> for <%= @need.first_name %> <%=  @need.last_name %></span>
+                        <% end %>
+                    </span>
+                  <span class="details">Show Results</span>
+                  </div>
+                </div>
+
+              <% end %>
+
+
 
           <% if @need.first_name? %>
             <p class="first-name">
@@ -399,20 +451,10 @@
         </div>
 
 
-      <% if current_user == @need.user_church_admin %>
 
-<!--         <div class="private-records-block">
-          <div class="previous-records-bar" data-toggle="modal" data-target="#rosmModal">
-            <span class="record-count">
-              0 Previous Records
-              <% if @need.first_name? %>
-                <span class="hide-on-xs"> for <%= @need.first_name %> <%=  @need.last_name %></span>
-              <% end %>
-            </span>
-            <span class="details">Show Results</span>
-          </div>
-        </div>
- -->
+
+
+        
 
         <% end %>
       <% end %>
@@ -617,17 +659,48 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">ROSM Records</h4>
       </div>
-      <div class="modal-body">
-        <p>
-          Jun 18th 2012 $180 Rent Assistance - Client came to us to ask and we helped.
-        </p>
-        <p>
-          May 11th 2014 $130 Utilities Assistance - Client came to us to ask and we helped.
-        </p>
-        <p>
-          Jan 18th 2014 $180 Rent Assistance - Client came to us to ask and we helped.
-        </p>
-      </div>
+
+      <% if user_signed_in? %>
+        <% if current_user == @need.user_church_admin || current_user == @need.user_need_leader %>
+
+          <div class="modal-body">
+
+            <% @rosm_results.sort.first[1].first[1].each do |array| %>
+              <p>
+Request Type: <strong><%= array['RequestType'] %></strong><br>
+Amount: <strong><%= array['Amount'] %></strong><br>
+Due: <strong><%= array['Due'] %></strong><br>
+Request Status: <strong><%= array['RequestStatus'] %></strong><br>
+Church: <strong><%= array['Church'] %></strong><br>
+Worker: <strong><%= array['Worker'] %></strong><br>
+Contact Date: <strong><%= array['contactDate'] %></strong><br>
+Worker Phone: <strong><%= array['workerPhone'] %></strong><br>
+Type of Assistance Given: <strong><%= array['TypeOfAssistanceGiven'] %></strong><br>
+Dollars Given: <strong><%= array['DollarsGiven'] %></strong><br>
+Approved By: <strong><%= array['ApprovedBy'] %></strong><br>
+Date Referred to ROSM: <strong><%= array['DateReferredtoROSM'] %></strong><br>
+ROSM Response: <strong><%= array['ROSMResponse'] %></strong><br>
+Referral Source: <strong><%= array['ReferralSource'] %></strong><br>
+Agency: <strong><%= array['Agency'] %></strong><br>
+Agency Worker: <strong><%= array['AgencyWorker'] %></strong><br>
+Agency Contact Info: <strong><%= array['AgencyContactInfo'] %></strong><br>
+Income Source: <strong><%= array['IncomeSource'] %></strong><br>
+Monthly Income: <strong><%= array['MonthlyIncome'] %></strong><br>
+Notes: <strong><%= array['Notes'] %></strong><br>
+Date Entered: <strong><%= array['DateEntered'] %></strong><br>
+Request ID: <strong><%= array['RequestID'] %></strong><br>
+
+              </p> 
+              <br> 
+            <% end %>
+
+
+
+          </div>
+        <% end %>
+      <% end %>
+
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
