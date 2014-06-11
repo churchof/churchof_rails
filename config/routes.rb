@@ -40,6 +40,8 @@ Churchof::Application.routes.draw do
   resources :users # Not sure if this is ok to do with Devise also.
 
   resources :skills
+  resources :organizations
+  resources :resources
 
   resources :needs do
     resources :contributions

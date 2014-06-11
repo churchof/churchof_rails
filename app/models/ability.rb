@@ -47,6 +47,13 @@ class Ability
     if user.has_role? :pending_need_leader
         can :agree_to_need_leader_agreement, User
     end
+    if user.has_role? :resource_validation_partner
+        can :manage, Organization
+        can :manage, Resource
+    end
+    can :read, Organization
+    can :read, Resource
+
 
 
     can :read, Need do |need|

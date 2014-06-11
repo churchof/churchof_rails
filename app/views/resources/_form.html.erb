@@ -1,0 +1,49 @@
+<%= simple_form_for @resource do |f| %>
+  <% if @resource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@resource.errors.count, "error") %> prohibited this expense from being saved:</h2>
+      <ul>
+      <% @resource.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+      <div class="field-pair">
+        <%= f.input :title %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :description %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :website %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :contact_phone %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :contact_email %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :user_id %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :availability_status %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :status %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :address %>
+      </div>
+      <div class="field-pair">
+        <%= f.input :organization_id, collection: Organization.all, label_method: :title %>
+      </div>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
