@@ -25,9 +25,9 @@
       <div class="field-pair">
         <%= f.input :contact_email %>
       </div>
-      <div class="field-pair">
-        <%= f.input :user_id %>
-      </div>
+
+      <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+
       <div class="field-pair">
         <%= f.input :availability_status %>
       </div>

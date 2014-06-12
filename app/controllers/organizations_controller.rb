@@ -32,6 +32,15 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def destroy
+    @organization.destroy
+    respond_to do |format|
+      format.html { redirect_to root_path, :flash => { :notice => "Organization deleted." } }
+      # format.json { head :no_content }
+    end
+  end
+
+
   private
 
   def organization_params

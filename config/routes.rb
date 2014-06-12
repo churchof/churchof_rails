@@ -9,6 +9,8 @@ Churchof::Application.routes.draw do
   get "need_leader_panel/index"
   get "impact_panel/index"
   get "validation_partner_panel/index"
+  get "organization_resource_validation_partner_panel/index"
+  get "resource_partner_panel/index"
   get "user_panel/index"
   get "user_panel/new"
   get "user_panel/create"
@@ -19,6 +21,9 @@ Churchof::Application.routes.draw do
   post "users/agree_to_need_poster_agreement"
   post "users/agree_to_need_leader_agreement"
   post "users/agree_to_church_admin_agreement"
+  post "users/add_user_as_resource_partner"
+  post "resources/take_over_management"
+  post "users/remove_user_as_resource_partner"
   get '/beta' => 'pages#beta'
   get '/contribution_terms' => 'pages#contribution_terms'
   get '/volunteering_terms' => 'pages#volunteering_terms'
@@ -42,6 +47,9 @@ Churchof::Application.routes.draw do
   resources :skills
   resources :organizations
   resources :resources
+
+  resources :organization_roles
+
 
   resources :needs do
     resources :contributions

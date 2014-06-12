@@ -2,9 +2,23 @@ class ResourcesController < ApplicationController
   
   load_and_authorize_resource :resource
 
+
+  def take_over_management
+    @resource = Resource.find(params[:resource][:id])
+    @resource.user = current_user
+    @resource.save
+    redirect_to root_path, :flash => { :alert => "Management taken." }
+  end
+
+
   def new
     @resource = Resource.new
   end
+
+  def index
+    @resources = Resource.all
+  end
+
 
   def show
     @resource = Resource.find(params[:id])
@@ -35,6 +49,6 @@ class ResourcesController < ApplicationController
   private
 
   def resource_params
-    params.require(:resource).permit(:title, :description, :website, :contact_phone, :contact_email, :user_id, :availability_status, :status, :address, :latitude, :longitude)
+    params.require(:resource).permit(:title, :description, :website, :contact_phone, :contact_email, :user_id, :organization_id, :availability_status, :status, :address, :latitude, :longitude, :id)
   end
 end

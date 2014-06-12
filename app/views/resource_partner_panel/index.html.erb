@@ -1,0 +1,90 @@
+
+<%= link_to "New Resource", new_resource_path %>
+
+<br>
+<br>
+<br>
+<p>
+	<b>No Organization</b>
+
+	<% @resources.each do |resource| %>
+
+		<% if resource.organization == nil %>
+				<p>
+					<%= resource.title %>
+					<% if can? :manage, resource %>
+						<% if resource.user == current_user %>
+							- You manage
+						<% end %>
+					<% elsif can? :take_over_management, resource %>
+
+
+
+						    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
+
+						      	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
+      							<%= f.submit "Take over management" %>
+    						<% end %>
+
+
+
+					<% else %>
+							- You dont manage and you cant
+					<% end %>
+				</p>
+
+		<% end %>
+	<% end %>
+
+
+
+</p>
+<br>
+
+<% @organizations.each do |organization| %>
+<p>
+<b><%= organization.title %></b>
+	<% contains_one = false %>
+	<% current_user.organization_roles.each do |organization_role| %>
+		<% if organization_role.organization == organization %>
+			<% contains_one = true %>
+		<% end %>
+	<% end %>
+
+	<% if contains_one %>
+(AFFILIATED)
+	<% else %>
+(NOT AFFILIATED)
+	<% end %>
+
+
+	<% @resources.each do |resource| %>
+
+		<% if resource.organization %>
+			<% if resource.organization == organization %>
+
+				<p>
+					<%= resource.title %>
+					<% if can? :manage, resource %>
+						<% if resource.user == current_user %>
+							- You manage
+						<% end %>
+					<% elsif can? :take_over_management, resource %>
+						    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
+						    	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
+      							<%= f.submit "Take over management" %>
+    						<% end %>
+					<% else %>
+							- You dont manage and you cant
+					<% end %>
+				</p>
+
+			<% end %>
+		<% end %>
+	<% end %>
+
+
+</p>
+<br>
+
+<% end %>
