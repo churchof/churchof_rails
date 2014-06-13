@@ -14,7 +14,7 @@
 					<%= resource.title %>
 					<% if can? :manage, resource %>
 						<% if resource.user == current_user %>
-							- You manage
+							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %>
 						<% end %>
 					<% elsif can? :take_over_management, resource %>
 

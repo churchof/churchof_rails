@@ -17,6 +17,8 @@ class OrganizationResourceValidationPartnerPanelController < ApplicationControll
 		@organizations = Organization.all
 		@users = User.all
 		@organization_roles = OrganizationRole.all
+		@skills = Skill.all
+
 	  	# @church_admins = User.with_role(:church_admin)
 	  	@organizations.each do |organization|
   			authorize! :manage, organization
@@ -27,5 +29,9 @@ class OrganizationResourceValidationPartnerPanelController < ApplicationControll
 	  	@organization_roles.each do |organization_role|
   			authorize! :manage, organization_role
   		end
+  		@skills.each do |skill|
+  			authorize! :read, skill
+  		end
+
 	end
 end

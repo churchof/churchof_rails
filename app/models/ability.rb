@@ -53,6 +53,8 @@ class Ability
         can :add_user_as_resource_partner, User
         can :remove_user_as_resource_partner, User
         can :manage, OrganizationRole
+        can :new, Skill
+        can :create, Skill
     end
 
     if user.has_role? :resource_partner

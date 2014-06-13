@@ -40,6 +40,9 @@
       <div class="field-pair">
         <%= f.input :organization_id, collection: Organization.all, label_method: :title %>
       </div>
+        <div>
+          <%= f.association :skills, as: :check_boxes %>
+        </div>
 
 
 

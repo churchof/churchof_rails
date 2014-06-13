@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612005328) do
+ActiveRecord::Schema.define(version: 20140613202325) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -157,6 +157,11 @@ ActiveRecord::Schema.define(version: 20140612005328) do
     t.decimal  "latitude",            precision: 15, scale: 10
     t.decimal  "longitude",           precision: 15, scale: 10
     t.integer  "organization_id"
+  end
+
+  create_table "resources_skills", force: true do |t|
+    t.integer "resource_id"
+    t.integer "skill_id"
   end
 
   create_table "roles", force: true do |t|

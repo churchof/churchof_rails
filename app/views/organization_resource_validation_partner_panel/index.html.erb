@@ -63,3 +63,23 @@ Organization Roles (Resource Manager):
 
 </p>
 <% end %>
+
+<br>
+<br>
+<br>
+<br>
+Skills:
+<br>
+<br>
+<%= link_to "New Skill", new_skill_path %>
+
+
+<br>
+<br>
+<% @skills.each do |skill| %>
+	<p>
+	<%= skill.name %>
+	</p>
+<% end %>
+
+
