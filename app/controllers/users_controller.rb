@@ -4,6 +4,21 @@ load_and_authorize_resource
 
   before_filter :is_allowed_to_view_page?, only: [:new, :create, :edit, :update, :index]
 
+  def add_user_as_resource_partner
+    @user = User.find(params[:user][:user_id])
+    @user.add_role "resource_partner"
+    @user.save
+    redirect_to root_path
+  end
+
+  def remove_user_as_resource_partner
+    @user = User.find(params[:user][:user_id])
+    @user.remove_role "resource_partner"
+    @user.save
+    @user.remove_management_from_resources
+    redirect_to root_path
+  end
+
   def agree_to_need_poster_agreement
     current_user.remove_role "pending_need_poster"
     current_user.add_role "need_poster"

@@ -48,6 +48,34 @@ class Ability
         can :agree_to_need_leader_agreement, User
     end
 
+    if user.has_role? :organization_resource_validation_partner
+        can :manage, Organization
+        can :add_user_as_resource_partner, User
+        can :remove_user_as_resource_partner, User
+        can :manage, OrganizationRole
+        can :new, Skill
+        can :create, Skill
+    end
+
+    if user.has_role? :resource_partner
+        can :manage, Resource, :user_id => user.id
+        # this needs turned on
+        can :take_over_management, Resource do |resource|
+            if resource.organization
+                at_least_one = false
+                resource.organization.organization_roles.each do |organization_role|
+                    at_least_one = true if organization_role.user.id == user.id
+                end
+                at_least_one
+            else
+                false
+            end
+        end
+    end
+    can :read, Organization
+    can :read, Resource
+
+
 
     can :read, Need do |need|
         at_least_one = false
