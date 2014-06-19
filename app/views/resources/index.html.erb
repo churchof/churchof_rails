@@ -1,8 +1,47 @@
+<p>
+	<b><h2>No Organization</h2></b>
 	<% @resources.each do |resource| %>
-	<p>
-		<%= resource.title %>
-		<% if resource.user %>
-			- <%= resource.user.full_name %>
+		<% if resource.organization == nil %>
+					<p><b>Title:</b> <%= resource.title %></p>
+					<p><b>Description:</b> <%= resource.description %></p>
+					<p><b>Website:</b> <%= resource.website %></p>
+					<p><b>Contact Phone:</b> <%= resource.contact_phone %></p>
+					<p><b>Contact Email:</b> <%= resource.contact_email %></p>
+					<p><b>Availability Status:</b> <%= resource.availability_status %></p>
+					<p><b>Status:</b> <%= resource.status %></p>
+					<p><b>Address:</b> <%= resource.address %></p>
+					<% if resource.user %>
+					<p><b>Managed By:</b> <%= resource.user.full_name %></p>
+					<% end %>
+				<br>
 		<% end %>
-	</p>
 	<% end %>
+</p>
+<br>
+
+<% @organizations.each do |organization| %>
+<p>
+<b><h2><%= organization.title %></h2></b>
+	<% @resources.each do |resource| %>
+		<% if resource.organization %>
+			<% if resource.organization == organization %>
+				
+					<p><b>Title:</b> <%= resource.title %></p>
+					<p><b>Description:</b> <%= resource.description %></p>
+					<p><b>Website:</b> <%= resource.website %></p>
+					<p><b>Contact Phone:</b> <%= resource.contact_phone %></p>
+					<p><b>Contact Email:</b> <%= resource.contact_email %></p>
+					<p><b>Availability Status:</b> <%= resource.availability_status %></p>
+					<p><b>Status:</b> <%= resource.status %></p>
+					<p><b>Address:</b> <%= resource.address %></p>
+					<% if resource.user %>
+					<p><b>Managed By:</b> <%= resource.user.full_name %></p>
+					<% end %>
+				<br>
+			<% end %>
+		<% end %>
+	<% end %>
+</p>
+<br>
+
+<% end %>

@@ -17,6 +17,7 @@ class ResourcesController < ApplicationController
 
   def index
     @resources = Resource.all
+    @organizations = Organization.all
   end
 
 
