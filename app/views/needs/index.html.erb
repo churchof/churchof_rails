@@ -125,7 +125,7 @@ $(document).ready(function () {
   <% @completed_needs.in_groups_of(2, false) do |completed_needs| %>
 
     <% completed_needs.each do |completed_need| %>
-           <div class="box col5" id="<%= completed_need.id %>">
+           <div class="boxx" id="<%= completed_need.id %>">
 
       <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
              </div>
@@ -164,3 +164,42 @@ $(document).ready(function () {
   })
 
 </script>
+
+
+
+<% @completed_needs.each do |completed_need| %>
+
+  <% completed_need.updates.each do |update| %>
+    <div class="modal fade" id="PublicUpdateModal<%= update.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel"><%= update.title %></h4>
+          </div>
+          <div class="modal-body">
+    <!--         This only shows the first...
+     -->
+            <%= update.content %>
+
+            <br>
+            <br>
+            <% update.images.each do |image| %>
+            <div class="image-modal">
+              <%= image_tag(image.image) %>
+            </div>
+              <br>
+              <%= image.caption %>
+              <br>
+              <br>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>
