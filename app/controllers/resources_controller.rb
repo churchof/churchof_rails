@@ -46,6 +46,15 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def destroy
+    @resource.destroy
+    respond_to do |format|
+      format.html { redirect_to root_path, :flash => { :notice => "Resource deleted." } }
+      # format.json { head :no_content }
+    end
+  end
+
+
   private
 
   def resource_params

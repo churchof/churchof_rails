@@ -14,7 +14,7 @@
 					<%= resource.title %>
 					<% if can? :manage, resource %>
 						<% if resource.user == current_user %>
-							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %>
+							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %> | <%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %>
 						<% end %>
 					<% elsif can? :take_over_management, resource %>
 
@@ -67,7 +67,8 @@
 					<%= resource.title %>
 					<% if can? :manage, resource %>
 						<% if resource.user == current_user %>
-							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %>
+							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %> | <%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %>
+
 						<% end %>
 					<% elsif can? :take_over_management, resource %>
 						    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
