@@ -1,0 +1,68 @@
+  <div class="need-container ">
+    <div class="inner-content">
+
+
+   <div class="row">
+      <div class="col-xs-12 col-sm-9">
+
+        <h2 class="need-title">
+          <%= link_to need.title_public, need %>
+        </h2>
+
+      </div>
+
+
+
+      </div>
+
+
+              <% if need.skills_count > 0 %>
+        <div class="row need-details">
+
+                <div class="skills col-xs-12 col-sm-6">
+                  <ul class="skills-list">
+
+                    <% need.skills.each do |skill| %>
+                      <li class="skill-tag">
+                        <span class="skill-icon">
+                          <%= image_tag(skill.icon_url) %>
+                        </span>
+                        <%= skill.name %>
+                      </li>
+                                    <% end %>
+
+                  </ul>
+                </div>
+                        </div>
+
+              <% end %>
+
+
+
+      <% if need.updates.count > 0 %>
+        <% if need.updates.count == 1 %>
+          <h3><%= need.updates.count %> Public Update</h3>
+        <% else %>
+          <h3><%= need.updates.count %> Public Updates</h3>
+        <% end %>
+      <% end %>
+
+      <% need.updates.each do |update| %>
+        <div class="public-update-bar" data-toggle="modal" data-target="#PublicUpdateModal<%= update.id%>">
+          <span class="record-count"><%= update.title %></span>
+<!--           This should only show up for the right people
+ -->
+          <span class="details"><%= time_ago_in_words(update.created_at) %> ago</span>
+        </div>
+      <% end %>
+
+
+
+    </div>
+
+
+
+<!-- need.volunteer_date_passed
+ -->
+
+</div>

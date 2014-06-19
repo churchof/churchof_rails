@@ -13,7 +13,6 @@ class NeedsController < ApplicationController
           @need.is_public = params["need"]["is_public"]
           @need.save
 
-
           redirect_to "/church_admin_panel/index?selected=admin_in_progress", notice: 'Need was successfully updated.'
         else
           redirect_to "/church_admin_panel/index?selected=admin_in_progress", alert: 'Need was not updated because people have already given to it.'
@@ -65,9 +64,12 @@ class NeedsController < ApplicationController
       @needs = Need.public.in_progress.joins(:skills).where("skills.name ILIKE ?", skill_name).uniq.reverse
     else
       @needs = Need.public.in_progress.reverse
+      # will only show completed need when not sorting...
+      @completed_needs = Need.public.completed.reverse
     end
 
     @needs = @needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @needs.reject(&:completion_goal_date)
+    @completed_needs = @completed_needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @completed_needs.reject(&:completion_goal_date)
 
     @skills = Skill.all
 
