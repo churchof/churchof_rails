@@ -17,4 +17,3 @@
 //= require jquery.tokeninput
 //= require jquery_nested_form
 //= require_tree .
-//= require masonry/jquery.masonry

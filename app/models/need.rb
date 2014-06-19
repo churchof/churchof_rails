@@ -235,6 +235,7 @@ class Need < ActiveRecord::Base
   end
 
   def should_accept_volunteers
+    # this concept should include only if in progress... and there should also be an equivilant for should take contributions... but the logic right now all rests in each view.
     i = self.volunteersNeededCount.nil? ? 0 : self.volunteersNeededCount
     (i > 0) && !volunteer_date_passed
   end

@@ -11,7 +11,6 @@
  *= require bootstrap
  *= require token-input
  *= require_self
- *= require 'masonry/basic'
  *= require_tree .
  
  */

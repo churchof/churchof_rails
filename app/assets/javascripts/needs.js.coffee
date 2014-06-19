@@ -7,18 +7,6 @@
   # alert "hi"
   # return
 
-jQuery(document).ready ->
-  $container = $("#completed-needs")
-  $container.imagesLoaded ->
-    $container.masonry
-      itemSelector: ".box"
-    return
-
-  return
-
-
-
-
 
 class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from builtin builder
   #override create_marker method

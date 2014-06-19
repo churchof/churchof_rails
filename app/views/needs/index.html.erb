@@ -125,7 +125,7 @@ $(document).ready(function () {
   <% @completed_needs.in_groups_of(2, false) do |completed_needs| %>
 
     <% completed_needs.each do |completed_need| %>
-           <div class="boxx" id="<%= completed_need.id %>">
+           <div class="div" id="<%= completed_need.id %>">
 
       <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
              </div>
