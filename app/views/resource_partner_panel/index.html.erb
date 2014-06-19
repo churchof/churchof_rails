@@ -67,7 +67,7 @@
 					<%= resource.title %>
 					<% if can? :manage, resource %>
 						<% if resource.user == current_user %>
-							- You manage
+							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %>
 						<% end %>
 					<% elsif can? :take_over_management, resource %>
 						    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
