@@ -167,7 +167,7 @@ var $container = $('#isotope-demo').imagesLoaded( function() {
     resizable: false,
     layoutMode: 'masonry',
     // set columnWidth to a percentage of container width
-    masonry: { columnWidth: $container.width() / 3 }
+    masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
   });
 
 });
@@ -175,15 +175,58 @@ $(window).smartresize(function(){
   if ($(window).innerWidth() > 767){
     $container.isotope({
       // update columnWidth to a percentage of container width
-      masonry: { columnWidth: $container.width() / 3 }
+      masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
     });
   }else{
     $container.isotope({
       // update columnWidth to a percentage of container width
-      masonry: { columnWidth: $container.width() }
+      masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
     });
   }
 });
+
+
+
+// Modified Isotope methods for gutters in masonry
+$.Isotope.prototype._getMasonryGutterColumns = function() {
+  var gutter = this.options.masonry && this.options.masonry.gutterWidth || 0;
+  containerWidth = this.element.width();
+ 
+  this.masonry.columnWidth = this.options.masonry && this.options.masonry.columnWidth ||
+  // Or use the size of the first item
+  this.$filteredAtoms.outerWidth(true) ||
+  // If there's no items, use size of container
+  containerWidth;
+ 
+  this.masonry.columnWidth += gutter;
+ 
+  this.masonry.cols = Math.floor((containerWidth + gutter) / this.masonry.columnWidth);
+  this.masonry.cols = Math.max(this.masonry.cols, 1);
+};
+ 
+$.Isotope.prototype._masonryReset = function() {
+  // Layout-specific props
+  this.masonry = {};
+  // FIXME shouldn't have to call this again
+  this._getMasonryGutterColumns();
+  var i = this.masonry.cols;
+  this.masonry.colYs = [];
+  while (i--) {
+    this.masonry.colYs.push(0);
+  }
+};
+ 
+$.Isotope.prototype._masonryResizeChanged = function() {
+  var prevSegments = this.masonry.cols;
+  // Update cols/rows
+  this._getMasonryGutterColumns();
+  // Return if updated cols/rows is not equal to previous
+  return (this.masonry.cols !== prevSegments);
+};
+
+
+
+
 </script>
 
 
@@ -225,6 +268,10 @@ $(window).smartresize(function(){
 
 <% end %>
 
+
+
+
+
 <style>
 /* ---- isotope ---- */
 /* clear fix */
@@ -236,11 +283,11 @@ $(window).smartresize(function(){
 
 /* ---- .element-item ---- */
 .isotope, .isotope .isotope-item{
-  -webkit-transition-duration: 0.8s;
-  -moz-transition-duration: 0.8s;
-  -ms-transition-duration: 0.8s;
-  -o-transition-duration: 0.8s;
-  transition-duration: 0.8s;
+  -webkit-transition-duration: 0.0s;
+  -moz-transition-duration: 0.0s;
+  -ms-transition-duration: 0.0s;
+  -o-transition-duration: 0.0s;
+  transition-duration: 0.0s;
 }
 .isotope{
   -webkit-transition-property: height, width;
@@ -266,11 +313,12 @@ $(window).smartresize(function(){
 .element-item {
   position: relative;
   float: left;
-  width: 32%;
+  width: 49.0%;
   height: auto;
-  margin: 5px;
+  margin: 0px;
   padding: 0px;
   color: #FFF;
+  padding-bottom: 10px;
 }
 
   .element-item a img{
