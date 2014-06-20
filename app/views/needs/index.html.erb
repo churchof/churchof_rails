@@ -2,6 +2,8 @@
 <%= stylesheet_link_tag "token-input-facebook.css" %>
 
 <% content_for :head do %>
+  <script src="https://s3.amazonaws.com/churchof/jquery.isotope.min.js"></script>
+  <script src="https://s3.amazonaws.com/churchof/imagesloaded-min.js"></script>
   <script type="text/javascript">
 
  jQuery(function(){ buildMap(map_hash, true); });
@@ -121,11 +123,11 @@ $(document).ready(function () {
 
   <h1 class="need-category-title">Completed Needs</h1>
 
-<div class="completed-needs main-content" id="needs-full-list">
+<div class="completed-needs main-content" id="isotope-demo">
   <% @completed_needs.in_groups_of(2, false) do |completed_needs| %>
 
     <% completed_needs.each do |completed_need| %>
-           <div class="div" id="<%= completed_need.id %>">
+           <div class="element-item" id="<%= completed_need.id %>">
 
       <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
              </div>
@@ -136,13 +138,6 @@ $(document).ready(function () {
 </div>
 
 <% end %>
-
-
-
-
-
-
-
 
 <script>
   $(document).ready(function(){
@@ -163,6 +158,19 @@ $(document).ready(function () {
     });
   })
 
+</script>
+
+<script>
+var $container = $('#isotope-demo').imagesLoaded( function() {
+  $container = $('#isotope-demo').isotope({
+    itemSelector: '.element-item',
+    layoutMode: 'masonry',
+    masonry: {
+      columnWidth: 310
+    }
+  });
+
+});
 </script>
 
 
@@ -203,3 +211,77 @@ $(document).ready(function () {
   <% end %>
 
 <% end %>
+
+<style>
+/* ---- isotope ---- */
+/* clear fix */
+.isotope:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- .element-item ---- */
+.isotope, .isotope .isotope-item{
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  -ms-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  transition-duration: 0.8s;
+}
+.isotope{
+  -webkit-transition-property: height, width;
+  -moz-transition-property: height, width;
+  -ms-transition-property: height, width;
+  -o-transition-property: height, width;
+  transition-property: height, width;
+}
+.isotope .isotope-item{
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property:    -moz-transform, opacity;
+  -ms-transition-property:     -ms-transform, opacity;
+  -o-transition-property:      -o-transform, opacity;
+  transition-property:         transform, opacity;
+}
+.isotope.no-transition, .isotope.no-transition .isotope-item, .isotope .isotope-item.no-transition{
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -ms-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+.element-item {
+  position: relative;
+  float: left;
+  width: 300px;
+  height: auto;
+  margin: 5px;
+  padding: 0px;
+  color: #FFF;
+}
+
+  .element-item a img{
+    opacity: .8;
+  }
+  .element-item a:hover img{
+    opacity: 1;
+  }
+
+
+    .element-item.width2 { width: 230px; height: auto;}
+.element-item.height2 { height: auto; }
+
+.element-item > * {
+  margin: 0;
+  padding: 0;
+}
+
+.element-item .symbol {
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  font-size: 42px;
+  font-weight: bold;
+  color: white;
+}
+  </style>
