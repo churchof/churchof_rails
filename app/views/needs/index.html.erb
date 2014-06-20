@@ -164,12 +164,25 @@ $(document).ready(function () {
 var $container = $('#isotope-demo').imagesLoaded( function() {
   $container = $('#isotope-demo').isotope({
     itemSelector: '.element-item',
+    resizable: false,
     layoutMode: 'masonry',
-    masonry: {
-      columnWidth: 310
-    }
+    // set columnWidth to a percentage of container width
+    masonry: { columnWidth: $container.width() / 3 }
   });
 
+});
+$(window).smartresize(function(){
+  if ($(window).innerWidth() > 767){
+    $container.isotope({
+      // update columnWidth to a percentage of container width
+      masonry: { columnWidth: $container.width() / 3 }
+    });
+  }else{
+    $container.isotope({
+      // update columnWidth to a percentage of container width
+      masonry: { columnWidth: $container.width() }
+    });
+  }
 });
 </script>
 
@@ -253,7 +266,7 @@ var $container = $('#isotope-demo').imagesLoaded( function() {
 .element-item {
   position: relative;
   float: left;
-  width: 300px;
+  width: 32%;
   height: auto;
   margin: 5px;
   padding: 0px;
@@ -283,5 +296,11 @@ var $container = $('#isotope-demo').imagesLoaded( function() {
   font-size: 42px;
   font-weight: bold;
   color: white;
+}
+
+@media(max-width: 767px){
+  .element-item {
+    width: 100%;
+  }
 }
   </style>
