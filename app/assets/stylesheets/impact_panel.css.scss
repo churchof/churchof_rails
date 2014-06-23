@@ -189,8 +189,13 @@ p.small-italic{
   font-style: italic;
 }
 
-.previous-records-bar{
+.previous-records-bar-green{
   @include content-bar($green);
+  margin: 10px auto;
+}
+
+.previous-records-bar-orange{
+  @include content-bar($orange);
   margin: 10px auto;
   cursor: pointer;
 }

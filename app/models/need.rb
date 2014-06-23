@@ -43,6 +43,10 @@ class Need < ActiveRecord::Base
 
   after_update :update_date_public_posted_if_changed
 
+
+  after_create :send_update_to_rosm
+  after_update :send_update_to_rosm
+
   # after_update :share_on_facebook_page
 
   scope :public, -> { where(is_public: true) }
@@ -55,6 +59,41 @@ class Need < ActiveRecord::Base
       description: 'User created Need.',
       user: self.user_posted_by
     )
+  end
+
+  def send_update_to_rosm
+
+    # hit rosm with all appropriate fields
+    # only if in production
+    # and a try catch
+
+
+# ONLY IF FOR INDIVIDUAL... AND HAS THOSE FIELDS
+    if self.recipient_size.individual?
+      begin
+        if Rails.env.production?
+          require 'net/http'
+          if self.rosm_request_id.nil? || self.rosm_request_id == 0
+            result = Net::HTTP.get(URI.parse(URI.encode("https://www.rosmky.org/secure/api/api.php?option=writeRequest&FirstName=#{self.first_name.nil? ? "" : self.first_name}&LastName=#{self.last_name.nil? ? "" : self.last_name}&SSN=#{self.last_four_ssn.nil? ? "" : self.last_four_ssn}&Address=#{self.street_address.nil? ? "" : self.street_address}&License=#{self.drivers_license.nil? ? "" : self.drivers_license}&RequestID=#{self.rosm_request_id.nil? ? "" : self.rosm_request_id}&RequestAmount=#{self.total_expenses.nil? ? "" : self.total_expenses}&Church=#{self.user_church_admin.associated_organization.nil? ? "" : self.user_church_admin.associated_organization}&DollarsGiven=#{self.total_contributed.nil? ? "" : self.total_contributed}&Notes=Title:#{self.title_public} - Description:#{self.description_public} - Status:#{self.need_stage} - Church of Lexington Need ID:#{self.id}&Key=#{ENV['ROSM_KEY']}")))
+            self.update_column(:rosm_request_id, result)
+            # logger.debug "rosmky write WORKED."
+            # logger.debug result
+            # logger.debug self.rosm_request_id
+          else
+            result = Net::HTTP.get(URI.parse(URI.encode("https://www.rosmky.org/secure/api/api.php?option=updateRequest&FirstName=#{self.first_name.nil? ? "" : self.first_name}&LastName=#{self.last_name.nil? ? "" : self.last_name}&SSN=#{self.last_four_ssn.nil? ? "" : self.last_four_ssn}&Address=#{self.street_address.nil? ? "" : self.street_address}&License=#{self.drivers_license.nil? ? "" : self.drivers_license}&RequestID=#{self.rosm_request_id.nil? ? "" : self.rosm_request_id}&RequestAmount=#{self.total_expenses.nil? ? "" : self.total_expenses}&Church=#{self.user_church_admin.associated_organization.nil? ? "" : self.user_church_admin.associated_organization}&DollarsGiven=#{self.total_contributed.nil? ? "" : self.total_contributed}&Notes=Title:#{self.title_public} - Description:#{self.description_public} - Status:#{self.need_stage} - Church of Lexington Need ID:#{self.id}&Key=#{ENV['ROSM_KEY']}")))
+            self.update_column(:rosm_request_id, result)
+            # logger.debug "rosmky write WORKED."
+            # logger.debug result
+            # logger.debug self.rosm_request_id
+          end
+        end
+      rescue => exception
+        logger.debug "rosmky write failed."
+        # logger.debug exception
+      ensure
+      end
+    end
+    # the returned id should be saved here.
   end
 
   def mail_to_church_admin_whos_recieving_the_need

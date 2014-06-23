@@ -145,6 +145,20 @@ class NeedsController < ApplicationController
       # This should use the path helper.
       marker.json({ title: need.title, image_url: if need.skills.first then need.skills.first.icon_url else '' end})
     end
+
+# if has appropriate role for the need
+    if user_signed_in?
+      if current_user == @need.user_church_admin || current_user == @need.user_need_leader
+        begin
+          url = "https://www.rosmky.org/secure/api/api.php?option=displayRequestsXML&FirstName=#{@need.first_name}&LastName=#{@need.last_name}&SSN=#{@need.last_four_ssn}&Key=#{ENV['ROSM_KEY']}"
+          @rosm_results = Hash.from_xml(open(url).read)
+        rescue
+          puts "Error #{$!}"
+          @rosm_results = Hash.new
+        ensure 
+        end
+      end
+    end
   end
 
   # GET /needs/new
