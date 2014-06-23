@@ -12,6 +12,7 @@
 					<p><b>Address:</b> <%= resource.address %></p>
 					<% if resource.user %>
 					<p><b>Managed By:</b> <%= resource.user.full_name %></p>
+					<p><b>Public Status:</b> <%= resource.public_status %></p>
 					<% end %>
 				<br>
 		<% end %>
@@ -36,6 +37,7 @@
 					<p><b>Address:</b> <%= resource.address %></p>
 					<% if resource.user %>
 					<p><b>Managed By:</b> <%= resource.user.full_name %></p>
+					<p><b>Public Status:</b> <%= resource.public_status %></p>
 					<% end %>
 				<br>
 			<% end %>
