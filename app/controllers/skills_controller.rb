@@ -1,6 +1,10 @@
 class SkillsController < ApplicationController
 
-load_and_authorize_resource
+  # this might not be the safest but it wasnt working with just load and authorize resource: http://stackoverflow.com/questions/19856112/forbiddenattributeserror-in-rails-4
+  before_filter :authenticate_user!, :except => [:show, :index]
+  load_and_authorize_resource :except => [:show, :index]
+  skip_load_resource :only => [:create]
+
   def index
 
 	#@skills = Skill.where(name: params[:q])
@@ -12,16 +16,25 @@ load_and_authorize_resource
 	end  
   end
   
+  def new
+    @skill = Skill.new
+  end
+
+
   def create
-    @need = Need.find(params[:need_id])
-    @skill = @need.skills.build(skills_params)
-    @skill.save
+
+    @skill = Skill.new(skills_params)
+    if @skill.save
+      redirect_to root_path, :flash => { :alert => "Skill created." }
+    else
+      redirect_to root_path, :flash => { :alert => "An error occured." }
+    end
   end
 
   private
 
   def skills_params
-    params.require(:skill).permit(:name, :description, :icon_url)
+    params.require(:skill).permit(:name, :description)
   end
 
 end

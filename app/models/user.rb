@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  rolify # :pending_need_poster, :need_poster, :pending_church_admin, :church_admin, :super_admin, :validation_partner
+  rolify # :pending_need_poster, :need_poster, :pending_church_admin, :church_admin, :super_admin, :validation_partner, :resource_partner, :organization_resource_validation_partner
   
   has_and_belongs_to_many :skills
 
@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   has_many :contributions
   has_many :time_contributions
   has_many :activities
+
+  has_many :organization_roles
+  has_many :resources, :foreign_key => 'user_id', :class_name => "Resource"
 
   has_attached_file :avatar, {
     :styles => {
@@ -58,6 +61,12 @@ class User < ActiveRecord::Base
       contributor.destroy
     end
     true
+  end
+
+  def remove_management_from_resources
+    self.resources.each do |resource|
+      resource.update_attribute(:user_id, nil)
+    end
   end
 
 end
