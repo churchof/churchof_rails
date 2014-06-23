@@ -16,7 +16,13 @@ class ResourcesController < ApplicationController
   end
 
   def index
-    @resources = Resource.all
+    if current_user.has_role? church_admin
+      @resources = Resource.all
+    elsif current_user.has_role? resource_partner
+      @resources = Resource.all
+    else
+      @resources = Resource.public
+    end
     @organizations = Organization.all
   end
 

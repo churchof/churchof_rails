@@ -22,6 +22,9 @@ class Ability
         can :manage, Expense, :need => { :user_id_church_admin => user.id }
         can :manage, Update # this needs to be only for the appropriate ones
         can :read, Contribution, :need => { :user_id_church_admin => user.id }
+        can :read, Resource, Resource.all do |resource|
+            resource.public_status.available_to_church_admins?
+        end
     end
     if user.has_role? :need_leader
         can :read, Need, :user_id_need_leader => user.id
@@ -73,8 +76,9 @@ class Ability
         end
     end
     can :read, Organization
-    can :read, Resource
-
+    can :read, Resource, Resource.all do |resource|
+        resource.public_status.available_to_public?
+    end
 
 
     can :read, Need do |need|
