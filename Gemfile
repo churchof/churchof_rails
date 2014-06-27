@@ -19,7 +19,9 @@ gem 'airbrake'
 # gem 'resque'
 # gem 'resque_mailer'
 gem 'google-analytics-rails'
-gem 'fb_graph'
+gem 'fb_graph' # not needed anymore?
+gem "koala"
+gem 'twitter'
 
 group :development, :test do
 	gem 'sqlite3'

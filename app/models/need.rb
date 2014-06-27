@@ -47,7 +47,7 @@ class Need < ActiveRecord::Base
   after_create :send_update_to_rosm
   after_update :send_update_to_rosm
 
-  # after_update :share_on_facebook_page
+  after_update :share_on_social_outlets
 
   scope :public, -> { where(is_public: true) }
   scope :in_progress, -> { where(need_stage: 2) }
@@ -301,31 +301,48 @@ class Need < ActiveRecord::Base
     i
   end
 
-  # def share_on_facebook_page
-  #   if self.is_public_changed?
-  #     if self.is_public
+  def share_on_social_outlets
+    # if Rails.env.production? MAKE SURE THIS IS ON BEFORE SHIPPING!!! TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO
+      if self.is_public_changed?
+        if self.is_public
 
-  #       past_relevant_activities = Activity.where(user_id: nil, subject: self, description: 'Facebook post for need #{self.id}.')
-  #       if past_relevant_activities.count == 0
-  #         # Only send to Facebook once.
+          past_relevant_activities = Activity.where(user_id: nil, subject: self, description: 'Social posts for need #{self.id}.')
+          if past_relevant_activities.count == 0
+            # Only send to Facebook / Twitter once and no times if it fails for some reason.
+            Activity.create(
+              subject: self,
+              description: 'Social posts for need #{self.id}.',
+              user: nil
+            )
 
-  #           pages = FbGraph::User.me(APP_CONFIG['facebook_access_token']).accounts.first
-  #           shorten_url = shorten_url(url) # create a bit.ly link
-  #           pages.feed!(
-  #             :message => "title_public",
-  #             :link => "http://church-of.com/needs/#{self.id}",
-  #             :description => "description_public",
-  #             :picture => 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png'
-  #           )
+            begin
+              @user = Koala::Facebook::API.new(ENV['FACEBOOK_ACCESS_TOKEN'])
+              page_access_token = @user.get_connections('me', 'accounts').first['access_token'] #this gets the users first page.
+              @page = Koala::Facebook::API.new(page_access_token)
+              @page.put_connections(1382913228636299, "feed", :name => self.title_public, :link => "http://church-of.com/needs/#{self.id}", :description => self.description_public, :picture => 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png')
+            rescue
 
-  #         Activity.create(
-  #           subject: self,
-  #           description: 'Facebook post for need #{self.id}.',
-  #           user: nil
-  #         )
-  #       end
-  #     end
-  #   end
-  # end
+            end   
+
+            begin
+              client = Twitter::REST::Client.new do |config|
+                config.consumer_key = ENV['TWITTER_APP_CONSUMER_KEY']
+                config.consumer_secret = ENV['TWITTER_APP_CONSUMER_SECRET']
+                config.access_token = ENV['TWITTER_USER_ACCESS_TOKEN']
+                config.access_token_secret = ENV['TWITTER_USER_ACCESS_SECRET']
+              end     
+              client.update("#{self.title_public.truncate(113)} - church-of.com/needs/#{self.id}")
+            rescue
+
+            end   
+
+
+
+            
+          end
+        end
+      end
+    # end
+  end
 
 end
