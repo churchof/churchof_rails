@@ -1,6 +1,8 @@
 class Resource < ActiveRecord::Base
 		extend Enumerize
 
+  has_many :resource_flags
+
 	validates :title, presence: true
 		validates :availability_status, presence: true
 	validates :public_status, presence: true
@@ -20,6 +22,16 @@ class Resource < ActiveRecord::Base
   accepts_nested_attributes_for :skills, :allow_destroy => true
 
 
-  scope :public, -> { where(public_status: 1) }
+  scope :public, -> { where(public_status: 1, flagged: false) }
+
+
+  def resource_flag_for_user(user_id_to_check)
+    self.resource_flags.where(user_church_admin: User.find(user_id_to_check)).first
+  end
+
+  def resource_flag_for_user_id(user_id_to_check)
+    resource_flag = self.resource_flags.where(user_church_admin: User.find(user_id_to_check)).first
+    resource_flag.id
+  end
 
 end

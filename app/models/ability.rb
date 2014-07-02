@@ -24,6 +24,8 @@ class Ability
         can :manage, Update # this needs to be only for the appropriate ones
         can :read, Contribution, :need => { :user_id_church_admin => user.id }
         can :read, Resource
+        can :read, ResourceFlag
+        can :manage, ResourceFlag, :user_id_church_admin => user.id
     end
     if user.has_role? :need_leader
         can :read, Need, :user_id_need_leader => user.id

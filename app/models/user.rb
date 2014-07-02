@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   has_many :time_contributions
   has_many :activities
 
+  has_many :resource_flags
+
+
   has_many :organization_roles
   has_many :resources, :foreign_key => 'user_id', :class_name => "Resource"
 
