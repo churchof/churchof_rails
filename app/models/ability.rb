@@ -13,6 +13,7 @@ class Ability
         can :read, Need, :is_public => true
         can :manage, Expense, :need => { :user_id_posted_by => user.id }
         can :read, Contribution, :need => { :user_id_posted_by => user.id }
+        can :read, Resource
     end
     if user.has_role? :church_admin
         can :read, Need, :user_id_church_admin => user.id
@@ -22,6 +23,9 @@ class Ability
         can :manage, Expense, :need => { :user_id_church_admin => user.id }
         can :manage, Update # this needs to be only for the appropriate ones
         can :read, Contribution, :need => { :user_id_church_admin => user.id }
+        can :read, Resource
+        can :read, ResourceFlag
+        can :manage, ResourceFlag, :user_id_church_admin => user.id
     end
     if user.has_role? :need_leader
         can :read, Need, :user_id_need_leader => user.id
@@ -31,6 +35,7 @@ class Ability
         can :manage, Expense, :need => { :user_id_need_leader => user.id }
         can :manage, Update # this needs to be only for the appropriate ones
         can :read, Contribution, :need => { :user_id_need_leader => user.id }
+        can :read, Resource
     end
     if user.has_role? :super_admin
         can :update, User
@@ -55,11 +60,17 @@ class Ability
         can :manage, OrganizationRole
         can :new, Skill
         can :create, Skill
+        can :read, Resource
     end
 
     if user.has_role? :resource_partner
         can :manage, Resource, :user_id => user.id
-        # this needs turned on
+
+
+
+        can :manage, ResourceEvent, :resource => { :user_id => user.id }
+         
+        can :read, Resource
         can :take_over_management, Resource do |resource|
             if resource.organization
                 at_least_one = false
@@ -73,8 +84,10 @@ class Ability
         end
     end
     can :read, Organization
-    can :read, Resource
+    can :read, Resource, :public_status => :available_to_public
 
+    
+    can :read, ResourceEvent, :resource => { :public_status => :available_to_public }
 
 
     can :read, Need do |need|
