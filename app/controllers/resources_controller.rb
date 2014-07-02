@@ -34,12 +34,21 @@ class ResourcesController < ApplicationController
   end
 
   def create
+    # @resource = Resource.new(resource_params)
+    # if @resource.save
+    #   redirect_to root_path, :flash => { :alert => "Resource created." }
+    # else
+    #   redirect_to root_path, :flash => { :alert => "An error occured." }
+    # end
+
+
     @resource = Resource.new(resource_params)
     if @resource.save
       redirect_to root_path, :flash => { :alert => "Resource created." }
     else
       redirect_to root_path, :flash => { :alert => "An error occured." }
     end
+
   end
 
   def edit
@@ -48,6 +57,7 @@ class ResourcesController < ApplicationController
 
   def update
     @resource = Resource.find(params[:id])
+
     if @resource.update(resource_params)
       redirect_to root_path, :flash => { :alert => "Resource updated." }
     else

@@ -24,6 +24,8 @@ class Ability
         can :manage, Update # this needs to be only for the appropriate ones
         can :read, Contribution, :need => { :user_id_church_admin => user.id }
         can :read, Resource
+        can :read, ResourceFlag
+        can :manage, ResourceFlag, :user_id_church_admin => user.id
     end
     if user.has_role? :need_leader
         can :read, Need, :user_id_need_leader => user.id
@@ -63,6 +65,11 @@ class Ability
 
     if user.has_role? :resource_partner
         can :manage, Resource, :user_id => user.id
+
+
+
+        can :manage, ResourceEvent, :resource => { :user_id => user.id }
+         
         can :read, Resource
         can :take_over_management, Resource do |resource|
             if resource.organization
@@ -78,6 +85,9 @@ class Ability
     end
     can :read, Organization
     can :read, Resource, :public_status => :available_to_public
+
+    
+    can :read, ResourceEvent, :resource => { :public_status => :available_to_public }
 
 
     can :read, Need do |need|
