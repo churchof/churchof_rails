@@ -302,7 +302,7 @@ class Need < ActiveRecord::Base
   end
 
   def share_on_social_outlets
-    # if Rails.env.production? MAKE SURE THIS IS ON BEFORE SHIPPING!!! TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO
+    if Rails.env.production?
       if self.is_public_changed?
         if self.is_public
 
@@ -316,9 +316,7 @@ class Need < ActiveRecord::Base
             )
 
             begin
-              @user = Koala::Facebook::API.new(ENV['FACEBOOK_ACCESS_TOKEN'])
-              page_access_token = @user.get_connections('me', 'accounts').first['access_token'] #this gets the users first page.
-              @page = Koala::Facebook::API.new(page_access_token)
+              @page = Koala::Facebook::API.new(ENV['FACEBOOK_ACCESS_TOKEN'])
               @page.put_connections(1382913228636299, "feed", :name => self.title_public, :link => "http://church-of.com/needs/#{self.id}", :description => self.description_public, :picture => 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png')
             rescue
 
@@ -342,7 +340,7 @@ class Need < ActiveRecord::Base
           end
         end
       end
-    # end
+    end
   end
 
 end
