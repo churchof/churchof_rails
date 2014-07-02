@@ -2,4 +2,57 @@
 	<div class="page-title">
   		<h2><%= @organization.title %></h2>
 	</div>
+	<br>
+
+	<h3>People</h3>
+
+<br>
+		<% @users.each do |user| %>
+
+              <% if !user.avatar_file_name.nil? %>
+                <div class="user-image">
+                  <%= image_tag(user.avatar(:large), class: "img-circle") %>
+                </div>
+              <% else %>
+                <div class="placeholder-leader-image"></div>
+              <% end %>
+
+              <div class="user-details">
+                <%= user.full_name %>
+                <p class="small-italic">  </p>
+              </div>
+
+         <% end %>
+
+<br><br><br><br><br><br>
+	<h3>Needs</h3>
+	<div class="needs main-content" id="needs-full-list">
+  		<%= render @needs %>
+	</div>
+
+	<h3>Resources</h3>
+	<% @resources.each do |resource| %>
+		<br>
+		<p><b>Title:</b> <%= resource.title %></p>
+		<p><b>Description:</b> <%= resource.description %></p>
+		<p><b>Website:</b> <%= resource.website %></p>
+		<p><b>Contact Phone:</b> <%= resource.contact_phone %></p>
+		<p><b>Contact Email:</b> <%= resource.contact_email %></p>
+		<p><b>Availability Status:</b> <%= resource.availability_status %></p>
+		<p><b>Status:</b> <%= resource.status %></p>
+		<p><b>Address:</b> <%= resource.address %></p>
+		<% if resource.user %>
+		<p><b>Managed By:</b> <%= resource.user.full_name %></p>
+		<% end %>
+		<p><b>Public Status:</b> <%= resource.public_status %></p>
+		<% resource.resource_events.each do |resource_event| %>
+			<p>
+				<%= resource_event.schedule_ice_cube.to_s %>:
+				<%= resource_event.start_time.strftime('%I:%M %p') %> - 
+				<%= resource_event.end_time.strftime('%I:%M %p') %>
+			</p>
+		<% end %>
+		<p><b>Flagged:</b> <%= resource.flagged %></p>
+
+	<% end %>
 </div>

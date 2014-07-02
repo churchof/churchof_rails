@@ -18,7 +18,11 @@
         <%= f.input :user_id, label: "User", collection: User.with_role(:resource_partner), label_method: :full_name %>
       </div>
 
-        <%= f.input :role_type, :as => :hidden, :input_html => { :value => :resource_manager } %>
+
+        <%= f.input :role_type %>
+
+        Note that currently all roles besides resource manager simply link a person to an org to show on the profile that way... in the future this will actually give them that permission. Shouldnt be able to give the type of church admin to a non-church org... etc... this needs added to github also... so these are dumb associations for connection only... will need rehashing inorder to actually provide abilities.
+
         <%= f.input :pending, :as => :hidden, :input_html => { :value => false } %>
 
   <div class="actions">
