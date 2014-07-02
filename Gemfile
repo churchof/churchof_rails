@@ -19,6 +19,8 @@ gem 'airbrake'
 # gem 'resque'
 # gem 'resque_mailer'
 gem 'google-analytics-rails'
+gem "koala"
+gem 'twitter'
 gem 'fb_graph'
 gem 'ice_cube'
 gem 'recurring_select'
