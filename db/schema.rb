@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701020631) do
+ActiveRecord::Schema.define(version: 20140702145055) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -143,6 +143,13 @@ ActiveRecord::Schema.define(version: 20140701020631) do
     t.decimal  "longitude",   precision: 15, scale: 10
   end
 
+  create_table "resource_events", force: true do |t|
+    t.integer "resource_id"
+    t.text    "schedule"
+    t.time    "start_time"
+    t.time    "end_time"
+  end
+
   create_table "resource_flags", force: true do |t|
     t.integer "resource_id"
     t.integer "user_id_church_admin"
@@ -165,7 +172,6 @@ ActiveRecord::Schema.define(version: 20140701020631) do
     t.decimal  "longitude",           precision: 15, scale: 10
     t.integer  "organization_id"
     t.integer  "public_status"
-    t.text     "schedule"
     t.boolean  "flagged",                                       default: false
   end
 

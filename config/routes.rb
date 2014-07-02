@@ -49,6 +49,7 @@ Churchof::Application.routes.draw do
 
   resources :resources do
     resources :resource_flags
+    resources :resource_events
   end
 
   resources :organization_roles

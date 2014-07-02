@@ -65,6 +65,11 @@ class Ability
 
     if user.has_role? :resource_partner
         can :manage, Resource, :user_id => user.id
+
+
+
+        can :manage, ResourceEvent, :resource => { :user_id => user.id }
+         
         can :read, Resource
         can :take_over_management, Resource do |resource|
             if resource.organization
@@ -80,6 +85,9 @@ class Ability
     end
     can :read, Organization
     can :read, Resource, :public_status => :available_to_public
+
+    
+    can :read, ResourceEvent, :resource => { :public_status => :available_to_public }
 
 
     can :read, Need do |need|
