@@ -87,15 +87,17 @@
 					<p><b>Flagged:</b> <%= resource.flagged %></p>
 
 
-					<% if user_signed_in? %>
-		        <% if resource.resource_flag_for_user(current_user.id) %>
-		          <% if resource.resource_flag_for_user(current_user.id).flagged %>
-		            <%= link_to 'Edit Flag', edit_resource_resource_flag_path(resource, resource.resource_flag_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
-		          <%else%>
-		            <%= link_to 'Flag', edit_resource_resource_flag_path(resource, resource.resource_flag_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
-							<% end %>
-		        <% else %>
-		          <%= link_to 'Flag', new_resource_resource_flag_path(resource), :class => "need-btn-link full-width-btn-red" %>
+		      <% if user_signed_in? %>
+		      	<% if current_user.has_role? :church_admin %>
+			        <% if resource.resource_flag_for_user(current_user.id) %>
+			          <% if resource.resource_flag_for_user(current_user.id).flagged %>
+			            <%= link_to 'Edit Flag', edit_resource_resource_flag_path(resource, resource.resource_flag_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
+			          <%else%>
+			            <%= link_to 'Flag', edit_resource_resource_flag_path(resource, resource.resource_flag_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
+								<% end %>
+			        <% else %>
+			          <%= link_to 'Flag', new_resource_resource_flag_path(resource), :class => "need-btn-link full-width-btn-red" %>
+			        <% end %>
 		        <% end %>
 		      <% end %>
 
