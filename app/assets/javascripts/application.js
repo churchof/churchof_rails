@@ -16,4 +16,5 @@
 //= require underscore
 //= require jquery.tokeninput
 //= require jquery_nested_form
+//= require recurring_select
 //= require_tree .

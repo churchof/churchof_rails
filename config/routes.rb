@@ -46,10 +46,13 @@ Churchof::Application.routes.draw do
 
   resources :skills
   resources :organizations
-  resources :resources
+
+  resources :resources do
+    resources :resource_flags
+    resources :resource_events
+  end
 
   resources :organization_roles
-
 
   resources :needs do
     resources :contributions
