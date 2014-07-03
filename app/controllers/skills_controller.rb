@@ -9,7 +9,7 @@ class SkillsController < ApplicationController
   logger.debug "This is from debug"
 
 	#@skills = Skill.where(name: params[:q])
-  @skills = Skill.where('name ilike ?', '%#{params[:q]}%')
+  @skills = Skill.where('name ilike ?', '%' + params[:q] + '%')
   @skills.each do |skill|
     authorize! :read, skill
   end
