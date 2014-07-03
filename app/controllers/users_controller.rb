@@ -4,6 +4,20 @@ load_and_authorize_resource
 
   before_filter :is_allowed_to_view_page?, only: [:new, :create, :edit, :update, :index]
 
+  def add_user_as_full_rosm_member
+    @user = User.find(params[:user][:user_id])
+    @user.update_attribute(:is_full_rosm_member, true)
+    @user.save
+    redirect_to validation_partner_panel_index_path
+  end
+
+  def remove_user_as_full_rosm_member
+    @user = User.find(params[:user][:user_id])
+    @user.update_attribute(:is_full_rosm_member, false)
+    @user.save
+    redirect_to validation_partner_panel_index_path
+  end
+
   def add_user_as_resource_partner
     @user = User.find(params[:user][:user_id])
     @user.add_role "resource_partner"
