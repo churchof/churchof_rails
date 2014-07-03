@@ -42,6 +42,8 @@ class Ability
     end
     if user.has_role? :validation_partner
         can :read, User
+        can :add_user_as_full_rosm_member, User
+        can :remove_user_as_full_rosm_member, User
     end
     if user.has_role? :pending_church_admin
         can :agree_to_church_admin_agreement, User
