@@ -1,13 +1,27 @@
 <% @church_admins.each do |user| %>
 	<p><%= user.full_name %></p>
 	<% if user.is_full_rosm_member %>
-		<%= simple_form_for user do |f| %>
-		    <%= f.input :is_full_rosm_member, :as => :hidden, :input_html => { :value => false } %><%= submit_tag "Remove as ROSM Member", class: 'action-btn' %>
-		<% end %>
+		<%= simple_form_for(user, :url => users_remove_user_as_full_rosm_member_path, :method => :post, html: {class: "change-status"}) do |f| %>
+	    	<%= f.input :user_id, :as => :hidden, :input_html => { :value => user.id } %>
+	    	<%= f.submit "Remove as ROSM Member" %>
+	    <% end %>
 	<% else %>
-		<%= simple_form_for user do |f| %>
-		    <%= f.input :is_full_rosm_member, :as => :hidden, :input_html => { :value => true } %><%= submit_tag "Add as ROSM Member", class: 'action-btn' %>
-		<% end %>
+		<%= simple_form_for(user, :url => users_add_user_as_full_rosm_member_path, :method => :post, html: {class: "change-status"}) do |f| %>
+	    	<%= f.input :user_id, :as => :hidden, :input_html => { :value => user.id } %>
+	    	<%= f.submit "Add as ROSM Member" %>
+	    <% end %>
 	<% end %>
 	<br>
+<% end %>
+
+
+<% @activities.each do |activity| %>
+<p>
+  <%= activity.subject_type %>:<%= activity.subject_id %> | <%= activity.description %> | 
+
+  <% if activity.user %>
+
+    <%= activity.user.full_name %>
+    <% end %>
+</p>
 <% end %>

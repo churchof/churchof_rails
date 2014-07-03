@@ -22,6 +22,8 @@ Churchof::Application.routes.draw do
   post "users/agree_to_need_leader_agreement"
   post "users/agree_to_church_admin_agreement"
   post "users/add_user_as_resource_partner"
+  post "users/add_user_as_full_rosm_member"
+  post "users/remove_user_as_full_rosm_member"
   post "resources/take_over_management"
   post "users/remove_user_as_resource_partner"
   get '/beta' => 'pages#beta'

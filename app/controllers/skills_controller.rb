@@ -6,9 +6,13 @@ class SkillsController < ApplicationController
   skip_load_resource :only => [:create]
 
   def index
+  logger.debug "This is from debug"
 
 	#@skills = Skill.where(name: params[:q])
   @skills = Skill.where('name ilike ?', '%' + params[:q] + '%')
+  @skills.each do |skill|
+    authorize! :read, skill
+  end
 
 	respond_to do |format|
 		format.html
