@@ -4,6 +4,19 @@
 	<b><h2>No Organization</h2></b>
 	<% @resources.each do |resource| %>
 		<% if resource.organization == nil %>
+
+
+					<% resource.skills.each do |skill| %>
+	                  <li class="skill-tag">
+	                    <span class="skill-icon">
+	                      <%= image_tag(skill.icon_url) %>
+	                    </span>
+	                    <%= skill.name %>
+	                  </li>
+					<% end %>
+
+
+
 					<p><b>Title:</b> <%= resource.title %></p>
 					<p><b>Description:</b> <%= resource.description %></p>
 					<p><b>Website:</b> <%= resource.website %></p>
@@ -66,6 +79,17 @@
 		<% if resource.organization %>
 			<% if resource.organization == organization %>
 				
+
+					<% resource.skills.each do |skill| %>
+	                  <li class="skill-tag">
+	                    <span class="skill-icon">
+	                      <%= image_tag(skill.icon_url) %>
+	                    </span>
+	                    <%= skill.name %>
+	                  </li>
+					<% end %>
+
+
 					<p><b>Title:</b> <%= resource.title %></p>
 					<p><b>Description:</b> <%= resource.description %></p>
 					<p><b>Website:</b> <%= resource.website %></p>
