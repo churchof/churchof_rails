@@ -16,13 +16,18 @@
 					<p><b>Managed By:</b> <%= resource.user.full_name %></p>
 					<p><b>Public Status:</b> <%= resource.public_status %></p>
 
-					<% resource.resource_events.each do |resource_event| %>
-						<p>
-							<%= resource_event.schedule_ice_cube.to_s %>:
-							<%= resource_event.start_time.strftime('%I:%M %p') %> - 
-							<%= resource_event.end_time.strftime('%I:%M %p') %>
-						</p>
-					<% end %>
+
+					    <% begin %>
+							<% resource.resource_events.each do |resource_event| %>
+								<p>
+									<%= resource_event.schedule_ice_cube.to_s %>:
+									<%= resource_event.start_time.strftime('%I:%M %p') %> - 
+									<%= resource_event.end_time.strftime('%I:%M %p') %>
+								</p>
+							<% end %>
+                        <% rescue %>
+                        <% end %>
+
 
 
 
@@ -74,13 +79,16 @@
 					<p><b>Public Status:</b> <%= resource.public_status %></p>
 
 
-					<% resource.resource_events.each do |resource_event| %>
-						<p>
-							<%= resource_event.schedule_ice_cube.to_s %>:
-							<%= resource_event.start_time.strftime('%I:%M %p') %> - 
-							<%= resource_event.end_time.strftime('%I:%M %p') %>
-						</p>
-					<% end %>
+					    <% begin %>
+							<% resource.resource_events.each do |resource_event| %>
+								<p>
+									<%= resource_event.schedule_ice_cube.to_s %>:
+									<%= resource_event.start_time.strftime('%I:%M %p') %> - 
+									<%= resource_event.end_time.strftime('%I:%M %p') %>
+								</p>
+							<% end %>
+                        <% rescue %>
+                        <% end %>
 
 
 
