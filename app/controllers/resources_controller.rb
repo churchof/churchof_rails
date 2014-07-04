@@ -44,9 +44,9 @@ class ResourcesController < ApplicationController
 
     @resource = Resource.new(resource_params)
     if @resource.save
-      redirect_to root_path, :flash => { :alert => "Resource created." }
+      redirect_to resource_partner_panel_index_path, :flash => { :alert => "Resource created." }
     else
-      redirect_to root_path, :flash => { :alert => "An error occured." }
+      redirect_to resource_partner_panel_index_path, :flash => { :alert => "An error occured." }
     end
 
   end
@@ -59,9 +59,9 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
 
     if @resource.update(resource_params)
-      redirect_to root_path, :flash => { :alert => "Resource updated." }
+      redirect_to resource_partner_panel_index_path, :flash => { :alert => "Resource updated." }
     else
-      redirect_to root_path, :flash => { :alert => "An error occured." }
+      redirect_to resource_partner_panel_index_path, :flash => { :alert => "An error occured." }
     end
   end
 

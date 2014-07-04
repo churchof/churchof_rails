@@ -29,9 +29,9 @@ class SkillsController < ApplicationController
 
     @skill = Skill.new(skills_params)
     if @skill.save
-      redirect_to root_path, :flash => { :alert => "Skill created." }
+      redirect_to organization_resource_validation_partner_panel_index_path, :flash => { :alert => "Skill created." }
     else
-      redirect_to root_path, :flash => { :alert => "An error occured." }
+      redirect_to organization_resource_validation_partner_panel_index_path, :flash => { :alert => "An error occured." }
     end
   end
 

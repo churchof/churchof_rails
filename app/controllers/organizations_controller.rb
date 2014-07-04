@@ -13,9 +13,9 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
-      redirect_to root_path, :flash => { :alert => "Organization created." }
+      redirect_to organization_resource_validation_partner_panel_index_path, :flash => { :alert => "Organization created." }
     else
-      redirect_to root_path, :flash => { :alert => "An error occured." }
+      redirect_to organization_resource_validation_partner_panel_index_path, :flash => { :alert => "An error occured." }
     end
   end
 
@@ -26,9 +26,9 @@ class OrganizationsController < ApplicationController
   def update
     @organization = Organization.find(params[:id])
     if @organization.update(organization_params)
-      redirect_to root_path, :flash => { :alert => "Organization updated." }
+      redirect_to organization_resource_validation_partner_panel_index_path, :flash => { :alert => "Organization updated." }
     else
-      redirect_to root_path, :flash => { :alert => "An error occured." }
+      redirect_to organization_resource_validation_partner_panel_index_path, :flash => { :alert => "An error occured." }
     end
   end
 
