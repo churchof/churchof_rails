@@ -16,6 +16,10 @@ class ResourcesController < ApplicationController
   end
 
   def index
+
+
+
+
     if user_signed_in?
       if current_user.has_role? :church_admin or current_user.has_role? :resource_partner or current_user.has_role? :need_poster or current_user.has_role? :need_leader or current_user.has_role? :organization_resource_validation_partner
         @resources = Resource.all
@@ -25,7 +29,31 @@ class ResourcesController < ApplicationController
     else
       @resources = Resource.public
     end
-    @organizations = Organization.all
+ 
+    if params[:selected_skills].present?
+      skill_name = params[:selected_skills]
+      @resources = @resources.joins(:skills).where("skills.name ILIKE ?", skill_name).uniq
+    end
+
+
+    @needs_no_organization_category = false
+    organizations = Array.new
+    @resources.each do |resource|
+      if resource.organization
+        organizations << resource.organization
+      else
+        @needs_no_organization_category = true
+      end
+    end
+    @organizations = organizations.uniq
+
+
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
 
@@ -46,7 +74,9 @@ class ResourcesController < ApplicationController
     if @resource.save
       redirect_to resource_partner_panel_index_path, :flash => { :alert => "Resource created." }
     else
-      redirect_to resource_partner_panel_index_path, :flash => { :alert => "An error occured." }
+
+
+      redirect_to resource_partner_panel_index_path, :flash => { :alert => @resource.errors.full_messages.to_sentence }
     end
 
   end

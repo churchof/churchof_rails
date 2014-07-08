@@ -1,146 +1,53 @@
+<script type="text/javascript">
 
 
-<p>
-	<b><h2>No Organization</h2></b>
-	<% @resources.each do |resource| %>
-		<% if resource.organization == nil %>
+$(document).ready(function () {
 
+    $("#skills_list").on("change", function () {
+      var selectedValue = ""
+      $('#needs-full-list').html();
+      selectedValue = $('#skills_list option:selected').val();
+      $('.need-category-title').html(selectedValue + " Needs");
+      $.ajax({
+          type: "GET",
+          url: "/resources",
+          data: {
+            selected_skills: selectedValue
+          },
+          dataType: "script",
+          success: function(data) {
+            if ($('.need-container').length == 0){
+              $('#needs-full-list').html('There are no needs yet listed under this skill set.');
+            }
+          }
+        });
+    });
+ });
 
-					<p><b>Title:</b> <%= resource.title %></p>
-
-					<% resource.skills.each do |skill| %>
-	                  <li class="skill-tag">
-	                    <span class="skill-icon">
-	                      <%= image_tag(skill.icon_url) %>
-	                    </span>
-	                    <%= skill.name %>
-	                  </li>
-					<% end %>
-
-
-
-					<p><b>Description:</b> <%= resource.description %></p>
-					<p><b>Website:</b> <%= resource.website %></p>
-					<p><b>Contact Phone:</b> <%= resource.contact_phone %></p>
-					<p><b>Contact Email:</b> <%= resource.contact_email %></p>
-					<p><b>Availability Status:</b> <%= resource.availability_status %></p>
-					<p><b>Status:</b> <%= resource.status %></p>
-					<p><b>Address:</b> <%= resource.address %></p>
-					<% if resource.user %>
-					<p><b>Managed By:</b> <%= resource.user.full_name %></p>
-					<p><b>Public Status:</b> <%= resource.public_status %></p>
-
-
-					    <% begin %>
-							<% resource.resource_events.each do |resource_event| %>
-								<p>
-									<%= resource_event.schedule_ice_cube.to_s %>:
-									<%= resource_event.start_time.strftime('%I:%M %p') %> - 
-									<%= resource_event.end_time.strftime('%I:%M %p') %>
-								</p>
-							<% end %>
-                        <% rescue %>
-                        <% end %>
+  </script>
 
 
 
+<div class="page-header-block">
+  <h1 class="need-category-title">All Resources</h1>
+  <div class="skills-filter">
+    <label>Filter:</label>
+    <select id="skills_list" class="skill-select">
+      <option value="">All Resources</option>
+      <%- Skill.all.each do | skill | %>
+        <option data-tag="#{skill.name}">
+          <%= skill.name %>
+        </div>
+      <% end %>
+    </select>
+  </div>
+</div>
 
-					<p><b>Flagged:</b> <%= resource.flagged %></p>
+<div class="resources" id="resources">
 
-
-		      <% if user_signed_in? %>
-		      	<% if current_user.has_role? :church_admin %>
-			        <% if resource.resource_flag_for_user(current_user.id) %>
-			          <% if resource.resource_flag_for_user(current_user.id).flagged %>
-			            <%= link_to 'Edit Flag', edit_resource_resource_flag_path(resource, resource.resource_flag_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
-			          <%else%>
-			            <%= link_to 'Flag', edit_resource_resource_flag_path(resource, resource.resource_flag_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
-								<% end %>
-			        <% else %>
-			          <%= link_to 'Flag', new_resource_resource_flag_path(resource), :class => "need-btn-link full-width-btn-red" %>
-			        <% end %>
-		        <% end %>
-		      <% end %>
-
-
-
-
-
-					<% end %>
-				<br>
-		<% end %>
-	<% end %>
-</p>
-<br>
-
-<% @organizations.each do |organization| %>
-<p>
-<b><h2><%= organization.title %></h2></b>
-	<% @resources.each do |resource| %>
-		<% if resource.organization %>
-			<% if resource.organization == organization %>
-				
-					<p><b>Title:</b> <%= resource.title %></p>
-
-					<% resource.skills.each do |skill| %>
-	                  <li class="skill-tag">
-	                    <span class="skill-icon">
-	                      <%= image_tag(skill.icon_url) %>
-	                    </span>
-	                    <%= skill.name %>
-	                  </li>
-					<% end %>
-
-
-					<p><b>Description:</b> <%= resource.description %></p>
-					<p><b>Website:</b> <%= resource.website %></p>
-					<p><b>Contact Phone:</b> <%= resource.contact_phone %></p>
-					<p><b>Contact Email:</b> <%= resource.contact_email %></p>
-					<p><b>Availability Status:</b> <%= resource.availability_status %></p>
-					<p><b>Status:</b> <%= resource.status %></p>
-					<p><b>Address:</b> <%= resource.address %></p>
-					<% if resource.user %>
-					<p><b>Managed By:</b> <%= resource.user.full_name %></p>
-					<p><b>Public Status:</b> <%= resource.public_status %></p>
-
-
-					    <% begin %>
-							<% resource.resource_events.each do |resource_event| %>
-								<p>
-									<%= resource_event.schedule_ice_cube.to_s %>:
-									<%= resource_event.start_time.strftime('%I:%M %p') %> - 
-									<%= resource_event.end_time.strftime('%I:%M %p') %>
-								</p>
-							<% end %>
-                        <% rescue %>
-                        <% end %>
+	  <%= render 'resources_by_organization' %>
 
 
 
-					<p><b>Flagged:</b> <%= resource.flagged %></p>
+</div>
 
-
-		      <% if user_signed_in? %>
-		      	<% if current_user.has_role? :church_admin %>
-			        <% if resource.resource_flag_for_user(current_user.id) %>
-			          <% if resource.resource_flag_for_user(current_user.id).flagged %>
-			            <%= link_to 'Edit Flag', edit_resource_resource_flag_path(resource, resource.resource_flag_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
-			          <%else%>
-			            <%= link_to 'Flag', edit_resource_resource_flag_path(resource, resource.resource_flag_for_user_id(current_user.id)), :class => "need-btn-link full-width-btn-red" %>
-								<% end %>
-			        <% else %>
-			          <%= link_to 'Flag', new_resource_resource_flag_path(resource), :class => "need-btn-link full-width-btn-red" %>
-			        <% end %>
-		        <% end %>
-		      <% end %>
-
-
-					<% end %>
-				<br>
-			<% end %>
-		<% end %>
-	<% end %>
-</p>
-<br>
-
-<% end %>
