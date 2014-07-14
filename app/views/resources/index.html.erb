@@ -7,7 +7,7 @@ $(document).ready(function () {
       var selectedValue = ""
       $('#needs-full-list').html();
       selectedValue = $('#skills_list option:selected').val();
-      $('.need-category-title').html(selectedValue + " Needs");
+      $('.need-category-title').html(selectedValue + " Resources");
       $.ajax({
           type: "GET",
           url: "/resources",
@@ -44,10 +44,6 @@ $(document).ready(function () {
 </div>
 
 <div class="resources" id="resources">
-
 	  <%= render 'resources_by_organization' %>
-
-
-
 </div>
 
