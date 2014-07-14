@@ -45,10 +45,8 @@ class ResourcesController < ApplicationController
         @needs_no_organization_category = true
       end
     end
-    @organizations = organizations.uniq
+    @organizations = organizations.uniq.sort_by!{ |m| m.title.downcase }
 
-
-@organizations.order('title')
 
 
     respond_to do |format|
