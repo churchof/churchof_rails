@@ -103,7 +103,7 @@
 
 										<% if resource.description.length > 0 %>
 									      <div class="resource-description col-xs-12 col-sm-12">
-											<%= resource.description %>
+													<%= resource.description %>
 									      </div>
 									  <% end %>
 
@@ -111,13 +111,13 @@
 									      <div class="field-icon">
 									        <%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/728-clock%402x.png") %>
 									        <% begin %>
-												<% resource.resource_events.each do |resource_event| %>
-													<span class="field-description">
-													<%= resource_event.schedule_ice_cube.to_s %>:
-													<%= resource_event.start_time.strftime('%I:%M %p') %> - 
-													<%= resource_event.end_time.strftime('%I:%M %p') %>.
-													</span>
-												<% end %>
+									        	<span class="field-description">
+															<% resource.resource_events.each do |resource_event| %>
+																<%= resource_event.schedule_ice_cube.to_s %>:
+																<%= resource_event.start_time.strftime('%I:%M %p') %> - 
+																<%= resource_event.end_time.strftime('%I:%M %p') %>.
+															<% end %>
+														</span>
 									      	<% rescue %>
 									    	<% end %>
 									      </div>
