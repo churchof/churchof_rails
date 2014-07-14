@@ -14,7 +14,7 @@ class OrganizationResourceValidationPartnerPanelController < ApplicationControll
 	end
 
 	def index
-		@organizations = Organization.all
+		@organizations = Organization.all.order('title')
 		@users = User.all
 		@organization_roles = OrganizationRole.all
 		@skills = Skill.all
