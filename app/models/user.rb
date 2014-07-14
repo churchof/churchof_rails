@@ -51,6 +51,23 @@ class User < ActiveRecord::Base
   	first_name + " " + last_name
   end
 
+  def associated_organization
+    if self.organization_roles.count > 0
+      self.organization_roles.first.organization.title
+    else
+      nil
+    end
+  end
+
+  def associated_organization_url
+    if self.organization_roles.count > 0
+      "https://www.church-of.com/organizations/" + self.organization_roles.first.organization.id.to_s
+    else
+      nil
+    end
+  end
+
+
   def church_admin_needs_admin_incoming_count
     self.needs_church_admin.where(need_stage: 1).count
   end

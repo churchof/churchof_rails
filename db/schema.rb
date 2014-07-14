@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702171735) do
+ActiveRecord::Schema.define(version: 20140714203757) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 20140702171735) do
     t.decimal  "latitude",          precision: 15, scale: 10
     t.decimal  "longitude",         precision: 15, scale: 10
     t.integer  "organization_type"
+    t.string   "website_url"
   end
 
   create_table "resource_events", force: true do |t|
@@ -226,12 +227,12 @@ ActiveRecord::Schema.define(version: 20140702171735) do
   create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email",                       default: "", null: false
-    t.string   "encrypted_password",          default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",               default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -243,8 +244,6 @@ ActiveRecord::Schema.define(version: 20140702171735) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "is_full_rosm_member"
-    t.string   "associated_organization"
-    t.string   "associated_organization_url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
