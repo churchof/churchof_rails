@@ -1,3 +1,28 @@
+
+
+<script>
+  $(document).ready(function(){
+    $('.need-button-block').each(function(){
+      var className;
+      var needButtonCount = $(this).find('.need-btn-link').length;
+        if (needButtonCount == 1){
+          className = "need-xs-12";
+        }else if(needButtonCount == 2){
+          className = "need-xs-6";
+        }else if(needButtonCount == 3){
+          className = "need-xs-4";
+        }
+
+      $(this).find('.need-btn-link').each(function(){
+        $(this).addClass(className);
+      });
+    });
+  })
+
+</script>
+
+
+
 <div class="page-header-block">
 	<div class="page-title">
   		<h2><%= @organization.title %></h2>
