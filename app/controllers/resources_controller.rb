@@ -48,6 +48,8 @@ class ResourcesController < ApplicationController
     @organizations = organizations.uniq
 
 
+@resources.order('title')
+
 
     respond_to do |format|
       format.html
