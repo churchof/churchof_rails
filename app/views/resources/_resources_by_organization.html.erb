@@ -101,33 +101,35 @@
         
 
 		<h2 class="resource-title"><%= resource.title %>
-			<% if resource.availability_status.fully_available? %>
-				<% if resource.status.length > 0 %>
-					<font color="69c773">(Fully Available - <%= resource.status %>)</font></h2>
-				<% else %>
-			  		<font color="69c773">(Fully Available)</font></h2>
-				<% end %>
-		  	<% elsif resource.availability_status.mostly_available? %>
-				<% if resource.status.length > 0 %>
-					<font color="69c773">(Mostly Available - <%= resource.status %>)</font></h2>
-				<% else %>
-			  		<font color="69c773">(Mostly Available)</font></h2>
-				<% end %>
-		  	<% elsif resource.availability_status.mostly_not_available? %>
-		  		<% if resource.status.length > 0 %>
-					<font color="FF8A3B">(Nearing Limit - <%= resource.status %>)</font></h2>
-				<% else %>
-			  		<font color="FF8A3B">(Nearing Limit)</font></h2>
-				<% end %>
-		  	<% elsif resource.availability_status.not_available? %>
-		  		<% if resource.status.length > 0 %>
-					<font color="e06c69">(Not Available - <%= resource.status %>)</font></h2>
-				<% else %>
-			  		<font color="e06c69">(Not Available)</font></h2>
-				<% end %>
-		  	<% elsif resource.availability_status.nil? %>
-		  		<% if resource.status.length > 0 %>
-					<font color="58A1EB">(<%= resource.status %>)</font></h2>
+			<% if resource.availability_status %>
+				<% if resource.availability_status.fully_available? %>
+					<% if resource.status.length > 0 %>
+						<font color="69c773">(Fully Available - <%= resource.status %>)</font></h2>
+					<% else %>
+				  		<font color="69c773">(Fully Available)</font></h2>
+					<% end %>
+			  	<% elsif resource.availability_status.mostly_available? %>
+					<% if resource.status.length > 0 %>
+						<font color="69c773">(Mostly Available - <%= resource.status %>)</font></h2>
+					<% else %>
+				  		<font color="69c773">(Mostly Available)</font></h2>
+					<% end %>
+			  	<% elsif resource.availability_status.mostly_not_available? %>
+			  		<% if resource.status.length > 0 %>
+						<font color="FF8A3B">(Nearing Limit - <%= resource.status %>)</font></h2>
+					<% else %>
+				  		<font color="FF8A3B">(Nearing Limit)</font></h2>
+					<% end %>
+			  	<% elsif resource.availability_status.not_available? %>
+			  		<% if resource.status.length > 0 %>
+						<font color="e06c69">(Not Available - <%= resource.status %>)</font></h2>
+					<% else %>
+				  		<font color="e06c69">(Not Available)</font></h2>
+					<% end %>
+			  	<% elsif resource.availability_status.nil? %>
+			  		<% if resource.status.length > 0 %>
+						<font color="58A1EB">(<%= resource.status %>)</font></h2>
+					<% end %>
 				<% end %>
 			<% end %>
 		</div>
