@@ -15,7 +15,7 @@
       </div>
 
       <div class="field-pair">
-        <%= f.input :user_id, label: "User", collection: User.with_role(:resource_partner), label_method: :full_name %>
+        <%= f.input :user_id, label: "User", collection: User.all, label_method: :full_name %>
       </div>
 
 
