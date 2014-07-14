@@ -31,7 +31,9 @@ class Resource < ActiveRecord::Base
 
 
 
-
+  def current_percentage_flagged
+    self.resource_flags.flagged.count / (User.with_role(:church_admin).count * 1.0)
+  end
 
   def resource_flag_for_user(user_id_to_check)
     self.resource_flags.where(user_church_admin: User.find(user_id_to_check)).first
