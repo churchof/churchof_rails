@@ -48,7 +48,7 @@ class ResourcesController < ApplicationController
     @organizations = organizations.uniq
 
 
-@resources.order('title')
+@organizations.order('title')
 
 
     respond_to do |format|
