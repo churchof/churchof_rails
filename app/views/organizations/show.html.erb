@@ -25,7 +25,11 @@
 
 <div class="page-header-block">
 	<div class="page-title">
-  		<h2><%= @organization.title %></h2>
+  		<h2><%= @organization.title %>
+		<% if @organization.is_verified %>
+			<span class="org-verified-icon"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
+		<% end %>
+</h2>
 	</div>
 	<br>
 
@@ -33,7 +37,7 @@
 
 <br>
 		<% @users.each do |user| %>
-
+			
               <% if !user.avatar_file_name.nil? %>
                 <div class="user-image">
                   <%= image_tag(user.avatar(:large), class: "img-circle") %>
@@ -46,7 +50,7 @@
                 <%= user.full_name %>
                 <p class="small-italic">  </p>
               </div>
-
+			
          <% end %>
 
 <br><br><br><br><br><br>

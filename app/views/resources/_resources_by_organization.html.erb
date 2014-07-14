@@ -1,7 +1,8 @@
 <% @organizations.each do |organization| %>
 		<br>
 		<b><h2>
-			<%= organization.title %>
+		<%= link_to organization.title, organization %>
+
 			<% if organization.is_verified %>
 				<span class="org-verified-icon"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
 			<% end %>
