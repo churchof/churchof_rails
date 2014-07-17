@@ -14,4 +14,15 @@ class OrganizationRole < ActiveRecord::Base
 # if you add more here youll need to update the validate_organization_role method in the controller.
 	enumerize :role_type, in: {:resource_manager => 1, :need_leader => 2, :church_admin => 3}, default: nil
 
+
+  def role_type_string
+  	if role_type.resource_manager?
+  		"Resource Manager"
+  	elsif role_type.need_leader?
+  		"Need Leader"
+  	elsif role_type.church_admin?		
+  		"Church Admin"
+  	end
+  end
+
 end

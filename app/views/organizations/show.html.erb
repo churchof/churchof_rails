@@ -33,11 +33,14 @@
 	</div>
 	<br>
 
+<% if @users.count > 0 %>
 	<h3>People</h3>
 
 <br>
+
 		<% @users.each do |user| %>
-			
+				<div class="col-xs-6 col-sm-6">
+
               <% if !user.avatar_file_name.nil? %>
                 <div class="user-image">
                   <%= image_tag(user.avatar(:large), class: "img-circle") %>
@@ -47,17 +50,34 @@
               <% end %>
 
               <div class="user-details">
-                <%= user.full_name %>
-                <p class="small-italic">  </p>
+
+              	<% i = 0 %>
+                <%= user.full_name %> - 
+                	<% user.organization_roles.where(organization: @organization).each do |organization_role| %>
+
+                		<%= organization_role.role_type_string%><% i = i + 1 %><% if i < user.organization_roles.count %>,<% end %>
+                	<% end %>
               </div>
-			
+
+              </div>
          <% end %>
 
-<br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+
+<% end %>
+
+
+<% if @needs.count > 0 %>
+<br><br>
 	<h3>Needs</h3>
 	<div class="needs main-content" id="needs-full-list">
   		<%= render @needs %>
 	</div>
+<% end %>
+
+
+<% if @resources.count > 0 %>
+<br><br>
 
 	<h3>Resources</h3>
 	<% @resources.each do |resource| %>
@@ -251,4 +271,6 @@
 
 
 	<% end %>
+<% end %>
+
 </div>

@@ -1,0 +1,21 @@
+<div class="page-header-block">
+  <h1 class="need-category-title">Groups</h1>
+
+  <br><br><br><br>
+
+
+
+    <% @organizations.each do |organization| %>
+
+    <b><h2>
+    <%= link_to organization.title, organization %>
+
+      <% if organization.is_verified %>
+        <span class="org-verified-icon"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
+      <% end %>
+    </h2></b>
+
+    <% end %>
+
+
+</div>

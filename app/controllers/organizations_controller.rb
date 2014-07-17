@@ -6,6 +6,10 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new
   end
 
+  def index
+    @organizations = Organization.all.sort_by(&:title)
+  end
+
   def show
     @organization = Organization.find(params[:id])
 
@@ -35,7 +39,7 @@ class OrganizationsController < ApplicationController
     end
 
     @resources = @organization.resources
-    @needs = needs.uniq
+    @needs = needs.uniq.sort_by(&:completion_goal_date)
     @users = users.uniq
 
   end
