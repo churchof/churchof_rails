@@ -15,6 +15,7 @@ class OrganizationsController < ApplicationController
 
     needs = Array.new
     users = Array.new
+    associated_groups = Array.new
 
     @organization.organization_roles.each do |organization_role|
       # Get all needs involved in.
@@ -23,6 +24,13 @@ class OrganizationsController < ApplicationController
           users << organization_role.user
           organization_role.user.needs_church_admin.public.each do |need|
             needs << need
+            if need.user_need_leader
+              need.user_need_leader.organization_roles.each do |organization_role|
+                if organization_role.organization != @organization
+                  associated_groups << organization_role.organization
+                end
+              end
+            end
           end
         end
       end
@@ -30,6 +38,13 @@ class OrganizationsController < ApplicationController
         users << organization_role.user
         organization_role.user.needs_need_leader.public.each do |need|
           needs << need
+          if need.user_church_admin
+            need.user_church_admin.organization_roles.each do |organization_role|
+              if organization_role.organization != @organization
+                associated_groups << organization_role.organization
+              end
+            end
+          end
         end
       end
       if organization_role.role_type.resource_manager?
@@ -41,6 +56,7 @@ class OrganizationsController < ApplicationController
     @resources = @organization.resources
     @needs = needs.uniq.select(&:completion_goal_date).sort_by(&:completion_goal_date) + needs.uniq.reject(&:completion_goal_date)
     @users = users.uniq
+    @associated_groups = associated_groups.uniq.sort_by(&:title)
 
   end
 
