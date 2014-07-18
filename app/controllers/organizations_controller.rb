@@ -40,9 +40,9 @@ class OrganizationsController < ApplicationController
           needs << need
           if need.user_church_admin
             need.user_church_admin.organization_roles.each do |organization_role|
-              # if organization_role.organization != @organization
+              if organization_role.organization != @organization
                 associated_groups << organization_role.organization
-              # end
+              end
             end
           end
         end
