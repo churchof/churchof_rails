@@ -39,7 +39,7 @@ class OrganizationsController < ApplicationController
     end
 
     @resources = @organization.resources
-    @needs = needs.uniq.sort_by(&:completion_goal_date) + needs.uniq.reject(&:completion_goal_date)
+    @needs = needs.uniq.select(&:completion_goal_date).sort_by(&:completion_goal_date) + needs.uniq.reject(&:completion_goal_date)
     @users = users.uniq
 
   end
