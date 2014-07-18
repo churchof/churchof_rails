@@ -71,19 +71,19 @@
 
 <% if @associated_groups.count > 0 %>
 <br><br>
-	<h2>Associated Groups</h2>
+	<h3>Associated Groups</h3>
 <br>
 
 		<% @associated_groups.each do |organization| %>
 
 
-		    <b><h2>
+		    <b><h3>
     <%= link_to organization.title, organization %>
 
       <% if organization.is_verified %>
-        <span class="org-verified-icon"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
+        <span class="org-verified-icon-small"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
       <% end %>
-    </h2></b>
+    </h3></b>
 
          <% end %>
 
