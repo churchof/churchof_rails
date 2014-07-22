@@ -33,6 +33,31 @@ load_and_authorize_resource
     redirect_to root_path
   end
 
+  # --------
+
+  def add_user_as_pending_need_poster
+    @user = User.find(params[:user][:user_id])
+    @user.add_role "pending_need_poster"
+    @user.save
+    redirect_to root_path
+  end
+
+  def add_user_as_pending_need_leader
+    @user = User.find(params[:user][:user_id])
+    @user.add_role "pending_need_leader"
+    @user.save
+    redirect_to root_path
+  end
+
+  def add_user_as_pending_church_admin
+    @user = User.find(params[:user][:user_id])
+    @user.add_role "pending_church_admin"
+    @user.save
+    redirect_to root_path
+  end
+
+  # --------
+
   def agree_to_need_poster_agreement
     current_user.remove_role "pending_need_poster"
     current_user.add_role "need_poster"

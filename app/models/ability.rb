@@ -63,6 +63,9 @@ class Ability
         can :new, Skill
         can :create, Skill
         can :read, Resource
+        can :add_user_as_pending_need_poster, User
+        can :add_user_as_pending_need_leader, User
+        can :add_user_as_pending_church_admin, User
     end
 
     if user.has_role? :resource_partner

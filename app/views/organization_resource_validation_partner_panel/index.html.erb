@@ -38,6 +38,39 @@ Users:
 	    	<%= f.submit "Add Resource Partner Role" %>
 	    <% end %>
 	<% end %>
+
+
+
+	<% if !user.has_role? :church_admin %>
+		<% if !user.has_role? :pending_church_admin %>
+		    <%= simple_form_for(user, :url => users_add_user_as_pending_church_admin_path, :method => :post, html: {class: "change-status"}) do |f| %>
+		        <%= f.input :user_id, :as => :hidden, :input_html => { :value => user.id } %>
+		    	<%= f.submit "Invite to be Church Admin", :data => { :confirm => "Are you sure you want to add this user as a Church Admin?" } %>
+		    <% end %>
+	    <% end %>
+	<% end %>
+
+	<% if !user.has_role? :need_poster %>
+		<% if !user.has_role? :pending_need_poster %>
+		    <%= simple_form_for(user, :url => users_add_user_as_pending_need_poster_path, :method => :post, html: {class: "change-status"}) do |f| %>
+		        <%= f.input :user_id, :as => :hidden, :input_html => { :value => user.id } %>
+		    	<%= f.submit "Invite to be Need Poster", :data => { :confirm => "Are you sure you want to add this user as a Need Poster?" } %>
+		    <% end %>
+	    <% end %>
+	<% end %>
+
+	<% if !user.has_role? :need_leader %>
+		<% if !user.has_role? :pending_need_leader %>
+		    <%= simple_form_for(user, :url => users_add_user_as_pending_need_leader_path, :method => :post, html: {class: "change-status"}) do |f| %>
+		        <%= f.input :user_id, :as => :hidden, :input_html => { :value => user.id } %>
+		    	<%= f.submit "Invite to be Need Leader", :data => { :confirm => "Are you sure you want to add this user as a Need Leader?" } %>
+		    <% end %>
+	    <% end %>
+	<% end %>
+
+
+
+
 	</p>
 <% end %>
 
