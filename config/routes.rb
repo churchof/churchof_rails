@@ -47,6 +47,8 @@ Churchof::Application.routes.draw do
 
   resources :logs
 
+  resources :about
+
   resources :users # Not sure if this is ok to do with Devise also.
 
   resources :skills

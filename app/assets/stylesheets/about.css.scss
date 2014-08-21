@@ -1,0 +1,150 @@
+// Place all the styles related to the about controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables.css.scss";
+
+body{
+  background: #FFFFFF;
+  padding-bottom: 100px;
+}
+
+.main-title {
+  font-family: 'Avenir LT W01 65 Medium';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 32px;
+  margin-top: 90px;
+ 	text-align: center;
+}
+
+.left-title {
+  font-family: 'Avenir LT W01 65 Medium';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 32px;
+  margin-top: 160px;
+  margin-left: 60px;
+ 	width:50%;
+ 	text-align: left;
+}
+
+.left-sentence {
+  font-family: 'Avenir LT W01 35 Light';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 22px;
+  margin-top: 40px;
+ 	width:50%;
+  margin-left: 60px;
+  text-align: left;
+}
+
+.right-title {
+  font-family: 'Avenir LT W01 65 Medium';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 32px;
+  margin-top: 160px;
+  margin-right: 60px;
+   margin-left: auto;
+ 	width:50%;
+ 	text-align: right;
+}
+
+.right-sentence {
+  font-family: 'Avenir LT W01 35 Light';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 22px;
+  margin-top: 40px;
+ 	width:50%;
+  margin-right: 60px;
+     margin-left: auto;
+
+  text-align: right;
+}
+
+.side-image-1 {
+  margin-top: 160px;
+	width: 35%;
+	float: right;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/skills_sketched.png);
+}
+
+.side-image-2 {
+  margin-top: 160px;
+	width: 35%;
+	float: left;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/map_sketched.png);
+}
+
+.side-image-3 {
+  margin-top: 160px;
+	width: 35%;
+	float: right;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/feedback_sketched.png);
+}
+
+.side-image-4 {
+  margin-top: 160px;
+	width: 35%;
+	float: left;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/stats_sketched.png);
+}
+
+
+
+.main-sentence {
+  font-family: 'Avenir LT W01 35 Light';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 22px;
+  margin-top: 40px;
+ 	text-align: center;
+ 	width:70%;
+ 	margin-left: auto;
+  margin-right: auto;
+}
+
+
+.menu-line {
+  margin-top: -5px;
+  margin-left: auto;
+  margin-right: auto;
+	background: #606060;
+	width: 100%;
+	height: 2px;
+}
+
+.menu-circle {
+  margin-top: -34px;
+  background: #FFFFFF;
+  margin-left: auto;
+  margin-right: auto;
+	left: 0;
+	right: 0;
+	border: 2px solid #606060; 
+	border-top-right-radius: 3em;
+	border-bottom-right-radius: 3em;
+	border-top-left-radius: 3em;
+	border-bottom-left-radius: 3em;
+	width: 665px; 
+	height: 69px;
+	position: absolute;
+}
+
+.menu-background-people {
+	width: 100%;
+	margin-top: -104px;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/people_top.png);
+}
+
+.menu-object {
+  margin-top: 15px;
+  font-size: 22px;
+  margin-left: 45px;
+  margin-right: 45px;
+  font-family: 'Avenir LT W01 35 Light';
+  display: inline-block;
+}

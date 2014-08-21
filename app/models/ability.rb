@@ -128,7 +128,8 @@ class Ability
     can :show, TimeContribution, :user_id => user.id
     can :read, TimeContribution, :user_id => user.id
 
-
+    # can :read, About // was causing crashing, strange.
+    
     # can :manage, :all
     
     # def initialize(user)
