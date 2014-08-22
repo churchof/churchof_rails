@@ -18,6 +18,30 @@ body{
  	text-align: center;
 }
 
+.main-mobile-title {
+  font-family: 'Avenir LT W01 65 Medium';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 22px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.main-mobile-sentence {
+  font-family: 'Avenir LT W01 35 Light';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 18px;
+  margin-top: 40px;
+  text-align: center;
+  width:70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
 .left-title {
   font-family: 'Avenir LT W01 65 Medium';
   color: #606060;
@@ -65,34 +89,272 @@ body{
   text-align: right;
 }
 
+.mobile-title-right {
+  font-family: 'Avenir LT W01 65 Medium';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 20px;
+  margin-top: 40px;
+    text-align: right;
+
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.mobile-sentence-right {
+  font-family: 'Avenir LT W01 35 Light';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 16px;
+  margin-top: 0px;
+  margin-right: 10px;
+  margin-left: 10px;
+  display: block;
+    text-align: right;
+}
+
+.mobile-title-left {
+  font-family: 'Avenir LT W01 65 Medium';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 20px;
+  margin-top: 40px;
+    text-align: left;
+
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.mobile-sentence-left {
+  font-family: 'Avenir LT W01 35 Light';
+  color: #606060;
+  letter-spacing: .01em;
+  font-size: 16px;
+  margin-top: 0px;
+  margin-right: 10px;
+  margin-left: 10px;
+  display: block;
+    text-align: left;
+}
+
+
 .side-image-1 {
-  margin-top: 160px;
-	width: 35%;
-	float: right;
+  margin-top: 0px;
+	width: 33%;
+  max-width: 400px;
   content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/skills_sketched.png);
+  float: right;
+}
+
+.mobile-side-image-padding {
+  width: 9%;
+  display: inline-block;
+}
+
+
+.mobile-image-1 {
+  margin-top: 20px;
+    margin-bottom: 20px;
+
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/skills_sketched.png);
+    display: inline-block;
+
 }
 
 .side-image-2 {
   margin-top: 160px;
-	width: 35%;
+	width: 33%;
+    max-width: 400px;
+
+    margin-left: 10px;
+
 	float: left;
   content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/map_sketched.png);
 }
 
+.mobile-image-2 {
+  margin-top: 20px;
+    margin-bottom: 20px;
+
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/map_sketched.png);
+    display: inline-block;
+
+}
+
+
 .side-image-3 {
   margin-top: 160px;
-	width: 35%;
+	width: 33%;
+  max-width: 400px;
+  margin-right: 30px;
 	float: right;
-  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/feedback_sketched.png);
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/sketched_feedback.png);
 }
+
+.mobile-image-3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/sketched_feedback.png);
+  display: inline-block;
+}
+
 
 .side-image-4 {
   margin-top: 160px;
-	width: 35%;
+	width: 33%;
+  max-width: 400px;
 	float: left;
+  margin-left: 20px;
   content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/stats_sketched.png);
 }
 
+.mobile-image-4 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/stats_sketched.png);
+  display: inline-block;
+}
+
+
+
+
+
+
+
+.side-image-5 {
+  margin-top: 0px;
+  width: 33%;
+  max-width: 400px;
+  margin-right: 30px;
+  float: right;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/congregation_sketched.png);
+}
+
+.mobile-image-5 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/congregation_sketched.png);
+  display: inline-block;
+}
+
+
+.side-image-6 {
+  margin-top: 160px;
+  width: 33%;
+  max-width: 400px;
+  float: left;
+  margin-left: 20px;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/one_place_sketched.png);
+}
+
+.mobile-image-6 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/one_place_sketched.png);
+  display: inline-block;
+}
+
+
+
+
+
+
+.side-image-7 {
+  margin-top: 160px;
+  width: 33%;
+  max-width: 400px;
+  margin-right: 30px;
+  float: right;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/united_sketched.png);
+}
+
+.mobile-image-7 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/united_sketched.png);
+  display: inline-block;
+}
+
+
+.side-image-8 {
+  margin-top: 160px;
+  width: 33%;
+  max-width: 400px;
+  float: left;
+  margin-left: 20px;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/tools_sketched.png);
+}
+
+.mobile-image-8 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/tools_sketched.png);
+  display: inline-block;
+}
+
+
+
+.side-image-9 {
+  margin-top: 0px;
+  width: 33%;
+  max-width: 400px;
+  margin-right: 30px;
+  float: right;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/partner_sketched.png);
+}
+
+.mobile-image-9 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/partner_sketched.png);
+  display: inline-block;
+}
+
+
+.side-image-10 {
+  margin-top: 160px;
+  width: 33%;
+  max-width: 400px;
+  float: left;
+  margin-left: 20px;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/resources_sketched.png);
+}
+
+.mobile-image-10 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/resources_sketched.png);
+  display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.about-link {
+  font-family: 'Avenir LT W01 35 Light';
+  color: #42bbdc;
+  text-decoration: underline;
+}
 
 
 .main-sentence {
@@ -134,17 +396,74 @@ body{
 	position: absolute;
 }
 
+
+
+
+.mobile-line {
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #606060;
+  width: 100%;
+  height: 2px;
+      margin-bottom: 55px;
+
+}
+
+.mobile-circle {
+  margin-top: -25px;
+
+  background: #FFFFFF;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  border: 2px solid #606060; 
+  border-top-right-radius: 3em;
+  border-bottom-right-radius: 3em;
+  border-top-left-radius: 3em;
+  border-bottom-left-radius: 3em;
+  width:70%; 
+  height: 50px;
+  position: absolute;
+}
+
+
+
+
+
+
+
 .menu-background-people {
 	width: 100%;
 	margin-top: -104px;
-  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/people_top.png);
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/people.png);
 }
+
+.menu-mobile-people {
+  width: 100%;
+  margin-top: -20px;
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/people.png);
+}
+
 
 .menu-object {
   margin-top: 15px;
   font-size: 22px;
-  margin-left: 45px;
-  margin-right: 45px;
+  margin-left: 35px;
+  margin-right: 35px;
   font-family: 'Avenir LT W01 35 Light';
   display: inline-block;
 }
+
+.mobile-menu-object {
+  margin-top: 10px;
+  font-size: 18px;
+  font-family: 'Avenir LT W01 35 Light';
+  display: inline-block;
+    text-align: center;
+      width: 100%;
+
+
+}
+

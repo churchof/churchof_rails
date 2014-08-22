@@ -199,6 +199,29 @@ ul.menu-links{
   display: inline-block;
 }
 
+@media(max-width:767px){
+  .hide-on-xs{
+    display: none;
+  }
+}
+@media(min-width:768px){
+  .show-on-xs{
+    display: none;
+  }
+}
+
+@media(min-width:992px){
+  .show-on-xs{
+    display: none;
+  }
+}
+
+@media(min-width:1200px){
+  .show-on-xs{
+    display: none;
+  }
+}
+
 @media(max-width: $screen-xs-max){
   .hide-on-xs{
     display: none;
@@ -237,6 +260,8 @@ ul.menu-links{
 }
 
 @media(max-width: $screen-sm-min){
+
+
   .page-options li.post-new-need.pull-right{
     display: block;
     float: none;
@@ -258,6 +283,8 @@ ul.menu-links{
 }
 
 @media(min-width: $screen-lg-min){
+
+
   .dropdown-wrapper{
     max-width: 1125px;
     margin: 0px auto;
