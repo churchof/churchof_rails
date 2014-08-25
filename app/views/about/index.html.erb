@@ -1,10 +1,7 @@
 <%= stylesheet_link_tag "application", :media => "all" %>
 <%= stylesheet_link_tag params[:controller] %>
 
-
-
 <%= content_for :hero_block do %>  
-
 
 <span class="hide-on-xs">
 	<div class="main-title"> Uniting the Church though crowd-sourced service. </div>
@@ -15,7 +12,7 @@
 
 <span class="show-on-xs">
 	<div class="main-mobile-title"> Uniting the Church though crowd-sourced service. </div>
-	<div class="main-mobile-sentence"> As a Christian body, we are called to be one. Today’s divisions leave us silo’d off so whats a good practical step forward? Let’s all pitch in on something we agree on being the hands and feet to our city. </div>
+	<div class="main-mobile-sentence"> As a Christian body, we are called to be one. Unfortunately, divisions often keep us from rallying around our joint mission. The "Church of Lexington” platform is a practical step forward. Let’s all pitch in on something we agree on by being the "hands and feet" to our city. </div>
 	<div class="menu-mobile-people">
 	</div>
 </span>
@@ -23,67 +20,71 @@
 <span class="hide-on-xs">
 	<div class="menu-line">
 		<div class="menu-circle">
-
-
-
-
-<ul class="nav nav-pills">
- 	<li class="active"><a href="#red" data-toggle="tab">For Users</a></li>
-	<li><a href="#orange" data-toggle="tab">For Churches</a></li>
-	<li><a href="#yellow" data-toggle="tab">For Non-Profits</a></li>
-</ul>
-
-
-
-
+			<ul class="nav nav-pills">
+			 	<li class="active"><a href="#users" data-toggle="tab">For Users</a></li>
+				<li><a href="#churches" data-toggle="tab">For Churches</a></li>
+				<li><a href="#nonprofits" data-toggle="tab">For Non-Profits</a></li>
+			</ul>
 		</div>
 	</div>
 </span>
 
 <span class="hide-on-xs">
     <div id="my-tab-content" class="tab-content">
-        <div class="tab-pane active" id="red">
+        <div class="tab-pane active" id="users">
+            
             <div class= "side-image-1"> </div>
 						<div class="left-title">You are uniquely equipped to meet your city’s Needs.</div>
-						<div class="left-sentence">Chances are, you’re good at something.  Whether it’s wielding a hammer or a pen, managing people or managing things. When you add skills to your profile you’ll automatically be notified when a Church is made aware of a need that matches your capabilities.<br><br><div class="about-link">Manage my Skills</div></div>
+						<div class="left-sentence">Chances are, you’re good at something.  Whether that’s wielding a hammer or a pen, managing people or managing things. When you add skills to your profile you’ll automatically be notified when a Church is made aware of a need that matches your capabilities.<br><br><%= link_to "Manage my Skills", edit_user_registration_path, :class => "about-link" %></div>
+						
 						<div class= "side-image-2"> </div>
 						<div class="right-title">See the Needs around you in real-time, all the time.</div>
-						<div class="right-sentence">Churches and Non-Profits post needs in the community so we can all pitch in. Needs are screened and approved by local churches, so you can trust that each one is valid.<br><br><div class="about-link">See Current Needs</div></div>
+						<div class="right-sentence">Churches and Non-Profits post needs in the community so we can all pitch in. Needs are screened and approved by local churches, so you can trust that each one is valid.<br><br><%= link_to "See Current Needs", needs_path, :class => "about-link" %></div>
+						
 						<div class= "side-image-3"> </div>
 						<div class="left-title">Give to specific Needs and get specific feedback.</div>
-						<div class="left-sentence">There’s something human about helping each other out. It connects and unifies us. Too often, when we give, we are unable to see the direct impact. With the "Church of Lexington" platform, 100% of your donation goes straight to the need through the local church. You’ll then be kept up-to-date as the need is met.<br><br><div class="about-link">Track my Impact</div></div>
+						<div class="left-sentence">There’s something human about helping each other out. It connects and unifies us. Too often, when we give, we are unable to see the direct impact. With the "Church of Lexington" platform, 100% of your donation goes straight to the need through the local church. You’ll then be kept up-to-date as the need is met.<br><br><%= link_to "Track My Impact", impact_panel_index_path, :class => "about-link" %></div>
+						
 						<div class= "side-image-4"> </div>
 						<div class="right-title">Help guide the Church to use its resources responsibly.</div>
-						<div class="right-sentence">The church is not a building, its a group of people. We should all play a part in helping that group act with integrity. Where are the churches resources going? Where should they be going? Can we be more responsible with what we've been given? The "Church of Lexington" provides a transparent platform for new initiatives.<br><br><div class="about-link">See Initiative Progress</div></div>
+						<div class="right-sentence">The church is not a building, it’s a group of people. We should all play a part in helping that group act with integrity. Where are the churches' resources going? Where should they be going? Can we be more responsible with what we've been given? The "Church of Lexington" provides a transparent platform for new initiatives.<br><br><div class="about-link">Initiative Progress Coming Soon</div></div>
+
         </div>
-        <div class="tab-pane" id="orange">
+        <div class="tab-pane" id="churches">
+            
             <div class= "side-image-5"> </div>
 						<div class="left-title">Allow your congregation to be a part of the story.</div>
-						<div class="left-sentence">There's a certain joy that comes with generosity. Those is charge of allocating the Church's resources get to see this on a daily basis. Its harder, though, for those that give the money to see the direct impact. Transparency allows them to be a part of the story and in turn encourages them to continue giving to the good work the Church is doing.<br><br><div class="about-link">Post a Need</div></div>
+						<div class="left-sentence">There's a certain joy that comes with generosity. Those in charge of allocating the Church's resources get to see this on a daily basis. Its harder, though, for those that give the money to see the direct impact. Transparency allows the congregation members to be a part of the story and in turn encourages them to continue giving to the good work the Church is doing.<br><br><%= link_to "Post a Need", new_need_path, :class => "about-link" %></div>
+						
 						<div class= "side-image-6"> </div>
 						<div class="right-title">List all the good work you are doing in one place.</div>
-						<div class="right-sentence">Your profile page will show all of the Needs you are currently meeting. Its a great place to keep your congregation involved in what your church is doing. It also gives space for people to jump in and be a part.<br><br><div class="about-link">Check out Profile Pages</div></div>
+						<div class="right-sentence">Your profile page will show all of the Needs you are currently meeting. Its a great place to keep your congregation involved in what your church is doing. It also gives space for people to jump in and be a part.<br><br><%= link_to "Check Out Profile Pages", organizations_path, :class => "about-link" %></div>
+						
 						<div class= "side-image-7"> </div>
 						<div class="left-title">A united Church.</div>
-						<div class="left-sentence">We all agree we should be working together more... but where do we start? By posting all of the oppertunities in one place we'll have an unprecendented chance to cross polenate as we seek to serve the city. Any Church who agree's to the oldest of ecuminical creeds (the Apostle's Creed) is able to help manage the platform.<br><br><div class="about-link">See Churches Involved</div></div>
+						<div class="left-sentence">We all agree we should be working together more... but where do we start? By posting all of the opportunities in one place we'll have an unprecendented chance to cross polenate as we seek to serve the city. Any Church who agrees to the oldest of ecumenical creeds (the Apostle's Creed) is able to help manage the platform.<br><br><%= link_to "See Churches Involved", organizations_path, :class => "about-link" %></div>
+						
 						<div class= "side-image-8"> </div>
 						<div class="right-title">Tools & Data to serve more efficiently.</div>
-						<div class="right-sentence">We took all the printed resource guides and brought them into the 21st century. Each group can manage their own resources and set availability statuses. No more wasted phone calls to groups who are "out of resources for the rest of the month." We also give Churches access to ROSM's Database to make the most informed decision possible.<br><br><div class="about-link">See Resources</div></div>
+						<div class="right-sentence">We took all the printed resource guides and brought them into the 21st century. Each group can manage their own resources and set availability statuses. No more wasted phone calls to groups who are "out of resources for the rest of the month." We also give Churches access to ROSM's Database to make the most informed decision possible.<br><br><%= link_to "See Resources", resources_path, :class => "about-link" %></div>
+
         </div>
-        <div class="tab-pane" id="yellow">
+        <div class="tab-pane" id="nonprofits">
+            
             <div class= "side-image-9"> </div>
 						<div class="left-title">Partner with the Church in the good work you are doing.</div>
-						<div class="left-sentence">Non-profits do a lot of creative and innovative work in our city. More times than not, these groups have alligned goals with the Church. Both groups are on the front lines; its a natural fit.<br><br><div class="about-link">Post a Need</div></div>
+						<div class="left-sentence">Non-profits do a lot of creative and innovative work in our city. More often than not, these groups have goals aligned with the Church. Both groups are on the front lines; its a natural fit.<br><br><%= link_to "Post a Need", new_need_path, :class => "about-link" %></div>
+						
 						<div class= "side-image-10"> </div>
 						<div class="right-title">Add your resources to an evergrowing resource guide.</div>
-						<div class="right-sentence">We took all the printed resource guides and brought them into the 21st century. Each group can manage their own resources and set availability statuses. Out of a certain resource for the month? Have a lot of extra resources this month? Mark it as such on your profile so churches can reach out to you accordingly.<br><br><div class="about-link">See Resources</div></div>
+						<div class="right-sentence">We took all the printed resource guides and brought them into the 21st century. Each group can manage their own resources and set availability statuses. Out of a certain resource for the month? Have a lot of extra resources this month? Mark it as such on your profile so churches can reach out to you accordingly.<br><br><%= link_to "See Resources", resources_path, :class => "about-link" %></div>
+
         </div>
     </div>
 </span>
 
 
 <span class="show-on-xs">
-
 
 	<div class="mobile-line">
 		<div class="mobile-circle">
@@ -94,29 +95,20 @@
 	</div>
 
 	<div class="mobile-title-right">You are uniquely equipped to meet your city’s Needs.</div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
   <div class= "mobile-image-1"> </div>
-	<div class="mobile-sentence-right">What gets you pumped up? What are you good at? Odds are the local Church is aware of oppertunites for you to put your talents to work. When you add skills to your profile you’ll automatically be notified when a chance to serve is posted that meets your capabilities.<br><br><div class="about-link">Manage my Skills</div></div>
+	<div class="mobile-sentence-right">Chances are, you’re good at something.  Whether that’s wielding a hammer or a pen, managing people or managing things. When you add skills to your profile you’ll automatically be notified when a Church is made aware of a need that matches your capabilities.<br><br><%= link_to "Manage my Skills", edit_user_registration_path, :class => "about-link" %></div>
 
 	<div class="mobile-title-left">See the Needs around you in real-time, all the time.</div>
   <div class= "mobile-image-2"> </div>
-  <div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class="mobile-sentence-left">Churches post Needs in the community so we can all chip in. You can trust that each Need is valid because it only shows up on the site once its been approved by a local Church.<br><br><div class="about-link">See Current Needs</div></div>
+	<div class="mobile-sentence-left">Churches and Non-Profits post needs in the community so we can all pitch in. Needs are screened and approved by local churches, so you can trust that each one is valid.<br><br><%= link_to "See Current Needs", needs_path, :class => "about-link" %></div>
 
 	<div class="mobile-title-right">Give to specific Needs and get specific feedback.</div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
   <div class= "mobile-image-3"> </div>
-	<div class="mobile-sentence-right">There’s something human about helping each other out. It connects and unifies us. When you give its great to see the impact you are having. Give and you’ll be kept up to date with the latest updates. 100% of what you give online goes straight to the Need.<br><br><div class="about-link">Track my Impact</div></div>
+	<div class="mobile-sentence-right">There’s something human about helping each other out. It connects and unifies us. Too often, when we give, we are unable to see the direct impact. With the "Church of Lexington" platform, 100% of your donation goes straight to the need through the local church. You’ll then be kept up-to-date as the need is met.<br><br><%= link_to "Track My Impact", impact_panel_index_path, :class => "about-link" %></div>
 
 	<div class="mobile-title-left">Help guide the Church to use its resources responsibly.</div>
   <div class= "mobile-image-4"> </div>
-  <div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class="mobile-sentence-left">The church is not a building, its a group of people. We should all play a part in helping that group act with integrity. Where are the churches resources going? Where should they be going? Dive into the data and do some research.<br><br><div class="about-link">See Initiative Progress</div></div>
-
+	<div class="mobile-sentence-left">The church is not a building, it’s a group of people. We should all play a part in helping that group act with integrity. Where are the churches' resources going? Where should they be going? Can we be more responsible with what we've been given? The "Church of Lexington" provides a transparent platform for new initiatives.<br><br><div class="about-link">Initiative Progress Coming Soon</div></div>
 
 	<div class="mobile-line">
 		<div class="mobile-circle">
@@ -126,32 +118,21 @@
 		</div>
 	</div>
 
-
 	<div class="mobile-title-right">Allow your congregation to be a part of the story.</div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
   <div class= "mobile-image-5"> </div>
-	<div class="mobile-sentence-right">There's a certain joy that comes with generosity. Those is charge of allocating the Church's resources get to see this on a daily basis. Its harder, though, for those that give the money to see the direct impact. Transparency allows them to be a part of the story and in turn encourages them to continue giving to the good work the Church is doing.<br><br><div class="about-link">Post a Need</div></div>
+	<div class="mobile-sentence-right">There's a certain joy that comes with generosity. Those in charge of allocating the Church's resources get to see this on a daily basis. Its harder, though, for those that give the money to see the direct impact. Transparency allows the congregation members to be a part of the story and in turn encourages them to continue giving to the good work the Church is doing.<br><br><%= link_to "Post a Need", new_need_path, :class => "about-link" %></div>
 
 	<div class="mobile-title-left">List all the good work you are doing in one place.</div>
   <div class= "mobile-image-6"> </div>
-  <div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class="mobile-sentence-left">Your profile page will show all of the Needs you are currently meeting. Its a great place to keep your congregation involved in what your church is doing. It's also gives space for people to jump in and be a part.<br><br><div class="about-link">Check out Profile Pages</div></div>
+	<div class="mobile-sentence-left">Your profile page will show all of the Needs you are currently meeting. Its a great place to keep your congregation involved in what your church is doing. It also gives space for people to jump in and be a part.<br><br><%= link_to "Check Out Profile Pages", organizations_path, :class => "about-link" %></div>
 
 	<div class="mobile-title-right">A united Church.</div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
   <div class= "mobile-image-7"> </div>
-	<div class="mobile-sentence-right">We all agree we should be working more together... but where do we start? By posting all of the oppertunities in one place we'll have an unprecendented chance to cross polenate as we seek to serve the city by plugging in wherever the need is. Any Church who agree's to the oldest of ecuminical creeds (the Apostle's Creed) is able to help manage the platform.<br><br><div class="about-link">See Churches Involved</div></div>
+	<div class="mobile-sentence-right">We all agree we should be working together more... but where do we start? By posting all of the opportunities in one place we'll have an unprecendented chance to cross polenate as we seek to serve the city. Any Church who agrees to the oldest of ecumenical creeds (the Apostle's Creed) is able to help manage the platform.<br><br><%= link_to "See Churches Involved", organizations_path, :class => "about-link" %></div>
 
 	<div class="mobile-title-left">Tools & Data to serve more efficiently.</div>
   <div class= "mobile-image-8"> </div>
-  <div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class="mobile-sentence-left">We took all the resource guides and brought them into the 21st century. Each group can manage their own resources and set availability statuses. No more wasted phone calls to groups who a "out of resources for the rest of the month." We also give Churches access to ROSM's Database to make the most informed decision possible.<br><br><div class="about-link">See Resources</div></div>
-
-
+	<div class="mobile-sentence-left">We took all the printed resource guides and brought them into the 21st century. Each group can manage their own resources and set availability statuses. No more wasted phone calls to groups who are "out of resources for the rest of the month." We also give Churches access to ROSM's Database to make the most informed decision possible.<br><br><%= link_to "See Resources", resources_path, :class => "about-link" %></div>
 
 	<div class="mobile-line">
 		<div class="mobile-circle">
@@ -161,36 +142,13 @@
 		</div>
 	</div>
 
-
-
-
 	<div class="mobile-title-right">Partner with the Church in the good work you are doing.</div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
   <div class= "mobile-image-9"> </div>
-	<div class="mobile-sentence-right">Non-profits do a lot of awesome work in our city! Oftentimes these groups have alligned goals with the Church. Non-profits are on the front lines of a lot of initiatives the Church is called to be a part of. Its a natural fit.<br><br><div class="about-link">Post a Need</div></div>
+	<div class="mobile-sentence-right">Non-profits do a lot of creative and innovative work in our city. More often than not, these groups have goals aligned with the Church. Both groups are on the front lines; its a natural fit.<br><br><%= link_to "Post a Need", new_need_path, :class => "about-link" %></div>
 
 	<div class="mobile-title-left">Add your resources to an evergrowing resource guide.</div>
   <div class= "mobile-image-10"> </div>
-  <div class= "mobile-side-image-padding"> </div>
-	<div class= "mobile-side-image-padding"> </div>
-	<div class="mobile-sentence-left">We took all the resource guides and brought them into the 21st century. Each group can manage their own resources and set availability statuses. No more wasted phone calls to groups who a "out of resources for the rest of the month." You can also use the guide to search for new groups in town.<br><br><div class="about-link">See Resources</div></div>
-
-
-
-
-
-
-
-
+	<div class="mobile-sentence-left">We took all the printed resource guides and brought them into the 21st century. Each group can manage their own resources and set availability statuses. Out of a certain resource for the month? Have a lot of extra resources this month? Mark it as such on your profile so churches can reach out to you accordingly.<br><br><%= link_to "See Resources", resources_path, :class => "about-link" %></div>
 
 </span>
-
-
-
-
-
 <%end %>
-
-
-
