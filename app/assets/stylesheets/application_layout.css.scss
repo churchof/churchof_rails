@@ -7,6 +7,69 @@ body{
   padding-bottom: 100px;
 }
 
+/**** Banner *****/
+
+.banner{
+  background: #ffdc71;
+  height: 50px;
+
+}
+
+.banner-text{
+  text-color: #343434;
+  font-size: 18px;
+  margin-top: 12px;
+  display: inline-block;
+}
+
+.banner-btn {
+  background: #FFFFFF;
+
+  margin-top: 8px;
+    margin-right: 10px;
+
+  display: inline-block;
+  float: right;
+    border-top-right-radius: .3em;
+  border-bottom-right-radius: .3em;
+  border-top-left-radius: .3em;
+  border-bottom-left-radius: .3em;
+
+  width: 150px;
+  height: 35px;
+text-align: center;
+    vertical-align: middle;
+}
+
+.banner-btn-mobile {
+  background: #FFFFFF;
+
+  margin-top: 8px;
+    margin-right: 10px;
+
+  display: inline-block;
+  float: center;
+    border-top-right-radius: .3em;
+  border-bottom-right-radius: .3em;
+  border-top-left-radius: .3em;
+  border-bottom-left-radius: .3em;
+
+  width: 150px;
+  height: 35px;
+text-align: center;
+    vertical-align: middle;
+}
+
+
+.banner-btn-text {
+  margin-top: 7px;
+
+  text-color: #343434;
+  font-size: 16px;
+
+}
+
+
 /**** Typography *****/
 
 h1, h2, h3, h4{
