@@ -1,0 +1,26 @@
+<h1>Listing initiative_metrics for <%= @initiative.title %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @initiative_metrics.each do |initiative_metric| %>
+      <tr>
+        <td><%= initiative_metric.title %></td>
+        <td><%= link_to 'Show', [@initiative, initiative_metric] %></td>
+        <td><%= link_to 'Edit', edit_initiative_initiative_metric_path(initiative_metric.initiative ,initiative_metric) %></td>
+        <td><%= link_to 'Destroy', [@initiative, initiative_metric], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Initiative metric', new_initiative_initiative_metric_path %>

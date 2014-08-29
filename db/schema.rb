@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714203757) do
+ActiveRecord::Schema.define(version: 20140826005943) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -65,6 +65,24 @@ ActiveRecord::Schema.define(version: 20140714203757) do
   end
 
   add_index "images", ["update_id"], name: "index_images_on_update_id"
+
+  create_table "initiative_metrics", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.integer  "initiative_id"
+  end
+
+  create_table "initiatives", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  create_table "initiatives_skills", force: true do |t|
+    t.integer "initiative_id"
+    t.integer "skill_id"
+  end
 
   create_table "needs", force: true do |t|
     t.string   "title"

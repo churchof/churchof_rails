@@ -1,4 +1,7 @@
 Churchof::Application.routes.draw do
+
+  
+
   resources :updates
 
   # get "whatever", to: "posts#show"
@@ -66,6 +69,10 @@ Churchof::Application.routes.draw do
     resources :time_contributions
     resources :expenses
     resources :updates
+  end
+
+  resources :initiatives do
+    resources :initiative_metrics
   end
 
   # The following was proposed by Todd Willey and adds it as a subroute.

@@ -8,6 +8,9 @@
 
   <title>Churchof</title>
 
+  <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+
+
   <%= stylesheet_link_tag 'https://fast.fonts.net/cssapi/0925c21f-6a07-4baa-b4a0-c0d0ba302974.css' %>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Muli:400,400italic' %>
   <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,700'%>
@@ -56,6 +59,7 @@
       <%= link_to "Needs", needs_path, :class => 'navbar-brand beta-btn' %>
       <%= link_to "Resources", resources_path, :class => 'navbar-brand beta-btn' %>
       <%= link_to "Groups", organizations_path, :class => 'navbar-brand beta-btn' %>
+      <%= link_to "Initiatives", initiatives_path, :class => 'navbar-brand beta-btn' %>
 </span>
 
 

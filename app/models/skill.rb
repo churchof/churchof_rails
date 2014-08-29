@@ -5,4 +5,7 @@ class Skill < ActiveRecord::Base
   validates :name, presence: true
   validates :name, uniqueness: true
   default_scope :order => 'skills.name ASC'
+
+  has_and_belongs_to_many :initiatives
+
 end

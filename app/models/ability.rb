@@ -39,6 +39,8 @@ class Ability
     end
     if user.has_role? :super_admin
         can :update, User
+        can :manage, Initiative
+        can :manage, InitiativeMetric
     end
     if user.has_role? :validation_partner
         can :read, User
@@ -127,6 +129,9 @@ class Ability
     can :update, TimeContribution, :user_id => user.id
     can :show, TimeContribution, :user_id => user.id
     can :read, TimeContribution, :user_id => user.id
+
+    can :read, Initiative
+    can :read, InitiativeMetric
 
     # can :read, About // was causing crashing, strange.
     

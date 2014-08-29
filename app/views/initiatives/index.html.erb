@@ -1,0 +1,27 @@
+<div class="page-header-block">
+  <h1 class="need-category-title">Initiatives</h1>
+
+  <br><br><br><br>
+
+  <% @initiatives.each do |initiative| %>
+
+    <b><h2>
+      <%= initiative.title %>
+    </h2></b>
+    <% initiative.initiative_metrics.each do |initiative_metric| %>
+
+    <br>
+
+      <%= initiative_metric.title %>
+
+<br>
+<br>
+<%= area_chart(initiative_metric.get_data_for_this_metric, min: 5, max: 8, colors: ["#58A1EB", "#999"], library: {backgroundColor: "#EEEFF1"}) %>
+
+
+
+    <% end %>
+  <% end %>
+
+
+</div>
