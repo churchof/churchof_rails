@@ -493,3 +493,60 @@ body{
 
 }
 
+
+
+.sign-up-link {
+  margin-top: 117px;
+  font-size: 30px;
+  margin-left: 30%;
+  width: 40%;
+    height: 70px;
+
+  font-family: 'Avenir LT W01 35 Light';
+  display: inline-block;
+  border-top-right-radius: .2em;
+  border-bottom-right-radius: .2em;
+  border-top-left-radius: .2em;
+  border-bottom-left-radius: .2em;
+  text-align: center;
+  background: #69c773;
+  color: #FFFFFF;
+  line-height: 65px;
+
+
+}
+
+.sign-up-link:hover {
+  background: #52b35d;
+  color: #FFFFFF;
+}
+
+
+.sign-up-link-mobile {
+  margin-top: 117px;
+  font-size: 30px;
+  margin-left: 10%;
+  width: 80%;
+    height: 70px;
+
+  font-family: 'Avenir LT W01 35 Light';
+  display: inline-block;
+  border-top-right-radius: .2em;
+  border-bottom-right-radius: .2em;
+  border-top-left-radius: .2em;
+  border-bottom-left-radius: .2em;
+  text-align: center;
+  background: #69c773;
+  color: #FFFFFF;
+  line-height: 65px;
+
+
+}
+
+.sign-up-link-mobile:hover {
+  background: #52b35d;
+  color: #FFFFFF;
+}
+
+
+
