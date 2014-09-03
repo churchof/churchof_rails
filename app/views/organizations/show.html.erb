@@ -50,7 +50,7 @@
 <br>
 
 		<% @users.each do |user| %>
-				<div class="col-xs-6 col-sm-6">
+			<div class="people-badge col-xs-6 col-sm-6">
 
               <% if !user.avatar_file_name.nil? %>
                 <div class="user-image">
@@ -74,6 +74,11 @@
          <% end %>
 
 			<br><br><br><br><br><br><br>
+
+			<% if @users.count == 3 %>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br>
+			<% end %>
 
 <% end %>
 
