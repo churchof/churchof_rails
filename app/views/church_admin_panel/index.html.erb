@@ -205,12 +205,20 @@
                 </div>
               <% end %>
 
-              <%= simple_form_for(need, html: {class: "change-status"}) do |f| %>
-                <%= f.input :need_stage, :as => :hidden, :input_html => { :value => :admin_in_progress } %>
+              <%= simple_form_for(need, :url => needs_set_in_progress_and_public_path, :method => :post, html: {class: "change-status"}) do |f| %>
+                <%= f.input :id, :as => :hidden, :input_html => { :value => need.id } %>
                 <div class="form-actions">
-                  <%= f.submit "Move To In Progress", :class => "half-width-btn col-xs-6 blue-btn" %>
+                  <%= f.submit "Make Public & In Progress", :class => "half-width-btn col-xs-6 blue-btn" %>
                 </div>
               <% end %>
+
+
+
+
+
+
+
+
             </div>
 
 

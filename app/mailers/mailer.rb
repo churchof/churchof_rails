@@ -3,6 +3,13 @@ class Mailer < ActionMailer::Base
 # include Resque::Mailer
 # In order to turn this back on and use ids user_new_need_with_matching_skills would need to be changed since it uses more than just ids.
 
+
+# System
+
+def activity_was_not_created(description)
+	mail :to => "zach.whelchel@gmail.com", :from => "churchoflexington@gmail.com", :subject => description
+end
+
 # Church Admins
 
 def church_admin_new_need_admin_incoming(need_id, user_posted_by_id, user_church_admin_id)

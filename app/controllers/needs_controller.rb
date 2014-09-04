@@ -5,6 +5,7 @@ class NeedsController < ApplicationController
 
   def set_is_public
     @need = Need.find(params["need"]["id"])
+
     authorize! :set_is_public, @need
     # Should only be able to set if its in progress so the archived version stays the same.
     if @need.need_stage_value == 2
@@ -24,7 +25,18 @@ class NeedsController < ApplicationController
           redirect_to "/church_admin_panel/index?selected=admin_in_progress", notice: 'Need was successfully updated.'
       end
     end
+
   end
+
+
+  def set_in_progress_and_public
+    @need = Need.find(params["need"]["id"])
+    @need.need_stage = :admin_in_progress
+    @need.is_public = true
+    @need.save
+    redirect_to "/church_admin_panel/index?selected=admin_in_progress", notice: 'Need was successfully updated.'
+  end
+
 
   # def record_usage
   #   logger.debug "Would record that activity here"

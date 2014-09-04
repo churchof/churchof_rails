@@ -160,12 +160,15 @@ class Need < ActiveRecord::Base
         past_relevant_activities = Activity.where(user_id: user.id, subject: self, description: 'Mailed about need due to relevant skills.')
         if past_relevant_activities.count == 0
           # Only email the user if they haven't been emailed about it yet.
-          Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skills).deliver
-          Activity.create(
+          if Activity.create( 
             subject: self,
             description: 'Mailed about need due to relevant skills.',
             user: user
           )
+            Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skills).deliver
+          else
+            Mailer.activity_was_not_created("mail_to_users_with_relevant_skills create activity failed.").deliver
+          end 
         end
       end
     end

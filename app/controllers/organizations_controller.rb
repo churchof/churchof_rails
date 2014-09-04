@@ -14,6 +14,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
 
     needs = Array.new
+    completed_needs = Array.new
     users = Array.new
     associated_groups = Array.new
 
@@ -23,7 +24,11 @@ class OrganizationsController < ApplicationController
         if @organization.organization_type.church?
           users << organization_role.user
           organization_role.user.needs_church_admin.public.each do |need|
-            needs << need
+              if need.need_stage.admin_in_progress?
+                needs << need
+              elsif need.need_stage.admin_completed?
+                completed_needs << need
+              end
             if need.user_need_leader
               need.user_need_leader.organization_roles.each do |organization_role|
                 if organization_role.organization != @organization
@@ -37,7 +42,11 @@ class OrganizationsController < ApplicationController
       if organization_role.role_type.need_leader?
         users << organization_role.user
         organization_role.user.needs_need_leader.public.each do |need|
-          needs << need
+            if need.need_stage.admin_in_progress?
+              needs << need
+            elsif need.need_stage.admin_completed?
+              completed_needs << need
+            end
           if need.user_church_admin
             need.user_church_admin.organization_roles.each do |organization_role|
               if organization_role.organization != @organization
@@ -55,6 +64,7 @@ class OrganizationsController < ApplicationController
 
     @resources = @organization.resources
     @needs = needs.uniq.select(&:completion_goal_date).sort_by(&:completion_goal_date) + needs.uniq.reject(&:completion_goal_date)
+    @completed_needs = completed_needs.uniq.select(&:completion_goal_date).sort_by(&:completion_goal_date) + completed_needs.uniq.reject(&:completion_goal_date)
     @users = users.uniq
     @associated_groups = associated_groups.uniq.sort_by(&:title)
 
