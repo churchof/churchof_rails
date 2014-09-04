@@ -18,6 +18,7 @@ Churchof::Application.routes.draw do
   get "users_controller/index"
   post "needs/create_charge"
   post "needs/set_is_public"
+  post "needs/set_in_progress_and_public"
   post "users/agree_to_need_poster_agreement"
   post "users/agree_to_need_leader_agreement"
   post "users/agree_to_church_admin_agreement"
