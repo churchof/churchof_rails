@@ -11,6 +11,8 @@ $(document).ready(function () {
       initiativeSelectedValue = $('#initiatives_list option:selected').val();
       skillSelectedValue = $('#skills_list option:selected').val();
       demographicSelectedValue = $('#demographics_list option:selected').val();
+      $("div.loading").show();
+      $("div.resources").html("");
       $.ajax({
           type: "GET",
           url: "/resources",
