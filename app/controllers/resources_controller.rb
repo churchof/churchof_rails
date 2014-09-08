@@ -90,6 +90,16 @@ class ResourcesController < ApplicationController
     end
 
 
+    if not params[:selected_skill].present?
+      if not params[:selected_initiative].present?
+        if not params[:selected_demographic].present?
+          if not params[:search_value].present?
+            @resources = Array.new()
+          end
+        end
+      end
+    end
+
     @resources = @resources.uniq
     @skills_to_show = @skills_to_show.uniq
 

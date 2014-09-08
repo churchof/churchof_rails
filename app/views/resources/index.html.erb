@@ -138,7 +138,7 @@ $('input').keydown(function() {
 
   <div class="initiatives-filter">
     <select id="initiatives_list" class="initiative-select">
-      <option value="">All Initiatives</option>
+        <option value="">All Initiatives</option>
       <%- Initiative.all.each do | initiative | %>
         <option data-tag="#{initiative.title}">
           <%= initiative.title %>

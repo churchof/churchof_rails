@@ -16,3 +16,16 @@
 			<% end %>
 		<% end %>
 <% end %>
+
+
+ <% if @resources.count == 0 %>
+    <% if params[:selected_initiative].present? %>
+        <br>
+        <br>
+        <h2>Select different search parameters, there are no results for your current selection.</h2>
+    <% else %>
+    <br>
+    <br>
+        <h2>Select search parameters to get started.</h2>
+    <% end %>
+ <% end %>
