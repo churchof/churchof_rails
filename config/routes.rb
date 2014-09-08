@@ -89,6 +89,17 @@ Churchof::Application.routes.draw do
   root :to => 'needs#index'
 
 
+
+
+  namespace :api, :path => "", :constraints => {:subdomain => "api"}, :defaults => {:format => :json} do
+    namespace :v1 do
+      resources :resources
+    end
+  end
+
+
+
+
   # Added for create_charge method.
   # resources :needs, :member => {:create_charge => :post}
 
