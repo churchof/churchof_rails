@@ -73,6 +73,23 @@ class ResourcesController < ApplicationController
       end
     end
 
+
+    if params[:search_value].present?
+      search_string = params[:search_value]
+      the_resources = @resources
+      @resources = Array.new()
+      the_resources.each do |resource|
+        if resource.title.downcase.include? search_string.downcase
+          @resources << resource
+        else
+          if resource.description.downcase.include? search_string.downcase
+            @resources << resource
+          end
+        end
+      end
+    end
+
+
     @resources = @resources.uniq
     @skills_to_show = @skills_to_show.uniq
 

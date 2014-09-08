@@ -7,10 +7,12 @@ $(document).ready(function () {
       var initiativeSelectedValue = ""
       var skillSelectedValue = ""
       var demographicSelectedValue = ""
+      var searchValue = ""
       $('#needs-full-list').html();
       initiativeSelectedValue = $('#initiatives_list option:selected').val();
       skillSelectedValue = $('#skills_list option:selected').val();
       demographicSelectedValue = $('#demographics_list option:selected').val();
+      searchValue = $('#search_box').val();
       $("div.loading").show();
       $("div.resources").html("");
       $.ajax({
@@ -19,7 +21,8 @@ $(document).ready(function () {
           data: {
             selected_initiative: initiativeSelectedValue,
             selected_skill: skillSelectedValue,
-            selected_demographic: demographicSelectedValue
+            selected_demographic: demographicSelectedValue,
+            search_value: searchValue
           },
           dataType: "script",
           success: function(data) {

@@ -8,9 +8,11 @@ $(document).ready(function () {
       var initiativeSelectedValue = ""
       var skillSelectedValue = ""
       var demographicSelectedValue = ""
+      var searchValue = ""
       $('#needs-full-list').html();
       initiativeSelectedValue = $('#initiatives_list option:selected').val();
       demographicSelectedValue = $('#demographics_list option:selected').val();
+      searchValue = $('#search_box').val();
       $("div.loading").show();
       $("div.resources").html("");
       $.ajax({
@@ -19,7 +21,8 @@ $(document).ready(function () {
           data: {
             selected_initiative: initiativeSelectedValue,
             selected_skill: skillSelectedValue,
-            selected_demographic: demographicSelectedValue
+            selected_demographic: demographicSelectedValue,
+            search_value: searchValue
           },
           dataType: "script",
           success: function(data) {
@@ -35,10 +38,12 @@ $(document).ready(function () {
       var initiativeSelectedValue = ""
       var skillSelectedValue = ""
       var demographicSelectedValue = ""
+      var searchValue = ""
       $('#needs-full-list').html();
       initiativeSelectedValue = $('#initiatives_list option:selected').val();
       skillSelectedValue = $('#skills_list option:selected').val();
       demographicSelectedValue = $('#demographics_list option:selected').val();
+      searchValue = $('#search_box').val();
       $("div.loading").show();
       $("div.resources").html("");
       $.ajax({
@@ -47,7 +52,8 @@ $(document).ready(function () {
           data: {
             selected_initiative: initiativeSelectedValue,
             selected_skill: skillSelectedValue,
-            selected_demographic: demographicSelectedValue
+            selected_demographic: demographicSelectedValue,
+            search_value: searchValue
           },
           dataType: "script",
           success: function(data) {
@@ -59,12 +65,67 @@ $(document).ready(function () {
     });
 
 
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+
+
+$('input').keydown(function() {
+    delay(function(){
+
+
+      var initiativeSelectedValue = ""
+      var skillSelectedValue = ""
+      var demographicSelectedValue = ""
+      var searchValue = ""
+      $('#needs-full-list').html();
+      initiativeSelectedValue = $('#initiatives_list option:selected').val();
+      skillSelectedValue = $('#skills_list option:selected').val();
+      demographicSelectedValue = $('#demographics_list option:selected').val();
+      searchValue = $('#search_box').val();
+      $("div.loading").show();
+      $("div.resources").html("");
+      $.ajax({
+          type: "GET",
+          url: "/resources",
+          data: {
+            selected_initiative: initiativeSelectedValue,
+            selected_skill: skillSelectedValue,
+            selected_demographic: demographicSelectedValue,
+            search_value: searchValue
+          },
+          dataType: "script",
+          success: function(data) {
+            if ($('.resource-container').length == 0){
+              $('#needs-full-list').html('There are no resources yet listed under this skill set.');
+            }
+          }
+        });
+
+
+
+
+
+
+
+
+
+
+    }, 1000 );
+});
 
 
 
  });
 
   </script>
+
+
+
 
 
 
@@ -108,6 +169,11 @@ $(document).ready(function () {
 
 
 </div>
+
+<input class="search-box" id= "search_box" type="text" size="25" value="" placeholder="Search">
+
+
+
 
 <div class="loading" id="loading" style="display:none; margin-left:50%; margin-top:100px;">
 <div id="spinnerContainer" class="spinner" style="width:100%;height:100px;">
