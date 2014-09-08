@@ -1,11 +1,53 @@
+<% if current_user.has_role? :resource_partner %>
+  <div class="page-header-block">
+    <div class="page-title">
+      <h2>Resource Panel</h2>
+    </div>
+    <ul class="nav nav-pills page-options">
+      <li class="active">
+        <a href="#no_organization" data-toggle="tab">
+          <% if @resources_without_organization.count > 0 %>
+            <span class="count-number pull-left"><%= @resources_without_organization.count %></span>
+          <% end %>
+          No Organization
+        </a>
+      </li>
 
-<%= link_to "New Resource", new_resource_path %>
+			<% @organizations.each do |organization| %>
+	      <li>
+				  <% resource_count = 0 %>
+					<% @resources.each do |resource| %>
+						<% if resource.organization %>
+							<% if resource.organization == organization %>
+							  <% resource_count = resource_count + 1 %>
+							<% end %>
+						<% end %>
+					<% end %>
+					<% org_id = organization.id -%>
+	        <a href="#organization<%= org_id -%>" data-toggle="tab">
+	          <% if resource_count > 0 %>
+	            <span class="count-number pull-left"><%= resource_count %></span>
+	          <% end %>
+	          <%= organization.title %>
+	          <% contains_one = false %>
+						<% current_user.organization_roles.each do |organization_role| %>
+							<% if organization_role.organization == organization %>
+								<% contains_one = true %>
+							<% end %>
+						<% end %>
+						<% if contains_one %>
+						<span class="org-verified-pill pull-right"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
+						<% end %>
+	        </a>
+	      </li>
+	    <% end %>
 
-<br>
-<br>
-<br>
-<p>
-	<b>No Organization</b>
+      <li class="pull-right post-new-need">
+        <%= link_to "New Resource", new_resource_path, :class => 'important-btn' %>
+      </li>
+</div>
+  <div id='content' class="tab-content main-content">
+    <div class="tab-pane active" id="no_organization">
 
 	<% @resources.each do |resource| %>
 
@@ -37,26 +79,19 @@
 	<% end %>
 
 
+		</div>
 
-</p>
-<br>
+
+		<% @organizations.each do |organization| %>
+			<% org_id = organization.id -%>
+			<div class="tab-pane" id="organization<%= org_id -%>">
+
+
+
+
+
 
 <% @organizations.each do |organization| %>
-<p>
-<b><%= organization.title %></b>
-	<% contains_one = false %>
-	<% current_user.organization_roles.each do |organization_role| %>
-		<% if organization_role.organization == organization %>
-			<% contains_one = true %>
-		<% end %>
-	<% end %>
-
-	<% if contains_one %>
-(AFFILIATED)
-	<% else %>
-(NOT AFFILIATED)
-	<% end %>
-
 
 	<% @resources.each do |resource| %>
 
@@ -83,9 +118,21 @@
 			<% end %>
 		<% end %>
 	<% end %>
+<% end %>
 
 
-</p>
-<br>
+
+
+
+
+
+
+			</div>
+		<% end %>
+
+	</div>
 
 <% end %>
+
+
+

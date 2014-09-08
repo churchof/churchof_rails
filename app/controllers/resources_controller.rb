@@ -18,7 +18,7 @@ class ResourcesController < ApplicationController
   def index
 
 
-
+    @skills_to_show = Skill.all
 
     if user_signed_in?
       if current_user.has_role? :church_admin or current_user.has_role? :resource_partner or current_user.has_role? :need_poster or current_user.has_role? :need_leader or current_user.has_role? :organization_resource_validation_partner
@@ -30,10 +30,51 @@ class ResourcesController < ApplicationController
       @resources = Resource.public
     end
  
-    if params[:selected_skills].present?
-      skill_name = params[:selected_skills]
-      @resources = @resources.joins(:skills).where("skills.name ILIKE ?", skill_name).uniq
+
+    if params[:selected_skill].present?
+      skill_name = params[:selected_skill]
+      @resources = @resources.joins(:skills).where("skills.name LIKE ?", skill_name).uniq
+    else
+      if params[:selected_initiative].present?
+        the_resources = @resources
+        @resources = Array.new()
+        initiative_name = params[:selected_initiative]
+        the_resources.each do |resource|
+          resource.skills.each do |skill|
+            if skill.initiative
+              if skill.initiative.title == initiative_name
+                @resources << resource
+              end
+            end
+          end
+        end
+      end
     end
+
+
+    if params[:selected_initiative].present? 
+      @skills_to_show = Array.new()
+      initiative_name = params[:selected_initiative]
+      initiative = Initiative.where(title: initiative_name).first
+      @skills_to_show = initiative.skills
+    end
+
+
+    if params[:selected_demographic].present?
+      demographic_name = params[:selected_demographic]
+      the_resources = @resources
+      @resources = Array.new()
+      the_resources.each do |resource|
+        resource.demographics.each do |demographic|
+          if demographic.title == demographic_name
+            @resources << resource
+          end
+        end
+      end
+    end
+
+    @resources = @resources.uniq
+    @skills_to_show = @skills_to_show.uniq
 
 
     @needs_no_organization_category = false

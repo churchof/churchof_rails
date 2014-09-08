@@ -178,6 +178,24 @@
 										</div>
 
 										<div class="skills col-xs-12 col-sm-12">
+
+
+
+
+								<ul class="demographics-list">
+					              <% if resource.demographics.count > 0 %>
+					              This resource is only available to the following demographics: <br><br>
+					                <% resource.demographics.each do |demographic| %>
+					                  <li class="demographic-tag">
+					                    <span class="demographic-icon">
+					                      <%= image_tag(demographic.icon_url) %>
+					                    </span>
+					                    <%= demographic.title %>
+					                  </li>
+					                <% end %>
+					              <% end %>
+					            </ul>
+
 					            <ul class="skills-list">
 					              <% if resource.skills.count > 0 %>
 					                <% resource.skills.each do |skill| %>

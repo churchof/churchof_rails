@@ -2,7 +2,7 @@ class Mailer < ActionMailer::Base
 
 # include Resque::Mailer
 # In order to turn this back on and use ids user_new_need_with_matching_skills would need to be changed since it uses more than just ids.
-
+# Still be wary of this.
 
 # System
 
@@ -63,10 +63,10 @@ end
 
 # Users
 
-def user_new_need_with_matching_skills(user_id, need_id, skills)
+def user_new_need_with_matching_skills(user_id, need_id, skill_ids)
 	@user = User.find(user_id)
 	@need = Need.find(need_id)
-	@skills = skills
+	@skills = Skill.find(skill_ids)
 	mail :to => @user.email, :from => "churchoflexington@gmail.com", :subject => "New Need Matching Skills: #{@need.title_public}"
 end
 

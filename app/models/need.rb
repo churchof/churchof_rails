@@ -114,12 +114,12 @@ class Need < ActiveRecord::Base
       if self.user_need_leader
         past_relevant_activities = Activity.where(user_id: self.user_need_leader.id, subject: self, description: 'Mailed because new Need pushed to this Leader.')
         if past_relevant_activities.count == 0
-          Mailer.need_leader_new_need_assigned(self.user_need_leader.id, self.user_church_admin.id, self.id).deliver
-          Activity.create(
+          Activity.create!(
             subject: self,
             description: 'Mailed because new Need pushed to this Leader.',
-            user: self.user_need_leader
+            user_id: self.user_need_leader.id
           )
+          Mailer.need_leader_new_need_assigned(self.user_need_leader.id, self.user_church_admin.id, self.id).deliver
         end
       end
     end
@@ -131,12 +131,12 @@ class Need < ActiveRecord::Base
         # Only email the user if they haven't been emailed about it yet.
         past_relevant_activities = Activity.where(user_id: self.user_posted_by.id, subject: self, description: 'Mailed because need they posted was approved (moved to In Progress).')
         if past_relevant_activities.count == 0
-          Mailer.user_posted_by_need_moved_to_in_progress(self.user_posted_by.id, self.id, self.user_church_admin.id).deliver
-          Activity.create(
+          Activity.create!(
             subject: self,
             description: 'Mailed because need they posted was approved (moved to In Progress).',
-            user: self.user_posted_by
+            user_id: self.user_posted_by.id
           )
+          Mailer.user_posted_by_need_moved_to_in_progress(self.user_posted_by.id, self.id, self.user_church_admin.id).deliver
         end
     end
   end
@@ -150,25 +150,23 @@ class Need < ActiveRecord::Base
 
   def mail_to_users_with_relevant_skills
     if self.is_public
-      @users = Array.new
+      @users = Hash.new
       self.skills.each do |skill|
         skill.users.each do |user|
-          @users << user
+          @users[user.id] = user
         end
       end
-      @users.uniq.each do |user|
+
+      @users.each do |_user_id, user|
         past_relevant_activities = Activity.where(user_id: user.id, subject: self, description: 'Mailed about need due to relevant skills.')
         if past_relevant_activities.count == 0
           # Only email the user if they haven't been emailed about it yet.
-          if Activity.create( 
+          Activity.create!( 
             subject: self,
             description: 'Mailed about need due to relevant skills.',
-            user: user
+            user_id: user.id
           )
-            Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skills).deliver
-          else
-            Mailer.activity_was_not_created("mail_to_users_with_relevant_skills create activity failed.").deliver
-          end 
+          Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skill_ids).deliver
         end
       end
     end
@@ -305,44 +303,38 @@ class Need < ActiveRecord::Base
   end
 
   def share_on_social_outlets
-    if Rails.env.production?
-      if self.is_public_changed?
-        if self.is_public
+    return unless Rails.env.production?
+    return unless self.is_public_changed?
+    return unless self.is_public
 
-          past_relevant_activities = Activity.where(user_id: nil, subject: self, description: 'Social posts for need #{self.id}.')
-          if past_relevant_activities.count == 0
-            # Only send to Facebook / Twitter once and no times if it fails for some reason.
-            Activity.create(
-              subject: self,
-              description: 'Social posts for need #{self.id}.',
-              user: nil
-            )
+    past_relevant_activities = Activity.where(user_id: nil, subject: self, description: 'Social posts for need #{self.id}.')
+    if past_relevant_activities.count == 0
+      # Only send to Facebook / Twitter once and no times if it fails for some reason.
+      Activity.create!(
+        subject: self,
+        description: 'Social posts for need #{self.id}.',
+        user: nil
+      )
 
-            begin
-              @page = Koala::Facebook::API.new(ENV['FACEBOOK_ACCESS_TOKEN'])
-              @page.put_connections(1382913228636299, "feed", :name => self.title_public, :link => "http://church-of.com/needs/#{self.id}", :description => self.description_public, :picture => 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png')
-            rescue
+      begin
+        @page = Koala::Facebook::API.new(ENV['FACEBOOK_ACCESS_TOKEN'])
+        @page.put_connections(1382913228636299, "feed", :name => self.title_public, :link => "http://church-of.com/needs/#{self.id}", :description => self.description_public, :picture => 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png')
+      rescue
 
-            end   
+      end   
 
-            begin
-              client = Twitter::REST::Client.new do |config|
-                config.consumer_key = ENV['TWITTER_APP_CONSUMER_KEY']
-                config.consumer_secret = ENV['TWITTER_APP_CONSUMER_SECRET']
-                config.access_token = ENV['TWITTER_USER_ACCESS_TOKEN']
-                config.access_token_secret = ENV['TWITTER_USER_ACCESS_SECRET']
-              end     
-              client.update("#{self.title_public.truncate(113)} - church-of.com/needs/#{self.id}")
-            rescue
+      begin
+        client = Twitter::REST::Client.new do |config|
+          config.consumer_key = ENV['TWITTER_APP_CONSUMER_KEY']
+          config.consumer_secret = ENV['TWITTER_APP_CONSUMER_SECRET']
+          config.access_token = ENV['TWITTER_USER_ACCESS_TOKEN']
+          config.access_token_secret = ENV['TWITTER_USER_ACCESS_SECRET']
+        end     
+        client.update("#{self.title_public.truncate(113)} - church-of.com/needs/#{self.id}")
+      rescue
 
-            end   
-
-
-
-            
-          end
-        end
-      end
+      end  
+      
     end
   end
 

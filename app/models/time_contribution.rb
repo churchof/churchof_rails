@@ -25,12 +25,12 @@ class TimeContribution < ActiveRecord::Base
   	if need.user_need_leader
         past_relevant_activities = Activity.where(user_id: need.user_need_leader.id, subject: self, description: 'Mailed because need they lead has a new volunteer.')
         if past_relevant_activities.count == 0
-          Mailer.need_leader_new_volunteer_added(need.user_need_leader.id, user.id, need.id).deliver
-          Activity.create(
+          Activity.create!(
             subject: self,
             description: 'Mailed because need they lead has a new volunteer.',
-            user: need.user_need_leader
+            user_id: need.user_need_leader.id
           )
+          Mailer.need_leader_new_volunteer_added(need.user_need_leader.id, user.id, need.id).deliver
         end
   	end
   end
@@ -42,12 +42,12 @@ class TimeContribution < ActiveRecord::Base
     	if need.user_need_leader
           past_relevant_activities = Activity.where(user_id: need.user_need_leader.id, subject: self, description: 'Mailed because need they lead is fully volunteered.')
           if past_relevant_activities.count == 0
-            Mailer.need_leader_need_fully_volunteered(need.user_need_leader.id, need.id).deliver
-            Activity.create(
+            Activity.create!(
               subject: self,
               description: 'Mailed because need they lead is fully volunteered.',
-              user: need.user_need_leader
+              user_id: need.user_need_leader.id
             )
+            Mailer.need_leader_need_fully_volunteered(need.user_need_leader.id, need.id).deliver
           end
     	end
 
@@ -57,12 +57,12 @@ class TimeContribution < ActiveRecord::Base
           past_relevant_activities = Activity.where(user_id: time_contribution.user.id, subject: self.need, description: 'Mailed news that need is fully volunteered to volunteer.')
           if past_relevant_activities.count == 0
             # Only email the user if they haven't been emailed about it yet.
-            Mailer.volunteer_need_volunteered_for_fully_volunteered(time_contribution.user.id, self.need.id).deliver
-            Activity.create(
+            Activity.create!(
               subject: self.need,
               description: 'Mailed news that need is fully volunteered to volunteer.',
-              user: time_contribution.user
+              user_id: time_contribution.user.id
             )
+            Mailer.volunteer_need_volunteered_for_fully_volunteered(time_contribution.user.id, self.need.id).deliver
           end
         end
       end
@@ -73,23 +73,23 @@ class TimeContribution < ActiveRecord::Base
           past_relevant_activities = Activity.where(user_id: contribution.user.id, subject: self.need, description: 'Mailed news that need is fully volunteered to contributor (with account).')
           if past_relevant_activities.count == 0
             # Only email the user if they haven't been emailed about it yet.
-            Mailer.user_need_contributed_to_fully_volunteered(contribution.user.id, self.need.id).deliver
-            Activity.create(
+            Activity.create!(
               subject: self.need,
               description: 'Mailed news that need is fully volunteered to contributor (with account).',
-              user: contribution.user
+              user_id: contribution.user.id
             )
+            Mailer.user_need_contributed_to_fully_volunteered(contribution.user.id, self.need.id).deliver
           end
         elsif contribution.contributor
           past_relevant_activities = Activity.where(user_id: nil, subject: self.need, description: 'Mailed news that need is fully volunteered to contributor (without account - #{contribution.contributor.email}).')
           if past_relevant_activities.count == 0
             # Only email the user if they haven't been emailed about it yet.
-            Mailer.contributor_need_contributed_to_fully_volunteered(contribution.contributor.id, self.need.id).deliver
-            Activity.create(
+            Activity.create!(
               subject: self.need,
               description: 'Mailed news that need is fully volunteered to contributor (without account - #{contribution.contributor.email}).',
               user: nil
             )
+            Mailer.contributor_need_contributed_to_fully_volunteered(contribution.contributor.id, self.need.id).deliver
           end
         end
       end

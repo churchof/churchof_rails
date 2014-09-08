@@ -76,6 +76,9 @@ Churchof::Application.routes.draw do
     resources :initiative_metrics
   end
 
+  resources :demographics
+
+
   # The following was proposed by Todd Willey and adds it as a subroute.
   # resources :needs do
   #   post :create_charge

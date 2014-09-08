@@ -1,0 +1,62 @@
+<script type="text/javascript">
+
+
+$(document).ready(function () {
+
+    $("#skills_list").on("change", function () {
+      var initiativeSelectedValue = ""
+      var skillSelectedValue = ""
+      var demographicSelectedValue = ""
+      $('#needs-full-list').html();
+      initiativeSelectedValue = $('#initiatives_list option:selected').val();
+      skillSelectedValue = $('#skills_list option:selected').val();
+      demographicSelectedValue = $('#demographics_list option:selected').val();
+      $.ajax({
+          type: "GET",
+          url: "/resources",
+          data: {
+            selected_initiative: initiativeSelectedValue,
+            selected_skill: skillSelectedValue,
+            selected_demographic: demographicSelectedValue
+          },
+          dataType: "script",
+          success: function(data) {
+            if ($('.resource-container').length == 0){
+              $('#needs-full-list').html('There are no resources yet listed under this skill set.');
+            }
+          }
+        });
+    });
+
+     });
+
+
+</script>
+
+
+    <select id="skills_list" class="skill-select" <%=params[:selected_initiative].present? ? "enabled" : "disabled"%> >
+      <option value="">All Categories</option>
+      <%- @skills_to_show.each do | skill | %>
+      	<% if params[:selected_skill].present? %>
+      		<% if params[:selected_skill] == skill.name %>
+      			<% if params[:selected_initiative].present? %>
+			        <option data-tag="#{skill.name}" selected>
+			          <%= skill.name %>
+			        </option>
+		        <% else %>
+			        <option data-tag="#{skill.name}">
+			          <%= skill.name %>
+			        </option>
+		        <% end %>
+      		<% else %>
+		        <option data-tag="#{skill.name}">
+		          <%= skill.name %>
+		        </option>
+      		<% end %>
+      	<% else %>
+    			<option data-tag="#{skill.name}">
+	          <%= skill.name %>
+	        </option>
+      	<% end %>
+      <% end %>
+    </select>

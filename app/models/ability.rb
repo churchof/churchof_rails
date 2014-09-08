@@ -42,6 +42,8 @@ class Ability
         can :update, User
         can :manage, Initiative
         can :manage, InitiativeMetric
+        can :manage, Skill
+        can :manage, Demographic
     end
     if user.has_role? :validation_partner
         can :read, User
@@ -133,6 +135,8 @@ class Ability
 
     can :read, Initiative
     can :read, InitiativeMetric
+
+    can :read, Demographic
 
     # can :read, About // was causing crashing, strange.
     

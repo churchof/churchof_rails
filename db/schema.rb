@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826005943) do
+ActiveRecord::Schema.define(version: 20140907184640) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -39,6 +39,18 @@ ActiveRecord::Schema.define(version: 20140826005943) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "demographics", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.string   "icon_url"
+  end
+
+  create_table "demographics_resources", force: true do |t|
+    t.integer "demographic_id"
+    t.integer "resource_id"
   end
 
   create_table "expenses", force: true do |t|
@@ -77,11 +89,6 @@ ActiveRecord::Schema.define(version: 20140826005943) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
-  end
-
-  create_table "initiatives_skills", force: true do |t|
-    t.integer "initiative_id"
-    t.integer "skill_id"
   end
 
   create_table "needs", force: true do |t|
@@ -217,6 +224,7 @@ ActiveRecord::Schema.define(version: 20140826005943) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.integer  "initiative_id"
   end
 
   create_table "skills_users", force: true do |t|
