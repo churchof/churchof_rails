@@ -91,34 +91,43 @@
 
 
 
-<% @organizations.each do |organization| %>
 
 	<% @resources.each do |resource| %>
 
 		<% if resource.organization %>
 			<% if resource.organization == organization %>
 
-				<p>
-					<%= resource.title %>
+
+
+				<%= render 'resources/resource', resource: resource %>
+
+
+
+
 					<% if can? :manage, resource %>
 						<% if resource.user == current_user %>
-							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %> | <%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %>
+							<%= link_to "Edit Resource", edit_resource_path(resource), :class => "half-width-btn col-xs-6 blue-btn" %><%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }, :class => "half-width-btn col-xs-6 red-btn" %>
 
 						<% end %>
 					<% elsif can? :take_over_management, resource %>
 						    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
 						    	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
-      							<%= f.submit "Take over management" %>
+      							<%= f.submit "Take over management", :class => "full-width-btn"  %>
     						<% end %>
 					<% else %>
-							- You dont manage and you cant
+							You dont manage and you cant becasue you are not associated with this organization.
 					<% end %>
-				</p>
+
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+
 
 			<% end %>
 		<% end %>
 	<% end %>
-<% end %>
 
 
 
