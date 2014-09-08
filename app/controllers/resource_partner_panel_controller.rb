@@ -48,6 +48,10 @@ class ResourcePartnerPanelController < ApplicationController
 
 		end
 
+
+    	@organizations = organizations.uniq.sort_by!{ |m| m.title.downcase }
+
+
 	  	# @church_admins = User.with_role(:church_admin)
 
 	  	@resources.each do |resource|
