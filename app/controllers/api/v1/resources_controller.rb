@@ -3,7 +3,7 @@ class API::V1::ResourcesController < ApplicationController
 
 	# note the api should have another thing passed in that says the scope... currently index is doing something more specific.
   def index
-    @resources = Resource.joins(:skills).where("skills.name ILIKE ?", "Free Meals").public.uniq
+    @resources = Resource.joins(:skills).where("skills.name LIKE ?", "Free Meals").public.uniq
 
     respond_to do |format|
       format.json do	
