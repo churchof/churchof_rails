@@ -25,8 +25,6 @@ class Resource < ActiveRecord::Base
   accepts_nested_attributes_for :resource_events, :allow_destroy => true
 
   scope :public, -> { where(public_status: 1, flagged: false) }
-  scope :available, -> { where(availability_status: 1) } # this could be changed to include more. ie mostly_available, etc.
-
 
   has_and_belongs_to_many :demographics
 
