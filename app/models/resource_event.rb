@@ -9,6 +9,12 @@ class ResourceEvent < ActiveRecord::Base
 	validates :start_time, presence: true, on: :update
   validates :end_time, presence: true, on: :update
 
+  validates :not_available_week_1, presence: true, on: :update
+  validates :not_available_week_2, presence: true, on: :update
+  validates :not_available_week_3, presence: true, on: :update
+  validates :not_available_week_4, presence: true, on: :update
+  validates :not_available_week_5, presence: true, on: :update
+
 	belongs_to :resource
 
   # # @return [IceCube::Schedule]
