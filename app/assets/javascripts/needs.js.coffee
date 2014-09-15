@@ -62,9 +62,9 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
          
     }, internal: {id: 'custom_style'} }, ->
     markers = handler.addMarkers(markers)
-    if fit
-      handler.bounds.extendWith(markers)
-    handler.fitMapToBounds()
+    # if fit
+    #   handler.bounds.extendWith(markers)
+    # handler.fitMapToBounds()
 
 # This doesnt work so just reloading the page everytime.
 @replaceMap = (markers)->

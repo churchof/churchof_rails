@@ -41,7 +41,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
               textSize: 18
               textColor: '#FFFFFF'
               backgroundColor: '#000000'
-              url: 'https://s3.amazonaws.com/church_of/assets/map_assets/blue_circle.png'
+              url: 'https://s3.amazonaws.com/church_of/assets/map_assets/green_circle.png'
               height: 60
               width: 60
             ] } #dependency injection
