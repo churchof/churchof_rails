@@ -6,7 +6,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
 
   rich_marker_options: ->
     marker = document.createElement("div")
-    marker.setAttribute 'class', 'marker_container'
+    marker.setAttribute 'class', 'marker_container_green'
     
     string = "https://s3.amazonaws.com/church_of/assets/skill_icons/715-globe%402x.png"
     if @args.image_url  
@@ -52,9 +52,9 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
          
     }, internal: {id: 'custom_style'} }, ->
     markers = handler.addMarkers(markers)
-    if fit
-      handler.bounds.extendWith(markers)
-    handler.fitMapToBounds()
+    # if fit
+    #   handler.bounds.extendWith(markers)
+    # handler.fitMapToBounds()
 
 # This doesnt work so just reloading the page everytime.
 @replaceMap = (markers)->
