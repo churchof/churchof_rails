@@ -117,6 +117,33 @@ class ResourcesController < ApplicationController
 
 
 
+
+
+    @hash = Gmaps4rails.build_markers(@resources) do |resource, marker|
+      if resource.latitude
+        marker.lat resource.latitude
+        marker.lng resource.longitude
+      end
+      marker.infowindow resource.title
+
+      # marker.picture({
+      #   :url    => "http://www.clker.com/cliparts/3/v/I/F/6/V/light-blue-circle-md.png",
+      #   :width  => "32",
+      #   :height => "32"
+      # })
+      marker.shadow({
+      anchor: [2,22],
+      url: '',
+      width: 29,
+      height: 22 })
+      # This should use the path helper.
+      marker.json({ title: resource.title, image_url: resource.skills.first ? resource.skills.first.icon_url : '', custom_infowindow: "<a href='resources/#{resource.id}'> #{Sanitize.clean(resource.title)} </a>" })
+    end
+
+
+
+
+
     respond_to do |format|
       format.html
       format.js

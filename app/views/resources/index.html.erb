@@ -1,3 +1,15 @@
+
+<% content_for :head do %>
+  <script src="https://s3.amazonaws.com/churchof/jquery.isotope.min.js"></script>
+  <script src="https://s3.amazonaws.com/churchof/imagesloaded-min.js"></script>
+  <script type="text/javascript">
+
+ jQuery(function(){ buildMap(map_hash, true, false); });
+   </script>
+
+<% end %>
+
+
 <script type="text/javascript">
 
 
@@ -122,7 +134,18 @@ $('input').keydown(function() {
 
  });
 
+
   </script>
+
+
+
+
+<% content_for :map do %>
+  <script>
+    var map_hash = <%= raw @hash.to_json %>;
+  </script>
+  <%= render 'map' %>
+<% end %>
 
 
 
