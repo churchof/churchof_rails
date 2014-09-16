@@ -101,6 +101,8 @@ class ResourcesController < ApplicationController
     #end
 
     @resources = @resources.uniq
+
+
     @skills_to_show = @skills_to_show.uniq
 
 
@@ -141,7 +143,7 @@ class ResourcesController < ApplicationController
     end
 
 
-
+    @organizations = Kaminari.paginate_array(@organizations).page(params[:page]).per(2)
 
 
     respond_to do |format|
