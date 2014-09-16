@@ -8,12 +8,8 @@
 			<% end %>
 		</h2></b>
 
-		<% @resources.each do |resource| %>
-			<% if resource.organization %>
-				<% if resource.organization == organization %>
-					<%= render 'resource', resource: resource %>
-				<% end %>
-			<% end %>
+		<% @resources.where(organization: organization).each do |resource| %>
+			<%= render 'resource', resource: resource %>
 		<% end %>
 <% end %>
 
