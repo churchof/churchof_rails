@@ -142,8 +142,13 @@ $(document).ready(function () {
   </div>
 </div>
 
+
+
+
+
 <div class="needs main-content" id="needs-full-list">
   <%= render @needs %>
+  <%= render "needs_script" %>
 </div>
 
 <% if @needs.count > 0 %>
@@ -170,26 +175,6 @@ $(document).ready(function () {
 
 <% end %>
 
-<script>
-  $(document).ready(function(){
-    $('.need-button-block').each(function(){
-      var className;
-      var needButtonCount = $(this).find('.need-btn-link').length;
-        if (needButtonCount == 1){
-          className = "need-xs-12";
-        }else if(needButtonCount == 2){
-          className = "need-xs-6";
-        }else if(needButtonCount == 3){
-          className = "need-xs-4";
-        }
-
-      $(this).find('.need-btn-link').each(function(){
-        $(this).addClass(className);
-      });
-    });
-  })
-
-</script>
 
 <script>
 var $container = $('#isotope-demo').imagesLoaded( function() {
