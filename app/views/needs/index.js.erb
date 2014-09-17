@@ -1,4 +1,4 @@
 $("div.needs").html("<%=j render @needs %><%=j render 'needs_script' %>");
 var map_hash = <%= raw @hash.to_json %>;
-jQuery(function(){ buildNeedsMap(map_hash); });
+jQuery(function(){ buildNeedsMap(map_hash, true, false); });
 // jQuery(function(){ replaceMap(map_hash); });
