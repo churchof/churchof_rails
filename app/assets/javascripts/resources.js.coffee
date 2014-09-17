@@ -33,18 +33,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
 
 @buildResourcesMap = (markers, fit)->
   handler = Gmaps.build(
-    'Google', { builders: { Marker: RichMarkerBuilder}, markers:
-          clusterer: 
-            gridSize: 50
-            maxZoom: 25
-            styles: [
-              textSize: 18
-              textColor: '#FFFFFF'
-              backgroundColor: '#000000'
-              url: 'https://s3.amazonaws.com/church_of/assets/map_assets/green_circle.png'
-              height: 60
-              width: 60
-            ] } #dependency injection
+    'Google', { builders: { Marker: RichMarkerBuilder} } #dependency injection
     
   ) 
   #then standard use
