@@ -1,21 +1,55 @@
-<div class="page-header-block">
-  <h1 class="need-category-title">Groups</h1>
 
-  <br><br><br><br>
-
-
-
-    <% @organizations.each do |organization| %>
-
-    <b><h2>
-    <%= link_to organization.title, organization %>
-
-      <% if organization.is_verified %>
-        <span class="org-verified-icon"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
+<div class="col-xs-12 col-sm-6">
+  <div class="page-header-block">
+    <h1 class="need-category-title">Admin Churches</h1>
+    <br><br><br><br>
+      <% @organizations.each do |organization| %>
+        <% if organization.organization_roles.where(role_type: 3).count > 0 %>
+          <b><h2>
+          <%= link_to organization.title, organization %>
+            <% if organization.is_verified %>
+              <span class="org-verified-icon"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
+            <% end %>
+          </h2></b>
+        <% end %>
       <% end %>
-    </h2></b>
+  </div>
+  <div class="page-header-block">
+    <h1 class="need-category-title">Involved Organizations</h1>
+    <br><br><br><br>
+      <% @organizations.each do |organization| %>
+        <% if organization.organization_roles.where(role_type: 3).count > 0 %>
+        <% else %>
+          <% if organization.is_verified %>
+            <b><h2>
+            <%= link_to organization.title, organization %>
+                <span class="org-verified-icon"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
+            </h2></b>
+          <% end %>
+        <% end %>
+      <% end %>
 
-    <% end %>
-
+  </div>
 
 </div>
+<div class="col-xs-12 col-sm-6">
+
+  <div class="page-header-block">
+    <h1 class="need-category-title">All Organizations</h1>
+
+    <br><br><br><br>
+      <% @organizations.each do |organization| %>
+        <% if not organization.is_verified %>
+
+      <b><h2>
+      <%= link_to organization.title, organization %>
+      </h2></b>
+        <% end %>
+
+      <% end %>
+
+
+  </div>
+
+</div>
+
