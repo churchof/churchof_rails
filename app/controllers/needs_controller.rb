@@ -73,7 +73,8 @@ class NeedsController < ApplicationController
   def index
     if params[:selected_skills].present?
       skill_name = params[:selected_skills]
-      @needs = Need.public.in_progress.joins(:skills).where("skills.name ILIKE ?", skill_name).uniq.reverse
+      @needs = Need.public.in_progress.joins(:skills).where("skills.name LIKE ?", skill_name).uniq.reverse
+      @completed_needs = Need.public.completed.reverse
     else
       @needs = Need.public.in_progress.reverse
       # will only show completed need when not sorting...
