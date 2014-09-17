@@ -1,4 +1,13 @@
 
+<% if @users.count > 0 %>
+	<% if @users.count == 1 %>
+	  There is 1 user who has this skill. Post a need and they will be notified.
+	<% else %>
+	  There are <%= @users.count %> users who have this skill. Post a need and they will all be notified.
+	<% end %>
+<% end %>
+
+
 <% @organizations.each do |organization| %>
 		<br>
 		<b><h2>
@@ -18,15 +27,9 @@
 
 
  <% if @resources.count == 0 %>
-    <% if params[:selected_initiative].present? %>
-        <br>
-        <br>
-        <h2>Select different search parameters, there are no results for your current selection.</h2>
-    <% else %>
+	<br>
     <br>
-    <br>
-        <h2>Select search parameters to get started.</h2>
-    <% end %>
+    <h2>No Programs found. Try selecting different search parameters.</h2>
  <% end %>
 
 <%= paginate @organizations %>
