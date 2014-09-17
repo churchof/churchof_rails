@@ -102,6 +102,14 @@ class ResourcesController < ApplicationController
 
     @resources = @resources.uniq
 
+    @users = Hash.new
+    if params[:selected_skill].present?
+      skill_name = params[:selected_skill]
+      skill = Skill.where(name: skill_name).first
+      skill.users.each do |user|
+        @users[user.id] = user
+      end
+    end
 
     @skills_to_show = @skills_to_show.uniq
 
