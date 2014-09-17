@@ -143,7 +143,7 @@ class ResourcesController < ApplicationController
     end
 
 
-    @organizations = Kaminari.paginate_array(@organizations).page(params[:page]).per(2)
+    @organizations = Kaminari.paginate_array(@organizations).page(params[:page]).per(20)
 
 
     respond_to do |format|

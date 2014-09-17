@@ -1,3 +1,4 @@
+
 <% @organizations.each do |organization| %>
 		<br>
 		<b><h2>
@@ -8,8 +9,10 @@
 			<% end %>
 		</h2></b>
 
-		<% @resources.where(organization: organization).each do |resource| %>
-			<%= render 'resource', resource: resource %>
+		<% @resources.each do |resource| %>
+			<% if resource.organization == organization %>
+				<%= render 'resource', resource: resource %>
+			<% end %>
 		<% end %>
 <% end %>
 
@@ -25,3 +28,5 @@
         <h2>Select search parameters to get started.</h2>
     <% end %>
  <% end %>
+
+<%= paginate @organizations %>
