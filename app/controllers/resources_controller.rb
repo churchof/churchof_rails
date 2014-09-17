@@ -139,7 +139,7 @@ class ResourcesController < ApplicationController
       width: 29,
       height: 22 })
       # This should use the path helper.
-      marker.json({ title: resource.title, image_url: resource.skills.first ? resource.skills.first.icon_url : '', custom_infowindow: "<a href='resources/#{resource.id}'> #{Sanitize.clean(resource.title)} </a>" })
+      marker.json({ title: resource.title, image_url: resource.skills.first ? resource.skills.first.icon_url : '', custom_infowindow: "<a href='organizations/#{resource.organization.id}'> #{Sanitize.clean(resource.title)} </a>" })
     end
 
 

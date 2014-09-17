@@ -177,23 +177,12 @@ $('input').keydown(function() {
   </div>
 
 
-  <div class="demographics-filter">
-    <select id="demographics_list" class="demographic-select">
-      <option value="">All Demographics</option>
-      <%- Demographic.all.each do | demographic | %>
-        <option data-tag="#{demographic.title}">
-          <%= demographic.title %>
-        </div>
-      <% end %>
-    </select>
-  </div>
 
-  <br>
 
+<input class="search-box" id= "search_box" type="text" size="25" value="" placeholder="Search">
 
 </div>
 
-<input class="search-box" id= "search_box" type="text" size="25" value="" placeholder="Search">
 
 
 
