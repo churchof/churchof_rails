@@ -81,9 +81,17 @@ class ResourcesController < ApplicationController
       the_resources.each do |resource|
         if resource.title.downcase.include? search_string.downcase
           @resources << resource
-        else
-          if resource.description.downcase.include? search_string.downcase
-            @resources << resource
+        elsif resource.description.downcase.include? search_string.downcase
+            @resources << resource   
+        elsif resource.organization
+          if resource.organization.title.downcase.include? search_string.downcase
+            @resources << resource  
+          end
+        elsif resource.skills.count > 0
+          resource.skills.each do |skill|
+            if skill.title.downcase.include? search_string.downcase
+              @resources << resource
+            end
           end
         end
       end
