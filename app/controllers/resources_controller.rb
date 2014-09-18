@@ -89,7 +89,7 @@ class ResourcesController < ApplicationController
           end
         elsif resource.skills.count > 0
           resource.skills.each do |skill|
-            if skill.title.downcase.include? search_string.downcase
+            if skill.name.downcase.include? search_string.downcase
               @resources << resource
             end
           end
