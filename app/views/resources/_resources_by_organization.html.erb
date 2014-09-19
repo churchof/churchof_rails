@@ -1,9 +1,31 @@
 
+<% if params[:selected_skill] == "Free Meals" %>
+	<div class="notice-well">
+		<div class="notice-image-2">
+		</div>
+		<div class="notice-text">
+			Looking for Free Meals? Have an iPhone? Download our app to find the closest next available free meal!
+		</div>
+	</div>
+<% end %>
+
 <% if @users.count > 0 %>
 	<% if @users.count == 1 %>
-	  There is 1 user who has this skill. Post a need and they will be notified.
+		<div class="notice-well">
+			<div class="notice-image-1">
+			</div>
+			<div class="notice-text">
+				There is 1 user who has the “<%= params[:selected_skill] %>” skill. Post a Need and they will be notified.
+			</div>
+		</div>
 	<% else %>
-	  There are <%= @users.count %> users who have this skill. Post a need and they will all be notified.
+		<div class="notice-well">
+			<div class="notice-image-1">
+			</div>
+			<div class="notice-text">
+				There are <%= @users.count %> users who have the “<%= params[:selected_skill] %>” skill. Post a Need and they will all be notified.
+			</div>
+		</div>
 	<% end %>
 <% end %>
 
