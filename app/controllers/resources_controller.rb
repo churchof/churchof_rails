@@ -109,6 +109,7 @@ class ResourcesController < ApplicationController
     #end
 
     @resources = @resources.uniq
+    @resources = Resource.all
 
     @users = Hash.new
     if params[:selected_skill].present?
