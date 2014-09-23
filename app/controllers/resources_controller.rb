@@ -159,10 +159,6 @@ class ResourcesController < ApplicationController
       marker.json({ title: resource.title, image_url: resource.skills.first ? resource.skills.first.icon_url : '', custom_infowindow: resource.organization ? "<a href='organizations/#{resource.organization.id}'> #{Sanitize.clean(resource.title)} </a>" : "#{Sanitize.clean(resource.title)}" })
     end
 
-
-    @organizations = Kaminari.paginate_array(@organizations).page(params[:page]).per(20)
-
-
     respond_to do |format|
       format.html
       format.js
