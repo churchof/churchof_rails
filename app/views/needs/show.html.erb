@@ -62,6 +62,21 @@
 <div class="page-header-block">
 </div>
 
+
+<% if @current_active_campaign %>
+<br><br>
+  <div class="notice-well">
+    <div class="ccb-logo">
+    </div>
+    <div class="notice-text">
+      Current Match Partner: <a href="http://www.commonwealthcompassionbridge.org">Commonwealth Compassion Bridge</a> will be matching the next <%= humanized_money_with_symbol @current_active_campaign.remaining_amount %> worth of contributions! 
+    </div>
+  </div>
+<% end %>
+
+
+
+
 <div class="needs main-content">
   <div class="need-container">
 
@@ -268,7 +283,7 @@
           <div class="expenses col-xs-12 col-sm-6">
             <h3>Expenses</h3>
             <div class="expenses-bar" data-toggle="modal" data-target="#expensesModal">
-              <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
+              <span class="progress-bar" style="width:<%= @need.percent_raised %>%"><span class="matched-bar" style="width:<%= @need.percent_raised_from_matched_contributions %>%"></span></span>
               <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
               <span class="details">Details</span>
             </div>

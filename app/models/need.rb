@@ -12,6 +12,8 @@ class Need < ActiveRecord::Base
   belongs_to :user_need_leader, :foreign_key => 'user_id_need_leader', :class_name => "User"
 
   has_many :contributions
+  has_many :match_contributions
+
   has_many :time_contributions
   has_many :expenses
   has_many :updates
@@ -235,6 +237,9 @@ class Need < ActiveRecord::Base
     	self.contributions.succeded.not_reimbursed.each do |contribution|
 		    money = money + contribution.amount
     	end
+      self.match_contributions.not_reimbursed.each do |match_contribution|
+        money = money + match_contribution.amount
+      end
     	money
   end
 
@@ -248,6 +253,22 @@ class Need < ActiveRecord::Base
 
   def percent_raised
     i = (Float(total_contributed) / Float(total_expenses)) * 100.0
+    if i < 0
+      i = 0
+    end
+    if i > 100
+      i = 100
+    end
+    i
+  end
+
+  def percent_raised_from_matched_contributions
+    money = Money.new(0, "USD")
+    self.match_contributions.not_reimbursed.each do |match_contribution|
+      money = money + match_contribution.amount
+    end
+    money
+    i = (money / total_contributed) * 100.0
     if i < 0
       i = 0
     end

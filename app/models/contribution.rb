@@ -3,6 +3,8 @@ class Contribution < ActiveRecord::Base
   belongs_to :user
   belongs_to :contributor
 
+  has_many :match_contributions
+
   monetize :amount_cents
 
   attr_writer :stripe_token
@@ -49,6 +51,12 @@ class Contribution < ActiveRecord::Base
   # Probably don't want these, just so there is no way money gets lost
   #validates :need, presence: true
   #validates :contributor, presence: true
+
+  # for testing
+  def fake_process_payment
+    self.update_column(:succeded, true)
+    self.update_column(:reimbursed, false)
+  end
 
   def process_payment
 

@@ -490,6 +490,15 @@ p.no-skills-message{
     background: $green;
   }
 
+  .expenses-bar .progress-bar .matched-bar{
+    height: 100%;
+    @include border-radius(2px);
+    float: right;
+    width: 0%;
+    background: $dark-green;
+  }
+
+
 .volunteers-bar,
 .skills-bar{
   @include content-bar($light-grey)

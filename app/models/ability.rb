@@ -44,6 +44,8 @@ class Ability
         can :manage, InitiativeMetric
         can :manage, Skill
         can :manage, Demographic
+        can :manage, MatchContribution
+        can :manage, MatchCampaign
     end
     if user.has_role? :validation_partner
         can :read, User
@@ -68,6 +70,7 @@ class Ability
         can :new, Skill
         can :create, Skill
         can :read, Resource
+        can :read, MatchCampaign
         can :add_user_as_pending_need_poster, User
         can :add_user_as_pending_need_leader, User
         can :add_user_as_pending_church_admin, User
@@ -114,11 +117,13 @@ class Ability
     # end
 
     can :create, Contribution
+    can :create, MatchContribution
 
     can :read, Expense
     can :read, Update
 
     can :read, Contribution, :user_id => user.id
+
     can :read, Need, :is_public => true
     can :create, User
     can :update, User, :id => user.id

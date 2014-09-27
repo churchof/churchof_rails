@@ -53,6 +53,10 @@ Churchof::Application.routes.draw do
 
   resources :about
 
+  resources :match_campaigns
+  resources :match_contributions
+
+
   resources :users # Not sure if this is ok to do with Devise also.
 
   resources :skills

@@ -127,6 +127,17 @@ $(document).ready(function () {
   <%= render 'map' %>
 <% end %>
 
+<% if @current_active_campaign %>
+<br><br>
+  <div class="notice-well">
+    <div class="ccb-logo">
+    </div>
+    <div class="notice-text">
+      Current Match Partner: <a href="http://www.commonwealthcompassionbridge.org">Commonwealth Compassion Bridge</a> will be matching the next <%= humanized_money_with_symbol @current_active_campaign.remaining_amount %> worth of contributions! 
+    </div>
+  </div>
+<% end %>
+
 <div class="page-header-block">
   <h1 class="need-category-title">All Needs</h1>
   <div class="skills-filter">
@@ -141,10 +152,6 @@ $(document).ready(function () {
     </select>
   </div>
 </div>
-
-
-
-
 
 <div class="needs main-content" id="needs-full-list">
   <%= render @needs %>

@@ -19,6 +19,7 @@ class OrganizationResourceValidationPartnerPanelController < ApplicationControll
 		@organization_roles = OrganizationRole.all
 		@skills = Skill.all
 		@demographics = Demographic.all
+		@match_campaigns = MatchCampaign.all
 
 	  	# @church_admins = User.with_role(:church_admin)
 	  	@organizations.each do |organization|
@@ -35,6 +36,9 @@ class OrganizationResourceValidationPartnerPanelController < ApplicationControll
   		end
   		@demographics.each do |demographic|
   			authorize! :read, demographic
+  		end
+  		@match_campaigns.each do |match_campaign|
+  			authorize! :read, match_campaign
   		end
 
 	end

@@ -96,6 +96,10 @@ class NeedsController < ApplicationController
     end
     @skills_represented = skills_represented.uniq
 
+    @current_active_campaign = nil
+    if MatchCampaign.current_active_campaign
+      @current_active_campaign = MatchCampaign.current_active_campaign
+    end
     
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
@@ -135,6 +139,14 @@ class NeedsController < ApplicationController
   def show
     @expense = Expense.new
     @needs = Need.where(id: params[:id])
+
+
+    @current_active_campaign = nil
+    if MatchCampaign.current_active_campaign
+      @current_active_campaign = MatchCampaign.current_active_campaign
+    end
+
+
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
         marker.lat need.latitude

@@ -48,7 +48,7 @@
       <% if @need.total_expenses > 0 %>
         <h4>Expenses</h4>
         <div class="expenses-bar" data-toggle="modal" data-target="#expensesModal">
-          <span class="progress-bar" style="width:<%= @need.percent_raised %>%"></span>
+          <span class="progress-bar" style="width:<%= @need.percent_raised %>%"><span class="matched-bar" style="width:<%= @need.percent_raised_from_matched_contributions %>%"></span></span>
           <span class="amount-raised"><%= humanized_money_with_symbol @need.total_contributed %> / <%= humanized_money_with_symbol @need.total_expenses %></span>
         </div>
       <% end %>

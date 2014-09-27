@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140927151213) do
+ActiveRecord::Schema.define(version: 20140927210222) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -105,6 +105,27 @@ ActiveRecord::Schema.define(version: 20140927151213) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+  end
+
+  create_table "match_campaigns", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "initial_amount_cents"
+    t.integer  "organization_id"
+  end
+
+  create_table "match_contributions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "contribution_id"
+    t.boolean  "is_full_match"
+    t.integer  "amount_cents"
+    t.boolean  "paid"
+    t.boolean  "reimbursed"
+    t.integer  "need_id"
+    t.integer  "match_campaign_id"
   end
 
   create_table "needs", force: true do |t|

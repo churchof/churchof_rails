@@ -32,6 +32,11 @@
           Demographics
         </a>
       </li>
+      <li>
+        <a href="#match" data-toggle="tab">
+          Match Campaigns
+        </a>
+      </li>
 
   	</ul>
   </div>
@@ -146,6 +151,23 @@
 				</p>
 			<% end %>
 		</div>
+
+
+		<div class="tab-pane" id="match">
+
+    		Match Campaigns:
+			<br>
+			<br>
+			<%= link_to "New Match Campaign", new_match_campaign_path %>
+			<br>
+			<br>
+			<% @match_campaigns.each do |match_campaign| %>
+				<p>
+				<%= match_campaign.organization.title %> | <%= match_campaign.initial_amount %> | <%= match_campaign.remaining_amount %>
+				</p>
+			<% end %>
+		</div>
+
 
 
   </div>
