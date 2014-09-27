@@ -17,7 +17,7 @@ class Update < ActiveRecord::Base
             description: 'Mailed news that need recieved public update to need poster.',
             user_id: self.need.user_posted_by.id
           )
-          Mailer.user_posted_by_public_update_added(self.need.user_posted_by.id, self.need.id, self.id).deliver
+          Mailer.delay.user_posted_by_public_update_added(self.need.user_posted_by.id, self.need.id, self.id)
         end
 
 	    self.need.contributions.succeded.not_reimbursed.each do |contribution|
@@ -30,7 +30,7 @@ class Update < ActiveRecord::Base
 	            description: 'Mailed news that need recieved public update to contributor (with account).',
 	            user_id: contribution.user.id
 	          )
-	          Mailer.user_need_contributed_to_public_update_added(contribution.user.id, self.need.id, self.id).deliver
+	          Mailer.delay.user_need_contributed_to_public_update_added(contribution.user.id, self.need.id, self.id)
 	        end
 	      elsif contribution.contributor
 	        past_relevant_activities = Activity.where(user_id: nil, subject: self, description: 'Mailed news that need recieved public update to contributor (without account - #{contribution.contributor.email}).')
@@ -41,7 +41,7 @@ class Update < ActiveRecord::Base
 	            description: 'Mailed news that need recieved public update to contributor (without account - #{contribution.contributor.email}).',
 	            user: nil
 	          )
-	          Mailer.contributor_need_contributed_to_public_update_added(contribution.contributor.id, self.need.id, self.id).deliver
+	          Mailer.delay.contributor_need_contributed_to_public_update_added(contribution.contributor.id, self.need.id, self.id)
 	        end
 	      end
 	    end
@@ -56,7 +56,7 @@ class Update < ActiveRecord::Base
 		            description: 'Mailed news that need recieved public update to volunteer.',
 		            user_id: time_contribution.user.id
 		          )
-		          Mailer.volunteer_need_volunteered_for_public_update_added(time_contribution.user.id, self.need.id, self.id).deliver
+		          Mailer.delay.volunteer_need_volunteered_for_public_update_added(time_contribution.user.id, self.need.id, self.id)
 		        end
 			end
 	    end

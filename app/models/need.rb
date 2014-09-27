@@ -98,7 +98,7 @@ class Need < ActiveRecord::Base
 
   def mail_to_church_admin_whos_recieving_the_need
     # should this be async?
-    Mailer.church_admin_new_need_admin_incoming(self.id, self.user_posted_by.id, self.user_church_admin.id).deliver
+    Mailer.delay.church_admin_new_need_admin_incoming(self.id, self.user_posted_by.id, self.user_church_admin.id)
   end
 
   def update_date_public_posted_if_changed
@@ -119,7 +119,7 @@ class Need < ActiveRecord::Base
             description: 'Mailed because new Need pushed to this Leader.',
             user_id: self.user_need_leader.id
           )
-          Mailer.need_leader_new_need_assigned(self.user_need_leader.id, self.user_church_admin.id, self.id).deliver
+          Mailer.delay.need_leader_new_need_assigned(self.user_need_leader.id, self.user_church_admin.id, self.id)
         end
       end
     end
@@ -136,7 +136,7 @@ class Need < ActiveRecord::Base
             description: 'Mailed because need they posted was approved (moved to In Progress).',
             user_id: self.user_posted_by.id
           )
-          Mailer.user_posted_by_need_moved_to_in_progress(self.user_posted_by.id, self.id, self.user_church_admin.id).deliver
+          Mailer.delay.user_posted_by_need_moved_to_in_progress(self.user_posted_by.id, self.id, self.user_church_admin.id)
         end
     end
   end
@@ -166,7 +166,7 @@ class Need < ActiveRecord::Base
             description: 'Mailed about need due to relevant skills.',
             user_id: user.id
           )
-          Mailer.user_new_need_with_matching_skills(user.id, self.id, self.skill_ids).deliver
+          Mailer.delay.user_new_need_with_matching_skills(user.id, self.id, self.skill_ids)
         end
       end
     end
@@ -195,8 +195,8 @@ class Need < ActiveRecord::Base
     if rand2 > -percent_inner_not_selectable / 2 && rand2 < 0
       rand2 = -percent_inner_not_selectable / 2
     end
-    self.approx_latitude = self.latitude + rand1*dither;
-    self.approx_longitude = self.longitude + rand2*dither;
+    # self.approx_latitude = self.latitude + rand1*dither;
+    # self.approx_longitude = self.longitude + rand2*dither;
   end
 
   def update_approx_location_values

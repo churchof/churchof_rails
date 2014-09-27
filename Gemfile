@@ -29,6 +29,7 @@ gem 'groupdate', '~> 2.1.1'
 gem 'active_median', '~> 0.1.0'
 gem 'spinjs-rails'
 gem 'kaminari'
+gem 'delayed_job_active_record'
 
 group :development, :test do
 	gem 'sqlite3'
