@@ -30,6 +30,7 @@ gem 'active_median', '~> 0.1.0'
 gem 'spinjs-rails'
 gem 'kaminari'
 gem 'delayed_job_active_record'
+gem 'workless'
 
 group :development, :test do
 	gem 'sqlite3'

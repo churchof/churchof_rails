@@ -195,8 +195,8 @@ class Need < ActiveRecord::Base
     if rand2 > -percent_inner_not_selectable / 2 && rand2 < 0
       rand2 = -percent_inner_not_selectable / 2
     end
-    # self.approx_latitude = self.latitude + rand1*dither;
-    # self.approx_longitude = self.longitude + rand2*dither;
+    self.approx_latitude = self.latitude + rand1*dither;
+    self.approx_longitude = self.longitude + rand2*dither;
   end
 
   def update_approx_location_values
