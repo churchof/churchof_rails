@@ -9,6 +9,8 @@ class Image < ActiveRecord::Base
 	    }
   	}
 
+  	process_in_background :image
+
   	validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/jpg', 'image/png']
 
 end

@@ -315,27 +315,29 @@ class Need < ActiveRecord::Base
         description: 'Social posts for need #{self.id}.',
         user: nil
       )
-
-      begin
-        @page = Koala::Facebook::API.new(ENV['FACEBOOK_ACCESS_TOKEN'])
-        @page.put_connections(1382913228636299, "feed", :name => self.title_public, :link => "http://church-of.com/needs/#{self.id}", :description => self.description_public, :picture => 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png')
-      rescue
-
-      end   
-
-      begin
-        client = Twitter::REST::Client.new do |config|
-          config.consumer_key = ENV['TWITTER_APP_CONSUMER_KEY']
-          config.consumer_secret = ENV['TWITTER_APP_CONSUMER_SECRET']
-          config.access_token = ENV['TWITTER_USER_ACCESS_TOKEN']
-          config.access_token_secret = ENV['TWITTER_USER_ACCESS_SECRET']
-        end     
-        client.update("#{self.title_public.truncate(113)} - church-of.com/needs/#{self.id}")
-      rescue
-
-      end  
-      
+      self.delay.post_on_social_outlets    
     end
+  end
+
+  def post_on_social_outlets
+    begin
+      @page = Koala::Facebook::API.new(ENV['FACEBOOK_ACCESS_TOKEN'])
+      @page.put_connections(1382913228636299, "feed", :name => self.title_public, :link => "http://church-of.com/needs/#{self.id}", :description => self.description_public, :picture => 'https://s3.amazonaws.com/church_of/assets/ui_assets/icon.png')
+    rescue
+
+    end   
+
+    begin
+      client = Twitter::REST::Client.new do |config|
+        config.consumer_key = ENV['TWITTER_APP_CONSUMER_KEY']
+        config.consumer_secret = ENV['TWITTER_APP_CONSUMER_SECRET']
+        config.access_token = ENV['TWITTER_USER_ACCESS_TOKEN']
+        config.access_token_secret = ENV['TWITTER_USER_ACCESS_SECRET']
+      end     
+      client.update("#{self.title_public.truncate(113)} - church-of.com/needs/#{self.id}")
+    rescue
+
+    end  
   end
 
 end

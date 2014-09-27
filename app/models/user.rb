@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
     }
   }
 
+  process_in_background :avatar
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/jpg', 'image/png']
 
   attr_reader :skill_tokens

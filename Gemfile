@@ -31,6 +31,7 @@ gem 'spinjs-rails'
 gem 'kaminari'
 gem 'delayed_job_active_record'
 gem 'workless'
+gem 'delayed_paperclip'
 
 group :development, :test do
 	gem 'sqlite3'
