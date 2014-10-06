@@ -251,6 +251,14 @@ class Need < ActiveRecord::Base
     	money
   end
 
+  def total_people_who_have_given
+    users = Array.new
+      self.contributions.succeded.not_reimbursed.each do |contribution|
+        users << contribution.user
+      end
+    users.uniq.count
+  end
+
   def percent_raised
     i = (Float(total_contributed) / Float(total_expenses)) * 100.0
     if i < 0

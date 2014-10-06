@@ -102,6 +102,14 @@
 
                   <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
                 </div>
+
+                <br>
+                <% if need.total_people_who_have_given == 1 %>
+                  <%= need.total_people_who_have_given %> person has contributed.
+                <% else %>
+                  <%= need.total_people_who_have_given %> people have contributed.
+                <% end %>
+
             </div>
           <% end %>
 
