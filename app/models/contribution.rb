@@ -28,8 +28,15 @@ class Contribution < ActiveRecord::Base
 
   def mail_to_user_posted_by
     # should this be async?
+    Mailer.delay.user_posted_by_need_recieved_contribution(self.need.id, self.id)
+  end
+
+  def mail_to_zapier
+    # should this be async?
     Mailer.delay.user_posted_by_need_recieved_contribution(self.need.user_posted_by.id, self.need.id, self.id)
   end
+
+
 
   def mail_to_need_leader_if_exists
     # should this be async?
@@ -75,6 +82,7 @@ class Contribution < ActiveRecord::Base
   mail_to_need_leader_if_exists
   mail_to_user_posted_by
   mail_to_users_who_contributed_if_fully_funded
+  mail_to_zapier
   mail_receipt
   true
   rescue Stripe::CardError

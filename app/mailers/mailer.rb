@@ -10,6 +10,14 @@ def activity_was_not_created(description)
 	mail :to => "zach.whelchel@gmail.com", :from => "no-reply@church-of.com", :subject => description
 end
 
+# Zapier
+
+def zapier_need_recieved_contribution(need_id, contribution_id)
+	@need = Need.find(need_id)
+	@contribution = Contribution.find(contribution_id)
+	mail :to => "churchof.tg54i@zapiermail.com", :from => "no-reply@church-of.com", :subject => "#{@need.title} - Recieved Contribution: #{@contribution.amount}"
+end
+
 # Church Admins
 
 def church_admin_new_need_admin_incoming(need_id, user_posted_by_id, user_church_admin_id)
