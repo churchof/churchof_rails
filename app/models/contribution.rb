@@ -28,12 +28,12 @@ class Contribution < ActiveRecord::Base
 
   def mail_to_user_posted_by
     # should this be async?
-    Mailer.delay.user_posted_by_need_recieved_contribution(self.need.id, self.id)
+    Mailer.delay.user_posted_by_need_recieved_contribution(self.need.user_posted_by.id, self.need.id, self.id)
   end
 
   def mail_to_zapier
     # should this be async?
-    Mailer.delay.user_posted_by_need_recieved_contribution(self.need.user_posted_by.id, self.need.id, self.id)
+    Mailer.delay.zapier_need_recieved_contribution(self.need.id, self.id)
   end
 
 
