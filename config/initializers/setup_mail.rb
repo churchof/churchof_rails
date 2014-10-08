@@ -7,5 +7,5 @@ ActionMailer::Base.smtp_settings = {
   :password             => ENV['ZOHO_PASSWORD'],         
   :authentication       => :plain,
   :ssl                  => true,
-  :tls                  => true,
+  :tls                  => true
 }
