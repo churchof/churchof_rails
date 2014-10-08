@@ -2,10 +2,10 @@ ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {            
   :address              => "smtp.zoho.com", 
   :port                 => 465,   
-  :domain 				=> "church-of.com",
   :user_name            => "no-reply@church-of.com",
   :password             => ENV['ZOHO_PASSWORD'],         
   :authentication       => :plain,
   :ssl                  => true,
-  :tls                  => true
+  :tls                  => true,
+  :enable_starttls_auto => true
 }
