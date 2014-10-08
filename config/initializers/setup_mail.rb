@@ -4,8 +4,7 @@ ActionMailer::Base.smtp_settings = {
   :port                 => 465,                 
   :user_name            => 'no-reply@church-of.com',
   :password             => ENV['ZOHO_PASSWORD'],         
-  :authentication       => :login,
+  :authentication       => :plain,
   :ssl                  => true,
   :tls                  => true,
-  :enable_starttls_auto => true    
 }
