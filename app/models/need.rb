@@ -54,7 +54,6 @@ class Need < ActiveRecord::Base
   scope :public, -> { where(is_public: true) }
   scope :in_progress, -> { where(need_stage: 2) }
   scope :completed, -> { where(need_stage: 3) }
-  scope :recently_completed, -> { where(need_stage: 3) }
 
   def log_creation
     Activity.create(

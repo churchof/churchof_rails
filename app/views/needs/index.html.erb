@@ -156,11 +156,6 @@ $(document).ready(function () {
     </a>
   </li>
   <li>
-    <a href="#RecentlyCompletedNeeds" data-toggle="tab">
-      Recently Completed
-    </a>
-  </li>
-  <li>
     <a href="#CompletedNeeds" data-toggle="tab">
       All Completed
     </a>
@@ -197,41 +192,11 @@ $(document).ready(function () {
 
 
   </div>
-  <div class="tab-pane" id="RecentlyCompletedNeeds">
-
-
-
-    <% if @recently_completed_needs.count > 0 %>
-
-      <h1 class="need-category-title-completed">Recently Completed Needs</h1>
-    <br><br>
-    <div class="completed-needs main-content" id="isotope-demo">
-      <% @recently_completed_needs.in_groups_of(2, false) do |completed_needs| %>
-
-        <% completed_needs.each do |completed_need| %>
-               <div class="element-item" id="<%= completed_need.id %>">
-
-          <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
-                 </div>
-
-        <% end %>
-
-      <% end %>
-    </div>
-
-    <% end %>
-
-
-
-  </div>
-
   <div class="tab-pane" id="CompletedNeeds">
 
 
     <% if @completed_needs.count > 0 %>
 
-      <h1 class="need-category-title-completed">All Completed Needs</h1>
-    <br><br>
     <div class="completed-needs main-content" id="isotope-demo">
       <% @completed_needs.in_groups_of(2, false) do |completed_needs| %>
 

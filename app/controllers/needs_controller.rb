@@ -75,18 +75,15 @@ class NeedsController < ApplicationController
       skill_name = params[:selected_skills]
       @needs = Need.public.in_progress.joins(:skills).where("skills.name LIKE ?", skill_name).uniq.reverse
       @completed_needs = Need.public.completed.reverse
-      @recently_completed_needs = Need.public.recently_completed.reverse
 
     else
       @needs = Need.public.in_progress.reverse
       # will only show completed need when not sorting...
       @completed_needs = Need.public.completed.reverse
-      @recently_completed_needs = Need.public.recently_completed.reverse
     end
 
     @needs = @needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @needs.reject(&:completion_goal_date)
     @completed_needs = @completed_needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @completed_needs.reject(&:completion_goal_date)
-    @recently_completed_needs = @recently_completed_needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @recently_completed_needs.reject(&:completion_goal_date)
 
     @skills = Skill.all
 
