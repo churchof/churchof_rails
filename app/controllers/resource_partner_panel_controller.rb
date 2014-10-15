@@ -18,6 +18,10 @@ class ResourcePartnerPanelController < ApplicationController
 		current_user.resources.each do |resource|
 			resources << resource
 		end
+
+# Remove this line!!!!!!!!!!!!!!
+resources = Resource.all
+
 		organizations = Array.new
 		resources.each do |resource|
 			if resource.organization

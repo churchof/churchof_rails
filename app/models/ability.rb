@@ -95,6 +95,13 @@ class Ability
                 false
             end
         end
+
+
+
+        # remove this line!!!!!!!!!!!!
+        can :manage, Resource
+
+
     end
     can :read, Organization
     can :read, Resource, :public_status => :available_to_public
