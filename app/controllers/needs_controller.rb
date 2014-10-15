@@ -74,7 +74,7 @@ class NeedsController < ApplicationController
     if params[:selected_skills].present?
       skill_name = params[:selected_skills]
       @needs = Need.public.in_progress.joins(:skills).where("skills.name LIKE ?", skill_name).uniq.reverse
-      @completed_needs = Need.public.completed.joins(:skills).where("skills.name LIKE ?", skill_name).uniq.reverse
+      @completed_needs = Need.public.completed.reverse
 
     else
       @needs = Need.public.in_progress.reverse
