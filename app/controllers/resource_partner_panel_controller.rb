@@ -19,6 +19,8 @@ class ResourcePartnerPanelController < ApplicationController
 			resources << resource
 		end
 
+resources = Resource.all
+
 		organizations = Array.new
 		resources.each do |resource|
 			if resource.organization

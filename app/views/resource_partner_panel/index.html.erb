@@ -18,6 +18,7 @@
 					<p>
 						<%= resource.title %>
 
+<%= link_to "SUPER Edit Resource", edit_resource_path(resource) %>
 
 						<% if can? :manage, resource %>
 							<% if resource.user == current_user %>
@@ -72,6 +73,8 @@
 
 					<p>
 						<%= resource.title %>
+
+<%= link_to "SUPER Edit Resource", edit_resource_path(resource) %>
 
 						<% if can? :manage, resource %>
 							<% if resource.user == current_user %>
@@ -165,6 +168,8 @@
 			<% if resource.organization == nil %>
 					<p>
 						<%= resource.title %>
+
+<%= link_to "SUPER Edit Resource", edit_resource_path(resource) %>
 
 
 						<% if can? :manage, resource %>
