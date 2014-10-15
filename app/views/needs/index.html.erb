@@ -372,16 +372,11 @@ $(document).ready(function () {
 
     <% if @completed_needs.count > 0 %>
 
+
       <% @completed_needs.each do |completed_need| %>
-
-
-              <div id="<%= completed_need.id %>">
-
-
-                <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
-              </div>
-
-
+        <div id="<%= completed_need.id %>">
+          <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
+        </div>
       <% end %>
 
     <% end %>
