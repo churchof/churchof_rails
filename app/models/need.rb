@@ -36,7 +36,7 @@ class Need < ActiveRecord::Base
 
   before_create :create_approx_location_values
   after_update :update_approx_location_values, :if => :full_street_address_changed?
-  after_create :mail_to_church_admin_whos_recieving_the_need, :log_creation, 
+  after_create :mail_to_church_admin_whos_recieving_the_need, :log_creation
   after_save :mail_to_users_with_relevant_skills
 
   after_save :mail_to_leader_if_just_appointed

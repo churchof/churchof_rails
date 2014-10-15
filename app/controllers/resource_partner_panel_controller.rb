@@ -19,7 +19,6 @@ class ResourcePartnerPanelController < ApplicationController
 			resources << resource
 		end
 
-# Remove this line!!!!!!!!!!!!!!
 resources = Resource.all
 
 		organizations = Array.new

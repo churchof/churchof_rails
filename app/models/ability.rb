@@ -98,7 +98,6 @@ class Ability
 
 
 
-        # remove this line!!!!!!!!!!!!
         can :manage, Resource
 
 
