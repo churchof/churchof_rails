@@ -17,18 +17,33 @@
 
 
                 <% if need.need_stage_value == 3 %>
-                <div class="time-block time-green">
-                  <div class="time-remaining">
-                    Completed
+                  <div class="time-block time-green">
+                    <div class="time-remaining">
+                      Completed
+                    </div>
+                    <div class="time-posted">
+                      <% if need.date_public_posted %>
+                        posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                      <% else %>
+                        not posted publicly
+                      <% end %>
+                    </div>
                   </div>
-                  <div class="time-posted">
-                    <% if need.date_public_posted %>
-                      posted: <%= time_ago_in_words(need.date_public_posted) %> ago
-                    <% else %>
-                      not posted publicly
-                    <% end %>
+
+                <% elsif need.percent_raised == 100 %>
+
+                  <div class="time-block time-green">
+                    <div class="time-remaining">
+                      Fully Funded
+                    </div>
+                    <div class="time-posted">
+                      <% if need.date_public_posted %>
+                        posted: <%= time_ago_in_words(need.date_public_posted) %> ago
+                      <% else %>
+                        not posted publicly
+                      <% end %>
+                    </div>
                   </div>
-                </div>
 
                 <% else %>
 

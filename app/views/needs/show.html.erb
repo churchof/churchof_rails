@@ -145,6 +145,23 @@
                     <% end %>
                   </div>
                 </div>
+
+
+              <% elsif @need.percent_raised == 100 %>
+
+                  <div class="time-block time-green">
+                    <div class="time-remaining">
+                      Fully Funded
+                    </div>
+                    <div class="time-posted">
+                      <% if @need.date_public_posted %>
+                        posted: <%= time_ago_in_words(@need.date_public_posted) %> ago
+                      <% else %>
+                        not posted publicly
+                      <% end %>
+                    </div>
+                  </div>
+
               <% else %>
                 <% if @need.completion_goal_date %>
                   <% if @need.completion_goal_date > Time.current %>
