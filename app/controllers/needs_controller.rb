@@ -83,7 +83,7 @@ class NeedsController < ApplicationController
     end
 
     @needs = @needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @needs.reject(&:completion_goal_date)
-    @completed_needs = @completed_needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @completed_needs.reject(&:completion_goal_date)
+    @completed_needs = @completed_needs.select(&:date_marked_completed).sort_by(&:date_marked_completed)
 
     @skills = Skill.all
 

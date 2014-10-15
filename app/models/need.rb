@@ -111,6 +111,14 @@ class Need < ActiveRecord::Base
     end
   end
 
+  def update_date_marked_completed_if_changed
+    if self.need_stage_changed?
+      if self.need_stage == 3
+        self.update_column(:date_marked_completed, Time.now)
+      end
+    end
+  end
+
   def mail_to_leader_if_just_appointed
     if self.user_id_need_leader_changed?
       if self.user_need_leader
