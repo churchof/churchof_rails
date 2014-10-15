@@ -208,7 +208,7 @@ $(document).ready(function () {
     <div class="completed-needs main-content" id="isotope-demo">
       <% @recently_completed_needs.in_groups_of(2, false) do |completed_needs| %>
 
-        <% recently_completed_needs.each do |completed_need| %>
+        <% completed_needs.each do |completed_need| %>
                <div class="element-item" id="<%= completed_need.id %>">
 
           <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
