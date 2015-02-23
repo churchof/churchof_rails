@@ -17,6 +17,18 @@
         <%= f.input :description %>
       </div>
 
+
+
+      <div class="field-pair">
+        <%= f.input :initiative_id, label: "Initiative", collection: Initiative.all, label_method: :title %>
+
+
+
+      </div>
+
+
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -41,7 +41,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     boxStyle:
       width: "280px"
 
-@buildMap = (markers, fit)->
+@buildNeedsMap = (markers, fit)->
   handler = Gmaps.build(
     'Google', { builders: { Marker: RichMarkerBuilder}, markers:
           clusterer: 

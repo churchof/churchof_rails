@@ -6,15 +6,24 @@
 <div class="main-content main-bg">
   <div class="contribution-completed-message">
     <div class="inner-content">
-      <h1>Thanks for your contribution.</h1>
-       A receipt has been emailed to you. <a href="mailto:support@church-of.com" target="_top">Contact us</a> if you have any questions.
+      <h1>Sign up and track your impact over time.</h1>
+      <br>
+       Thanks for your contribution. A receipt has been emailed to you. <a href="mailto:support@church-of.com" target="_top">Contact us</a> if you have any questions. 
+               <div class= "side-image-6-sign-up"> </div>
+                   <%= link_to "Sign Up", register_path, :class => "sign-up-link-contribution" %>
+
       <div class="register-intro-block">
-        <p>
-          In order to see all your contributions in your Impact Panel (located in the menu after you sign up), register now by clicking the link below.<br> Make sure to register with the same email you've made gifts with.
-        </p>
+
       </div>
     </div>
-    <%= link_to "Register", register_path, :class => "register-now-from-contribution" %>
+
+
+            
+
+
+
+
+    <%= link_to "No Thanks", root_path, :class => "register-now-from-contribution" %>
   </div>
 </div>
 

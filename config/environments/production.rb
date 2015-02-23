@@ -10,6 +10,10 @@ Churchof::Application.configure do
     }
   }
 
+  config.after_initialize do 
+    Delayed::Job.scaler = :heroku_cedar
+  end
+
   config.time_zone = 'Eastern Time (US & Canada)'
   
   GA.tracker = ENV['GOOGLE_ANALYTICS_ID']

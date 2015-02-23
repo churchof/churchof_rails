@@ -14,11 +14,38 @@ request a Skill / Resource be listed</a>.
 <br>
 <br>
 
-<% Skill.all.each do |skill| %>
-  <li class="skill-tag">
-    <span class="skill-icon">
-      <%= image_tag(skill.icon_url) %>
-    </span>
-    <%= skill.name %>
-  </li>
+<% Initiative.all.each do |initiative| %>
+  <h1> <%= initiative.title %></h1>
+  <br>
+  <% Skill.all.each do |skill| %>
+    <% if skill.initiative == initiative %>
+      <li class="skill-tag">
+        <span class="skill-icon">
+          <%= image_tag(skill.icon_url) %>
+        </span>
+        <%= skill.name %>
+      </li>
+    <% end %>
+  <% end %>
+  <br>
+  <br>
 <% end %>
+
+
+<h1> No Initiative </h1>
+<br>
+<% Skill.all.each do |skill| %>
+  <% if not skill.initiative %>
+    <li class="skill-tag">
+      <span class="skill-icon">
+        <%= image_tag(skill.icon_url) %>
+      </span>
+      <%= skill.name %>
+    </li>
+  <% end %>
+<% end %>
+
+
+
+
+

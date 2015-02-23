@@ -73,7 +73,9 @@ class NeedsController < ApplicationController
   def index
     if params[:selected_skills].present?
       skill_name = params[:selected_skills]
-      @needs = Need.public.in_progress.joins(:skills).where("skills.name ILIKE ?", skill_name).uniq.reverse
+      @needs = Need.public.in_progress.joins(:skills).where("skills.name LIKE ?", skill_name).uniq.reverse
+      @completed_needs = Need.public.completed.reverse
+
     else
       @needs = Need.public.in_progress.reverse
       # will only show completed need when not sorting...
@@ -81,7 +83,7 @@ class NeedsController < ApplicationController
     end
 
     @needs = @needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @needs.reject(&:completion_goal_date)
-    @completed_needs = @completed_needs.select(&:completion_goal_date).sort_by(&:completion_goal_date) + @completed_needs.reject(&:completion_goal_date)
+    @completed_needs = @completed_needs.select(&:date_marked_completed).sort_by(&:date_marked_completed).reverse
 
     @skills = Skill.all
 
@@ -95,6 +97,10 @@ class NeedsController < ApplicationController
     end
     @skills_represented = skills_represented.uniq
 
+    @current_active_campaign = nil
+    if MatchCampaign.current_active_campaign
+      @current_active_campaign = MatchCampaign.current_active_campaign
+    end
     
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
@@ -134,6 +140,14 @@ class NeedsController < ApplicationController
   def show
     @expense = Expense.new
     @needs = Need.where(id: params[:id])
+
+
+    @current_active_campaign = nil
+    if MatchCampaign.current_active_campaign
+      @current_active_campaign = MatchCampaign.current_active_campaign
+    end
+
+
     @hash = Gmaps4rails.build_markers(@needs) do |need, marker|
       if need.shows_real_location_publically
         marker.lat need.latitude

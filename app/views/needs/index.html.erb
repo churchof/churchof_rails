@@ -6,7 +6,7 @@
   <script src="https://s3.amazonaws.com/churchof/imagesloaded-min.js"></script>
   <script type="text/javascript">
 
- jQuery(function(){ buildMap(map_hash, true, false); });
+ jQuery(function(){ buildNeedsMap(map_hash, true, false); });
 
 // $(document).ready(function(){
 //     $('#custom_style').height($(window).height() * .6);
@@ -87,6 +87,168 @@ $(document).ready(function () {
 });
 
   </script>
+
+
+
+
+
+
+    <script>
+    var $container = $('#isotope-demo').imagesLoaded( function() {
+      $container = $('#isotope-demo').isotope({
+        itemSelector: '.element-item',
+        resizable: false,
+        layoutMode: 'masonry',
+        // set columnWidth to a percentage of container width
+        masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
+      });
+
+    });
+    $(window).smartresize(function(){
+      if ($(window).innerWidth() > 767){
+        $container.isotope({
+          // update columnWidth to a percentage of container width
+          masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
+        });
+      }else{
+        $container.isotope({
+          // update columnWidth to a percentage of container width
+          masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
+        });
+      }
+    });
+
+
+
+    // Modified Isotope methods for gutters in masonry
+    $.Isotope.prototype._getMasonryGutterColumns = function() {
+      var gutter = this.options.masonry && this.options.masonry.gutterWidth || 0;
+      containerWidth = this.element.width();
+     
+      this.masonry.columnWidth = this.options.masonry && this.options.masonry.columnWidth ||
+      // Or use the size of the first item
+      this.$filteredAtoms.outerWidth(true) ||
+      // If there's no items, use size of container
+      containerWidth;
+     
+      this.masonry.columnWidth += gutter;
+     
+      this.masonry.cols = Math.floor((containerWidth + gutter) / this.masonry.columnWidth);
+      this.masonry.cols = Math.max(this.masonry.cols, 1);
+    };
+     
+    $.Isotope.prototype._masonryReset = function() {
+      // Layout-specific props
+      this.masonry = {};
+      // FIXME shouldn't have to call this again
+      this._getMasonryGutterColumns();
+      var i = this.masonry.cols;
+      this.masonry.colYs = [];
+      while (i--) {
+        this.masonry.colYs.push(0);
+      }
+    };
+     
+    $.Isotope.prototype._masonryResizeChanged = function() {
+      var prevSegments = this.masonry.cols;
+      // Update cols/rows
+      this._getMasonryGutterColumns();
+      // Return if updated cols/rows is not equal to previous
+      return (this.masonry.cols !== prevSegments);
+    };
+
+
+
+
+    </script>
+
+
+
+
+    <style>
+    /* ---- isotope ---- */
+    /* clear fix */
+    .isotope:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    /* ---- .element-item ---- */
+    .isotope, .isotope .isotope-item{
+      -webkit-transition-duration: 0.0s;
+      -moz-transition-duration: 0.0s;
+      -ms-transition-duration: 0.0s;
+      -o-transition-duration: 0.0s;
+      transition-duration: 0.0s;
+    }
+    .isotope{
+      -webkit-transition-property: height, width;
+      -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+      -o-transition-property: height, width;
+      transition-property: height, width;
+    }
+    .isotope .isotope-item{
+      -webkit-transition-property: -webkit-transform, opacity;
+      -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+      -o-transition-property:      -o-transform, opacity;
+      transition-property:         transform, opacity;
+    }
+    .isotope.no-transition, .isotope.no-transition .isotope-item, .isotope .isotope-item.no-transition{
+      -webkit-transition-duration: 0s;
+      -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+      -o-transition-duration: 0s;
+      transition-duration: 0s;
+    }
+    .element-item {
+      position: relative;
+      float: left;
+      width: 49.0%;
+      height: auto;
+      margin: 0px;
+      padding: 0px;
+      color: #FFF;
+      padding-bottom: 10px;
+    }
+
+      .element-item a img{
+        opacity: .8;
+      }
+      .element-item a:hover img{
+        opacity: 1;
+      }
+
+
+        .element-item.width2 { width: 230px; height: auto;}
+    .element-item.height2 { height: auto; }
+
+    .element-item > * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .element-item .symbol {
+      position: absolute;
+      left: 10px;
+      top: 0px;
+      font-size: 42px;
+      font-weight: bold;
+      color: white;
+    }
+
+    @media(max-width: 767px){
+      .element-item {
+        width: 100%;
+      }
+    }
+      </style>
+
+
+
+
 <% end %>
 
 <% content_for :banner do %>
@@ -124,12 +286,58 @@ $(document).ready(function () {
   <script>
     var map_hash = <%= raw @hash.to_json %>;
   </script>
-  <%= render 'layouts/map' %>
+  <%= render 'map' %>
 <% end %>
 
+<% if @current_active_campaign %>
+<br><br>
+  <div class="notice-well">
+    <div class="ccb-logo">
+    </div>
+    <div class="notice-text">
+      Current Match Partner: <a href="http://www.commonwealthcompassionbridge.org">Commonwealth Compassion Bridge</a> will be matching the next <%= humanized_money_with_symbol @current_active_campaign.remaining_amount %> worth of contributions! 
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+
 <div class="page-header-block">
-  <h1 class="need-category-title">All Needs</h1>
-  <div class="skills-filter">
+  <h1 class="need-category-title">Needs</h1>
+
+<ul class="nav nav-pills page-options">
+  <li class="active">
+    <a href="#AllNeeds" data-toggle="tab">
+      Current
+    </a>
+  </li>
+  <li>
+    <a href="#CompletedNeeds" data-toggle="tab">
+      Completed
+    </a>
+  </li>
+</ul>
+
+
+
+
+
+
+</div>
+
+
+<div id='content' class="tab-content main-content">
+
+
+  <div class="tab-pane active" id="AllNeeds">
+   
+    <div class="skills-filter">
     <label>Filter:</label>
     <select id="skills_list" class="skill-select">
       <option value="">All Needs</option>
@@ -140,246 +348,107 @@ $(document).ready(function () {
       <% end %>
     </select>
   </div>
-</div>
 
-<div class="needs main-content" id="needs-full-list">
-  <%= render @needs %>
-</div>
 
-<% if @needs.count > 0 %>
-<br><br><br><br>
-<% end %>
 
-<% if @completed_needs.count > 0 %>
+    <div class="needs main-content" id="needs-full-list">
+      <%= render @needs %>
+      <%= render "needs_script" %>
+    </div>
 
-  <h1 class="need-category-title">Completed Needs</h1>
-<br><br>
-<div class="completed-needs main-content" id="isotope-demo">
-  <% @completed_needs.in_groups_of(2, false) do |completed_needs| %>
 
-    <% completed_needs.each do |completed_need| %>
-           <div class="element-item" id="<%= completed_need.id %>">
 
-      <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
-             </div>
+
+  </div>
+  <div class="tab-pane" id="CompletedNeeds">
+
+
+
+
+
+
+
+
+
+    <% if @completed_needs.count > 0 %>
+
+
+      <% @completed_needs.each do |completed_need| %>
+        <div id="<%= completed_need.id %>">
+          <%= render partial: 'needs/completed_need', locals: { need: completed_need } %>
+        </div>
+      <% end %>
 
     <% end %>
 
-  <% end %>
-</div>
-
-<% end %>
-
-<script>
-  $(document).ready(function(){
-    $('.need-button-block').each(function(){
-      var className;
-      var needButtonCount = $(this).find('.need-btn-link').length;
-        if (needButtonCount == 1){
-          className = "need-xs-12";
-        }else if(needButtonCount == 2){
-          className = "need-xs-6";
-        }else if(needButtonCount == 3){
-          className = "need-xs-4";
-        }
-
-      $(this).find('.need-btn-link').each(function(){
-        $(this).addClass(className);
-      });
-    });
-  })
-
-</script>
-
-<script>
-var $container = $('#isotope-demo').imagesLoaded( function() {
-  $container = $('#isotope-demo').isotope({
-    itemSelector: '.element-item',
-    resizable: false,
-    layoutMode: 'masonry',
-    // set columnWidth to a percentage of container width
-    masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
-  });
-
-});
-$(window).smartresize(function(){
-  if ($(window).innerWidth() > 767){
-    $container.isotope({
-      // update columnWidth to a percentage of container width
-      masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
-    });
-  }else{
-    $container.isotope({
-      // update columnWidth to a percentage of container width
-      masonry: { columnWidth: $container.width() * .49, gutterWidth: $container.width() * .02 }
-    });
-  }
-});
 
 
 
-// Modified Isotope methods for gutters in masonry
-$.Isotope.prototype._getMasonryGutterColumns = function() {
-  var gutter = this.options.masonry && this.options.masonry.gutterWidth || 0;
-  containerWidth = this.element.width();
- 
-  this.masonry.columnWidth = this.options.masonry && this.options.masonry.columnWidth ||
-  // Or use the size of the first item
-  this.$filteredAtoms.outerWidth(true) ||
-  // If there's no items, use size of container
-  containerWidth;
- 
-  this.masonry.columnWidth += gutter;
- 
-  this.masonry.cols = Math.floor((containerWidth + gutter) / this.masonry.columnWidth);
-  this.masonry.cols = Math.max(this.masonry.cols, 1);
-};
- 
-$.Isotope.prototype._masonryReset = function() {
-  // Layout-specific props
-  this.masonry = {};
-  // FIXME shouldn't have to call this again
-  this._getMasonryGutterColumns();
-  var i = this.masonry.cols;
-  this.masonry.colYs = [];
-  while (i--) {
-    this.masonry.colYs.push(0);
-  }
-};
- 
-$.Isotope.prototype._masonryResizeChanged = function() {
-  var prevSegments = this.masonry.cols;
-  // Update cols/rows
-  this._getMasonryGutterColumns();
-  // Return if updated cols/rows is not equal to previous
-  return (this.masonry.cols !== prevSegments);
-};
+    <% @completed_needs.each do |completed_need| %>
 
+      <% completed_need.updates.each do |update| %>
+        <div class="modal fade" id="PublicUpdateModal<%= update.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><%= update.title %></h4>
+              </div>
+              <div class="modal-body">
+        <!--         This only shows the first...
+         -->
+                <%= update.content %>
 
-
-
-</script>
-
-
-
-<% @completed_needs.each do |completed_need| %>
-
-  <% completed_need.updates.each do |update| %>
-    <div class="modal fade" id="PublicUpdateModal<%= update.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel"><%= update.title %></h4>
-          </div>
-          <div class="modal-body">
-    <!--         This only shows the first...
-     -->
-            <%= update.content %>
-
-            <br>
-            <br>
-            <% update.images.each do |image| %>
-            <div class="image-modal">
-              <%= image_tag(image.image) %>
+                <br>
+                <br>
+                <% update.images.each do |image| %>
+                <div class="image-modal">
+                  <%= image_tag(image.image) %>
+                </div>
+                  <br>
+                  <%= image.caption %>
+                  <br>
+                  <br>
+                <% end %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
             </div>
-              <br>
-              <%= image.caption %>
-              <br>
-              <br>
-            <% end %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
-      </div>
-    </div>
-  <% end %>
+      <% end %>
 
-<% end %>
+    <% end %>
 
 
 
 
 
-<style>
-/* ---- isotope ---- */
-/* clear fix */
-.isotope:after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
-/* ---- .element-item ---- */
-.isotope, .isotope .isotope-item{
-  -webkit-transition-duration: 0.0s;
-  -moz-transition-duration: 0.0s;
-  -ms-transition-duration: 0.0s;
-  -o-transition-duration: 0.0s;
-  transition-duration: 0.0s;
-}
-.isotope{
-  -webkit-transition-property: height, width;
-  -moz-transition-property: height, width;
-  -ms-transition-property: height, width;
-  -o-transition-property: height, width;
-  transition-property: height, width;
-}
-.isotope .isotope-item{
-  -webkit-transition-property: -webkit-transform, opacity;
-  -moz-transition-property:    -moz-transform, opacity;
-  -ms-transition-property:     -ms-transform, opacity;
-  -o-transition-property:      -o-transform, opacity;
-  transition-property:         transform, opacity;
-}
-.isotope.no-transition, .isotope.no-transition .isotope-item, .isotope .isotope-item.no-transition{
-  -webkit-transition-duration: 0s;
-  -moz-transition-duration: 0s;
-  -ms-transition-duration: 0s;
-  -o-transition-duration: 0s;
-  transition-duration: 0s;
-}
-.element-item {
-  position: relative;
-  float: left;
-  width: 49.0%;
-  height: auto;
-  margin: 0px;
-  padding: 0px;
-  color: #FFF;
-  padding-bottom: 10px;
-}
-
-  .element-item a img{
-    opacity: .8;
-  }
-  .element-item a:hover img{
-    opacity: 1;
-  }
 
 
-    .element-item.width2 { width: 230px; height: auto;}
-.element-item.height2 { height: auto; }
 
-.element-item > * {
-  margin: 0;
-  padding: 0;
-}
 
-.element-item .symbol {
-  position: absolute;
-  left: 10px;
-  top: 0px;
-  font-size: 42px;
-  font-weight: bold;
-  color: white;
-}
 
-@media(max-width: 767px){
-  .element-item {
-    width: 100%;
-  }
-}
-  </style>
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

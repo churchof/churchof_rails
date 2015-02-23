@@ -42,6 +42,10 @@ class Ability
         can :update, User
         can :manage, Initiative
         can :manage, InitiativeMetric
+        can :manage, Skill
+        can :manage, Demographic
+        can :manage, MatchContribution
+        can :manage, MatchCampaign
     end
     if user.has_role? :validation_partner
         can :read, User
@@ -66,6 +70,7 @@ class Ability
         can :new, Skill
         can :create, Skill
         can :read, Resource
+        can :read, MatchCampaign
         can :add_user_as_pending_need_poster, User
         can :add_user_as_pending_need_leader, User
         can :add_user_as_pending_church_admin, User
@@ -90,6 +95,10 @@ class Ability
                 false
             end
         end
+
+
+        can :manage, Resource
+
     end
     can :read, Organization
     can :read, Resource, :public_status => :available_to_public
@@ -112,11 +121,13 @@ class Ability
     # end
 
     can :create, Contribution
+    can :create, MatchContribution
 
     can :read, Expense
     can :read, Update
 
     can :read, Contribution, :user_id => user.id
+
     can :read, Need, :is_public => true
     can :create, User
     can :update, User, :id => user.id
@@ -133,6 +144,8 @@ class Ability
 
     can :read, Initiative
     can :read, InitiativeMetric
+
+    can :read, Demographic
 
     # can :read, About // was causing crashing, strange.
     

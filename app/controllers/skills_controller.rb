@@ -9,7 +9,7 @@ class SkillsController < ApplicationController
   logger.debug "This is from debug"
 
 	#@skills = Skill.where(name: params[:q])
-  @skills = Skill.where('name ilike ?', '%' + params[:q] + '%')
+  @skills = Skill.where('name ilike ?', '%' + params[:q].to_s + '%')
   @skills.each do |skill|
     authorize! :read, skill
   end
@@ -35,10 +35,24 @@ class SkillsController < ApplicationController
     end
   end
 
+  def update
+    @skill = Skill.find(params[:id])
+
+    respond_to do |format|
+      if @skill.update(skills_params)
+        format.html { redirect_to root_path, notice: 'Skill was successfully updated.' }
+        # format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        # format.json { render json: @need.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def skills_params
-    params.require(:skill).permit(:name, :description)
+    params.require(:skill).permit(:id, :name, :description, :initiative_id)
   end
 
 end

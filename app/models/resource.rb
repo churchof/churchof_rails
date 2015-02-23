@@ -26,7 +26,7 @@ class Resource < ActiveRecord::Base
 
   scope :public, -> { where(public_status: 1, flagged: false) }
 
-
+  has_and_belongs_to_many :demographics
 
 
 

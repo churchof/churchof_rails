@@ -1,91 +1,274 @@
 
-<%= link_to "New Resource", new_resource_path %>
+<% if @organizations.count > 10 %>
 
-<br>
-<br>
-<br>
-<p>
-	<b>No Organization</b>
 
-	<% @resources.each do |resource| %>
 
-		<% if resource.organization == nil %>
-				<p>
-					<%= resource.title %>
-					<% if can? :manage, resource %>
-						<% if resource.user == current_user %>
-							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %> | <%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %>
+
+	<%= link_to "New Resource", new_resource_path %>
+
+	<br>
+	<br>
+	<br>
+	<p>
+		<b>No Organization</b>
+
+		<% @resources.each do |resource| %>
+
+			<% if resource.organization == nil %>
+					<p>
+						<%= resource.title %>
+
+<%= link_to "SUPER Edit Resource", edit_resource_path(resource) %>
+
+						<% if can? :manage, resource %>
+							<% if resource.user == current_user %>
+								- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %> | <%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %>
+							<% end %>
+						<% elsif can? :take_over_management, resource %>
+
+
+
+							    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
+
+							      	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
+	      							<%= f.submit "Take over management" %>
+	    						<% end %>
+
+
+
+						<% else %>
+								- You dont manage and you cant
 						<% end %>
-					<% elsif can? :take_over_management, resource %>
-
-
-
-						    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
-
-						      	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
-      							<%= f.submit "Take over management" %>
-    						<% end %>
-
-
-
-					<% else %>
-							- You dont manage and you cant
-					<% end %>
-				</p>
-
-		<% end %>
-	<% end %>
-
-
-
-</p>
-<br>
-
-<% @organizations.each do |organization| %>
-<p>
-<b><%= organization.title %></b>
-	<% contains_one = false %>
-	<% current_user.organization_roles.each do |organization_role| %>
-		<% if organization_role.organization == organization %>
-			<% contains_one = true %>
-		<% end %>
-	<% end %>
-
-	<% if contains_one %>
-(AFFILIATED)
-	<% else %>
-(NOT AFFILIATED)
-	<% end %>
-
-
-	<% @resources.each do |resource| %>
-
-		<% if resource.organization %>
-			<% if resource.organization == organization %>
-
-				<p>
-					<%= resource.title %>
-					<% if can? :manage, resource %>
-						<% if resource.user == current_user %>
-							- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %> | <%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %>
-
-						<% end %>
-					<% elsif can? :take_over_management, resource %>
-						    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
-						    	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
-      							<%= f.submit "Take over management" %>
-    						<% end %>
-					<% else %>
-							- You dont manage and you cant
-					<% end %>
-				</p>
+					</p>
 
 			<% end %>
 		<% end %>
+
+
+
+	</p>
+	<br>
+
+	<% @organizations.each do |organization| %>
+	<p>
+	<b><%= organization.title %></b>
+		<% contains_one = false %>
+		<% current_user.organization_roles.each do |organization_role| %>
+			<% if organization_role.organization == organization %>
+				<% contains_one = true %>
+			<% end %>
+		<% end %>
+
+		<% if contains_one %>
+	(AFFILIATED)
+		<% else %>
+	(NOT AFFILIATED)
+		<% end %>
+
+
+		<% @resources.each do |resource| %>
+
+			<% if resource.organization %>
+				<% if resource.organization == organization %>
+
+					<p>
+						<%= resource.title %>
+
+<%= link_to "SUPER Edit Resource", edit_resource_path(resource) %>
+
+						<% if can? :manage, resource %>
+							<% if resource.user == current_user %>
+								- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %> | <%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %>
+
+							<% end %>
+						<% elsif can? :take_over_management, resource %>
+							    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
+							    	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
+	      							<%= f.submit "Take over management" %>
+	    						<% end %>
+						<% else %>
+								- You dont manage and you cant
+						<% end %>
+					</p>
+
+				<% end %>
+			<% end %>
+		<% end %>
+
+
+	</p>
+	<br>
+
 	<% end %>
 
 
-</p>
-<br>
+
+
+
+<% else %>
+
+
+
+
+
+
+	<% if current_user.has_role? :resource_partner %>
+	  <div class="page-header-block">
+	    <div class="page-title">
+	      <h2>Resource Panel</h2>
+	    </div>
+	    <ul class="nav nav-pills page-options">
+	      <li class="active">
+	        <a href="#no_organization" data-toggle="tab">
+	          <% if @resources_without_organization.count > 0 %>
+	            <span class="count-number pull-left"><%= @resources_without_organization.count %></span>
+	          <% end %>
+	          No Organization
+	        </a>
+	      </li>
+
+				<% @organizations.each do |organization| %>
+		      <li>
+					  <% resource_count = 0 %>
+						<% @resources.each do |resource| %>
+							<% if resource.organization %>
+								<% if resource.organization == organization %>
+								  <% resource_count = resource_count + 1 %>
+								<% end %>
+							<% end %>
+						<% end %>
+						<% org_id = organization.id -%>
+		        <a href="#organization<%= org_id -%>" data-toggle="tab">
+		          <% if resource_count > 0 %>
+		            <span class="count-number pull-left"><%= resource_count %></span>
+		          <% end %>
+		          <%= organization.title %>
+		          <% contains_one = false %>
+							<% current_user.organization_roles.each do |organization_role| %>
+								<% if organization_role.organization == organization %>
+									<% contains_one = true %>
+								<% end %>
+							<% end %>
+							<% if contains_one %>
+							<span class="org-verified-pill pull-right"><%= image_tag("https://s3.amazonaws.com/church_of/assets/resource_assets/check_on.png") %></span>
+							<% end %>
+		        </a>
+		      </li>
+		    <% end %>
+
+	      <li class="pull-right post-new-need">
+	        <%= link_to "New Resource", new_resource_path, :class => 'important-btn' %>
+	      </li>
+	</div>
+	  <div id='content' class="tab-content main-content">
+	    <div class="tab-pane active" id="no_organization">
+
+		<% @resources.each do |resource| %>
+
+			<% if resource.organization == nil %>
+					<p>
+						<%= resource.title %>
+
+<%= link_to "SUPER Edit Resource", edit_resource_path(resource) %>
+
+
+						<% if can? :manage, resource %>
+							<% if resource.user == current_user %>
+								- You manage <%= link_to "Edit Resource", edit_resource_path(resource) %> | <%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' } %>
+							<% end %>
+						<% elsif can? :take_over_management, resource %>
+
+
+
+							    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
+
+							      	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
+	      							<%= f.submit "Take over management" %>
+	    						<% end %>
+
+
+
+						<% else %>
+								- You dont manage and you cant
+						<% end %>
+					</p>
+
+			<% end %>
+		<% end %>
+
+
+			</div>
+
+
+			<% @organizations.each do |organization| %>
+				<% org_id = organization.id -%>
+				<div class="tab-pane" id="organization<%= org_id -%>">
+
+
+
+
+
+
+
+		<% @resources.each do |resource| %>
+
+			<% if resource.organization %>
+				<% if resource.organization == organization %>
+
+
+
+					<%= render 'resources/resource', resource: resource %>
+
+
+
+
+						<% if can? :manage, resource %>
+							<% if resource.user == current_user %>
+								<%= link_to "Edit Resource", edit_resource_path(resource), :class => "half-width-btn col-xs-6 blue-btn" %><%= link_to "Delete", resource_path(resource), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }, :class => "half-width-btn col-xs-6 red-btn" %>
+
+							<% end %>
+						<% elsif can? :take_over_management, resource %>
+							    <%= simple_form_for(resource, :url => resources_take_over_management_path, :method => :post, html: {class: "change-status"}) do |f| %>
+							    	<%= f.input :id, :as => :hidden, :input_html => { :value => resource.id } %>
+	      							<%= f.submit "Take over management", :class => "full-width-btn"  %>
+	    						<% end %>
+						<% else %>
+								You dont manage and you cant becasue you are not associated with this organization.
+						<% end %>
+
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+
+
+				<% end %>
+			<% end %>
+		<% end %>
+
+
+
+
+
+
+
+
+				</div>
+			<% end %>
+
+		</div>
+
+	<% end %>
+
+
+
+
 
 <% end %>
+
+
+
+
+
+

@@ -1,1 +1,5 @@
+$("div.categories-filter").html("<%=j render 'skills_select' %>");
 $("div.resources").html("<%=j render 'resources_by_organization' %>");
+$("div.loading").hide();
+var map_hash = <%= raw @hash.to_json %>;
+jQuery(function(){ buildResourcesMap(map_hash, true, false); });

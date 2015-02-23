@@ -251,6 +251,18 @@ body{
   content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/one_place_sketched.png);
 }
 
+.side-image-6-sign-up {
+  margin-top: 20px;
+  width: 40%;
+  max-width: 400px;
+  margin-left: auto;
+    margin-right: auto;
+
+  content:url(https://s3.amazonaws.com/church_of/assets/ui_assets/one_place_sketched.png);
+}
+
+
+
 .mobile-image-6 {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -515,6 +527,36 @@ body{
 
 
 }
+
+.sign-up-link-contribution {
+  margin-top: 20px;
+  font-size: 30px;
+  margin-left: auto;
+    margin-right: auto;
+
+  width: 40%;
+    height: 70px;
+
+  font-family: 'Avenir LT W01 35 Light';
+  display: inline-block;
+  border-top-right-radius: .2em;
+  border-bottom-right-radius: .2em;
+  border-top-left-radius: .2em;
+  border-bottom-left-radius: .2em;
+  text-align: center;
+  background: #69c773;
+  color: #FFFFFF;
+  line-height: 65px;
+
+
+}
+
+
+.sign-up-link-contribution:hover {
+  background: #52b35d;
+  color: #FFFFFF;
+}
+
 
 .sign-up-link:hover {
   background: #52b35d;

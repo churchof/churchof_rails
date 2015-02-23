@@ -3,6 +3,8 @@ class Contribution < ActiveRecord::Base
   belongs_to :user
   belongs_to :contributor
 
+  has_many :match_contributions
+
   monetize :amount_cents
 
   attr_writer :stripe_token
@@ -21,18 +23,25 @@ class Contribution < ActiveRecord::Base
 
   def mail_to_church_admin
     # should this be async?
-    Mailer.church_admin_need_recieved_contribution(self.need.user_church_admin.id, self.need.id, self.id).deliver
+    Mailer.delay.church_admin_need_recieved_contribution(self.need.user_church_admin.id, self.need.id, self.id)
   end
 
   def mail_to_user_posted_by
     # should this be async?
-    Mailer.user_posted_by_need_recieved_contribution(self.need.user_posted_by.id, self.need.id, self.id).deliver
+    Mailer.delay.user_posted_by_need_recieved_contribution(self.need.user_posted_by.id, self.need.id, self.id)
   end
+
+  def mail_to_zapier
+    # should this be async?
+    Mailer.delay.zapier_need_recieved_contribution(self.need.id, self.id)
+  end
+
+
 
   def mail_to_need_leader_if_exists
     # should this be async?
     if self.need.user_need_leader
-      Mailer.need_leader_need_recieved_contribution(self.need.user_need_leader.id, self.need.id, self.id).deliver
+      Mailer.delay.need_leader_need_recieved_contribution(self.need.user_need_leader.id, self.need.id, self.id)
     end
   end
 
@@ -40,15 +49,21 @@ class Contribution < ActiveRecord::Base
   def mail_receipt
     # should this be async?
     if self.user
-      Mailer.receipt_to_user(self.user.id, self.need.id, self.id).deliver
+      Mailer.delay.receipt_to_user(self.user.id, self.need.id, self.id)
     elsif self.contributor
-      Mailer.receipt_to_contributor(self.contributor.id, self.need.id, self.id).deliver
+      Mailer.delay.receipt_to_contributor(self.contributor.id, self.need.id, self.id)
     end
   end
 
   # Probably don't want these, just so there is no way money gets lost
   #validates :need, presence: true
   #validates :contributor, presence: true
+
+  # for testing
+  def fake_process_payment
+    self.update_column(:succeded, true)
+    self.update_column(:reimbursed, false)
+  end
 
   def process_payment
 
@@ -67,6 +82,7 @@ class Contribution < ActiveRecord::Base
   mail_to_need_leader_if_exists
   mail_to_user_posted_by
   mail_to_users_who_contributed_if_fully_funded
+  mail_to_zapier
   mail_receipt
   true
   rescue Stripe::CardError
@@ -107,23 +123,23 @@ class Contribution < ActiveRecord::Base
         past_relevant_activities = Activity.where(user_id: self.need.user_church_admin.id, subject: self.need, description: 'Mailed news that need is fully funded to Church Admin.')
         if past_relevant_activities.count == 0
           # Only email the user if they haven't been emailed about it yet.
-          Mailer.church_admin_need_fully_funded(self.need.user_church_admin.id, self.need.id).deliver
-          Activity.create(
+          Activity.create!(
             subject: self.need,
             description: 'Mailed news that need is fully funded to Church Admin.',
-            user: self.need.user_church_admin
+            user_id: self.need.user_church_admin.id
           )
+          Mailer.delay.church_admin_need_fully_funded(self.need.user_church_admin.id, self.need.id)
         end
         # Alert the need poster
         past_relevant_activities = Activity.where(user_id: self.need.user_posted_by.id, subject: self.need, description: 'Mailed news that need is fully funded to Need Poster.')
         if past_relevant_activities.count == 0
           # Only email the user if they haven't been emailed about it yet.
-          Mailer.user_posted_by_need_fully_funded(self.need.user_posted_by.id, self.need.id).deliver
-          Activity.create(
+          Activity.create!(
             subject: self.need,
             description: 'Mailed news that need is fully funded to Need Poster.',
-            user: self.need.user_posted_by
+            user_id: self.need.user_posted_by.id
           )
+          Mailer.delay.user_posted_by_need_fully_funded(self.need.user_posted_by.id, self.need.id)
         end
         # Alert the need leader if exists
 
@@ -131,12 +147,12 @@ class Contribution < ActiveRecord::Base
           past_relevant_activities = Activity.where(user_id: self.need.user_need_leader.id, subject: self.need, description: 'Mailed news that need is fully funded to Need Leader.')
           if past_relevant_activities.count == 0
             # Only email the user if they haven't been emailed about it yet.
-            Mailer.need_leader_need_fully_funded(self.need.user_need_leader.id, self.need.id).deliver
-            Activity.create(
+            Activity.create!(
               subject: self.need,
               description: 'Mailed news that need is fully funded to Need Leader.',
-              user: self.need.user_need_leader
+              user_id: self.need.user_need_leader.id
             )
+            Mailer.delay.need_leader_need_fully_funded(self.need.user_need_leader.id, self.need.id)
           end
         end 
 
@@ -146,23 +162,23 @@ class Contribution < ActiveRecord::Base
             past_relevant_activities = Activity.where(user_id: contribution.user.id, subject: self.need, description: 'Mailed news that need is fully funded to contributor (with account).')
             if past_relevant_activities.count == 0
               # Only email the user if they haven't been emailed about it yet.
-              Mailer.user_need_contributed_to_fully_funded(contribution.user.id, self.need.id).deliver
-              Activity.create(
+              Activity.create!(
                 subject: self.need,
                 description: 'Mailed news that need is fully funded to contributor (with account).',
-                user: contribution.user
+                user_id: contribution.user.id
               )
+              Mailer.delay.user_need_contributed_to_fully_funded(contribution.user.id, self.need.id)
             end
           elsif contribution.contributor
             past_relevant_activities = Activity.where(user_id: nil, subject: self.need, description: 'Mailed news that need is fully funded to contributor (without account - #{contribution.contributor.email}).')
             if past_relevant_activities.count == 0
               # Only email the user if they haven't been emailed about it yet.
-              Mailer.contributor_need_contributed_to_fully_funded(contribution.contributor.id, self.need.id).deliver
-              Activity.create(
+              Activity.create!(
                 subject: self.need,
                 description: 'Mailed news that need is fully funded to contributor (without account - #{contribution.contributor.email}).',
                 user: nil
               )
+              Mailer.delay.contributor_need_contributed_to_fully_funded(contribution.contributor.id, self.need.id)
             end
           end
         end
@@ -172,12 +188,12 @@ class Contribution < ActiveRecord::Base
             past_relevant_activities = Activity.where(user_id: time_contribution.user.id, subject: self.need, description: 'Mailed news that need is fully funded to volunteer.')
             if past_relevant_activities.count == 0
               # Only email the user if they haven't been emailed about it yet.
-              Mailer.volunteer_need_volunteered_for_fully_funded(time_contribution.user.id, self.need.id).deliver
               Activity.create(
                 subject: self.need,
                 description: 'Mailed news that need is fully funded to volunteer.',
-                user: time_contribution.user
+                user_id: time_contribution.user.id
               )
+              Mailer.delay.volunteer_need_volunteered_for_fully_funded(time_contribution.user.id, self.need.id)
             end
           end
         end

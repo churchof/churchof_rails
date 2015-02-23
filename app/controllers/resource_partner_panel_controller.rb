@@ -18,6 +18,9 @@ class ResourcePartnerPanelController < ApplicationController
 		current_user.resources.each do |resource|
 			resources << resource
 		end
+
+resources = Resource.all
+
 		organizations = Array.new
 		resources.each do |resource|
 			if resource.organization
@@ -36,9 +39,31 @@ class ResourcePartnerPanelController < ApplicationController
 		end
 		@resources = resources.uniq
 
+		@resources_without_organization = Array.new()
+		@resources_with_organization = Array.new()
+
+		@resources.each do |resource|
+			if resource.organization
+				@resources_with_organization << resource
+			else
+				@resources_without_organization << resource
+			end
+
+		end
+
+
+    	@organizations = organizations.uniq.sort_by!{ |m| m.title.downcase }
+
+
 	  	# @church_admins = User.with_role(:church_admin)
 
 	  	@resources.each do |resource|
+  			authorize! :read, resource
+  		end
+  		@resources_without_organization.each do |resource|
+  			authorize! :read, resource
+  		end
+	  	@resources_with_organization.each do |resource|
   			authorize! :read, resource
   		end
 	  	@organizations.each do |organization|

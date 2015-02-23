@@ -92,7 +92,7 @@
                 <div class="expenses col-xs-12 col-sm-6">
                   <h3>Expenses</h3>
                   <div class="expenses-bar">
-                    <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                    <span class="progress-bar" style="width:<%= need.percent_raised %>%"><span class="matched-bar" style="width:<%= need.percent_raised_from_matched_contributions %>%"></span></span>
                     <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
                   </div>
                 </div>
@@ -276,7 +276,7 @@
                   <div class="expenses col-xs-12 col-sm-6">
                     <h3>Expenses</h3>
                     <div class="expenses-bar">
-                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"><span class="matched-bar" style="width:<%= need.percent_raised_from_matched_contributions %>%"></span></span>
                       <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
                     </div>
                   </div>
@@ -414,7 +414,7 @@
                   <div class="expenses col-xs-12 col-sm-6">
                     <h3>Expenses</h3>
                     <div class="expenses-bar">
-                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"><span class="matched-bar" style="width:<%= need.percent_raised_from_matched_contributions %>%"></span></span>
                       <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
                     </div>
                   </div>
@@ -547,7 +547,7 @@
                   <div class="expenses col-xs-12 col-sm-6">
                     <h3>Expenses</h3>
                     <div class="expenses-bar">
-                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"></span>
+                      <span class="progress-bar" style="width:<%= need.percent_raised %>%"><span class="matched-bar" style="width:<%= need.percent_raised_from_matched_contributions %>%"></span></span>
                       <span class="amount-raised"><%= humanized_money_with_symbol need.total_contributed %> / <%= humanized_money_with_symbol need.total_expenses %></span>
                     </div>
                   </div>

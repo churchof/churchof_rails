@@ -1,18 +1,71 @@
+<% content_for :banner do %>
+
+<span class="show-on-xs">
+    <div class="banner">
+      <div class="container">
+        <div class="banner-btn-mobile">
+          <div class="banner-btn-text">
+            <%= link_to "Read our Vision", about_index_path %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</span>
+<span class="hide-on-xs">
+    <div class="banner">
+      <div class="container">
+        <div class="banner-text">
+          We’re aiming to unite the Church through crowd-sourced service.
+        </div>
+        <div class="banner-btn">
+          <div class="banner-btn-text">
+            <%= link_to "Read our Vision", about_index_path %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</span>
+<% end %>
+
+
+<% content_for :head do %>
+  <script src="https://s3.amazonaws.com/churchof/jquery.isotope.min.js"></script>
+  <script src="https://s3.amazonaws.com/churchof/imagesloaded-min.js"></script>
+  <script type="text/javascript">
+
+ jQuery(function(){ buildResourcesMap(map_hash, true, false); });
+   </script>
+
+<% end %>
+
+
 <script type="text/javascript">
 
 
 $(document).ready(function () {
 
-    $("#skills_list").on("change", function () {
-      var selectedValue = ""
+
+    $("#initiatives_list").on("change", function () {
+      var initiativeSelectedValue = ""
+      var skillSelectedValue = ""
+      var demographicSelectedValue = ""
+      var searchValue = ""
       $('#needs-full-list').html();
-      selectedValue = $('#skills_list option:selected').val();
-      $('.need-category-title').html(selectedValue + " Resources");
+      initiativeSelectedValue = $('#initiatives_list option:selected').val();
+      demographicSelectedValue = $('#demographics_list option:selected').val();
+      searchValue = $('#search_box').val();
+      $("div.loading").show();
+      $("div.resources").html("");
       $.ajax({
           type: "GET",
           url: "/resources",
           data: {
-            selected_skills: selectedValue
+            selected_initiative: initiativeSelectedValue,
+            selected_skill: skillSelectedValue,
+            selected_demographic: demographicSelectedValue,
+            search_value: searchValue
           },
           dataType: "script",
           success: function(data) {
@@ -22,28 +75,169 @@ $(document).ready(function () {
           }
         });
     });
+
+
+    $("#demographics_list").on("change", function () {
+      var initiativeSelectedValue = ""
+      var skillSelectedValue = ""
+      var demographicSelectedValue = ""
+      var searchValue = ""
+      $('#needs-full-list').html();
+      initiativeSelectedValue = $('#initiatives_list option:selected').val();
+      skillSelectedValue = $('#skills_list option:selected').val();
+      demographicSelectedValue = $('#demographics_list option:selected').val();
+      searchValue = $('#search_box').val();
+      $("div.loading").show();
+      $("div.resources").html("");
+      $.ajax({
+          type: "GET",
+          url: "/resources",
+          data: {
+            selected_initiative: initiativeSelectedValue,
+            selected_skill: skillSelectedValue,
+            selected_demographic: demographicSelectedValue,
+            search_value: searchValue
+          },
+          dataType: "script",
+          success: function(data) {
+            if ($('.resource-container').length == 0){
+              $('#needs-full-list').html('There are no resources yet listed under this skill set.');
+            }
+          }
+        });
+    });
+
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+
+
+$('input').keydown(function() {
+    delay(function(){
+
+
+      var initiativeSelectedValue = ""
+      var skillSelectedValue = ""
+      var demographicSelectedValue = ""
+      var searchValue = ""
+      $('#needs-full-list').html();
+      initiativeSelectedValue = $('#initiatives_list option:selected').val();
+      skillSelectedValue = $('#skills_list option:selected').val();
+      demographicSelectedValue = $('#demographics_list option:selected').val();
+      searchValue = $('#search_box').val();
+      $("div.loading").show();
+      $("div.resources").html("");
+      $.ajax({
+          type: "GET",
+          url: "/resources",
+          data: {
+            selected_initiative: initiativeSelectedValue,
+            selected_skill: skillSelectedValue,
+            selected_demographic: demographicSelectedValue,
+            search_value: searchValue
+          },
+          dataType: "script",
+          success: function(data) {
+            if ($('.resource-container').length == 0){
+              $('#needs-full-list').html('There are no resources yet listed under this skill set.');
+            }
+          }
+        });
+
+
+
+
+
+
+
+
+
+
+    }, 1000 );
+});
+
+
+
  });
+
 
   </script>
 
 
 
+
+<% content_for :map do %>
+  <script>
+    var map_hash = <%= raw @hash.to_json %>;
+  </script>
+  <%= render 'map' %>
+<% end %>
+
+
 <div class="page-header-block">
-  <h1 class="need-category-title">All Resources</h1>
-  <div class="skills-filter">
-    <label>Filter:</label>
-    <select id="skills_list" class="skill-select">
-      <option value="">All Resources</option>
-      <%- Skill.all.each do | skill | %>
-        <option data-tag="#{skill.name}">
-          <%= skill.name %>
+  <h1 class="need-category-title">Programs</h1>
+
+  <br>
+
+  <div class="initiatives-filter">
+    <select id="initiatives_list" class="initiative-select">
+        <option value="">All Initiatives</option>
+      <%- Initiative.all.each do | initiative | %>
+        <option data-tag="#{initiative.title}">
+          <%= initiative.title %>
         </div>
       <% end %>
     </select>
   </div>
+
+  <div class="categories-filter">
+
+     <%= render 'skills_select' %>
+
+  </div>
+
+
+
+
+<input class="search-box" id= "search_box" type="text" size="25" value="" placeholder="Search">
+
+</div>
+
+
+
+
+
+<div class="loading" id="loading" style="display:none; margin-left:50%; margin-top:100px;">
+<div id="spinnerContainer" class="spinner" style="width:100%;height:100px;">
+</div>
+<script src="Scripts/Spin.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var opts = {
+      lines: 13, // The number of lines to draw
+      length: 7, // The length of each line
+      width: 4, // The line thickness
+      radius: 10, // The radius of the inner circle
+      corners: 1, // Corner roundness (0..1)
+      rotate: 0, // The rotation offset
+      color: '#000', // #rgb or #rrggbb
+      speed: 1, // Rounds per second
+      trail: 60, // Afterglow percentage
+      shadow: false, // Whether to render a shadow
+      hwaccel: false, // Whether to use hardware acceleration
+      className: 'spinner', // The CSS class to assign to the spinner
+      zIndex: 2e9, // The z-index (defaults to 2000000000)
+    };
+    var target = document.getElementById('spinnerContainer');
+    var spinner = new Spinner(opts).spin(target);
+</script>
+
 </div>
 
 <div class="resources" id="resources">
-	  <%= render 'resources_by_organization' %>
+   <%= render 'resources_by_organization' %>
 </div>
-

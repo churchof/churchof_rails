@@ -53,6 +53,10 @@ Churchof::Application.routes.draw do
 
   resources :about
 
+  resources :match_campaigns
+  resources :match_contributions
+
+
   resources :users # Not sure if this is ok to do with Devise also.
 
   resources :skills
@@ -76,6 +80,9 @@ Churchof::Application.routes.draw do
     resources :initiative_metrics
   end
 
+  resources :demographics
+
+
   # The following was proposed by Todd Willey and adds it as a subroute.
   # resources :needs do
   #   post :create_charge
@@ -84,6 +91,17 @@ Churchof::Application.routes.draw do
   get 'feed', to: 'needs#index', as: :feed
 
   root :to => 'needs#index'
+
+
+
+
+  namespace :api, :defaults => {:format => :json} do
+    namespace :v1 do
+      resources :resources
+    end
+  end
+
+
 
 
   # Added for create_charge method.

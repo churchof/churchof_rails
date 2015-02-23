@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826005943) do
+ActiveRecord::Schema.define(version: 20141015181948) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -39,6 +39,34 @@ ActiveRecord::Schema.define(version: 20140826005943) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "demographics", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.string   "icon_url"
+  end
+
+  create_table "demographics_resources", force: true do |t|
+    t.integer "demographic_id"
+    t.integer "resource_id"
   end
 
   create_table "expenses", force: true do |t|
@@ -79,9 +107,25 @@ ActiveRecord::Schema.define(version: 20140826005943) do
     t.string   "title"
   end
 
-  create_table "initiatives_skills", force: true do |t|
-    t.integer "initiative_id"
-    t.integer "skill_id"
+  create_table "match_campaigns", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "initial_amount_cents"
+    t.integer  "organization_id"
+  end
+
+  create_table "match_contributions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "contribution_id"
+    t.boolean  "is_full_match"
+    t.integer  "amount_cents"
+    t.boolean  "paid"
+    t.boolean  "reimbursed"
+    t.integer  "need_id"
+    t.integer  "match_campaign_id"
   end
 
   create_table "needs", force: true do |t|
@@ -120,6 +164,7 @@ ActiveRecord::Schema.define(version: 20140826005943) do
     t.integer  "user_id_need_leader"
     t.datetime "completion_goal_date"
     t.integer  "rosm_request_id"
+    t.datetime "date_marked_completed"
   end
 
   add_index "needs", ["description_public"], name: "index_needs_on_description_public"
@@ -217,6 +262,7 @@ ActiveRecord::Schema.define(version: 20140826005943) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.integer  "initiative_id"
   end
 
   create_table "skills_users", force: true do |t|
