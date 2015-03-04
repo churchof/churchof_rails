@@ -72,23 +72,27 @@ class Contribution < ActiveRecord::Base
 #   emailAddress = email
 # end
 
-    charge = Stripe::Charge.create(amount: amount_cents,
-                                   currency: @stripe_currency,
-                                   card: @stripe_token,
-                                   description: "#{Rails.env} - contribution_id:#{id} need_id:#{need.id} email:#{email} title:#{need.title}")
-  self.update_column(:succeded, true)
-  self.update_column(:reimbursed, false)
-  mail_to_church_admin
-  mail_to_need_leader_if_exists
-  mail_to_user_posted_by
-  mail_to_users_who_contributed_if_fully_funded
-  mail_to_zapier
-  mail_receipt
-  true
-  rescue Stripe::CardError
-    self.update_column(:succeded, false)
-    self.update_column(:reimbursed, false)
-    false
+      Stripe.api_key = self.need.organization_to_give_to.stripe_access_code
+
+      
+        charge = Stripe::Charge.create(amount: amount_cents,
+                                       currency: @stripe_currency,
+                                       card: @stripe_token,
+                                       description: "#{Rails.env} - title:#{need.title} contribution_id:#{id} need_id:#{need.id} email:#{email}")
+      self.update_column(:succeded, true)
+      self.update_column(:reimbursed, false)
+      mail_to_church_admin
+      mail_to_need_leader_if_exists
+      mail_to_user_posted_by
+      mail_to_users_who_contributed_if_fully_funded
+      mail_to_zapier
+      mail_receipt
+      true
+      rescue Stripe::CardError
+        self.update_column(:succeded, false)
+        self.update_column(:reimbursed, false)
+        false
+
   end
 
   private

@@ -10,6 +10,17 @@ class OrganizationRolesController < ApplicationController
     @organization_role = OrganizationRole.find(params[:id])
   end
 
+  def index
+    orgs = Array.new
+    org_roles_current_user = current_user.organization_roles
+    org_roles_current_user.each do |org_role|
+      unless orgs.include?(org_role.organization)
+         orgs << org_role.organization
+      end
+    end
+    @unique_orgs_for_current_user = orgs
+  end
+
   def create
     @organization_role = OrganizationRole.new(organization_role_params)
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015181948) do
+ActiveRecord::Schema.define(version: 20150304185358) do
 
   create_table "activities", force: true do |t|
     t.datetime "created_at"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20141015181948) do
     t.datetime "completion_goal_date"
     t.integer  "rosm_request_id"
     t.datetime "date_marked_completed"
+    t.integer  "organization_to_give_to_id"
   end
 
   add_index "needs", ["description_public"], name: "index_needs_on_description_public"
@@ -202,10 +203,14 @@ ActiveRecord::Schema.define(version: 20141015181948) do
     t.string   "title"
     t.text     "description"
     t.string   "address"
-    t.decimal  "latitude",          precision: 15, scale: 10
-    t.decimal  "longitude",         precision: 15, scale: 10
+    t.decimal  "latitude",               precision: 15, scale: 10
+    t.decimal  "longitude",              precision: 15, scale: 10
     t.integer  "organization_type"
     t.string   "website_url"
+    t.string   "stripe_publishable_key"
+    t.string   "stripe_provider"
+    t.string   "stripe_uid"
+    t.string   "stripe_access_code"
   end
 
   create_table "resource_events", force: true do |t|

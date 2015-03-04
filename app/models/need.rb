@@ -10,6 +10,7 @@ class Need < ActiveRecord::Base
   belongs_to :user_posted_by, :foreign_key => 'user_id_posted_by', :class_name => "User"
   belongs_to :user_church_admin, :foreign_key => 'user_id_church_admin', :class_name => "User"
   belongs_to :user_need_leader, :foreign_key => 'user_id_need_leader', :class_name => "User"
+  belongs_to :organization_to_give_to, :foreign_key => 'organization_to_give_to_id', :class_name => "Organization"
 
   has_many :contributions
   has_many :match_contributions
@@ -318,6 +319,18 @@ class Need < ActiveRecord::Base
   end
 
   def should_accept_contributions
+    if self.organization_to_give_to
+      if self.organization_to_give_to.able_to_give_to
+        if self.is_public
+          if self.need_stage_value == 2
+            if total_expenses > Money.new(0, "USD")
+              return true
+            end
+          end
+        end
+      end
+    end
+    return false
   end
 
   def total_volunteers

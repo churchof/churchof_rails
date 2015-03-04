@@ -21,7 +21,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= csrf_meta_tags %>
 
-  <%= tag :meta, :name => "stripe-key", :content => ENV['PUBLISHABLE_KEY'] %>
+  <%= tag :meta, :name => "stripe-key", :content => ENV['STRIPE_PUBLISHABLE_KEY'] %>
 
 
   <%= yield :head %>
@@ -106,7 +106,9 @@
                 <% if current_user.has_role? :organization_resource_validation_partner %>
                   <li><%= link_to "Admin Panel", organization_resource_validation_partner_panel_index_path %></li>
                 <% end %>
-
+                <% if current_user.organization_roles.count > 0 %>
+                  <li><%= link_to "Finances Panel", organization_roles_path %></li>
+                <% end %>
                 <li class="divider"></li>
                 <li><%= link_to "Edit Account", edit_user_registration_path %></li>
                 <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>

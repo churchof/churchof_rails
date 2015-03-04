@@ -1,0 +1,28 @@
+
+<br>
+<br>
+
+<% @unique_orgs_for_current_user.each do |organization| %>
+
+    <div class="page-title">
+      <h2><%= organization.title %></h2>
+
+
+      
+    </div>
+
+	<% if organization.is_stripe_linked %>
+
+	This organization is connected to a Stripe account to recieve funds. If you have questions about this please contact us.
+
+	<% else %>
+
+	<a href=<%="https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&client_id=" + ENV['STRIPE_CONNECT_CLIENT_ID'] + "&state=" + organization.id.to_s %>> Connect this organization to a Stripe account in order to start recieving funds. </a>
+
+	<% end %>
+
+
+<br>
+<br>
+
+<% end %>

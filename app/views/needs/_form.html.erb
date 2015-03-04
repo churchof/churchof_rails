@@ -78,6 +78,11 @@ $(document).ready(function () {
         <div class="lone-field ">
           <%= f.input :user_id_church_admin, label: "Church Admin", collection: User.with_role(:church_admin), label_method: :full_name %>
         </div>
+        <div class="lone-field ">
+          <%= f.input :organization_to_give_to_id, label: "Organization to Recieve Money", collection: Organization.all_orgs_able_to_give_to, label_method: :title %>
+        </div>
+        Dont see the organization you want the money to go to on this list? As of March, 2015, organizations must now link a bank account inorder to recieve funds. You can link a bank account to an organization you are connected to here: <%= link_to "Finances Panel", organization_roles_path %>
+
         <div class="lone-field">
           <%= f.input :user_id_need_leader, label: "Leader", collection: User.with_role(:need_leader), label_method: :full_name %>
         </div>

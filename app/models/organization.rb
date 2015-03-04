@@ -20,4 +20,38 @@ class Organization < ActiveRecord::Base
     self.organization_roles.count > 0
   end
 
+
+  def is_stripe_linked
+    if (self.stripe_publishable_key && self.stripe_uid && self.stripe_access_code)
+      return true
+    end
+    return false
+  end
+
+
+  def able_to_give_to
+      if self.is_verified
+        if self.is_stripe_linked
+          return true
+        end
+      end
+      return false
+  end
+
+
+  def self.all_orgs_able_to_give_to
+    all_orgs_able_to_give_to = Array.new()
+
+    Organization.all.each do |organization|
+      if organization.able_to_give_to
+        all_orgs_able_to_give_to << organization
+      end
+    end
+
+    all_orgs_able_to_give_to
+  end
+
+  # scope :able_to_give_to, -> {where(is_stripe_linked: true, is_verified: true)}
+
+
 end

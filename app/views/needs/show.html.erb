@@ -635,10 +635,11 @@
       <%= link_to 'Edit Need', edit_need_path(@need), :class => "full-width-btn" %>
     <% end %>
 
-      <% if @need.is_public && @need.need_stage_value == 2 %>
-        <% if @need.total_expenses > Money.new(0, "USD") %>
+
+
+
+      <% if @need.should_accept_contributions %>
           <%= link_to 'Contribute', new_need_contribution_path(@need), :class => "full-width-btn-green" %>
-        <% end %>
       <% end %>
 
 

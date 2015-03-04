@@ -32,6 +32,7 @@ gem 'kaminari'
 gem 'delayed_job_active_record'
 gem 'workless'
 gem 'delayed_paperclip'
+gem 'omniauth-stripe-connect'
 
 group :development, :test do
 	gem 'sqlite3'

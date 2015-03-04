@@ -40,7 +40,9 @@ Churchof::Application.routes.draw do
   get '/contribution_succeeded' => 'pages#contribution_succeeded'
   get '/contribution_failed' => 'pages#contribution_failed'
   get '/contribution_succeeded_account_invite' => 'pages#contribution_succeeded_account_invite'
-  devise_for :users
+  get "omniauth_callbacks/stripe_connect"
+
+  devise_for :users#, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   devise_scope :user do
     get 'register', to: 'devise/registrations#new', as: :register

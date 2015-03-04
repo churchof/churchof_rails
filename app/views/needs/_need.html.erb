@@ -171,11 +171,8 @@
   <div class="need-button-block cf">
     <%= link_to 'Read More', need_path(need), :class => "need-btn-link full-width-btn" %>
 
-
-      <% if need.is_public && need.need_stage_value == 2 %>
-        <% if need.total_expenses > Money.new(0, "USD") %>
+      <% if need.should_accept_contributions %>
           <%= link_to 'Contribute', new_need_contribution_path(need), :class => "need-btn-link full-width-btn-green" %>
-        <% end %>
       <% end %>
 
 
