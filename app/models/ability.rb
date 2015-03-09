@@ -102,8 +102,7 @@ class Ability
     end
     can :read, Organization
     can :read, Resource, :public_status => :available_to_public
-
-    
+    can :read, OrganizationRole
     can :read, ResourceEvent, :resource => { :public_status => :available_to_public }
 
 
