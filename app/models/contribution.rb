@@ -74,7 +74,11 @@ class Contribution < ActiveRecord::Base
 
       Stripe.api_key = self.need.organization_to_give_to.stripe_access_code
 
-      
+logger.info self.need.organization_to_give_to.stripe_access_code
+logger.info amount_cents
+logger.info @stripe_currency
+logger.info @stripe_token
+
         charge = Stripe::Charge.create(amount: amount_cents,
                                        currency: @stripe_currency,
                                        card: @stripe_token,
