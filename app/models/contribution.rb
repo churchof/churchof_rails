@@ -81,7 +81,7 @@ logger.info @stripe_token
 
 
     customer = Stripe::Customer.create(
-      :email => current_user.email,
+      :email => email,
       :card  => @stripe_token
     )
 
