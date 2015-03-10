@@ -72,7 +72,7 @@ class Contribution < ActiveRecord::Base
 #   emailAddress = email
 # end
 
-      # Stripe.api_key = self.need.organization_to_give_to.stripe_access_code
+      Stripe.api_key = self.need.organization_to_give_to.stripe_access_code
 
 logger.info self.need.organization_to_give_to.stripe_access_code
 logger.info amount_cents

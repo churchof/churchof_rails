@@ -5,7 +5,8 @@
 
   <script type="text/javascript">
 
-    jQuery(function($) { Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));})
+    //jQuery(function($) { Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));})
+    jQuery(function($) { Stripe.setPublishableKey(@need.organization_to_give_to.stripe_publishable_key)
 
       var stripeResponseHandler = function(status, response) {
 
