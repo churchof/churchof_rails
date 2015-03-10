@@ -81,7 +81,7 @@ logger.info @stripe_token
 
         charge = Stripe::Charge.create({amount: amount_cents,
                                        currency: @stripe_currency,
-                                       source: @stripe_token,
+                                       card: @stripe_token,
                                        description: "#{Rails.env} - title:#{need.title} contribution_id:#{id} need_id:#{need.id} email:#{email}"}, 
                                        self.need.organization_to_give_to.stripe_access_code)
       self.update_column(:succeded, true)
